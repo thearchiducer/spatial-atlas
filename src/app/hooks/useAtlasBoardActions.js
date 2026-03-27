@@ -67,7 +67,14 @@ export default function useAtlasBoardActions({
   );
 
   const handleDeleteProjectBoard = useCallback(
-    (boardId) => {
+    (boardOrBoardId) => {
+      const boardId =
+        typeof boardOrBoardId === "string"
+          ? boardOrBoardId
+          : boardOrBoardId?.id || null;
+
+      if (!boardId) return;
+
       setProjectBoards((current) => {
         const remainingBoards = current.filter((board) => board.id !== boardId);
 
@@ -92,7 +99,6 @@ export default function useAtlasBoardActions({
           if (board.id !== activeProjectBoardId) return board;
 
           const entryIds = getSafeEntryIds(board);
-          if (entryIds.includes(entryId)) return board;
 
           return touchBoard({
             ...board,
@@ -107,16 +113,30 @@ export default function useAtlasBoardActions({
   );
 
   const handleRemoveEntryFromBoard = useCallback(
-    (entryId) => {
-      if (!activeProjectBoardId || !entryId) return;
+    (boardOrEntryId, maybeEntryId) => {
+      const boardId =
+        maybeEntryId !== undefined ? boardOrEntryId : activeProjectBoardId;
+
+      const entryId =
+        maybeEntryId !== undefined ? maybeEntryId : boardOrEntryId;
+
+      if (!boardId || !entryId) return;
 
       setProjectBoards((current) =>
         current.map((board) => {
-          if (board.id !== activeProjectBoardId) return board;
+          if (board.id !== boardId) return board;
+
+          const entryIds = getSafeEntryIds(board);
+          const removeIndex = entryIds.lastIndexOf(entryId);
+
+          if (removeIndex === -1) return board;
+
+          const nextEntryIds = [...entryIds];
+          nextEntryIds.splice(removeIndex, 1);
 
           return touchBoard({
             ...board,
-            entryIds: getSafeEntryIds(board).filter((id) => id !== entryId),
+            entryIds: nextEntryIds,
             comparePairs: (Array.isArray(board.comparePairs)
               ? board.comparePairs
               : []
@@ -180,12 +200,17 @@ export default function useAtlasBoardActions({
   );
 
   const handleUpdateBoardNotes = useCallback(
-    (notes) => {
-      if (!activeProjectBoardId) return;
+    (boardOrNotes, maybeNotes) => {
+      const boardId =
+        maybeNotes !== undefined ? boardOrNotes : activeProjectBoardId;
+
+      const notes = maybeNotes !== undefined ? maybeNotes : boardOrNotes;
+
+      if (!boardId) return;
 
       setProjectBoards((current) =>
         current.map((board) => {
-          if (board.id !== activeProjectBoardId) return board;
+          if (board.id !== boardId) return board;
 
           return touchBoard({
             ...board,

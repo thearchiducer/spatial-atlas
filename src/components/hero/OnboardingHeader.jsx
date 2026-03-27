@@ -23,6 +23,23 @@ export default function OnboardingHeader() {
           Start with two boards to explore a direction
         </div>
       </div>
+      <div className='mt-4 flex gap-2'>
+        <button
+          onClick={() => window.scrollTo({ top: 600, behavior: "smooth" })}
+          className='border border-stone-300 px-3 py-1 text-xs uppercase tracking-[0.1em] hover:bg-stone-100'
+        >
+          Browse entries
+        </button>
+
+        <button
+          onClick={() =>
+            alert("Select an entry → then click 'Add to active board'")
+          }
+          className='border border-emerald-300 bg-emerald-50 px-3 py-1 text-xs uppercase tracking-[0.1em] text-emerald-900'
+        >
+          How to start
+        </button>
+      </div>
     </div>
   );
 }

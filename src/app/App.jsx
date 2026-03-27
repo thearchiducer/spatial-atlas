@@ -883,15 +883,22 @@ export default function App() {
   function handleAddEntryToBoardWithLogging(entryId) {
     const entry = entries.find((item) => item.id === entryId);
 
+    if (!activeProjectBoard) {
+      alert("No active board selected");
+      return;
+    }
+
     if (entry) {
       logDecision("added_entry_to_board", {
         boardId: activeProjectBoardId || null,
         entryId: entry.id,
         entryType: entry.type,
       });
-    }
 
-    handleAddEntryToBoard(entryId);
+      handleAddEntryToBoard(entryId);
+
+      alert(`Added "${entry.term}" to ${activeProjectBoard.name}`);
+    }
   }
   function handleExportIntelligenceState() {
     const payload = buildIntelligenceStateExport();
@@ -1267,6 +1274,7 @@ export default function App() {
 
     setSelectedEntryId(entryId);
     setHighlightedEntryId(entryId);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   function handleSelectEntryInGraph(entryId) {
@@ -2758,13 +2766,26 @@ export default function App() {
     secondaryToolsCount,
     setShowSecondaryTools,
   };
+
   return (
     <div className='min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(120,80,30,0.10),transparent_28%),linear-gradient(180deg,#f6f3ed_0%,#f5f1e8_100%)] px-4 py-5 text-stone-900 md:px-6'>
       <div className='mx-auto flex max-w-7xl flex-col gap-5'>
         <OnboardingHeader />
-
+        {activeProjectBoard ? (
+          <div className='border border-violet-300 bg-violet-50 px-3 py-2 text-xs font-semibold text-violet-900'>
+            Active board: {activeProjectBoard.name}
+          </div>
+        ) : (
+          <div className='border border-amber-300 bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-900'>
+            No active board — open or create one to start
+          </div>
+        )}
         {!minimalMode ? <HeroHeader metrics={atlas.metrics} /> : null}
-
+        {minimalMode && (
+          <div className='border border-sky-300 bg-sky-50 px-3 py-2 text-xs text-sky-900'>
+            Focus mode — simplified view for step-by-step use
+          </div>
+        )}
         <FilterToolbar
           filters={atlas.filters}
           updateFilter={atlas.updateFilter}
@@ -2787,6 +2808,7 @@ export default function App() {
         {!minimalMode ? (
           <>
             <AtlasUtilityBar
+              activeBoard={activeProjectBoard}
               selectedEntry={selectedEntry}
               compareEntries={compareEntries}
               pinnedEntries={pinnedEntries}
@@ -2795,7 +2817,6 @@ export default function App() {
               onClearCompare={handleClearCompare}
               onClearPinned={handleClearPinned}
             />
-
             <AtlasQuickDrawer
               compareEntries={compareEntries}
               pinnedEntries={pinnedEntries}

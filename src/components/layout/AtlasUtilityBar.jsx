@@ -65,6 +65,7 @@ function QuickReferenceButton({ tone = "stone", children, onClick }) {
 }
 
 export default function AtlasUtilityBar({
+  activeBoard,
   selectedEntry,
   compareEntries,
   pinnedEntries,
@@ -73,11 +74,12 @@ export default function AtlasUtilityBar({
   onClearCompare,
   onClearPinned,
 }) {
+  const hasActiveBoard = Boolean(activeBoard);
   const hasSelected = Boolean(selectedEntry);
   const hasCompare = Boolean(compareEntries && compareEntries.length > 0);
   const hasPinned = Boolean(pinnedEntries && pinnedEntries.length > 0);
 
-  if (!hasSelected && !hasCompare && !hasPinned) {
+  if (!hasActiveBoard && !hasSelected && !hasCompare && !hasPinned) {
     return null;
   }
 
@@ -85,6 +87,19 @@ export default function AtlasUtilityBar({
     <section className='sticky top-20 z-10 border border-stone-300 bg-white/95 p-4 backdrop-blur'>
       <div className='flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between'>
         <div className='flex flex-wrap gap-2'>
+          {hasActiveBoard && (
+            <div className='border border-violet-300 bg-violet-50 px-3 py-2 text-violet-950'>
+              <div className='flex flex-wrap items-center gap-2'>
+                <span className='text-[10px] font-semibold uppercase tracking-[0.16em]'>
+                  Active board
+                </span>
+                <span className='text-sm font-medium'>{activeBoard.name}</span>
+              </div>
+              <div className='border border-stone-300 bg-stone-50 px-3 py-2 text-xs text-stone-700'>
+                Flow: Select → Add to board → Compare → Transform
+              </div>
+            </div>
+          )}
           {hasSelected && (
             <UtilityTag
               label='Selected'

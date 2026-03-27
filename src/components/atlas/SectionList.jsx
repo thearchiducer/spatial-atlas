@@ -11,6 +11,7 @@ export default function SectionList({
   onCompareEntry,
   onTogglePinEntry,
   onAddToBoard,
+  onRemoveFromBoard,
   highlightedEntryId,
   searchQuery = "",
   compareEntryIds = [],
@@ -21,7 +22,9 @@ export default function SectionList({
   const visibleSections = groupedSections.filter(
     (section) => section.entries.length > 0,
   );
-
+  function getBoardEntryCount(entryId) {
+    return activeBoardEntryIds.filter((id) => id === entryId).length;
+  }
   if (!visibleSections.length) {
     return (
       <div className='border border-stone-300 bg-white p-8 text-center text-sm text-stone-500'>
@@ -65,10 +68,12 @@ export default function SectionList({
                 onCompareEntry={onCompareEntry}
                 onTogglePinEntry={onTogglePinEntry}
                 onAddToBoard={onAddToBoard}
+                onRemoveFromBoard={onRemoveFromBoard}
                 isHighlighted={highlightedEntryId === entry.id}
                 isCompared={compareEntryIds.includes(entry.id)}
                 isPinned={pinnedEntryIds.includes(entry.id)}
                 isInActiveBoard={activeBoardEntryIds.includes(entry.id)}
+                boardEntryCount={getBoardEntryCount(entry.id)}
                 activeBoardName={activeBoardName}
                 searchQuery={searchQuery}
               />

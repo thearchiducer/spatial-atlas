@@ -1,3 +1,4 @@
+import { useState } from "react";
 import SearchSummaryBar from "../../components/atlas/SearchSummaryBar";
 import PinnedEntriesPanel from "../../components/atlas/PinnedEntriesPanel";
 import ComparePanel from "../../components/atlas/ComparePanel";
@@ -10,6 +11,63 @@ import ProjectBoardPanel from "../../components/atlas/ProjectBoardPanel";
 import DesignDirectionPanel from "../../components/atlas/DesignDirectionPanel";
 import BoardAnalysisPanel from "../../components/atlas/BoardAnalysisPanel";
 import LayoutPanel from "../../components/atlas/LayoutPanel";
+
+function JumpButton({ targetId, children }) {
+  function handleClick() {
+    const target = document.getElementById(targetId);
+    if (!target) return;
+
+    target.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+
+  return (
+    <button
+      type='button'
+      onClick={handleClick}
+      className='border border-stone-300 bg-white px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+    >
+      {children}
+    </button>
+  );
+}
+
+function SectionBlock({
+  id,
+  title,
+  defaultOpen = true,
+  children,
+  countLabel = "",
+}) {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+
+  return (
+    <section id={id} className='scroll-mt-28 border border-stone-300 bg-white'>
+      <div className='flex items-center justify-between gap-3 border-b border-stone-200 px-4 py-3'>
+        <div>
+          <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+            {title}
+          </div>
+          {countLabel ? (
+            <div className='mt-1 text-xs text-stone-500'>{countLabel}</div>
+          ) : null}
+        </div>
+
+        <button
+          type='button'
+          onClick={() => setIsOpen((current) => !current)}
+          className='border border-stone-300 bg-white px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+        >
+          {isOpen ? "Collapse" : "Expand"}
+        </button>
+      </div>
+
+      {isOpen ? <div className='p-4'>{children}</div> : null}
+    </section>
+  );
+}
 
 export default function AtlasView(props) {
   const {
@@ -33,7 +91,6 @@ export default function AtlasView(props) {
     hasSelection,
     projectBoards,
     hydratedActiveProjectBoard,
-    lastIntentSummaryLabel,
     hasBoard,
 
     handleSelectEntry,
@@ -59,89 +116,149 @@ export default function AtlasView(props) {
     handleDeleteProjectBoard,
     handleAddSelectedEntryToBoard,
     handleAddComparePairToBoard,
-    handleRemoveBoardEntry,
     handleRemoveEntryFromBoard,
-    handleRemoveBoardComparePair,
-    handleOpenCompareHistoryItem,
     handleUpdateBoardNotes,
     handleExportBoardSheet,
   } = props;
 
+  const visibleEntryCount = atlas.visibleEntries.length;
+  const compareCount = compareEntries.length;
+  const pinnedCount = pinnedEntries.length;
+  const boardCount = projectBoards.length;
+  const activeBoardName = activeProjectBoard?.name || "";
+  const activeBoardEntryCount = activeBoardEntryIds.length;
+
   return (
     <>
-      <SearchSummaryBar
-        filters={{ ...atlas.filters, query: atlas.debouncedQuery }}
-        visibleCount={atlas.visibleEntries.length}
-        topReasons={topSearchReasons}
-      />
+      <div className='sticky top-24 z-20 space-y-3'>
+        <div className='border border-stone-300 bg-white p-3 shadow-sm'>
+          <div className='mb-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+            Navigate workspace
+          </div>
+
+          <div className='flex flex-wrap gap-2'>
+            <JumpButton targetId='atlas-search-summary'>Search</JumpButton>
+            <JumpButton targetId='atlas-compare'>Compare</JumpButton>
+            <JumpButton targetId='atlas-entries'>Entries</JumpButton>
+            <JumpButton targetId='atlas-selected-entry'>Selected</JumpButton>
+            <JumpButton targetId='atlas-intent'>Intent</JumpButton>
+            <JumpButton targetId='atlas-project-boards'>Boards</JumpButton>
+            <JumpButton targetId='atlas-direction'>Direction</JumpButton>
+            <JumpButton targetId='atlas-analysis'>Analysis</JumpButton>
+            <JumpButton targetId='atlas-layout'>Layout</JumpButton>
+            <JumpButton targetId='atlas-pinned'>
+              Pinned ({pinnedCount})
+            </JumpButton>
+          </div>
+        </div>
+
+        <div className='border border-stone-300 bg-stone-50 px-3 py-2 text-xs text-stone-700 shadow-sm'>
+          Flow: Browse entries → add to active board → compare → transform →
+          review direction
+        </div>
+      </div>
+
+      <section id='atlas-search-summary' className='scroll-mt-28'>
+        <SearchSummaryBar
+          filters={{ ...atlas.filters, query: atlas.debouncedQuery }}
+          visibleCount={visibleEntryCount}
+          topReasons={topSearchReasons}
+        />
+      </section>
 
       {hasPinnedEntries ? (
-        <PinnedEntriesPanel
-          pinnedEntries={pinnedEntries}
-          onSelectEntry={handleSelectEntry}
-          onRemovePinnedEntry={handleRemovePinnedEntry}
-          onClearPinned={handleClearPinned}
-        />
+        <section id='atlas-pinned' className='scroll-mt-28'>
+          <PinnedEntriesPanel
+            pinnedEntries={pinnedEntries}
+            onSelectEntry={handleSelectEntry}
+            onRemovePinnedEntry={handleRemovePinnedEntry}
+            onClearPinned={handleClearPinned}
+          />
+        </section>
       ) : null}
 
-      {isCompareMode ? (
-        <CompareModeLayout
-          compareEntries={compareEntries}
-          onSelectEntry={handleSelectEntry}
-          onRemoveCompareEntry={handleRemoveCompareEntry}
-          onClearCompare={handleClearCompare}
-          onCopyCompareLink={handleCopyCompareLink}
-          compareLinkCopied={compareLinkCopied}
-        />
-      ) : (
-        <ComparePanel
-          compareEntries={compareEntries}
-          onRemoveCompareEntry={handleRemoveCompareEntry}
-          onClearCompare={handleClearCompare}
-          onSelectEntry={handleSelectEntry}
-        />
-      )}
+      <SectionBlock
+        id='atlas-compare'
+        title='Compare'
+        defaultOpen={true}
+        countLabel={`${compareCount} compare entr${compareCount === 1 ? "y" : "ies"}`}
+      >
+        {isCompareMode ? (
+          <CompareModeLayout
+            compareEntries={compareEntries}
+            onSelectEntry={handleSelectEntry}
+            onRemoveCompareEntry={handleRemoveCompareEntry}
+            onClearCompare={handleClearCompare}
+            onCopyCompareLink={handleCopyCompareLink}
+            compareLinkCopied={compareLinkCopied}
+          />
+        ) : (
+          <ComparePanel
+            compareEntries={compareEntries}
+            onRemoveCompareEntry={handleRemoveCompareEntry}
+            onClearCompare={handleClearCompare}
+            onSelectEntry={handleSelectEntry}
+          />
+        )}
+      </SectionBlock>
 
-      <SectionList
-        groupedSections={atlas.groupedSections}
-        onRelatedClick={handleRelatedClick}
-        onSelectEntry={handleSelectEntry}
-        onCompareEntry={handleCompareEntry}
-        onTogglePinEntry={handleTogglePinEntry}
-        onAddToBoard={handleAddEntryToBoard}
-        highlightedEntryId={highlightedEntryId}
-        compareEntryIds={compareEntryIds}
-        pinnedEntryIds={pinnedEntryIds}
-        activeBoardEntryIds={activeBoardEntryIds}
-        activeBoardName={activeProjectBoard?.name || ""}
-        searchQuery={atlas.debouncedQuery}
-      />
-
-      {!isCompareMode && hasSelection ? (
-        <SelectedEntryPanel
-          selectedEntry={selectedEntry}
-          recommendedEntries={recommendedEntries}
+      <SectionBlock
+        id='atlas-entries'
+        title='Entries'
+        defaultOpen={true}
+        countLabel={`${visibleEntryCount} visible entries`}
+      >
+        <SectionList
+          groupedSections={atlas.groupedSections}
           onRelatedClick={handleRelatedClick}
-          onClear={handleClearSelection}
+          onSelectEntry={handleSelectEntry}
           onCompareEntry={handleCompareEntry}
           onTogglePinEntry={handleTogglePinEntry}
-          onPrintEntrySheet={handlePrintEntrySheet}
-          onEditEntry={handleOpenEditor}
           onAddToBoard={handleAddEntryToBoard}
-          isCompared={
-            selectedEntry ? compareEntryIds.includes(selectedEntry.id) : false
+          onRemoveFromBoard={(entryId) =>
+            handleRemoveEntryFromBoard(activeProjectBoard?.id, entryId)
           }
-          isPinned={
-            selectedEntry ? pinnedEntryIds.includes(selectedEntry.id) : false
-          }
-          isInActiveBoard={
-            selectedEntry
-              ? activeBoardEntryIds.includes(selectedEntry.id)
-              : false
-          }
-          activeBoardName={activeProjectBoard?.name || ""}
+          highlightedEntryId={highlightedEntryId}
+          compareEntryIds={compareEntryIds}
+          pinnedEntryIds={pinnedEntryIds}
+          activeBoardEntryIds={activeBoardEntryIds}
+          activeBoardName={activeBoardName}
           searchQuery={atlas.debouncedQuery}
         />
+      </SectionBlock>
+
+      {!isCompareMode && hasSelection ? (
+        <SectionBlock
+          id='atlas-selected-entry'
+          title='Selected entry'
+          defaultOpen={true}
+          countLabel={selectedEntry ? selectedEntry.term : ""}
+        >
+          <SelectedEntryPanel
+            selectedEntry={selectedEntry}
+            recommendedEntries={recommendedEntries}
+            onRelatedClick={handleRelatedClick}
+            onClear={handleClearSelection}
+            onCompareEntry={handleCompareEntry}
+            onTogglePinEntry={handleTogglePinEntry}
+            onPrintEntrySheet={handlePrintEntrySheet}
+            onEditEntry={handleOpenEditor}
+            onAddToBoard={handleAddEntryToBoard}
+            isCompared={
+              selectedEntry ? compareEntryIds.includes(selectedEntry.id) : false
+            }
+            isPinned={
+              selectedEntry ? pinnedEntryIds.includes(selectedEntry.id) : false
+            }
+            isInActiveBoard={
+              selectedEntry
+                ? activeBoardEntryIds.includes(selectedEntry.id)
+                : false
+            }
+            activeBoardName={activeBoardName}
+            searchQuery={atlas.debouncedQuery}
+          />
+        </SectionBlock>
       ) : null}
 
       <EntryEditorPanel
@@ -158,49 +275,86 @@ export default function AtlasView(props) {
       />
 
       {hasSelection ? (
-        <DesignIntentPanel
+        <SectionBlock
+          id='atlas-intent'
+          title='Design intent'
+          defaultOpen={false}
+          countLabel='Intent matching and direction framing'
+        >
+          <DesignIntentPanel
+            entries={atlas.visibleEntries}
+            onSelectEntry={handleSelectEntry}
+            onCompareEntry={handleCompareEntry}
+            onTogglePinEntry={handleTogglePinEntry}
+            onIntentChange={handleDesignIntentChange}
+          />
+        </SectionBlock>
+      ) : null}
+
+      <SectionBlock
+        id='atlas-project-boards'
+        title='Project boards'
+        defaultOpen={true}
+        countLabel={`${boardCount} board${boardCount === 1 ? "" : "s"} · ${
+          hydratedActiveProjectBoard?.name
+            ? `active: ${hydratedActiveProjectBoard.name}`
+            : "no active board"
+        }`}
+      >
+        <ProjectBoardPanel
+          boards={projectBoards}
           entries={atlas.visibleEntries}
-          onSelectEntry={handleSelectEntry}
-          onCompareEntry={handleCompareEntry}
-          onTogglePinEntry={handleTogglePinEntry}
-          onIntentChange={handleDesignIntentChange}
-        />
-      ) : null}
-
-      <ProjectBoardPanel
-        boards={projectBoards}
-        activeBoard={hydratedActiveProjectBoard}
-        selectedEntry={selectedEntry}
-        compareEntries={compareEntries}
-        intentSummaryLabel={lastIntentSummaryLabel}
-        onCreateBoard={handleCreateProjectBoard}
-        onOpenBoard={handleOpenProjectBoard}
-        onDeleteBoard={handleDeleteProjectBoard}
-        onAddSelectedEntry={handleAddSelectedEntryToBoard}
-        onAddComparePair={handleAddComparePairToBoard}
-        onRemoveBoardEntry={handleRemoveBoardEntry}
-        onRemoveEntryFromBoard={handleRemoveEntryFromBoard}
-        onRemoveComparePair={handleRemoveBoardComparePair}
-        onOpenComparePair={handleOpenCompareHistoryItem}
-        onUpdateBoardNotes={handleUpdateBoardNotes}
-        onSelectEntry={handleSelectEntry}
-        onExportBoardSheet={handleExportBoardSheet}
-      />
-
-      {hasBoard ? (
-        <DesignDirectionPanel
-          activeBoard={hydratedActiveProjectBoard}
-          onAddEntryToBoard={handleAddEntryToBoard}
+          activeBoardId={hydratedActiveProjectBoard?.id || null}
+          selectedEntry={selectedEntry}
+          compareEntries={compareEntries}
+          onCreateBoard={handleCreateProjectBoard}
+          onSetActiveBoard={handleOpenProjectBoard}
+          onDeleteBoard={handleDeleteProjectBoard}
+          onAddSelectedEntry={handleAddSelectedEntryToBoard}
+          onAddComparePair={handleAddComparePairToBoard}
           onRemoveEntryFromBoard={handleRemoveEntryFromBoard}
+          onUpdateBoardNotes={handleUpdateBoardNotes}
+          onExportBoardSheet={handleExportBoardSheet}
         />
+      </SectionBlock>
+
+      {hasBoard ? (
+        <SectionBlock
+          id='atlas-direction'
+          title='Direction'
+          defaultOpen={false}
+          countLabel={`${activeBoardEntryCount} active board entr${
+            activeBoardEntryCount === 1 ? "y" : "ies"
+          }`}
+        >
+          <DesignDirectionPanel
+            activeBoard={hydratedActiveProjectBoard}
+            onAddEntryToBoard={handleAddEntryToBoard}
+            onRemoveEntryFromBoard={handleRemoveEntryFromBoard}
+          />
+        </SectionBlock>
       ) : null}
 
       {hasBoard ? (
-        <BoardAnalysisPanel activeBoard={hydratedActiveProjectBoard} />
+        <SectionBlock
+          id='atlas-analysis'
+          title='Board analysis'
+          defaultOpen={false}
+          countLabel='Direction reading and evaluation'
+        >
+          <BoardAnalysisPanel activeBoard={hydratedActiveProjectBoard} />
+        </SectionBlock>
       ) : null}
 
       {hasBoard ? (
-        <LayoutPanel activeBoard={hydratedActiveProjectBoard} />
+        <SectionBlock
+          id='atlas-layout'
+          title='Layout'
+          defaultOpen={false}
+          countLabel='Spatial organization view'
+        >
+          <LayoutPanel activeBoard={hydratedActiveProjectBoard} />
+        </SectionBlock>
       ) : null}
     </>
   );

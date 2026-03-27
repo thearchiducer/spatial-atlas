@@ -61,18 +61,23 @@ function ComparePairCard({ pair }) {
 }
 
 function BoardCard({ board, isActive, onOpen, onDelete }) {
-  const entryCount = Array.isArray(board?.entries) ? board.entries.length : 0;
+  const entryCount = Array.isArray(board?.entryIds) ? board.entryIds.length : 0;
   const pairCount = Array.isArray(board?.comparePairs)
     ? board.comparePairs.length
     : 0;
 
   return (
     <div
+      onClick={(event) => {
+        event.stopPropagation();
+        if (!onOpen) return;
+        onOpen(board.id);
+      }}
       className={
-        "border p-4 transition " +
+        "border p-4 transition cursor-pointer " +
         (isActive
-          ? "border-stone-900 bg-stone-950 text-white"
-          : "border-stone-300 bg-white")
+          ? "border-violet-400 bg-violet-50 text-violet-900 shadow-sm"
+          : "border-stone-300 bg-white hover:bg-stone-50")
       }
     >
       <div className='flex items-start justify-between gap-3 border-b border-current/15 pb-4'>
@@ -81,21 +86,15 @@ function BoardCard({ board, isActive, onOpen, onDelete }) {
             Project board
           </div>
 
-          <h3
-            className={
-              "text-base font-semibold tracking-tight " +
-              (isActive ? "text-white" : "text-stone-900")
-            }
-          >
+          <h3 className='text-base font-semibold tracking-tight text-stone-900'>
             {board?.name || "Untitled board"}
           </h3>
-
-          <p
-            className={
-              "mt-2 text-sm leading-relaxed " +
-              (isActive ? "text-stone-300" : "text-stone-600")
-            }
-          >
+          {isActive && (
+            <div className='mt-1 inline-block border border-violet-300 bg-violet-100 px-2 py-0.5 text-[10px] uppercase tracking-[0.12em] text-violet-900'>
+              Active
+            </div>
+          )}
+          <p className={"mt-2 text-sm leading-relaxed " + "text-stone-600"}>
             {board?.description ||
               "Working board for applied spatial research."}
           </p>
@@ -103,7 +102,10 @@ function BoardCard({ board, isActive, onOpen, onDelete }) {
 
         <button
           type='button'
-          onClick={() => onDelete(board)}
+          onClick={(event) => {
+            event.stopPropagation();
+            onDelete(board);
+          }}
           className={
             "border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] " +
             (isActive
@@ -129,7 +131,11 @@ function BoardCard({ board, isActive, onOpen, onDelete }) {
       <div className='mt-4'>
         <button
           type='button'
-          onClick={() => onOpen(board)}
+          onClick={(event) => {
+            event.stopPropagation();
+            if (!onOpen) return;
+            onOpen(board.id);
+          }}
           className={
             "border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition " +
             (isActive
@@ -137,7 +143,7 @@ function BoardCard({ board, isActive, onOpen, onDelete }) {
               : "border-stone-300 bg-white text-stone-900 hover:bg-stone-100")
           }
         >
-          {isActive ? "Active board" : "Open board"}
+          {isActive ? "Current board" : "Activate board"}
         </button>
       </div>
     </div>
@@ -146,6 +152,7 @@ function BoardCard({ board, isActive, onOpen, onDelete }) {
 
 export default function ProjectBoardPanel({
   boards = [],
+  entries = [],
   activeBoardId = null,
   selectedEntry = null,
   compareEntries = [],
@@ -162,8 +169,10 @@ export default function ProjectBoardPanel({
     return boards.find((board) => board?.id === activeBoardId) || null;
   }, [boards, activeBoardId]);
 
-  const activeBoardEntries = Array.isArray(activeBoard?.entries)
-    ? activeBoard.entries
+  const activeBoardEntries = Array.isArray(activeBoard?.entryIds)
+    ? activeBoard.entryIds
+        .map((id) => entries.find((e) => e.id === id))
+        .filter(Boolean)
     : [];
 
   const activeComparePairs = Array.isArray(activeBoard?.comparePairs)

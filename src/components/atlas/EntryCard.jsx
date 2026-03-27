@@ -258,7 +258,6 @@ export default function EntryCard({
             background: "rgba(251,191,36,0.12)",
             borderBottom: "1px solid rgba(251,191,36,0.5)",
             color: "var(--text-primary)",
-            padding: "0 1px",
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.background = "rgba(251,191,36,0.2)";

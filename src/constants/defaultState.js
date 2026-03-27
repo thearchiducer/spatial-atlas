@@ -1,0 +1,17 @@
+export const defaultFilters = {
+  query: "",
+  type: "",
+  scale: "",
+  domain: "",
+  status: "",
+  region: "",
+  privacyLevel: "",
+  enclosureType: "",
+  circulationRole: "",
+  socialRole: "",
+  spatialLogic: "",
+  culturalSpecificity: "",
+  ritualWeight: "",
+  climateResponse: "",
+  sortBy: "term",
+};

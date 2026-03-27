@@ -10,7 +10,9 @@ export default function OnboardingHeader() {
           Compare architectural directions, preview transformations, and track
           how design thinking evolves.
         </p>
-
+        <div className='mt-3 border border-sky-300 bg-sky-50 px-3 py-2 text-xs text-sky-900'>
+          A sample board has been created to help you explore the workflow.
+        </div>
         {/* Steps */}
         <div className='mt-4 flex flex-col gap-1 text-xs text-stone-500'>
           <div>1. Select or create two directions</div>

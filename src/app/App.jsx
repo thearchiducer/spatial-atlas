@@ -622,6 +622,7 @@ export default function App() {
   const boardIdCounterRef = useRef(1);
   const historyIdCounterRef = useRef(1);
   const snapshotIdCounterRef = useRef(1);
+  const hasInitializedDemoRef = useRef(false);
   const entries = useMemo(() => {
     return mergeEntriesWithOverrides(baseEntries, entryOverrides);
   }, [entryOverrides]);
@@ -660,6 +661,7 @@ export default function App() {
   const [activeProjectBoardId, setActiveProjectBoardId] = useState(() =>
     getInitialActiveProjectBoardId(),
   );
+
   const [directionVersions, setDirectionVersions] = useState(() =>
     getInitialDirectionVersions(),
   );
@@ -851,6 +853,7 @@ export default function App() {
     snapshotIdCounterRef.current += 1;
     return id;
   }
+
   function saveCompareHistoryForIds(ids) {
     const nextItem = buildCompareHistoryItem(ids, entries);
     if (!nextItem) return;
@@ -863,16 +866,6 @@ export default function App() {
       return [nextItem, ...withoutDuplicate].slice(0, MAX_COMPARE_HISTORY);
     });
   }
-  useEffect(() => {
-    try {
-      window.localStorage.setItem(
-        DECISION_LOG_STORAGE_KEY,
-        JSON.stringify(decisionLog),
-      );
-    } catch {
-      // ignore storage errors
-    }
-  }, [decisionLog]);
 
   function logDecision(type, payload = {}) {
     setDecisionLog((current) =>
@@ -1434,6 +1427,54 @@ export default function App() {
     activeProjectBoardId,
     setActiveProjectBoardId,
   });
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(
+        DECISION_LOG_STORAGE_KEY,
+        JSON.stringify(decisionLog),
+      );
+    } catch {
+      // ignore storage errors
+    }
+  }, [decisionLog]);
+
+  useEffect(() => {
+    if (hasInitializedDemoRef.current) return;
+    if (!projectBoards || projectBoards.length > 0) return;
+
+    hasInitializedDemoRef.current = true;
+    handleCreateProjectBoard();
+  }, [projectBoards, handleCreateProjectBoard]);
+
+  useEffect(() => {
+    if (!activeProjectBoardId) return;
+    if (!atlas.visibleEntries.length) return;
+
+    const activeBoard = projectBoards.find(
+      (board) => board.id === activeProjectBoardId,
+    );
+
+    if (!activeBoard) return;
+
+    const existingEntryIds = Array.isArray(activeBoard.entryIds)
+      ? activeBoard.entryIds
+      : [];
+
+    if (existingEntryIds.length > 0) return;
+
+    const sampleEntries = atlas.visibleEntries.slice(0, 3);
+
+    sampleEntries.forEach((entry) => {
+      handleAddEntryToBoard(entry.id);
+    });
+  }, [
+    activeProjectBoardId,
+    atlas.visibleEntries,
+    projectBoards,
+    handleAddEntryToBoard,
+  ]);
+
   function handleAddSelectedEntryToBoard() {
     if (!selectedEntry) return;
     handleAddEntryToBoard(selectedEntry.id);

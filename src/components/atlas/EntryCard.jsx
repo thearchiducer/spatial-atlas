@@ -156,6 +156,14 @@ export default function EntryCard({
         boxShadow:
           "0 0 0 1px rgba(255,255,255,0.02), 0 6px 12px rgba(0,0,0,0.25)",
       }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.boxShadow =
+          "0 0 0 1px rgba(255,255,255,0.05), 0 10px 18px rgba(0,0,0,0.35)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.boxShadow =
+          "0 0 0 1px rgba(255,255,255,0.02), 0 6px 12px rgba(0,0,0,0.25)";
+      }}
     >
       <div
         className='flex items-start justify-between gap-4 border-b pb-3'
@@ -190,7 +198,7 @@ export default function EntryCard({
         </div>
       </div>
 
-      <div className='flex flex-wrap items-center gap-2'>
+      <div className='flex flex-wrap items-center gap-2 mt-1'>
         <button
           type='button'
           onClick={handleCompareClick}
@@ -255,8 +263,8 @@ export default function EntryCard({
           disabled={!onRemoveFromBoard || boardEntryCount < 1}
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.1em] transition disabled:cursor-not-allowed disabled:opacity-60'
           style={{
-            background: "rgba(251,191,36,0.12)",
-            borderBottom: "1px solid rgba(251,191,36,0.5)",
+            background: "rgba(251,191,36,0.10)",
+            borderBottom: "rgba(251,191,36,0.30)",
             color: "var(--text-primary)",
           }}
           onMouseEnter={(e) => {
@@ -325,7 +333,7 @@ export default function EntryCard({
 
       {searchWhy.length > 0 && (
         <div className='border border-sky-200 bg-sky-50 px-3 py-2 text-sm text-sky-900'>
-          <div className='flex flex-wrap items-center gap-2'>
+          <div className='flex flex-wrap items-center gap-2 mt-1'>
             <strong className='text-sky-900'>Matched by</strong>
 
             {searchWhy.map((reason) => (
@@ -349,7 +357,7 @@ export default function EntryCard({
         <>
           <div
             className='border-t pt-3'
-            style={{ borderColor: "rgba(255,255,255,0.08)" }}
+            style={{ borderColor: "rgba(255,255,255,0.12)" }}
           >
             <div className='mb-2'>{annotationLabel("Synonyms")}</div>
             <div

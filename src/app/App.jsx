@@ -619,6 +619,7 @@ export default function App() {
   const [entryOverrides, setEntryOverrides] = useState(() =>
     getInitialEntryOverrides(),
   );
+  const [theme, setTheme] = useState("light");
   const boardIdCounterRef = useRef(1);
   const historyIdCounterRef = useRef(1);
   const snapshotIdCounterRef = useRef(1);
@@ -2809,7 +2810,14 @@ export default function App() {
   };
 
   return (
-    <div className='min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(120,80,30,0.10),transparent_28%),linear-gradient(180deg,#f6f3ed_0%,#f5f1e8_100%)] px-4 py-5 text-stone-900 md:px-6'>
+    <div
+      className={
+        "min-h-screen px-4 py-5 md:px-6 " +
+        (theme === "dark"
+          ? "bg-stone-950 text-stone-100"
+          : "bg-[radial-gradient(circle_at_top_left,rgba(120,80,30,0.10),transparent_28%),linear-gradient(180deg,#f6f3ed_0%,#f5f1e8_100%)] text-stone-900")
+      }
+    >
       <div className='mx-auto flex max-w-7xl flex-col gap-5'>
         <OnboardingHeader />
         {activeProjectBoard ? (
@@ -2821,6 +2829,24 @@ export default function App() {
             No active board — open or create one to start
           </div>
         )}
+
+        <div className='flex justify-end'>
+          <button
+            type='button'
+            onClick={() =>
+              setTheme((current) => (current === "light" ? "dark" : "light"))
+            }
+            className={
+              "border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition " +
+              (theme === "dark"
+                ? "border-stone-700 bg-stone-900 text-stone-100 hover:bg-stone-800"
+                : "border-stone-300 bg-white text-stone-700 hover:bg-stone-100")
+            }
+          >
+            {theme === "light" ? "Dark mode" : "Light mode"}
+          </button>
+        </div>
+
         {!minimalMode ? <HeroHeader metrics={atlas.metrics} /> : null}
         {minimalMode && (
           <div className='border border-sky-300 bg-sky-50 px-3 py-2 text-xs text-sky-900'>

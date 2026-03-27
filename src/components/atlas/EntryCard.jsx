@@ -263,8 +263,8 @@ export default function EntryCard({
           disabled={!onRemoveFromBoard || boardEntryCount < 1}
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.1em] transition disabled:cursor-not-allowed disabled:opacity-60'
           style={{
-            background: "rgba(251,191,36,0.10)",
-            borderColor: "rgba(251,191,36,0.30)",
+            background: "rgba(251,191,36,0.08)",
+            borderColor: "rgba(251,191,36,0.25)",
             color: "var(--text-primary)",
           }}
           onMouseEnter={(e) => {

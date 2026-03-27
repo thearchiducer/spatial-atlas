@@ -2811,6 +2811,7 @@ export default function App() {
 
   return (
     <div
+      data-theme={theme}
       className={
         "min-h-screen px-4 py-5 md:px-6 " +
         (theme === "dark"

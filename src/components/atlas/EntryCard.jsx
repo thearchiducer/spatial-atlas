@@ -49,7 +49,10 @@ function HighlightedText({ text, query }) {
 
 function annotationLabel(children) {
   return (
-    <span className='text-[10px] font-semibold uppercase tracking-[0.14em] text-stone-500'>
+    <span
+      className='text-[10px] font-semibold uppercase tracking-[0.14em]'
+      style={{ color: "var(--text-muted)" }}
+    >
       {children}
     </span>
   );
@@ -140,19 +143,38 @@ export default function EntryCard({
     <article
       id={`entry-${entry.id}`}
       onClick={handleSelectEntry}
-      className={`flex cursor-pointer flex-col gap-3 border bg-white px-4 py-4 transition ${stateClasses}`}
+      className={`flex cursor-pointer flex-col gap-3 border px-4 py-4 transition ${stateClasses}`}
+      style={{
+        background: "var(--bg-surface)",
+        borderColor: stateClasses.includes("border-stone")
+          ? "var(--border-color)"
+          : undefined,
+        color: "var(--text-primary)",
+      }}
     >
-      <div className='flex items-start justify-between gap-4 border-b border-stone-200 pb-3'>
+      <div
+        className='flex items-start justify-between gap-4 border-b pb-3'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         <div className='min-w-0 flex-1'>
-          <div className='mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+          <div
+            className='mb-2 text-[10px] font-semibold uppercase tracking-[0.16em]'
+            style={{ color: "var(--text-muted)" }}
+          >
             Spatial entry
           </div>
 
-          <h3 className='text-lg font-semibold tracking-tight text-stone-900'>
+          <h3
+            className='text-lg font-semibold tracking-tight'
+            style={{ color: "var(--text-primary)" }}
+          >
             <HighlightedText text={entry.term} query={searchQuery} />
           </h3>
 
-          <p className='mt-2 text-sm leading-relaxed text-stone-600'>
+          <p
+            className='mt-2 text-sm leading-relaxed'
+            style={{ color: "var(--text-secondary)" }}
+          >
             <HighlightedText text={entry.description} query={searchQuery} />
           </p>
         </div>
@@ -168,10 +190,17 @@ export default function EntryCard({
           type='button'
           onClick={handleCompareClick}
           className={`border px-3 py-1 text-[11px] uppercase tracking-[0.1em] transition ${
-            isCompared
-              ? "border-sky-300 bg-sky-50 text-sky-900"
-              : "border-stone-300 bg-white text-stone-700 hover:bg-stone-100"
+            isCompared ? "border-sky-300 bg-sky-50 text-sky-900" : ""
           }`}
+          style={
+            isCompared
+              ? undefined
+              : {
+                  borderColor: "var(--border-color)",
+                  background: "var(--bg-surface)",
+                  color: "var(--text-secondary)",
+                }
+          }
         >
           {isCompared ? "In compare" : "Add to compare"}
         </button>
@@ -180,10 +209,17 @@ export default function EntryCard({
           type='button'
           onClick={handlePinClick}
           className={`border px-3 py-1 text-[11px] uppercase tracking-[0.1em] transition ${
-            isPinned
-              ? "border-amber-300 bg-amber-50 text-amber-900"
-              : "border-stone-300 bg-white text-stone-700 hover:bg-stone-100"
+            isPinned ? "border-amber-300 bg-amber-50 text-amber-900" : ""
           }`}
+          style={
+            isPinned
+              ? undefined
+              : {
+                  borderColor: "var(--border-color)",
+                  background: "var(--bg-surface)",
+                  color: "var(--text-secondary)",
+                }
+          }
         >
           {isPinned ? "Pinned" : "Pin"}
         </button>
@@ -217,7 +253,12 @@ export default function EntryCard({
             event.stopPropagation();
             setIsExpanded((current) => !current);
           }}
-          className='border border-stone-300 bg-white px-3 py-1 text-[11px] uppercase tracking-[0.1em] text-stone-700 transition hover:bg-stone-100'
+          className='border px-3 py-1 text-[11px] uppercase tracking-[0.1em] transition'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "var(--bg-surface)",
+            color: "var(--text-secondary)",
+          }}
         >
           {isExpanded ? "Less" : "More"}
         </button>
@@ -265,10 +306,15 @@ export default function EntryCard({
       )}
       {isExpanded && (
         <>
-          <div className='border-t border-stone-200 pt-3'>
+          <div
+            className='border-t pt-3'
+            style={{ borderColor: "var(--border-color)" }}
+          >
             <div className='mb-2'>{annotationLabel("Synonyms")}</div>
-
-            <div className='text-sm leading-relaxed text-stone-600'>
+            <div
+              className='text-sm leading-relaxed'
+              style={{ color: "var(--text-secondary)" }}
+            >
               {entry.synonyms.length
                 ? entry.synonyms.map((synonym, index) => (
                     <span key={`${synonym}-${index}`}>
@@ -280,30 +326,46 @@ export default function EntryCard({
             </div>
           </div>
 
-          <div className='grid gap-x-4 gap-y-2 border-t border-stone-200 pt-3 text-sm text-stone-600 md:grid-cols-2'>
+          <div
+            className='grid gap-x-4 gap-y-2 border-t pt-3 text-sm md:grid-cols-2'
+            style={{
+              borderColor: "var(--border-color)",
+              color: "var(--text-secondary)",
+            }}
+          >
             <div>
               {annotationLabel("Scale")}
-              <div className='mt-1 text-stone-900'>{entry.scale}</div>
+              <div className='mt-1' style={{ color: "var(--text-primary)" }}>
+                {entry.scale}
+              </div>
             </div>
 
             <div>
               {annotationLabel("Domain")}
-              <div className='mt-1 text-stone-900'>{entry.domain}</div>
+              <div className='mt-1' style={{ color: "var(--text-primary)" }}>
+                {entry.domain}
+              </div>
             </div>
 
             <div>
               {annotationLabel("Status")}
-              <div className='mt-1 text-stone-900'>{entry.status}</div>
+              <div className='mt-1' style={{ color: "var(--text-primary)" }}>
+                {entry.status}
+              </div>
             </div>
 
             <div>
               {annotationLabel("Region")}
-              <div className='mt-1 text-stone-900'>{entry.region}</div>
+              <div className='mt-1' style={{ color: "var(--text-primary)" }}>
+                {entry.region}
+              </div>
             </div>
 
             <div className='md:col-span-2'>
               {annotationLabel("Source")}
-              <div className='mt-1 text-stone-900'>{entry.sourceCategory}</div>
+              <div className='mt-1' style={{ color: "var(--text-primary)" }}>
+                {entry.sourceCategory}
+              </div>
             </div>
           </div>
 
@@ -320,7 +382,12 @@ export default function EntryCard({
                     key={item.id}
                     type='button'
                     onClick={() => handleRelatedClick(item.id)}
-                    className='border border-stone-300 bg-white px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100 hover:text-stone-900'
+                    className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] transition'
+                    style={{
+                      borderColor: "var(--border-color)",
+                      background: "var(--bg-surface)",
+                      color: "var(--text-secondary)",
+                    }}
                   >
                     {item.label}
                   </button>
@@ -329,9 +396,15 @@ export default function EntryCard({
             </div>
           )}
 
-          <div className='border-t border-stone-200 pt-3'>
+          <div
+            className='border-t pt-3'
+            style={{ borderColor: "var(--border-color)" }}
+          >
             <div className='mb-2'>{annotationLabel("Note")}</div>
-            <p className='text-sm leading-relaxed text-stone-600'>
+            <p
+              className='text-sm leading-relaxed'
+              style={{ color: "var(--text-secondary)" }}
+            >
               {entry.notes}
             </p>
           </div>

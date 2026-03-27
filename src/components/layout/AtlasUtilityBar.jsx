@@ -65,6 +65,7 @@ function QuickReferenceButton({ tone = "stone", children, onClick }) {
 }
 
 export default function AtlasUtilityBar({
+  theme = "light",
   activeBoard,
   selectedEntry,
   compareEntries,
@@ -84,11 +85,25 @@ export default function AtlasUtilityBar({
   }
 
   return (
-    <section className='sticky top-20 z-10 border border-stone-300 bg-white/95 p-4 backdrop-blur'>
+    <section
+      className={
+        "sticky top-20 z-10 border p-4 backdrop-blur " +
+        (theme === "dark"
+          ? "border-stone-700 bg-stone-900/95"
+          : "border-stone-300 bg-white/95")
+      }
+    >
       <div className='flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between'>
         <div className='flex flex-wrap gap-2'>
           {hasActiveBoard && (
-            <div className='border border-violet-300 bg-violet-50 px-3 py-2 text-violet-950'>
+            <div
+              className={
+                "border px-3 py-2 " +
+                (theme === "dark"
+                  ? "border-violet-700 bg-violet-950 text-violet-100"
+                  : "border-violet-300 bg-violet-50 text-violet-950")
+              }
+            >
               <div className='flex flex-wrap items-center gap-2'>
                 <span className='text-[10px] font-semibold uppercase tracking-[0.16em]'>
                   Active board

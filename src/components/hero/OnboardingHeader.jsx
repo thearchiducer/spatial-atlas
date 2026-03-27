@@ -1,12 +1,31 @@
-export default function OnboardingHeader() {
+export default function OnboardingHeader({ theme = "light" }) {
   return (
-    <div className='border-b border-stone-200 bg-white px-6 py-6'>
+    <div
+      className={
+        "border-b px-6 py-6 " +
+        (theme === "dark"
+          ? "border-stone-800 bg-stone-900"
+          : "border-stone-200 bg-white")
+      }
+    >
       <div className='max-w-5xl'>
         {/* Title */}
-        <h1 className='text-xl font-semibold text-stone-900'>Spatial Atlas</h1>
+        <h1
+          className={
+            "text-xl font-semibold " +
+            (theme === "dark" ? "text-stone-100" : "text-stone-900")
+          }
+        >
+          Spatial Atlas
+        </h1>
 
         {/* Description */}
-        <p className='mt-2 text-sm text-stone-600 leading-relaxed'>
+        <p
+          className={
+            "mt-2 text-sm leading-relaxed " +
+            (theme === "dark" ? "text-stone-300" : "text-stone-600")
+          }
+        >
           Compare architectural directions, preview transformations, and track
           how design thinking evolves.
         </p>
@@ -14,7 +33,12 @@ export default function OnboardingHeader() {
           A sample board has been created to help you explore the workflow.
         </div>
         {/* Steps */}
-        <div className='mt-4 flex flex-col gap-1 text-xs text-stone-500'>
+        <div
+          className={
+            "mt-4 flex flex-col gap-1 text-xs " +
+            (theme === "dark" ? "text-stone-400" : "text-stone-500")
+          }
+        >
           <div>1. Select or create two directions</div>
           <div>2. Compare them</div>
           <div>3. Apply a transformation and observe the trajectory</div>

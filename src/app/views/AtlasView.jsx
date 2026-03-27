@@ -12,7 +12,7 @@ import DesignDirectionPanel from "../../components/atlas/DesignDirectionPanel";
 import BoardAnalysisPanel from "../../components/atlas/BoardAnalysisPanel";
 import LayoutPanel from "../../components/atlas/LayoutPanel";
 
-function JumpButton({ targetId, children }) {
+function JumpButton({ targetId, children, theme = "light" }) {
   function handleClick() {
     const target = document.getElementById(targetId);
     if (!target) return;
@@ -27,7 +27,12 @@ function JumpButton({ targetId, children }) {
     <button
       type='button'
       onClick={handleClick}
-      className='border border-stone-300 bg-white px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+      className={
+        "border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition " +
+        (theme === "dark"
+          ? "border-stone-700 bg-stone-950 text-stone-200 hover:bg-stone-800"
+          : "border-stone-300 bg-white text-stone-700 hover:bg-stone-100")
+      }
     >
       {children}
     </button>
@@ -40,25 +45,56 @@ function SectionBlock({
   defaultOpen = true,
   children,
   countLabel = "",
+  theme = "light",
 }) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <section id={id} className='scroll-mt-28 border border-stone-300 bg-white'>
-      <div className='flex items-center justify-between gap-3 border-b border-stone-200 px-4 py-3'>
+    <section
+      id={id}
+      className={
+        "scroll-mt-28 border " +
+        (theme === "dark"
+          ? "border-stone-700 bg-stone-900"
+          : "border-stone-300 bg-white")
+      }
+    >
+      <div
+        className={
+          "flex items-center justify-between gap-3 border-b px-4 py-3 " +
+          (theme === "dark" ? "border-stone-800" : "border-stone-200")
+        }
+      >
         <div>
-          <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+          <div
+            className={
+              "text-[10px] font-semibold uppercase tracking-[0.16em] " +
+              (theme === "dark" ? "text-stone-400" : "text-stone-500")
+            }
+          >
             {title}
           </div>
           {countLabel ? (
-            <div className='mt-1 text-xs text-stone-500'>{countLabel}</div>
+            <div
+              className={
+                "mt-1 text-xs " +
+                (theme === "dark" ? "text-stone-400" : "text-stone-500")
+              }
+            >
+              {countLabel}
+            </div>
           ) : null}
         </div>
 
         <button
           type='button'
           onClick={() => setIsOpen((current) => !current)}
-          className='border border-stone-300 bg-white px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+          className={
+            "border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition " +
+            (theme === "dark"
+              ? "border-stone-700 bg-stone-950 text-stone-200 hover:bg-stone-800"
+              : "border-stone-300 bg-white text-stone-700 hover:bg-stone-100")
+          }
         >
           {isOpen ? "Collapse" : "Expand"}
         </button>
@@ -71,6 +107,7 @@ function SectionBlock({
 
 export default function AtlasView(props) {
   const {
+    theme = "light",
     atlas,
     topSearchReasons,
     hasPinnedEntries,
@@ -131,28 +168,60 @@ export default function AtlasView(props) {
   return (
     <>
       <div className='sticky top-24 z-20 space-y-3'>
-        <div className='border border-stone-300 bg-white p-3 shadow-sm'>
+        <div
+          className={
+            "border p-3 shadow-sm " +
+            (theme === "dark"
+              ? "border-stone-700 bg-stone-900"
+              : "border-stone-300 bg-white")
+          }
+        >
           <div className='mb-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
             Navigate workspace
           </div>
 
           <div className='flex flex-wrap gap-2'>
-            <JumpButton targetId='atlas-search-summary'>Search</JumpButton>
-            <JumpButton targetId='atlas-compare'>Compare</JumpButton>
-            <JumpButton targetId='atlas-entries'>Entries</JumpButton>
-            <JumpButton targetId='atlas-selected-entry'>Selected</JumpButton>
-            <JumpButton targetId='atlas-intent'>Intent</JumpButton>
-            <JumpButton targetId='atlas-project-boards'>Boards</JumpButton>
-            <JumpButton targetId='atlas-direction'>Direction</JumpButton>
-            <JumpButton targetId='atlas-analysis'>Analysis</JumpButton>
-            <JumpButton targetId='atlas-layout'>Layout</JumpButton>
-            <JumpButton targetId='atlas-pinned'>
+            <JumpButton theme={theme} targetId='atlas-search-summary'>
+              Search
+            </JumpButton>
+            <JumpButton theme={theme} targetId='atlas-compare'>
+              Compare
+            </JumpButton>
+            <JumpButton theme={theme} targetId='atlas-entries'>
+              Entries
+            </JumpButton>
+            <JumpButton theme={theme} targetId='atlas-selected-entry'>
+              Selected
+            </JumpButton>
+            <JumpButton theme={theme} targetId='atlas-intent'>
+              Intent
+            </JumpButton>
+            <JumpButton theme={theme} targetId='atlas-project-boards'>
+              Boards
+            </JumpButton>
+            <JumpButton theme={theme} targetId='atlas-direction'>
+              Direction
+            </JumpButton>
+            <JumpButton theme={theme} targetId='atlas-analysis'>
+              Analysis
+            </JumpButton>
+            <JumpButton theme={theme} targetId='atlas-layout'>
+              Layout
+            </JumpButton>
+            <JumpButton theme={theme} targetId='atlas-pinned'>
               Pinned ({pinnedCount})
             </JumpButton>
           </div>
         </div>
 
-        <div className='border border-stone-300 bg-stone-50 px-3 py-2 text-xs text-stone-700 shadow-sm'>
+        <div
+          className={
+            "border px-3 py-2 text-xs shadow-sm " +
+            (theme === "dark"
+              ? "border-stone-700 bg-stone-900 text-stone-300"
+              : "border-stone-300 bg-stone-50 text-stone-700")
+          }
+        >
           Flow: Browse entries → add to active board → compare → transform →
           review direction
         </div>
@@ -182,6 +251,7 @@ export default function AtlasView(props) {
         title='Compare'
         defaultOpen={true}
         countLabel={`${compareCount} compare entr${compareCount === 1 ? "y" : "ies"}`}
+        theme={theme}
       >
         {isCompareMode ? (
           <CompareModeLayout
@@ -207,6 +277,7 @@ export default function AtlasView(props) {
         title='Entries'
         defaultOpen={true}
         countLabel={`${visibleEntryCount} visible entries`}
+        theme={theme}
       >
         <SectionList
           groupedSections={atlas.groupedSections}
@@ -233,6 +304,7 @@ export default function AtlasView(props) {
           title='Selected entry'
           defaultOpen={true}
           countLabel={selectedEntry ? selectedEntry.term : ""}
+          theme={theme}
         >
           <SelectedEntryPanel
             selectedEntry={selectedEntry}
@@ -280,6 +352,7 @@ export default function AtlasView(props) {
           title='Design intent'
           defaultOpen={false}
           countLabel='Intent matching and direction framing'
+          theme={theme}
         >
           <DesignIntentPanel
             entries={atlas.visibleEntries}
@@ -300,6 +373,7 @@ export default function AtlasView(props) {
             ? `active: ${hydratedActiveProjectBoard.name}`
             : "no active board"
         }`}
+        theme={theme}
       >
         <ProjectBoardPanel
           boards={projectBoards}
@@ -326,6 +400,7 @@ export default function AtlasView(props) {
           countLabel={`${activeBoardEntryCount} active board entr${
             activeBoardEntryCount === 1 ? "y" : "ies"
           }`}
+          theme={theme}
         >
           <DesignDirectionPanel
             activeBoard={hydratedActiveProjectBoard}
@@ -341,6 +416,7 @@ export default function AtlasView(props) {
           title='Board analysis'
           defaultOpen={false}
           countLabel='Direction reading and evaluation'
+          theme={theme}
         >
           <BoardAnalysisPanel activeBoard={hydratedActiveProjectBoard} />
         </SectionBlock>
@@ -352,6 +428,7 @@ export default function AtlasView(props) {
           title='Layout'
           defaultOpen={false}
           countLabel='Spatial organization view'
+          theme={theme}
         >
           <LayoutPanel activeBoard={hydratedActiveProjectBoard} />
         </SectionBlock>

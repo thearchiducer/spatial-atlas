@@ -2819,7 +2819,7 @@ export default function App() {
       }
     >
       <div className='mx-auto flex max-w-7xl flex-col gap-5'>
-        <OnboardingHeader />
+        <OnboardingHeader theme={theme} />
         {activeProjectBoard ? (
           <div className='border border-violet-300 bg-violet-50 px-3 py-2 text-xs font-semibold text-violet-900'>
             Active board: {activeProjectBoard.name}
@@ -2875,6 +2875,7 @@ export default function App() {
         {!minimalMode ? (
           <>
             <AtlasUtilityBar
+              theme={theme}
               activeBoard={activeProjectBoard}
               selectedEntry={selectedEntry}
               compareEntries={compareEntries}
@@ -2920,6 +2921,7 @@ export default function App() {
 
               {isAtlasView ? (
                 <AtlasView
+                  theme={theme}
                   atlas={atlas}
                   topSearchReasons={topSearchReasons}
                   hasPinnedEntries={hasPinnedEntries}

@@ -146,15 +146,15 @@ export default function EntryCard({
       className={`flex cursor-pointer flex-col gap-3 border px-4 py-4 transition ${stateClasses}`}
       style={{
         background: "var(--bg-surface)",
-        borderColor: stateClasses.includes("border-stone")
-          ? "var(--border-color)"
-          : undefined,
+        borderColor: "var(--border-color)",
         color: "var(--text-primary)",
+        boxShadow:
+          "0 0 0 1px rgba(255,255,255,0.02), 0 6px 12px rgba(0,0,0,0.25)",
       }}
     >
       <div
         className='flex items-start justify-between gap-4 border-b pb-3'
-        style={{ borderColor: "var(--border-color)" }}
+        style={{ borderColor: "rgba(255,255,255,0.08)" }}
       >
         <div className='min-w-0 flex-1'>
           <div
@@ -197,7 +197,7 @@ export default function EntryCard({
               ? undefined
               : {
                   borderColor: "var(--border-color)",
-                  background: "var(--bg-surface)",
+                  background: "var(--bg-muted)",
                   color: "var(--text-secondary)",
                 }
           }
@@ -216,7 +216,7 @@ export default function EntryCard({
               ? undefined
               : {
                   borderColor: "var(--border-color)",
-                  background: "var(--bg-surface)",
+                  background: "var(--bg-muted)",
                   color: "var(--text-secondary)",
                 }
           }
@@ -228,7 +228,12 @@ export default function EntryCard({
           type='button'
           onClick={handleAddToBoardClick}
           disabled={!onAddToBoard}
-          className='border border-emerald-300 bg-emerald-50 px-3 py-1 text-[11px] uppercase tracking-[0.1em] text-emerald-900 transition hover:bg-emerald-100 disabled:cursor-not-allowed disabled:opacity-60'
+          className='border px-3 py-1 text-[11px] uppercase tracking-[0.1em] transition disabled:cursor-not-allowed disabled:opacity-60'
+          style={{
+            background: "rgba(16,185,129,0.12)",
+            borderColor: "rgba(16,185,129,0.4)",
+            color: "#6ee7b7",
+          }}
         >
           Add to active board
         </button>
@@ -237,7 +242,12 @@ export default function EntryCard({
           type='button'
           onClick={handleRemoveFromBoardClick}
           disabled={!onRemoveFromBoard || boardEntryCount < 1}
-          className='border border-amber-300 bg-amber-50 px-3 py-1 text-[11px] uppercase tracking-[0.1em] text-amber-900 transition hover:bg-amber-100 disabled:cursor-not-allowed disabled:opacity-60'
+          className='border px-3 py-1 text-[11px] uppercase tracking-[0.1em] transition disabled:cursor-not-allowed disabled:opacity-60'
+          style={{
+            background: "rgba(251,191,36,0.12)",
+            borderColor: "rgba(251,191,36,0.35)",
+            color: "#fde68a",
+          }}
         >
           Remove from active board
         </button>
@@ -256,7 +266,7 @@ export default function EntryCard({
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.1em] transition'
           style={{
             borderColor: "var(--border-color)",
-            background: "var(--bg-surface)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -308,7 +318,7 @@ export default function EntryCard({
         <>
           <div
             className='border-t pt-3'
-            style={{ borderColor: "var(--border-color)" }}
+            style={{ borderColor: "rgba(255,255,255,0.08)" }}
           >
             <div className='mb-2'>{annotationLabel("Synonyms")}</div>
             <div
@@ -385,7 +395,7 @@ export default function EntryCard({
                     className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] transition'
                     style={{
                       borderColor: "var(--border-color)",
-                      background: "var(--bg-surface)",
+                      background: "var(--bg-muted)",
                       color: "var(--text-secondary)",
                     }}
                   >

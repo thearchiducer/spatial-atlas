@@ -35,6 +35,7 @@ import {
   getSafeEntryIds,
   normalizeEntryIds,
 } from "../lib/boardUtils";
+import OnboardingHeader from "../components/hero/OnboardingHeader";
 
 const PINNED_STORAGE_KEY = "architectural-atlas-pinned-entries";
 const COMPARE_HISTORY_STORAGE_KEY = "architectural-atlas-compare-history";
@@ -2759,6 +2760,8 @@ export default function App() {
   return (
     <div className='min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(120,80,30,0.10),transparent_28%),linear-gradient(180deg,#f6f3ed_0%,#f5f1e8_100%)] px-4 py-5 text-stone-900 md:px-6'>
       <div className='mx-auto flex max-w-7xl flex-col gap-5'>
+        <OnboardingHeader />
+
         {!minimalMode ? <HeroHeader metrics={atlas.metrics} /> : null}
 
         <FilterToolbar

@@ -39,7 +39,12 @@ function HighlightedText({ text, query }) {
     return (
       <mark
         key={`${part}-${index}`}
-        className='bg-amber-100 px-0.5 text-inherit'
+        style={{
+          background: "rgba(251,191,36,0.18)",
+          color: "var(--text-primary)",
+          padding: "0 2px",
+          borderRadius: "2px",
+        }}
       >
         {part}
       </mark>
@@ -234,6 +239,12 @@ export default function EntryCard({
             borderColor: "rgba(16,185,129,0.4)",
             color: "#6ee7b7",
           }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = "rgba(16,185,129,0.2)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "rgba(16,185,129,0.12)";
+          }}
         >
           Add to active board
         </button>
@@ -245,14 +256,28 @@ export default function EntryCard({
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.1em] transition disabled:cursor-not-allowed disabled:opacity-60'
           style={{
             background: "rgba(251,191,36,0.12)",
-            borderColor: "rgba(251,191,36,0.35)",
-            color: "#fde68a",
+            borderBottom: "1px solid rgba(251,191,36,0.5)",
+            color: "var(--text-primary)",
+            padding: "0 1px",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = "rgba(251,191,36,0.2)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "rgba(251,191,36,0.12)";
           }}
         >
           Remove from active board
         </button>
 
-        <span className='border border-fuchsia-200 bg-fuchsia-50 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-fuchsia-800'>
+        <span
+          className='border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em]'
+          style={{
+            background: "rgba(168,85,247,0.15)",
+            borderColor: "rgba(168,85,247,0.4)",
+            color: "#d8b4fe",
+          }}
+        >
           In board · {boardEntryCount}
         </span>
 
@@ -286,7 +311,14 @@ export default function EntryCard({
         )}
 
         {isInActiveBoard && (
-          <span className='border border-fuchsia-200 bg-fuchsia-50 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-fuchsia-800'>
+          <span
+            className='border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em]'
+            style={{
+              background: "rgba(168,85,247,0.15)",
+              borderColor: "rgba(168,85,247,0.4)",
+              color: "#d8b4fe",
+            }}
+          >
             {activeBoardName ? `Board · ${activeBoardName}` : "In active board"}
           </span>
         )}
@@ -381,7 +413,8 @@ export default function EntryCard({
 
           {entry.related && entry.related.length > 0 && (
             <div
-              className='border-t border-stone-200 pt-3'
+              className='border-t pt-3'
+              style={{ borderColor: "var(--border-color)" }}
               onClick={(event) => event.stopPropagation()}
             >
               <div className='mb-2'>{annotationLabel("Related")}</div>

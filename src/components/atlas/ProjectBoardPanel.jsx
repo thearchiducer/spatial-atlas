@@ -2,7 +2,10 @@ import { useEffect, useMemo, useState } from "react";
 
 function annotationLabel(children) {
   return (
-    <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+    <div
+      className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+      style={{ color: "var(--text-muted)" }}
+    >
       {children}
     </div>
   );
@@ -10,7 +13,14 @@ function annotationLabel(children) {
 
 function MetricChip({ label, value }) {
   return (
-    <span className='border border-stone-300 bg-white px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700'>
+    <span
+      className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-muted)",
+        color: "var(--text-secondary)",
+      }}
+    >
       {label} · {value}
     </span>
   );
@@ -20,12 +30,24 @@ function EntryPill({ entry, onRemove }) {
   if (!entry) return null;
 
   return (
-    <div className='flex items-center gap-2 border border-stone-200 bg-white px-3 py-2'>
+    <div
+      className='flex items-center gap-2 border px-3 py-2'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
       <div className='min-w-0 flex-1'>
-        <div className='truncate text-sm font-semibold text-stone-900'>
+        <div
+          className='truncate text-sm font-semibold'
+          style={{ color: "var(--text-primary)" }}
+        >
           {entry.term}
         </div>
-        <div className='truncate text-[11px] uppercase tracking-[0.08em] text-stone-500'>
+        <div
+          className='truncate text-[11px] uppercase tracking-[0.08em]'
+          style={{ color: "var(--text-muted)" }}
+        >
           {entry.type || "—"} · {entry.privacyLevel || "—"}
         </div>
       </div>
@@ -33,7 +55,12 @@ function EntryPill({ entry, onRemove }) {
       <button
         type='button'
         onClick={() => onRemove(entry)}
-        className='border border-red-200 bg-red-50 px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] text-red-700 transition hover:bg-red-100'
+        className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] transition'
+        style={{
+          background: "rgba(251,191,36,0.10)",
+          borderColor: "rgba(251,191,36,0.30)",
+          color: "#fde68a",
+        }}
       >
         Remove
       </button>
@@ -48,12 +75,24 @@ function ComparePairCard({ pair }) {
   const right = pair.right || null;
 
   return (
-    <div className='border border-stone-200 bg-white p-3'>
-      <div className='text-sm font-semibold text-stone-900'>
+    <div
+      className='border p-3'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='text-sm font-semibold'
+        style={{ color: "var(--text-primary)" }}
+      >
         {left?.term || pair.leftId || "Unknown"} ↔{" "}
         {right?.term || pair.rightId || "Unknown"}
       </div>
-      <div className='mt-1 text-[11px] uppercase tracking-[0.08em] text-stone-500'>
+      <div
+        className='mt-1 text-[11px] uppercase tracking-[0.08em]'
+        style={{ color: "var(--text-muted)" }}
+      >
         Compare pair
       </div>
     </div>
@@ -73,28 +112,52 @@ function BoardCard({ board, isActive, onOpen, onDelete }) {
         if (!onOpen) return;
         onOpen(board.id);
       }}
-      className={
-        "border p-4 transition cursor-pointer " +
-        (isActive
-          ? "border-violet-400 bg-violet-50 text-violet-900 shadow-sm"
-          : "border-stone-300 bg-white hover:bg-stone-50")
-      }
+      className='border p-4 transition cursor-pointer'
+      style={{
+        borderColor: isActive ? "rgba(168,85,247,0.55)" : "var(--border-color)",
+        background: isActive ? "rgba(168,85,247,0.08)" : "var(--bg-surface)",
+        color: "var(--text-primary)",
+        boxShadow: isActive
+          ? "0 0 0 1px rgba(168,85,247,0.12), 0 8px 18px rgba(0,0,0,0.28)"
+          : "0 0 0 1px rgba(255,255,255,0.02), 0 4px 10px rgba(0,0,0,0.18)",
+      }}
     >
-      <div className='flex items-start justify-between gap-3 border-b border-current/15 pb-4'>
+      <div
+        className='flex items-start justify-between gap-3 border-b pb-4'
+        style={{ borderColor: "rgba(255,255,255,0.10)" }}
+      >
         <div>
-          <div className='mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] opacity-70'>
+          <div
+            className='mb-2 text-[10px] font-semibold uppercase tracking-[0.16em]'
+            style={{ color: "var(--text-muted)" }}
+          >
             Project board
           </div>
 
-          <h3 className='text-base font-semibold tracking-tight text-stone-900'>
+          <h3
+            className='text-base font-semibold tracking-tight'
+            style={{ color: "var(--text-primary)" }}
+          >
             {board?.name || "Untitled board"}
           </h3>
+
           {isActive && (
-            <div className='mt-1 inline-block border border-violet-300 bg-violet-100 px-2 py-0.5 text-[10px] uppercase tracking-[0.12em] text-violet-900'>
+            <div
+              className='mt-1 inline-block border px-2 py-0.5 text-[10px] uppercase tracking-[0.12em]'
+              style={{
+                background: "rgba(168,85,247,0.15)",
+                borderColor: "rgba(168,85,247,0.40)",
+                color: "#d8b4fe",
+              }}
+            >
               Active
             </div>
           )}
-          <p className={"mt-2 text-sm leading-relaxed " + "text-stone-600"}>
+
+          <p
+            className='mt-2 text-sm leading-relaxed'
+            style={{ color: "var(--text-secondary)" }}
+          >
             {board?.description ||
               "Working board for applied spatial research."}
           </p>
@@ -106,12 +169,12 @@ function BoardCard({ board, isActive, onOpen, onDelete }) {
             event.stopPropagation();
             onDelete(board);
           }}
-          className={
-            "border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] " +
-            (isActive
-              ? "border-stone-700 bg-stone-900 text-stone-200 hover:bg-stone-800"
-              : "border-stone-300 bg-white text-stone-700 hover:bg-stone-100")
-          }
+          className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] transition'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "var(--bg-muted)",
+            color: "var(--text-secondary)",
+          }}
         >
           Delete
         </button>
@@ -136,12 +199,14 @@ function BoardCard({ board, isActive, onOpen, onDelete }) {
             if (!onOpen) return;
             onOpen(board.id);
           }}
-          className={
-            "border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition " +
-            (isActive
-              ? "border-stone-600 bg-stone-900 text-white hover:bg-stone-800"
-              : "border-stone-300 bg-white text-stone-900 hover:bg-stone-100")
-          }
+          className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+          style={{
+            borderColor: isActive
+              ? "rgba(168,85,247,0.40)"
+              : "var(--border-color)",
+            background: isActive ? "rgba(168,85,247,0.15)" : "var(--bg-muted)",
+            color: isActive ? "#d8b4fe" : "var(--text-primary)",
+          }}
         >
           {isActive ? "Current board" : "Activate board"}
         </button>
@@ -200,23 +265,43 @@ export default function ProjectBoardPanel({
   const canAddCompare = Boolean(activeBoard && compareEntries.length === 2);
 
   return (
-    <section className='border border-stone-300 bg-white p-5'>
+    <section
+      className='border p-5'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
       {annotationLabel("Project board mode")}
 
-      <h2 className='mt-2 text-xl font-semibold tracking-tight text-stone-900'>
+      <h2
+        className='mt-2 text-xl font-semibold tracking-tight'
+        style={{ color: "var(--text-primary)" }}
+      >
         Applied design workspace
       </h2>
 
-      <p className='mt-2 text-sm leading-relaxed text-stone-600'>
+      <p
+        className='mt-2 text-sm leading-relaxed'
+        style={{ color: "var(--text-secondary)" }}
+      >
         Turn entries, compare pairs, and spatial intent into a project-specific
         working board.
       </p>
 
-      <div className='mt-4 flex flex-wrap gap-2 border-b border-stone-200 pb-4'>
+      <div
+        className='mt-4 flex flex-wrap gap-2 border-b pb-4'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         <button
           type='button'
           onClick={onCreateBoard}
-          className='border border-stone-900 bg-stone-950 px-4 py-2 text-[11px] uppercase tracking-[0.08em] text-white transition hover:bg-stone-800'
+          className='border px-4 py-2 text-[11px] uppercase tracking-[0.08em] transition'
+          style={{
+            borderColor: "rgba(168,85,247,0.40)",
+            background: "rgba(168,85,247,0.15)",
+            color: "#d8b4fe",
+          }}
         >
           Create board
         </button>
@@ -225,7 +310,12 @@ export default function ProjectBoardPanel({
           type='button'
           onClick={onAddSelectedEntry}
           disabled={!canAddSelected}
-          className='border border-stone-300 bg-white px-4 py-2 text-[11px] uppercase tracking-[0.08em] text-stone-900 transition hover:bg-stone-100 disabled:cursor-not-allowed disabled:opacity-50'
+          className='border px-4 py-2 text-[11px] uppercase tracking-[0.08em] transition disabled:cursor-not-allowed disabled:opacity-50'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "var(--bg-muted)",
+            color: "var(--text-primary)",
+          }}
         >
           Add selected entry
         </button>
@@ -234,7 +324,12 @@ export default function ProjectBoardPanel({
           type='button'
           onClick={onAddComparePair}
           disabled={!canAddCompare}
-          className='border border-stone-300 bg-white px-4 py-2 text-[11px] uppercase tracking-[0.08em] text-stone-900 transition hover:bg-stone-100 disabled:cursor-not-allowed disabled:opacity-50'
+          className='border px-4 py-2 text-[11px] uppercase tracking-[0.08em] transition disabled:cursor-not-allowed disabled:opacity-50'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "var(--bg-muted)",
+            color: "var(--text-primary)",
+          }}
         >
           Add active compare pair
         </button>
@@ -243,14 +338,28 @@ export default function ProjectBoardPanel({
           type='button'
           onClick={onExportBoardSheet}
           disabled={!activeBoard}
-          className='border border-stone-300 bg-white px-4 py-2 text-[11px] uppercase tracking-[0.08em] text-stone-900 transition hover:bg-stone-100 disabled:cursor-not-allowed disabled:opacity-50'
+          className='border px-4 py-2 text-[11px] uppercase tracking-[0.08em] transition disabled:cursor-not-allowed disabled:opacity-50'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "var(--bg-muted)",
+            color: "var(--text-primary)",
+          }}
         >
           Export board sheet
         </button>
       </div>
 
-      <div className='mt-6 border border-stone-200 bg-stone-50/60 p-4'>
-        <div className='mb-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+      <div
+        className='mt-6 border p-4'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "rgba(255,255,255,0.03)",
+        }}
+      >
+        <div
+          className='mb-3 text-[10px] font-semibold uppercase tracking-[0.16em]'
+          style={{ color: "var(--text-muted)" }}
+        >
           Boards
         </div>
 
@@ -274,13 +383,25 @@ export default function ProjectBoardPanel({
       </div>
 
       <div className='mt-6 grid gap-4 xl:grid-cols-[1.2fr,0.8fr]'>
-        <div className='border border-stone-200 bg-white p-4'>
+        <div
+          className='border p-4'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "var(--bg-surface)",
+          }}
+        >
           <div className='flex items-start justify-between gap-3 border-b border-stone-200 pb-4'>
             <div>
-              <h3 className='text-base font-semibold text-stone-900'>
+              <h3
+                className='text-base font-semibold '
+                style={{ color: "var(--text-primary)" }}
+              >
                 Active board entries
               </h3>
-              <p className='mt-1 text-sm text-stone-600'>
+              <p
+                className='mt-1 text-sm '
+                style={{ color: "var(--text-secondary)" }}
+              >
                 Remove entries directly from the active board here.
               </p>
             </div>
@@ -299,36 +420,73 @@ export default function ProjectBoardPanel({
                   />
                 ))
               ) : (
-                <div className='border border-dashed border-stone-300 bg-stone-50 p-4 text-sm text-stone-500'>
+                <div
+                  className='border border-dashed p-4 text-sm'
+                  style={{
+                    borderColor: "var(--border-color)",
+                    background: "rgba(255,255,255,0.02)",
+                    color: "var(--text-muted)",
+                  }}
+                >
                   Active board is empty.
                 </div>
               )
             ) : (
-              <div className='border border-dashed border-stone-300 bg-stone-50 p-4 text-sm text-stone-500'>
+              <div
+                className='border border-dashed p-4 text-sm'
+                style={{
+                  borderColor: "var(--border-color)",
+                  background: "rgba(255,255,255,0.02)",
+                  color: "var(--text-muted)",
+                }}
+              >
                 Open a board to manage its entries.
               </div>
             )}
           </div>
 
-          <div className='mt-5 border-t border-stone-200 pt-4'>
+          <div
+            className='mt-5 border-t pt-4'
+            style={{ borderColor: "var(--border-color)" }}
+          >
             {annotationLabel("Board notes")}
             <textarea
               value={draftNotes}
               onChange={(event) => setDraftNotes(event.target.value)}
               onBlur={handleNotesBlur}
               placeholder='Working notes, spatial intent, program reminders...'
-              className='mt-2 min-h-[120px] w-full border border-stone-300 bg-white px-3 py-3 text-sm text-stone-900 outline-none transition focus:border-stone-500'
+              className='mt-2 min-h-[120px] w-full border px-3 py-3 text-sm outline-none transition'
+              style={{
+                borderColor: "var(--border-color)",
+                background: "var(--bg-muted)",
+                color: "var(--text-primary)",
+              }}
             />
           </div>
         </div>
 
-        <div className='border border-stone-200 bg-white p-4'>
-          <div className='flex items-start justify-between gap-3 border-b border-stone-200 pb-4'>
+        <div
+          className='border p-4'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "var(--bg-surface)",
+          }}
+        >
+          <div
+            className='flex items-start justify-between gap-3 border-b pb-4'
+            style={{ borderColor: "var(--border-color)" }}
+          >
             <div>
-              <h3 className='text-base font-semibold text-stone-900'>
+              <h3
+                className='text-base font-semibold '
+                style={{ color: "var(--text-primary)" }}
+              >
                 Active compare pairs
               </h3>
-              <p className='mt-1 text-sm text-stone-600'>
+              <p
+                className='mt-1 text-sm '
+                style={{ color: "var(--text-secondary)" }}
+              >
                 Pairs attached to the active board.
               </p>
             </div>
@@ -349,12 +507,26 @@ export default function ProjectBoardPanel({
                   />
                 ))
               ) : (
-                <div className='border border-dashed border-stone-300 bg-stone-50 p-4 text-sm text-stone-500'>
+                <div
+                  className='border border-dashed p-4 text-sm'
+                  style={{
+                    borderColor: "var(--border-color)",
+                    background: "rgba(255,255,255,0.02)",
+                    color: "var(--text-muted)",
+                  }}
+                >
                   No compare pairs in this board.
                 </div>
               )
             ) : (
-              <div className='border border-dashed border-stone-300 bg-stone-50 p-4 text-sm text-stone-500'>
+              <div
+                className='border border-dashed p-4 text-sm'
+                style={{
+                  borderColor: "var(--border-color)",
+                  background: "rgba(255,255,255,0.02)",
+                  color: "var(--text-muted)",
+                }}
+              >
                 Open a board to inspect its compare pairs.
               </div>
             )}

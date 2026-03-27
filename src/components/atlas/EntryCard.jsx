@@ -264,7 +264,7 @@ export default function EntryCard({
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.1em] transition disabled:cursor-not-allowed disabled:opacity-60'
           style={{
             background: "rgba(251,191,36,0.10)",
-            borderBottom: "rgba(251,191,36,0.30)",
+            borderColor: "rgba(251,191,36,0.30)",
             color: "var(--text-primary)",
           }}
           onMouseEnter={(e) => {

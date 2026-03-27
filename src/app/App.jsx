@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import { entries as baseEntries } from "../data/entries";
 import { sections } from "../data/sections";
 import { useAtlasSearch } from "../hooks/useAtlasSearch";
@@ -2964,6 +2965,7 @@ export default function App() {
         isOpen={showShortcuts}
         onToggle={toggleShortcuts}
       />
+      <Analytics />
     </div>
   );
 }

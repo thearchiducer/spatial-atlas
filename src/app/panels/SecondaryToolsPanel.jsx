@@ -20,20 +20,20 @@ function SectionToggle({
 }) {
   const toneClasses =
     tone === "sky"
-      ? "border-sky-300 bg-sky-50 text-sky-950"
+      ? "border-[rgba(56,189,248,0.35)] bg-[rgba(56,189,248,0.08)] text-[#e0f2fe]"
       : tone === "amber"
-        ? "border-amber-300 bg-amber-50 text-amber-950"
+        ? "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.08)] text-[#fef3c7]"
         : tone === "emerald"
-          ? "border-emerald-300 bg-emerald-50 text-emerald-950"
+          ? "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.08)] text-[#d1fae5]"
           : tone === "violet"
-            ? "border-violet-300 bg-violet-50 text-violet-950"
-            : "border-stone-300 bg-stone-50 text-stone-950";
+            ? "border-[rgba(168,85,247,0.35)] bg-[rgba(168,85,247,0.08)] text-[#f3e8ff]"
+            : "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-primary)]";
 
   return (
     <button
       type='button'
       onClick={onToggle}
-      className={`flex w-full items-start justify-between gap-4 border px-4 py-3 text-left transition hover:bg-white ${toneClasses}`}
+      className={`flex w-full items-start justify-between gap-4 border px-4 py-3 text-left transition hover:bg-[rgba(255,255,255,0.04)] ${toneClasses}`}
     >
       <div className='min-w-0'>
         <div className='flex flex-wrap items-center gap-2'>
@@ -526,22 +526,40 @@ export default function SecondaryToolsPanel({
 
   return (
     <section
-      className={
-        docked ? "space-y-5" : "border border-stone-300 bg-stone-50/40 p-5"
+      className={docked ? "space-y-5" : "border p-5"}
+      style={
+        docked
+          ? undefined
+          : {
+              borderColor: "var(--border-color)",
+              background: "rgba(255,255,255,0.03)",
+            }
       }
     >
       {!docked ? (
-        <div className='flex flex-col gap-3 border-b border-stone-200 pb-4 md:flex-row md:items-start md:justify-between'>
+        <div
+          className='flex flex-col gap-3 border-b pb-4 md:flex-row md:items-start md:justify-between'
+          style={{ borderColor: "var(--border-color)" }}
+        >
           <div>
-            <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+            <div
+              className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+              style={{ color: "var(--text-muted)" }}
+            >
               Secondary tools
             </div>
 
-            <h2 className='mt-2 text-lg font-semibold tracking-tight text-stone-900'>
+            <h2
+              className='mt-2 text-lg font-semibold tracking-tight'
+              style={{ color: "var(--text-primary)" }}
+            >
               Comparison, history, and workspace tools
             </h2>
 
-            <p className='mt-2 text-sm leading-relaxed text-stone-600'>
+            <p
+              className='mt-2 text-sm leading-relaxed'
+              style={{ color: "var(--text-secondary)" }}
+            >
               These tools support the workflow, but are not part of the primary
               design sequence.
             </p>
@@ -550,7 +568,12 @@ export default function SecondaryToolsPanel({
           <button
             type='button'
             onClick={() => setShowSecondaryTools?.((current) => !current)}
-            className='border border-stone-400 bg-white px-3 py-1.5 text-[10px] uppercase tracking-[0.12em] text-stone-800 transition hover:bg-stone-100 active:bg-stone-200'
+            className='border px-3 py-1.5 text-[10px] uppercase tracking-[0.12em] transition'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "rgba(255,255,255,0.03)",
+              color: "var(--text-secondary)",
+            }}
           >
             {secondaryToolsOpen
               ? `Hide tools (${secondaryToolsCount})`
@@ -571,33 +594,54 @@ export default function SecondaryToolsPanel({
         }
       >
         <div
-          className={`border px-4 py-3 ${
+          className='border px-4 py-3'
+          style={
             contextSummary.tone === "sky"
-              ? "border-sky-300 bg-sky-50"
+              ? {
+                  borderColor: "rgba(56,189,248,0.35)",
+                  background: "rgba(56,189,248,0.08)",
+                }
               : contextSummary.tone === "emerald"
-                ? "border-emerald-300 bg-emerald-50"
+                ? {
+                    borderColor: "rgba(16,185,129,0.35)",
+                    background: "rgba(16,185,129,0.08)",
+                  }
                 : contextSummary.tone === "amber"
-                  ? "border-amber-300 bg-amber-50"
-                  : "border-stone-300 bg-stone-50"
-          }`}
+                  ? {
+                      borderColor: "rgba(251,191,36,0.30)",
+                      background: "rgba(251,191,36,0.08)",
+                    }
+                  : {
+                      borderColor: "var(--border-color)",
+                      background: "rgba(255,255,255,0.03)",
+                    }
+          }
         >
-          <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+          <div
+            className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+            style={{ color: "var(--text-muted)" }}
+          >
             Active dock context
           </div>
-          <div className='mt-1 text-sm font-semibold text-stone-900'>
+          <div
+            className='mt-1 text-sm font-semibold'
+            style={{ color: "var(--text-primary)" }}
+          >
             {contextSummary.title}
           </div>
-          <div className='mt-1 text-xs leading-relaxed text-stone-600'>
+          <div
+            className='mt-1 text-xs leading-relaxed'
+            style={{ color: "var(--text-secondary)" }}
+          >
             {contextSummary.subtitle}
           </div>
         </div>
-
         {orderedSections.map((section) => (
           <div
             key={section.key}
             className={
               section.priority <= 15
-                ? "ring-1 ring-stone-200"
+                ? "ring-1 ring-[rgba(255,255,255,0.10)]"
                 : section.priority <= 30
                   ? "opacity-100"
                   : "opacity-85"

@@ -10,6 +10,7 @@ export default function MinimalView({
   handleCompareEntry,
   handleTogglePinEntry,
   handleAddEntryToBoard,
+  handleRemoveEntryFromBoard,
   highlightedEntryId,
   compareEntryIds,
   pinnedEntryIds,
@@ -32,6 +33,9 @@ export default function MinimalView({
           onCompareEntry={handleCompareEntry}
           onTogglePinEntry={handleTogglePinEntry}
           onAddToBoard={handleAddEntryToBoard}
+          onRemoveFromBoard={(entryId) =>
+            handleRemoveEntryFromBoard(activeProjectBoard?.id, entryId)
+          }
           highlightedEntryId={highlightedEntryId}
           compareEntryIds={compareEntryIds}
           pinnedEntryIds={pinnedEntryIds}

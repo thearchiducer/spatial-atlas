@@ -402,44 +402,44 @@ function BranchView({ branches, entriesById }) {
 function nodeTone(zone) {
   if (zone === "public") {
     return {
-      fill: "#f0f9ff",
-      stroke: "#7dd3fc",
-      text: "#082f49",
+      fill: "rgba(56, 189, 248, 0.05)",
+      stroke: "rgba(56, 189, 248, 0.22)",
+      text: "#93c5fd",
       label: "Public",
     };
   }
 
   if (zone === "transition") {
     return {
-      fill: "#fffbeb",
-      stroke: "#fcd34d",
-      text: "#78350f",
+      fill: "rgba(251, 191, 36, 0.05)",
+      stroke: "rgba(251, 191, 36, 0.22)",
+      text: "#fcd34d",
       label: "Transition",
     };
   }
 
   if (zone === "private") {
     return {
-      fill: "#ecfdf5",
-      stroke: "#6ee7b7",
-      text: "#064e3b",
+      fill: "rgba(16, 185, 129, 0.05)",
+      stroke: "rgba(16, 185, 129, 0.22)",
+      text: "#86efac",
       label: "Private",
     };
   }
 
   if (zone === "service") {
     return {
-      fill: "#f5f3ff",
-      stroke: "#c4b5fd",
-      text: "#4c1d95",
+      fill: "rgba(168, 85, 247, 0.05)",
+      stroke: "rgba(168, 85, 247, 0.22)",
+      text: "#c4b5fd",
       label: "Service",
     };
   }
 
   return {
-    fill: "#fafaf9",
-    stroke: "#d6d3d1",
-    text: "#292524",
+    fill: "rgba(255,255,255,0.02)",
+    stroke: "rgba(255,255,255,0.10)",
+    text: "var(--text-secondary)",
     label: "Zone",
   };
 }
@@ -937,7 +937,7 @@ function VisualLayoutRenderer({ layout }) {
         className='mt-5 overflow-x-auto border p-4'
         style={{
           borderColor: "var(--border-color)",
-          background: "rgba(255,255,255,0.03)",
+          background: "rgba(255,255,255,0.02)",
         }}
       >
         <svg
@@ -968,8 +968,8 @@ function VisualLayoutRenderer({ layout }) {
             width={canvas.width}
             height={canvas.height}
             rx='10'
-            fill='#fafaf9'
-            stroke='#d6d3d1'
+            fill='#141414'
+            stroke='#2c2c2c'
             strokeWidth='2'
           />
 
@@ -1004,8 +1004,8 @@ function VisualLayoutRenderer({ layout }) {
             width={canvas.width - 96}
             height='68'
             rx='10'
-            fill='#fff7ed'
-            stroke='#fdba74'
+            fill='rgba(251,146,60,0.05)'
+            stroke='rgba(251,146,60,0.22)'
             strokeWidth='2'
           />
           <line
@@ -1013,17 +1013,17 @@ function VisualLayoutRenderer({ layout }) {
             y1={canvas.spineY}
             x2={canvas.width - 72}
             y2={canvas.spineY}
-            stroke='#c2410c'
+            stroke='rgba(251,146,60,0.45)'
             strokeWidth='4'
             strokeDasharray='16 10'
-            opacity='0.92'
+            opacity='0.9'
           />
           <text
             x='74'
             y={canvas.spineY - 42}
             fontSize='12'
             fontWeight='700'
-            fill='#9a3412'
+            fill='#fdba74'
           >
             Primary circulation spine
           </text>
@@ -1056,7 +1056,7 @@ function VisualLayoutRenderer({ layout }) {
                   width={node.width}
                   height={node.height}
                   rx='8'
-                  fill='#ffffff'
+                  fill='rgba(255,255,255,0.03)'
                   stroke={tone.stroke}
                   strokeWidth={node.renderMode === "axis" ? 2.8 : 2}
                 />
@@ -1065,7 +1065,7 @@ function VisualLayoutRenderer({ layout }) {
                   y={node.y + 24}
                   fontSize={node.renderMode === "axis" ? "15" : "14"}
                   fontWeight='700'
-                  fill='#1c1917'
+                  fill='#f5f5f4'
                 >
                   {node.term}
                 </text>
@@ -1073,7 +1073,7 @@ function VisualLayoutRenderer({ layout }) {
                   x={node.x + 12}
                   y={node.y + 44}
                   fontSize='11'
-                  fill='#57534e'
+                  fill='#a8a29e'
                 >
                   {node.type || "—"} · {node.privacyLevel || "—"}
                 </text>

@@ -543,18 +543,18 @@ function buildImpactPreview(moveTitle, entry, currentEntries) {
 
 function toneClasses(tone) {
   if (tone === "positive") {
-    return "border-emerald-200 bg-emerald-50 text-emerald-800";
+    return "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.10)] text-[#a7f3d0]";
   }
 
   if (tone === "negative") {
-    return "border-red-200 bg-red-50 text-red-800";
+    return "border-[rgba(248,113,113,0.35)] bg-[rgba(248,113,113,0.10)] text-[#fecaca]";
   }
 
   if (tone === "tradeoff") {
-    return "border-amber-200 bg-amber-50 text-amber-800";
+    return "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.10)] text-[#fde68a]";
   }
 
-  return "border-stone-200 bg-stone-50 text-stone-700";
+  return "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-secondary)]";
 }
 
 function confidenceBadgeClasses(tone, selected) {
@@ -564,84 +564,84 @@ function confidenceBadgeClasses(tone, selected) {
   if (tone === "positive") {
     return `${base} ${
       selected
-        ? "border-emerald-200 bg-white/20 text-white"
-        : "border-emerald-200 bg-emerald-50 text-emerald-700"
+        ? "border-[rgba(16,185,129,0.45)] bg-[rgba(16,185,129,0.20)] text-[#d1fae5]"
+        : "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.10)] text-[#a7f3d0]"
     }`;
   }
 
   if (tone === "negative") {
     return `${base} ${
       selected
-        ? "border-red-200 bg-white/20 text-white"
-        : "border-red-200 bg-red-50 text-red-700"
+        ? "border-[rgba(248,113,113,0.45)] bg-[rgba(248,113,113,0.20)] text-[#fee2e2]"
+        : "border-[rgba(248,113,113,0.35)] bg-[rgba(248,113,113,0.10)] text-[#fecaca]"
     }`;
   }
 
   if (tone === "tradeoff") {
     return `${base} ${
       selected
-        ? "border-amber-200 bg-white/20 text-white"
-        : "border-amber-200 bg-amber-50 text-amber-700"
+        ? "border-[rgba(251,191,36,0.40)] bg-[rgba(251,191,36,0.18)] text-[#fef3c7]"
+        : "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.10)] text-[#fde68a]"
     }`;
   }
 
   return `${base} ${
     selected
-      ? "border-white/30 bg-white/10 text-white"
-      : "border-stone-200 bg-stone-50 text-stone-700"
+      ? "border-[rgba(255,255,255,0.18)] bg-[rgba(255,255,255,0.08)] text-white"
+      : "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-secondary)]"
   }`;
 }
 
 function confidencePanelClasses(tone) {
   if (tone === "positive") {
-    return "border-emerald-300 bg-emerald-50/70";
+    return "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.08)]";
   }
 
   if (tone === "negative") {
-    return "border-red-300 bg-red-50/70";
+    return "border-[rgba(248,113,113,0.35)] bg-[rgba(248,113,113,0.08)]";
   }
 
   if (tone === "tradeoff") {
-    return "border-amber-300 bg-amber-50/70";
+    return "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.08)]";
   }
 
-  return "border-stone-200 bg-stone-50/70";
+  return "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)]";
 }
 
 function strengthClasses(strength) {
   if (strength === "Clear") {
-    return "border-emerald-200 bg-emerald-50 text-emerald-700";
+    return "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.10)] text-[#a7f3d0]";
   }
 
   if (strength === "Developing") {
-    return "border-amber-200 bg-amber-50 text-amber-700";
+    return "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.10)] text-[#fde68a]";
   }
 
-  return "border-red-200 bg-red-50 text-red-700";
+  return "border-[rgba(248,113,113,0.35)] bg-[rgba(248,113,113,0.10)] text-[#fecaca]";
 }
 
 function priorityClasses(priority) {
   if (priority === "Critical") {
-    return "border-red-200 bg-red-50 text-red-700";
+    return "border-[rgba(248,113,113,0.35)] bg-[rgba(248,113,113,0.10)] text-[#fecaca]";
   }
 
   if (priority === "Core") {
-    return "border-sky-200 bg-sky-50 text-sky-700";
+    return "border-[rgba(56,189,248,0.35)] bg-[rgba(56,189,248,0.10)] text-[#bae6fd]";
   }
 
-  return "border-stone-200 bg-stone-50 text-stone-700";
+  return "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-secondary)]";
 }
 
 function verdictToneClasses(strength) {
   if (strength === "Clear") {
-    return "border-emerald-300 bg-emerald-50/40";
+    return "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.08)]";
   }
 
   if (strength === "Developing") {
-    return "border-amber-300 bg-amber-50/40";
+    return "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.08)]";
   }
 
-  return "border-red-300 bg-red-50/40";
+  return "border-[rgba(248,113,113,0.35)] bg-[rgba(248,113,113,0.08)]";
 }
 
 function verdictMessage(identity, summary) {
@@ -660,7 +660,10 @@ function verdictMessage(identity, summary) {
 
 function annotationLabel(children) {
   return (
-    <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+    <div
+      className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+      style={{ color: "var(--text-muted)" }}
+    >
       {children}
     </div>
   );
@@ -668,9 +671,20 @@ function annotationLabel(children) {
 
 function StatCard({ label, value }) {
   return (
-    <div className='border border-stone-200 bg-white p-3'>
+    <div
+      className='border p-3'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
       {annotationLabel(label)}
-      <div className='mt-1 text-sm font-semibold text-stone-900'>{value}</div>
+      <div
+        className='mt-1 text-sm font-semibold'
+        style={{ color: "var(--text-primary)" }}
+      >
+        {value}
+      </div>
     </div>
   );
 }
@@ -682,10 +696,16 @@ function FinalVerdictBanner({ identity, summary }) {
     <div className={`mt-5 border p-5 ${verdictToneClasses(identity.strength)}`}>
       <div className='border-b border-current/15 pb-4'>
         {annotationLabel("Final design verdict")}
-        <div className='mt-3 text-2xl font-semibold tracking-tight text-stone-900 md:text-3xl'>
+        <div
+          className='mt-3 text-2xl font-semibold tracking-tight md:text-3xl'
+          style={{ color: "var(--text-primary)" }}
+        >
           {identity.title}
         </div>
-        <p className='mt-3 max-w-4xl text-base text-stone-700'>
+        <p
+          className='mt-3 max-w-4xl text-base'
+          style={{ color: "var(--text-secondary)" }}
+        >
           {identity.sentence}
         </p>
       </div>
@@ -699,20 +719,44 @@ function FinalVerdictBanner({ identity, summary }) {
           {identity.strength}
         </span>
 
-        <span className='border border-stone-200 bg-white px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-stone-700'>
+        <span
+          className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em]'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          }}
+        >
           Privacy · {summary.privacyModel}
         </span>
 
-        <span className='border border-stone-200 bg-white px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-stone-700'>
+        <span
+          className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em]'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          }}
+        >
           Social · {summary.socialModel}
         </span>
 
-        <span className='border border-stone-200 bg-white px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-stone-700'>
+        <span
+          className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em]'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          }}
+        >
           Circulation · {summary.circulationModel}
         </span>
       </div>
 
-      <p className='mt-4 text-sm leading-relaxed text-stone-600'>
+      <p
+        className='mt-4 text-sm leading-relaxed'
+        style={{ color: "var(--text-secondary)" }}
+      >
         {verdictMessage(identity, summary)}
       </p>
     </div>
@@ -723,14 +767,26 @@ function IdentityPanel({ identity }) {
   if (!identity) return null;
 
   return (
-    <div className='mt-5 border border-stone-200 bg-stone-50/50 p-4'>
+    <div
+      className='mt-5 border p-4'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "rgba(255,255,255,0.03)",
+      }}
+    >
       <div className='flex flex-col gap-3 md:flex-row md:items-start md:justify-between'>
         <div>
           {annotationLabel("Direction identity")}
-          <div className='mt-2 text-base font-semibold text-stone-900'>
+          <div
+            className='mt-2 text-base font-semibold'
+            style={{ color: "var(--text-primary)" }}
+          >
             {identity.title}
           </div>
-          <p className='mt-2 text-sm leading-relaxed text-stone-700'>
+          <p
+            className='mt-2 text-sm leading-relaxed'
+            style={{ color: "var(--text-secondary)" }}
+          >
             {identity.sentence}
           </p>
         </div>
@@ -748,7 +804,12 @@ function IdentityPanel({ identity }) {
         {identity.tags.map((tag) => (
           <span
             key={identity.title + "-" + tag}
-            className='border border-stone-200 bg-white px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700'
+            className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em]'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "rgba(255,255,255,0.03)",
+              color: "var(--text-secondary)",
+            }}
           >
             {tag}
           </span>
@@ -760,14 +821,29 @@ function IdentityPanel({ identity }) {
 
 function SpatialMoveCard({ move, index }) {
   return (
-    <div className='border border-stone-200 bg-white p-4'>
-      <div className='flex flex-col gap-3 border-b border-stone-200 pb-4 md:flex-row md:items-start md:justify-between'>
+    <div
+      className='border p-4'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='flex flex-col gap-3 border-b pb-4 md:flex-row md:items-start md:justify-between'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         <div>
           {annotationLabel(`Spatial move ${index + 1}`)}
-          <div className='mt-2 text-base font-semibold text-stone-900'>
+          <div
+            className='mt-2 text-base font-semibold'
+            style={{ color: "var(--text-primary)" }}
+          >
             {move.title}
           </div>
-          <p className='mt-2 text-sm leading-relaxed text-stone-700'>
+          <p
+            className='mt-2 text-sm leading-relaxed'
+            style={{ color: "var(--text-secondary)" }}
+          >
             {move.intent}
           </p>
         </div>
@@ -782,21 +858,52 @@ function SpatialMoveCard({ move, index }) {
       </div>
 
       <div className='mt-4 space-y-3'>
-        <div className='border border-stone-200 bg-stone-50/50 p-3'>
+        <div
+          className='border p-3'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+          }}
+        >
           {annotationLabel("Spatial instruction")}
-          <p className='mt-2 text-sm text-stone-700'>
+          <p
+            className='mt-2 text-sm'
+            style={{ color: "var(--text-secondary)" }}
+          >
             {move.spatialInstruction}
           </p>
         </div>
 
-        <div className='border border-stone-200 bg-stone-50/50 p-3'>
+        <div
+          className='border p-3'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+          }}
+        >
           {annotationLabel("Diagram cue")}
-          <p className='mt-2 text-sm text-stone-700'>{move.diagramCue}</p>
+          <p
+            className='mt-2 text-sm'
+            style={{ color: "var(--text-secondary)" }}
+          >
+            {move.diagramCue}
+          </p>
         </div>
 
-        <div className='border border-stone-200 bg-stone-50/50 p-3'>
+        <div
+          className='border p-3'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+          }}
+        >
           {annotationLabel("Avoid")}
-          <p className='mt-2 text-sm text-stone-700'>{move.avoid}</p>
+          <p
+            className='mt-2 text-sm'
+            style={{ color: "var(--text-secondary)" }}
+          >
+            {move.avoid}
+          </p>
         </div>
       </div>
     </div>
@@ -807,13 +914,27 @@ function SpatialMovesTranslatorPanel({ translator }) {
   if (!translator) return null;
 
   return (
-    <div className='mt-6 border border-stone-300 bg-white p-5'>
-      <div className='border-b border-stone-200 pb-4'>
+    <div
+      className='mt-6 border p-5'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='border-b pb-4'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         {annotationLabel("Spatial moves translator")}
-        <h3 className='mt-2 text-lg font-semibold text-stone-900'>
+        <h3
+          className='mt-2 text-lg font-semibold'
+          style={{ color: "var(--text-primary)" }}
+        >
           {translator.translatorLabel}
         </h3>
-        <p className='mt-2 text-sm text-stone-700'>{translator.headline}</p>
+        <p className='mt-2 text-sm' style={{ color: "var(--text-secondary)" }}>
+          {translator.headline}
+        </p>
       </div>
 
       <SpatialDiagramPanel translator={translator} />
@@ -833,13 +954,29 @@ function SpatialMovesTranslatorPanel({ translator }) {
 
 function SignalCard({ title, description, implication = null }) {
   return (
-    <div className='border border-stone-200 bg-white p-4'>
-      <div className='text-sm font-semibold text-stone-900'>{title}</div>
-      <p className='mt-2 text-sm leading-relaxed text-stone-700'>
+    <div
+      className='border p-4'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='text-sm font-semibold'
+        style={{ color: "var(--text-primary)" }}
+      >
+        {title}
+      </div>
+      <p
+        className='mt-2 text-sm leading-relaxed'
+        style={{ color: "var(--text-secondary)" }}
+      >
         {description}
       </p>
       {implication ? (
-        <p className='mt-2 text-sm text-stone-500'>{implication}</p>
+        <p className='mt-2 text-sm' style={{ color: "var(--text-muted)" }}>
+          {implication}
+        </p>
       ) : null}
     </div>
   );
@@ -847,7 +984,14 @@ function SignalCard({ title, description, implication = null }) {
 
 function EmptyCard({ text }) {
   return (
-    <div className='border border-dashed border-stone-300 bg-stone-50 p-4 text-sm text-stone-500'>
+    <div
+      className='border border-dashed p-4 text-sm'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "rgba(255,255,255,0.02)",
+        color: "var(--text-muted)",
+      }}
+    >
       {text}
     </div>
   );
@@ -863,20 +1007,32 @@ function SuggestedEntryChip({
 }) {
   return (
     <div
-      className={`flex flex-wrap items-center gap-2 border p-2 transition ${
-        isSelected
-          ? "border-stone-900 bg-stone-900 text-white"
-          : "border-stone-200 bg-white"
-      }`}
+      className='flex flex-wrap items-center gap-2 border p-2 transition'
+      style={{
+        borderColor: isSelected
+          ? "rgba(255,255,255,0.18)"
+          : "var(--border-color)",
+        background: isSelected ? "rgba(255,255,255,0.06)" : "var(--bg-surface)",
+        color: isSelected ? "#ffffff" : "var(--text-primary)",
+      }}
     >
       <button
         type='button'
         onClick={() => onSelect(isSelected ? null : entry.id)}
-        className={`border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition ${
+        className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
+        style={
           isSelected
-            ? "border-white/30 bg-white/10 text-white"
-            : "border-stone-300 bg-white text-stone-700 hover:bg-stone-100"
-        }`}
+            ? {
+                borderColor: "rgba(255,255,255,0.20)",
+                background: "rgba(255,255,255,0.08)",
+                color: "#ffffff",
+              }
+            : {
+                borderColor: "var(--border-color)",
+                background: "rgba(255,255,255,0.03)",
+                color: "var(--text-secondary)",
+              }
+        }
         title={explanation.summary}
       >
         {entry.term}
@@ -889,11 +1045,20 @@ function SuggestedEntryChip({
       <button
         type='button'
         onClick={() => onAdd(entry.id)}
-        className={`border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition ${
+        className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
+        style={
           isSelected
-            ? "border-emerald-300 bg-emerald-100 text-emerald-900 hover:bg-emerald-200"
-            : "border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100"
-        }`}
+            ? {
+                borderColor: "rgba(16,185,129,0.45)",
+                background: "rgba(16,185,129,0.20)",
+                color: "#d1fae5",
+              }
+            : {
+                borderColor: "rgba(16,185,129,0.35)",
+                background: "rgba(16,185,129,0.10)",
+                color: "#a7f3d0",
+              }
+        }
         title={`Add ${entry.term} to board`}
       >
         Add
@@ -906,19 +1071,36 @@ function SuggestionExplanationCard({ explanation }) {
   if (!explanation) return null;
 
   return (
-    <div className='mt-3 border border-stone-200 bg-white p-4'>
+    <div
+      className='mt-3 border p-4'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
       <div className='flex flex-col gap-1'>
-        <div className='text-sm font-semibold text-stone-900'>
+        <div
+          className='text-sm font-semibold'
+          style={{ color: "var(--text-primary)" }}
+        >
           Why {explanation.title}?
         </div>
-        <div className='text-[11px] uppercase tracking-[0.08em] text-stone-500'>
+        <div
+          className='text-[11px] uppercase tracking-[0.08em]'
+          style={{ color: "var(--text-muted)" }}
+        >
           {explanation.meta}
         </div>
       </div>
 
-      <p className='mt-3 text-sm text-stone-700'>{explanation.summary}</p>
+      <p className='mt-3 text-sm' style={{ color: "var(--text-secondary)" }}>
+        {explanation.summary}
+      </p>
 
-      <ul className='mt-3 space-y-2 pl-5 text-sm text-stone-600'>
+      <ul
+        className='mt-3 space-y-2 pl-5 text-sm'
+        style={{ color: "var(--text-secondary)" }}
+      >
         {explanation.details.map((item, index) => (
           <li key={explanation.title + "-" + index}>{item}</li>
         ))}
@@ -929,7 +1111,13 @@ function SuggestionExplanationCard({ explanation }) {
 
 function DiffList({ title, items, emptyText, tone }) {
   return (
-    <div className='border border-stone-200 bg-stone-50/50 p-3'>
+    <div
+      className='border p-3'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "rgba(255,255,255,0.03)",
+      }}
+    >
       {annotationLabel(title)}
 
       {items.length ? (
@@ -946,7 +1134,9 @@ function DiffList({ title, items, emptyText, tone }) {
           ))}
         </div>
       ) : (
-        <p className='mt-2 text-sm text-stone-500'>{emptyText}</p>
+        <p className='mt-2 text-sm' style={{ color: "var(--text-muted)" }}>
+          {emptyText}
+        </p>
       )}
     </div>
   );
@@ -972,7 +1162,14 @@ function DecisionConfidenceCard({ confidence }) {
               {confidence.label}
             </span>
 
-            <span className='border border-stone-200 bg-white px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-stone-700'>
+            <span
+              className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em]'
+              style={{
+                borderColor: "var(--border-color)",
+                background: "rgba(255,255,255,0.03)",
+                color: "var(--text-secondary)",
+              }}
+            >
               Score · {confidence.score}
             </span>
           </div>
@@ -983,7 +1180,12 @@ function DecisionConfidenceCard({ confidence }) {
         {confidence.reasons.map((reason, index) => (
           <div
             key={confidence.label + "-reason-" + index}
-            className='border border-stone-200 bg-white px-3 py-2 text-sm text-stone-700'
+            className='border px-3 py-2 text-sm'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "rgba(255,255,255,0.03)",
+              color: "var(--text-secondary)",
+            }}
           >
             {reason}
           </div>
@@ -997,9 +1199,21 @@ function ImpactPreviewCard({ preview, entryTitle }) {
   if (!preview) return null;
 
   return (
-    <div className='mt-3 border border-stone-200 bg-white p-4'>
-      <div className='flex flex-col gap-3 border-b border-stone-200 pb-4 md:flex-row md:items-start md:justify-between'>
-        <div className='text-sm font-semibold text-stone-900'>
+    <div
+      className='mt-3 border p-4'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='flex flex-col gap-3 border-b pb-4 md:flex-row md:items-start md:justify-between'
+        style={{ borderColor: "var(--border-color)" }}
+      >
+        <div
+          className='text-sm font-semibold'
+          style={{ color: "var(--text-primary)" }}
+        >
           If you add {entryTitle}
         </div>
 
@@ -1013,16 +1227,34 @@ function ImpactPreviewCard({ preview, entryTitle }) {
       </div>
 
       <div className='mt-4 grid gap-3 md:grid-cols-2'>
-        <div className='border border-stone-200 bg-stone-50/50 p-3'>
+        <div
+          className='border p-3'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+          }}
+        >
           {annotationLabel("Before")}
-          <div className='mt-2 text-sm text-stone-800'>
+          <div
+            className='mt-2 text-sm'
+            style={{ color: "var(--text-secondary)" }}
+          >
             {preview.beforeSnapshot}
           </div>
         </div>
 
-        <div className='border border-stone-200 bg-stone-50/50 p-3'>
+        <div
+          className='border p-3'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+          }}
+        >
           {annotationLabel("After")}
-          <div className='mt-2 text-sm font-semibold text-stone-900'>
+          <div
+            className='mt-2 text-sm font-semibold'
+            style={{ color: "var(--text-primary)" }}
+          >
             {preview.afterSnapshot}
           </div>
         </div>
@@ -1093,13 +1325,30 @@ function NextMoveCard({
     : null;
 
   return (
-    <div className='border border-stone-200 bg-white p-4'>
-      <div className='flex flex-col gap-3 border-b border-stone-200 pb-4 md:flex-row md:items-start md:justify-between'>
+    <div
+      className='border p-4'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='flex flex-col gap-3 border-b pb-4 md:flex-row md:items-start md:justify-between'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         <div className='min-w-0 flex-1'>
-          <div className='text-sm font-semibold text-stone-900'>
+          <div
+            className='text-sm font-semibold'
+            style={{ color: "var(--text-primary)" }}
+          >
             {move.title}
           </div>
-          <p className='mt-2 text-sm text-stone-700'>{move.description}</p>
+          <p
+            className='mt-2 text-sm'
+            style={{ color: "var(--text-secondary)" }}
+          >
+            {move.description}
+          </p>
         </div>
 
         <button
@@ -1121,7 +1370,7 @@ function NextMoveCard({
           </div>
 
           {!isBoardActive ? (
-            <p className='mt-2 text-sm text-stone-500'>
+            <p className='mt-2 text-sm' style={{ color: "var(--text-muted)" }}>
               Open a board first to add suggested entries.
             </p>
           ) : suggestions.length ? (
@@ -1152,7 +1401,7 @@ function NextMoveCard({
               />
             </>
           ) : (
-            <p className='mt-2 text-sm text-stone-500'>
+            <p className='mt-2 text-sm' style={{ color: "var(--text-muted)" }}>
               No matching entry suggestions are currently available outside this
               board.
             </p>
@@ -1368,9 +1617,18 @@ export default function DesignDirectionPanel({
 
       <SpatialMovesTranslatorPanel translator={spatialTranslator} />
 
-      <div className='mt-5 border border-stone-200 bg-stone-50/50 p-4'>
+      <div
+        className='mt-5 border p-4'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "rgba(255,255,255,0.03)",
+        }}
+      >
         {annotationLabel("Board character")}
-        <div className='mt-2 text-sm font-semibold text-stone-900'>
+        <div
+          className='mt-2 text-sm font-semibold'
+          style={{ color: "var(--text-primary)" }}
+        >
           {summary.boardCharacter}
         </div>
         <p className='mt-2 text-sm text-stone-600'>{summary.spatialPattern}</p>

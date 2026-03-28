@@ -5,34 +5,59 @@ function formatValue(value) {
 }
 
 function Chip({ label, value, tone = "stone" }) {
-  const toneClasses =
+  const toneStyles =
     tone === "sky"
-      ? "border-sky-200 bg-sky-50 text-sky-900"
+      ? {
+          borderColor: "rgba(56,189,248,0.35)",
+          background: "rgba(56,189,248,0.10)",
+          color: "#bae6fd",
+        }
       : tone === "emerald"
-        ? "border-emerald-200 bg-emerald-50 text-emerald-900"
+        ? {
+            borderColor: "rgba(16,185,129,0.35)",
+            background: "rgba(16,185,129,0.10)",
+            color: "#a7f3d0",
+          }
         : tone === "amber"
-          ? "border-amber-200 bg-amber-50 text-amber-900"
+          ? {
+              borderColor: "rgba(251,191,36,0.30)",
+              background: "rgba(251,191,36,0.10)",
+              color: "#fde68a",
+            }
           : tone === "violet"
-            ? "border-violet-200 bg-violet-50 text-violet-900"
+            ? {
+                borderColor: "rgba(168,85,247,0.35)",
+                background: "rgba(168,85,247,0.10)",
+                color: "#d8b4fe",
+              }
             : tone === "rose"
-              ? "border-rose-200 bg-rose-50 text-rose-900"
-              : "border-stone-200 bg-stone-50 text-stone-800";
+              ? {
+                  borderColor: "rgba(244,63,94,0.35)",
+                  background: "rgba(244,63,94,0.10)",
+                  color: "#fecdd3",
+                }
+              : {
+                  borderColor: "var(--border-color)",
+                  background: "rgba(255,255,255,0.03)",
+                  color: "var(--text-secondary)",
+                };
 
   return (
     <div
-      className={`inline-flex min-h-[34px] items-center border ${toneClasses}`}
+      className='inline-flex min-h-[34px] items-center border'
+      style={toneStyles}
     >
-      <span className='border-r border-current/20 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em]'>
+      <span
+        className='border-r px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em]'
+        style={{ borderColor: "rgba(255,255,255,0.12)" }}
+      >
         {label}
       </span>
 
-      <span className='px-2.5 py-1 text-[11px] text-current'>
-        {formatValue(value)}
-      </span>
+      <span className='px-2.5 py-1 text-[11px]'>{formatValue(value)}</span>
     </div>
   );
 }
-
 export default function SemanticChips({
   entry,
   compact = false,

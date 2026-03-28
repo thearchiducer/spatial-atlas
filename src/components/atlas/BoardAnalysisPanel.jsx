@@ -1,28 +1,45 @@
 function annotationLabel(children) {
   return (
-    <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+    <div
+      className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+      style={{ color: "var(--text-muted)" }}
+    >
       {children}
     </div>
   );
 }
 
 function MetricChip({ label, value, tone = "neutral" }) {
-  let toneClass = "border-stone-200 bg-white text-stone-700";
+  let style = {
+    borderColor: "var(--border-color)",
+    background: "var(--bg-muted)",
+    color: "var(--text-secondary)",
+  };
 
   if (tone === "danger") {
-    toneClass = "border-red-200 bg-red-50 text-red-800";
+    style = {
+      borderColor: "rgba(248,113,113,0.35)",
+      background: "rgba(248,113,113,0.10)",
+      color: "#fecaca",
+    };
   } else if (tone === "warning") {
-    toneClass = "border-amber-200 bg-amber-50 text-amber-800";
+    style = {
+      borderColor: "rgba(251,191,36,0.30)",
+      background: "rgba(251,191,36,0.10)",
+      color: "#fde68a",
+    };
   } else if (tone === "good") {
-    toneClass = "border-emerald-200 bg-emerald-50 text-emerald-800";
+    style = {
+      borderColor: "rgba(16,185,129,0.35)",
+      background: "rgba(16,185,129,0.10)",
+      color: "#a7f3d0",
+    };
   }
 
   return (
     <span
-      className={
-        "border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] " +
-        toneClass
-      }
+      className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
+      style={style}
     >
       {label} · {value}
     </span>
@@ -30,32 +47,58 @@ function MetricChip({ label, value, tone = "neutral" }) {
 }
 
 function AnalysisCard({ title, description, tone = "neutral" }) {
-  let toneClass = "border-stone-200 bg-white";
-  let titleClass = "text-stone-900";
-  let bodyClass = "text-stone-600";
+  let style = {
+    borderColor: "var(--border-color)",
+    background: "rgba(255,255,255,0.03)",
+    titleColor: "var(--text-primary)",
+    bodyColor: "var(--text-secondary)",
+  };
 
   if (tone === "danger") {
-    toneClass = "border-red-200 bg-red-50";
-    titleClass = "text-red-950";
-    bodyClass = "text-red-900/80";
+    style = {
+      borderColor: "rgba(248,113,113,0.35)",
+      background: "rgba(248,113,113,0.08)",
+      titleColor: "#fee2e2",
+      bodyColor: "#fecaca",
+    };
   } else if (tone === "warning") {
-    toneClass = "border-amber-200 bg-amber-50";
-    titleClass = "text-amber-950";
-    bodyClass = "text-amber-900/80";
+    style = {
+      borderColor: "rgba(251,191,36,0.30)",
+      background: "rgba(251,191,36,0.08)",
+      titleColor: "#fef3c7",
+      bodyColor: "#fde68a",
+    };
   } else if (tone === "good") {
-    toneClass = "border-emerald-200 bg-emerald-50";
-    titleClass = "text-emerald-950";
-    bodyClass = "text-emerald-900/80";
+    style = {
+      borderColor: "rgba(16,185,129,0.35)",
+      background: "rgba(16,185,129,0.08)",
+      titleColor: "#d1fae5",
+      bodyColor: "#a7f3d0",
+    };
   } else if (tone === "info") {
-    toneClass = "border-sky-200 bg-sky-50";
-    titleClass = "text-sky-950";
-    bodyClass = "text-sky-900/80";
+    style = {
+      borderColor: "rgba(56,189,248,0.35)",
+      background: "rgba(56,189,248,0.08)",
+      titleColor: "#e0f2fe",
+      bodyColor: "#bae6fd",
+    };
   }
 
   return (
-    <div className={"border p-4 " + toneClass}>
-      <h4 className={"text-sm font-semibold " + titleClass}>{title}</h4>
-      <p className={"mt-2 text-sm leading-relaxed " + bodyClass}>
+    <div
+      className='border p-4'
+      style={{
+        borderColor: style.borderColor,
+        background: style.background,
+      }}
+    >
+      <h4 className='text-sm font-semibold' style={{ color: style.titleColor }}>
+        {title}
+      </h4>
+      <p
+        className='mt-2 text-sm leading-relaxed'
+        style={{ color: style.bodyColor }}
+      >
         {description}
       </p>
     </div>
@@ -71,18 +114,36 @@ function SectionBlock({
   tone = "neutral",
 }) {
   return (
-    <section className='border border-stone-300 bg-white p-4'>
-      <div className='border-b border-stone-200 pb-4'>
+    <section
+      className='border p-4'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='border-b pb-4'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         <div className='grid gap-3 md:grid-cols-[72px_minmax(0,1fr)] md:items-end'>
-          <div className='text-[10px] font-semibold uppercase tracking-[0.18em] text-stone-500'>
+          <div
+            className='text-[10px] font-semibold uppercase tracking-[0.18em]'
+            style={{ color: "var(--text-muted)" }}
+          >
             {index}
           </div>
 
           <div>
-            <h3 className='text-base font-semibold tracking-tight text-stone-900'>
+            <h3
+              className='text-base font-semibold tracking-tight'
+              style={{ color: "var(--text-primary)" }}
+            >
               {title}
             </h3>
-            <p className='mt-2 text-sm leading-relaxed text-stone-600'>
+            <p
+              className='mt-2 text-sm leading-relaxed'
+              style={{ color: "var(--text-secondary)" }}
+            >
               {description}
             </p>
           </div>
@@ -100,7 +161,14 @@ function SectionBlock({
             />
           ))
         ) : (
-          <div className='border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900'>
+          <div
+            className='border p-4 text-sm'
+            style={{
+              borderColor: "rgba(16,185,129,0.30)",
+              background: "rgba(16,185,129,0.08)",
+              color: "#a7f3d0",
+            }}
+          >
             {emptyLabel}
           </div>
         )}
@@ -643,20 +711,31 @@ export default function BoardAnalysisPanel({ activeBoard = null }) {
 
   if (!activeBoard) {
     return (
-      <section className='border border-stone-300 bg-white p-5'>
+      <section
+        className='border p-5'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "var(--bg-surface)",
+        }}
+      >
         {annotationLabel("Board analysis · contradiction diagnostic")}
-        <h2 className='mt-2 text-xl font-semibold tracking-tight text-stone-900'>
+        <h2
+          className='mt-2 text-xl font-semibold tracking-tight'
+          style={{ color: "var(--text-primary)" }}
+        >
           Spatial logic diagnostic
         </h2>
 
-        <p className='mt-2 text-sm leading-relaxed text-stone-600'>
+        <p
+          className='mt-2 text-sm leading-relaxed'
+          style={{ color: "var(--text-secondary)" }}
+        >
           Open a board to inspect redundancy, hierarchy gaps, missing systems,
           semantic drift, and contradictions in the current spatial logic.
         </p>
       </section>
     );
   }
-
   const totalWarnings =
     analysis.metrics.redundancyCount +
     analysis.metrics.hierarchyGapCount +
@@ -668,14 +747,29 @@ export default function BoardAnalysisPanel({ activeBoard = null }) {
     contradiction.boardTensions.length;
 
   return (
-    <section className='border border-stone-300 bg-white p-5'>
-      <div className='border-b border-stone-200 pb-4'>
+    <section
+      className='border p-5'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='border-b pb-4'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         {annotationLabel("Board analysis · contradiction diagnostic")}
-        <h2 className='mt-2 text-xl font-semibold tracking-tight text-stone-900'>
+        <h2
+          className='mt-2 text-xl font-semibold tracking-tight'
+          style={{ color: "var(--text-primary)" }}
+        >
           Spatial logic diagnostic
         </h2>
 
-        <p className='mt-2 max-w-3xl text-sm leading-relaxed text-stone-600'>
+        <p
+          className='mt-2 max-w-3xl text-sm leading-relaxed'
+          style={{ color: "var(--text-secondary)" }}
+        >
           Diagnose the active board for redundancy, missing layers, semantic
           tension, structural strengths, and direct contradictions in the
           current spatial logic.

@@ -2,7 +2,10 @@ import { useRef, useState } from "react";
 
 function annotationLabel(children) {
   return (
-    <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+    <div
+      className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+      style={{ color: "var(--text-muted)" }}
+    >
       {children}
     </div>
   );
@@ -14,21 +17,38 @@ function ActionButton({
   variant = "default",
   disabled = false,
 }) {
-  const classes =
+  const style =
     variant === "primary"
-      ? "border-stone-900 bg-stone-900 text-white hover:bg-stone-800"
+      ? {
+          borderColor: "rgba(16,185,129,0.35)",
+          background: "rgba(16,185,129,0.10)",
+          color: "#a7f3d0",
+        }
       : variant === "violet"
-        ? "border-violet-300 bg-violet-50 text-violet-900 hover:bg-violet-100"
+        ? {
+            borderColor: "rgba(168,85,247,0.35)",
+            background: "rgba(168,85,247,0.10)",
+            color: "#d8b4fe",
+          }
         : variant === "danger"
-          ? "border-red-300 bg-red-50 text-red-900 hover:bg-red-100"
-          : "border-stone-300 bg-white text-stone-700 hover:bg-stone-100";
+          ? {
+              borderColor: "rgba(248,113,113,0.35)",
+              background: "rgba(248,113,113,0.10)",
+              color: "#fecaca",
+            }
+          : {
+              borderColor: "var(--border-color)",
+              background: "rgba(255,255,255,0.03)",
+              color: "var(--text-secondary)",
+            };
 
   return (
     <button
       type='button'
       onClick={onClick}
       disabled={disabled}
-      className={`border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition disabled:cursor-not-allowed disabled:opacity-50 ${classes}`}
+      className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition disabled:cursor-not-allowed disabled:opacity-50'
+      style={style}
     >
       {children}
     </button>
@@ -37,11 +57,25 @@ function ActionButton({
 
 function SmallInfoCard({ label, value }) {
   return (
-    <div className='border border-stone-300 bg-white px-4 py-3'>
-      <div className='text-[10px] uppercase tracking-[0.12em] text-stone-500'>
+    <div
+      className='border px-4 py-3'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='text-[10px] uppercase tracking-[0.12em]'
+        style={{ color: "var(--text-muted)" }}
+      >
         {label}
       </div>
-      <div className='mt-1 text-sm font-semibold text-stone-900'>{value}</div>
+      <div
+        className='mt-1 text-sm font-semibold'
+        style={{ color: "var(--text-primary)" }}
+      >
+        {value}
+      </div>
     </div>
   );
 }
@@ -81,14 +115,29 @@ export default function DatasetIOPanel({
   }
 
   return (
-    <section className='border border-stone-300 bg-white p-5'>
-      <div className='border-b border-stone-200 pb-4'>
+    <section
+      className='border p-5'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='border-b pb-4'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         {annotationLabel("Dataset I/O")}
-        <h2 className='mt-2 text-xl font-semibold tracking-tight text-stone-900'>
+        <h2
+          className='mt-2 text-xl font-semibold tracking-tight'
+          style={{ color: "var(--text-primary)" }}
+        >
           Export / import dataset
         </h2>
 
-        <p className='mt-2 text-sm leading-relaxed text-stone-600'>
+        <p
+          className='mt-2 text-sm leading-relaxed'
+          style={{ color: "var(--text-secondary)" }}
+        >
           Export the current atlas snapshot, local overrides, or the full
           intelligence workspace state. Import JSON back later to continue the
           authoring workflow.
@@ -102,7 +151,13 @@ export default function DatasetIOPanel({
       </div>
 
       <div className='mt-5 grid gap-4 xl:grid-cols-2'>
-        <div className='border border-stone-200 bg-stone-50/60 p-4'>
+        <div
+          className='border p-4'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+          }}
+        >
           {annotationLabel("Export")}
 
           <div className='mt-3 flex flex-wrap gap-2'>
@@ -119,7 +174,10 @@ export default function DatasetIOPanel({
             </ActionButton>
           </div>
 
-          <p className='mt-3 text-sm leading-relaxed text-stone-600'>
+          <p
+            className='mt-3 text-sm leading-relaxed'
+            style={{ color: "var(--text-secondary)" }}
+          >
             Full dataset export writes the active atlas state. Override export
             writes only local edits. Intelligence state export writes the wider
             workspace context including boards, versions, decision history,
@@ -127,7 +185,13 @@ export default function DatasetIOPanel({
           </p>
         </div>
 
-        <div className='border border-stone-200 bg-stone-50/60 p-4'>
+        <div
+          className='border p-4'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+          }}
+        >
           {annotationLabel("Import")}
 
           <div className='mt-3 flex flex-wrap gap-2'>
@@ -151,7 +215,10 @@ export default function DatasetIOPanel({
             </ActionButton>
           </div>
 
-          <p className='mt-3 text-sm leading-relaxed text-stone-600'>
+          <p
+            className='mt-3 text-sm leading-relaxed'
+            style={{ color: "var(--text-secondary)" }}
+          >
             Import accepts a full dataset export, an overrides export, a raw
             entry array, or a raw overrides object keyed by entry id.
           </p>

@@ -9,18 +9,36 @@ export default function CompareHistoryPanel({
   }
 
   return (
-    <section className='border border-violet-300 bg-violet-50/40 p-5'>
-      <div className='flex flex-col gap-4 border-b border-violet-200 pb-4 md:flex-row md:items-start md:justify-between'>
+    <section
+      className='border p-5'
+      style={{
+        borderColor: "rgba(168,85,247,0.35)",
+        background: "rgba(168,85,247,0.08)",
+      }}
+    >
+      <div
+        className='flex flex-col gap-4 border-b pb-4 md:flex-row md:items-start md:justify-between'
+        style={{ borderColor: "rgba(168,85,247,0.25)" }}
+      >
         <div>
-          <div className='mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-violet-800'>
+          <div
+            className='mb-2 text-[10px] font-semibold uppercase tracking-[0.16em]'
+            style={{ color: "#d8b4fe" }}
+          >
             Compare history · {compareHistory.length}
           </div>
 
-          <h2 className='text-lg font-semibold tracking-tight text-violet-950'>
+          <h2
+            className='text-lg font-semibold tracking-tight'
+            style={{ color: "#f3e8ff" }}
+          >
             Recent comparisons
           </h2>
 
-          <p className='mt-2 text-sm leading-relaxed text-violet-900'>
+          <p
+            className='mt-2 text-sm leading-relaxed'
+            style={{ color: "#e9d5ff" }}
+          >
             Reopen earlier comparison states without rebuilding them manually.
           </p>
         </div>
@@ -28,7 +46,12 @@ export default function CompareHistoryPanel({
         <button
           type='button'
           onClick={onClearCompareHistory}
-          className='border border-violet-300 bg-white px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-violet-900 transition hover:bg-violet-100'
+          className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+          style={{
+            borderColor: "rgba(168,85,247,0.35)",
+            background: "rgba(168,85,247,0.10)",
+            color: "#e9d5ff",
+          }}
         >
           Clear history
         </button>
@@ -36,10 +59,20 @@ export default function CompareHistoryPanel({
 
       <div className='mt-4 grid gap-3'>
         {compareHistory.map((item) => (
-          <div key={item.key} className='border border-violet-200 bg-white p-4'>
+          <div
+            key={item.key}
+            className='border p-4'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "var(--bg-surface)",
+            }}
+          >
             <div className='flex flex-col gap-3 md:flex-row md:items-start md:justify-between'>
               <div>
-                <div className='mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-violet-700'>
+                <div
+                  className='mb-2 text-[10px] font-semibold uppercase tracking-[0.16em]'
+                  style={{ color: "var(--text-muted)" }}
+                >
                   Saved comparison
                 </div>
 
@@ -48,16 +81,25 @@ export default function CompareHistoryPanel({
                   onClick={() => onOpenCompareHistoryItem(item.ids)}
                   className='text-left'
                 >
-                  <h3 className='text-base font-semibold tracking-tight text-stone-900 hover:underline'>
+                  <h3
+                    className='text-base font-semibold tracking-tight hover:underline'
+                    style={{ color: "var(--text-primary)" }}
+                  >
                     {item.terms.join(" vs ")}
                   </h3>
                 </button>
 
-                <p className='mt-2 text-sm text-stone-700'>
+                <p
+                  className='mt-2 text-sm'
+                  style={{ color: "var(--text-secondary)" }}
+                >
                   {item.label} · Similarity {item.score}/100
                 </p>
 
-                <p className='mt-1 text-[11px] uppercase tracking-[0.08em] text-stone-500'>
+                <p
+                  className='mt-1 text-[11px] uppercase tracking-[0.08em]'
+                  style={{ color: "var(--text-muted)" }}
+                >
                   Saved {item.savedAtLabel}
                 </p>
               </div>
@@ -66,7 +108,12 @@ export default function CompareHistoryPanel({
                 <button
                   type='button'
                   onClick={() => onOpenCompareHistoryItem(item.ids)}
-                  className='border border-violet-300 bg-violet-50 px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-violet-900 transition hover:bg-violet-100'
+                  className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+                  style={{
+                    borderColor: "rgba(168,85,247,0.35)",
+                    background: "rgba(168,85,247,0.10)",
+                    color: "#d8b4fe",
+                  }}
                 >
                   Open compare
                 </button>
@@ -74,7 +121,12 @@ export default function CompareHistoryPanel({
                 <button
                   type='button'
                   onClick={() => onRemoveCompareHistoryItem(item.key)}
-                  className='border border-stone-300 bg-white px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+                  className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+                  style={{
+                    borderColor: "var(--border-color)",
+                    background: "rgba(255,255,255,0.03)",
+                    color: "var(--text-secondary)",
+                  }}
                 >
                   Remove
                 </button>

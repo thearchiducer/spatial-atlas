@@ -134,35 +134,54 @@ export default function EntryCard({
     return () => clearTimeout(timeout);
   }, [isHighlighted, entry.id]);
 
-  const stateClasses = isHighlighted
-    ? "border-amber-400"
+  const stateStyle = isHighlighted
+    ? {
+        borderColor: "rgba(251,191,36,0.55)",
+        boxShadow:
+          "0 0 0 1px rgba(251,191,36,0.18), 0 10px 18px rgba(0,0,0,0.35)",
+      }
     : isCompared
-      ? "border-sky-500"
+      ? {
+          borderColor: "rgba(56,189,248,0.55)",
+          boxShadow:
+            "0 0 0 1px rgba(56,189,248,0.18), 0 10px 18px rgba(0,0,0,0.35)",
+        }
       : isPinned
-        ? "border-amber-400"
+        ? {
+            borderColor: "rgba(251,191,36,0.45)",
+            boxShadow:
+              "0 0 0 1px rgba(251,191,36,0.14), 0 8px 16px rgba(0,0,0,0.30)",
+          }
         : isInActiveBoard
-          ? "border-fuchsia-400"
-          : "border-stone-300 hover:border-stone-400";
+          ? {
+              borderColor: "rgba(168,85,247,0.50)",
+              boxShadow:
+                "0 0 0 1px rgba(168,85,247,0.16), 0 8px 16px rgba(0,0,0,0.30)",
+            }
+          : {
+              borderColor: "var(--border-color)",
+              boxShadow:
+                "0 0 0 1px rgba(255,255,255,0.02), 0 6px 12px rgba(0,0,0,0.25)",
+            };
 
   return (
     <article
       id={`entry-${entry.id}`}
       onClick={handleSelectEntry}
-      className={`flex cursor-pointer flex-col gap-3 border px-4 py-4 transition ${stateClasses}`}
+      className='flex cursor-pointer flex-col gap-3 border px-4 py-4 transition'
       style={{
         background: "var(--bg-surface)",
-        borderColor: "var(--border-color)",
+        borderColor: stateStyle.borderColor,
         color: "var(--text-primary)",
-        boxShadow:
-          "0 0 0 1px rgba(255,255,255,0.02), 0 6px 12px rgba(0,0,0,0.25)",
+        boxShadow: stateStyle.boxShadow,
       }}
       onMouseEnter={(e) => {
+        if (isHighlighted || isCompared || isPinned || isInActiveBoard) return;
         e.currentTarget.style.boxShadow =
           "0 0 0 1px rgba(255,255,255,0.05), 0 10px 18px rgba(0,0,0,0.35)";
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.boxShadow =
-          "0 0 0 1px rgba(255,255,255,0.02), 0 6px 12px rgba(0,0,0,0.25)";
+        e.currentTarget.style.boxShadow = stateStyle.boxShadow;
       }}
     >
       <div
@@ -202,15 +221,17 @@ export default function EntryCard({
         <button
           type='button'
           onClick={handleCompareClick}
-          className={`border px-3 py-1 text-[11px] uppercase tracking-[0.1em] transition ${
-            isCompared ? "border-sky-300 bg-sky-50 text-sky-900" : ""
-          }`}
+          className='border px-3 py-1 text-[11px] uppercase tracking-[0.1em] transition'
           style={
             isCompared
-              ? undefined
+              ? {
+                  borderColor: "rgba(56,189,248,0.35)",
+                  background: "rgba(56,189,248,0.10)",
+                  color: "#bae6fd",
+                }
               : {
                   borderColor: "var(--border-color)",
-                  background: "var(--bg-muted)",
+                  background: "rgba(255,255,255,0.03)",
                   color: "var(--text-secondary)",
                 }
           }
@@ -221,15 +242,17 @@ export default function EntryCard({
         <button
           type='button'
           onClick={handlePinClick}
-          className={`border px-3 py-1 text-[11px] uppercase tracking-[0.1em] transition ${
-            isPinned ? "border-amber-300 bg-amber-50 text-amber-900" : ""
-          }`}
+          className='border px-3 py-1 text-[11px] uppercase tracking-[0.1em] transition'
           style={
             isPinned
-              ? undefined
+              ? {
+                  borderColor: "rgba(251,191,36,0.30)",
+                  background: "rgba(251,191,36,0.10)",
+                  color: "#fde68a",
+                }
               : {
                   borderColor: "var(--border-color)",
-                  background: "var(--bg-muted)",
+                  background: "rgba(255,255,255,0.03)",
                   color: "var(--text-secondary)",
                 }
           }
@@ -277,16 +300,18 @@ export default function EntryCard({
           Remove from active board
         </button>
 
-        <span
-          className='border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em]'
-          style={{
-            background: "rgba(168,85,247,0.15)",
-            borderColor: "rgba(168,85,247,0.4)",
-            color: "#d8b4fe",
-          }}
-        >
-          In board · {boardEntryCount}
-        </span>
+        {boardEntryCount > 0 ? (
+          <span
+            className='border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em]'
+            style={{
+              background: "rgba(168,85,247,0.15)",
+              borderColor: "rgba(168,85,247,0.4)",
+              color: "#d8b4fe",
+            }}
+          >
+            In board · {boardEntryCount}
+          </span>
+        ) : null}
 
         <button
           type='button'
@@ -298,7 +323,7 @@ export default function EntryCard({
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.1em] transition'
           style={{
             borderColor: "var(--border-color)",
-            background: "var(--bg-muted)",
+            background: "rgba(255,255,255,0.03)",
             color: "var(--text-secondary)",
           }}
         >
@@ -306,13 +331,27 @@ export default function EntryCard({
         </button>
 
         {isCompared && (
-          <span className='border border-sky-200 bg-sky-50 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-sky-800'>
+          <span
+            className='border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em]'
+            style={{
+              borderColor: "rgba(56,189,248,0.35)",
+              background: "rgba(56,189,248,0.10)",
+              color: "#bae6fd",
+            }}
+          >
             Comparing
           </span>
         )}
 
         {isPinned && (
-          <span className='border border-amber-200 bg-amber-50 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-amber-800'>
+          <span
+            className='border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em]'
+            style={{
+              borderColor: "rgba(251,191,36,0.30)",
+              background: "rgba(251,191,36,0.10)",
+              color: "#fde68a",
+            }}
+          >
             Favorite
           </span>
         )}
@@ -332,21 +371,36 @@ export default function EntryCard({
       </div>
 
       {searchWhy.length > 0 && (
-        <div className='border border-sky-200 bg-sky-50 px-3 py-2 text-sm text-sky-900'>
-          <div className='flex flex-wrap items-center gap-2 mt-1'>
-            <strong className='text-sky-900'>Matched by</strong>
+        <div
+          className='border px-3 py-2 text-sm'
+          style={{
+            borderColor: "rgba(56,189,248,0.35)",
+            background: "rgba(56,189,248,0.08)",
+            color: "#e0f2fe",
+          }}
+        >
+          <div className='mt-1 flex flex-wrap items-center gap-2'>
+            <strong style={{ color: "#bae6fd" }}>Matched by</strong>
 
             {searchWhy.map((reason) => (
               <span
                 key={reason}
-                className='border border-sky-200 bg-white px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] text-sky-800'
+                className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
+                style={{
+                  borderColor: "rgba(56,189,248,0.30)",
+                  background: "rgba(255,255,255,0.06)",
+                  color: "#bae6fd",
+                }}
               >
                 {reason}
               </span>
             ))}
 
             {searchScore !== null && (
-              <span className='ml-auto text-[10px] font-semibold uppercase tracking-[0.14em] text-sky-700'>
+              <span
+                className='ml-auto text-[10px] font-semibold uppercase tracking-[0.14em]'
+                style={{ color: "#7dd3fc" }}
+              >
                 Score {searchScore}
               </span>
             )}
@@ -435,7 +489,7 @@ export default function EntryCard({
                     className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] transition'
                     style={{
                       borderColor: "var(--border-color)",
-                      background: "var(--bg-muted)",
+                      background: "rgba(255,255,255,0.03)",
                       color: "var(--text-secondary)",
                     }}
                   >

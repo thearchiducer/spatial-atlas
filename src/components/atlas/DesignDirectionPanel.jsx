@@ -1354,17 +1354,38 @@ function NextMoveCard({
         <button
           type='button'
           onClick={onToggle}
-          className='border border-stone-300 bg-white px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+          className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.04)",
+            color: "var(--text-secondary)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = "rgba(255,255,255,0.08)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "rgba(255,255,255,0.04)";
+          }}
         >
           {isExpanded ? "Hide suggestions" : "Show suggestions"}
         </button>
       </div>
 
       {isExpanded ? (
-        <div className='mt-4 border border-stone-200 bg-stone-50/50 p-3'>
+        <div
+          className='mt-4 border p-3'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+          }}
+        >
           <div className='flex flex-col gap-2 md:flex-row md:items-center md:justify-between'>
             {annotationLabel("Suggested entries")}
-            <div className='text-[11px] uppercase tracking-[0.08em] text-stone-500'>
+
+            <div
+              className='text-[11px] uppercase tracking-[0.08em]'
+              style={{ color: "var(--text-muted)" }}
+            >
               Confidence is shown on each option
             </div>
           </div>
@@ -1414,12 +1435,25 @@ function NextMoveCard({
 
 function RemovableEntryRow({ entry, onRemove }) {
   return (
-    <div className='flex items-center gap-2 border border-stone-200 bg-white px-3 py-2'>
+    <div
+      className='flex items-center gap-2 border px-3 py-2'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "rgba(255,255,255,0.03)",
+      }}
+    >
       <div className='min-w-0 flex-1'>
-        <div className='truncate text-sm font-semibold text-stone-900'>
+        <div
+          className='truncate text-sm font-semibold'
+          style={{ color: "var(--text-primary)" }}
+        >
           {entry.term}
         </div>
-        <div className='truncate text-[11px] uppercase tracking-[0.08em] text-stone-500'>
+
+        <div
+          className='truncate text-[11px] uppercase tracking-[0.08em]'
+          style={{ color: "var(--text-muted)" }}
+        >
           {entry.type || "—"} · {entry.privacyLevel || "—"} ·{" "}
           {entry.domain || "—"}
         </div>
@@ -1428,7 +1462,18 @@ function RemovableEntryRow({ entry, onRemove }) {
       <button
         type='button'
         onClick={() => onRemove(entry.id)}
-        className='border border-red-200 bg-red-50 px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-red-700 transition hover:bg-red-100'
+        className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
+        style={{
+          borderColor: "rgba(248,113,113,0.35)",
+          background: "rgba(248,113,113,0.10)",
+          color: "#fecaca",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = "rgba(248,113,113,0.16)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = "rgba(248,113,113,0.10)";
+        }}
       >
         Remove
       </button>
@@ -1439,10 +1484,14 @@ function RemovableEntryRow({ entry, onRemove }) {
 function BoardEntryManagementPanel({ entries, onRemoveEntry }) {
   return (
     <div className='mt-6'>
-      <h3 className='text-base font-semibold text-stone-900'>
+      <h3
+        className='text-base font-semibold'
+        style={{ color: "var(--text-primary)" }}
+      >
         Remove board entries
       </h3>
-      <p className='mt-1 text-sm text-stone-600'>
+
+      <p className='mt-1 text-sm' style={{ color: "var(--text-secondary)" }}>
         Remove entries directly here to test how the board character, tensions,
         and next moves change.
       </p>

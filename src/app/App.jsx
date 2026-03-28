@@ -619,7 +619,7 @@ export default function App() {
   const [entryOverrides, setEntryOverrides] = useState(() =>
     getInitialEntryOverrides(),
   );
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
   const boardIdCounterRef = useRef(1);
   const historyIdCounterRef = useRef(1);
   const snapshotIdCounterRef = useRef(1);
@@ -2821,12 +2821,27 @@ export default function App() {
     >
       <div className='mx-auto flex max-w-7xl flex-col gap-5'>
         <OnboardingHeader theme={theme} />
+
         {activeProjectBoard ? (
-          <div className='border border-violet-300 bg-violet-50 px-3 py-2 text-xs font-semibold text-violet-900'>
+          <div
+            className='border px-3 py-2 text-xs font-semibold'
+            style={{
+              borderColor: "rgba(168,85,247,0.35)",
+              background: "rgba(168,85,247,0.10)",
+              color: "#d8b4fe",
+            }}
+          >
             Active board: {activeProjectBoard.name}
           </div>
         ) : (
-          <div className='border border-amber-300 bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-900'>
+          <div
+            className='border px-3 py-2 text-xs font-semibold'
+            style={{
+              borderColor: "rgba(251,191,36,0.30)",
+              background: "rgba(251,191,36,0.10)",
+              color: "#fde68a",
+            }}
+          >
             No active board — open or create one to start
           </div>
         )}
@@ -2837,12 +2852,18 @@ export default function App() {
             onClick={() =>
               setTheme((current) => (current === "light" ? "dark" : "light"))
             }
-            className={
-              "border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition " +
-              (theme === "dark"
-                ? "border-stone-700 bg-stone-900 text-stone-100 hover:bg-stone-800"
-                : "border-stone-300 bg-white text-stone-700 hover:bg-stone-100")
-            }
+            className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "rgba(255,255,255,0.04)",
+              color: "var(--text-secondary)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(255,255,255,0.08)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "rgba(255,255,255,0.04)";
+            }}
           >
             {theme === "light" ? "Dark mode" : "Light mode"}
           </button>

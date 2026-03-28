@@ -487,7 +487,7 @@ function SemanticScoreCard({ score, label, breakdown }) {
           }
         : {
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "rgba(255,255,255,0.02)",
             color: "var(--text-primary)",
           };
 
@@ -514,7 +514,7 @@ function SemanticScoreCard({ score, label, breakdown }) {
           className='border px-4 py-3 text-center'
           style={{
             borderColor: "rgba(255,255,255,0.10)",
-            background: "rgba(255,255,255,0.04)",
+            background: "rgba(255,255,255,0.03)",
           }}
         >
           <div className='text-[10px] font-semibold uppercase tracking-[0.12em] opacity-70'>
@@ -600,7 +600,7 @@ function NaturalLanguageSummary({ leftEntry, rightEntry, summary }) {
           className='border p-4'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "rgba(255,255,255,0.02)",
           }}
         >
           {annotationLabel("Differences")}
@@ -660,7 +660,7 @@ function SemanticDiffInsights({ insights }) {
             className='border p-4'
             style={{
               borderColor: "var(--border-color)",
-              background: "rgba(255,255,255,0.03)",
+              background: "rgba(255,255,255,0.02)",
             }}
           >
             <div className='flex flex-wrap items-center gap-2'>
@@ -718,7 +718,7 @@ function CompareAttributeRow({ label, left, right }) {
               }
             : {
                 borderColor: "var(--border-color)",
-                background: "var(--bg-surface)",
+                background: "rgba(255,255,255,0.03)",
                 color: "var(--text-secondary)",
               }
         }
@@ -737,7 +737,7 @@ function CompareAttributeRow({ label, left, right }) {
               }
             : {
                 borderColor: "var(--border-color)",
-                background: "var(--bg-surface)",
+                background: "rgba(255,255,255,0.03)",
                 color: "var(--text-secondary)",
               }
         }
@@ -761,12 +761,12 @@ function CompareEntryHeader({
   const toneStyles =
     tone === "left"
       ? {
-          borderColor: "rgba(56,189,248,0.35)",
-          background: "rgba(56,189,248,0.08)",
+          borderColor: "rgba(56,189,248,0.30)",
+          background: "rgba(56,189,248,0.06)",
         }
       : {
-          borderColor: "rgba(99,102,241,0.35)",
-          background: "rgba(99,102,241,0.08)",
+          borderColor: "rgba(99,102,241,0.30)",
+          background: "rgba(99,102,241,0.06)",
         };
 
   return (
@@ -813,7 +813,7 @@ function CompareEntryHeader({
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
           style={{
             borderColor: "var(--border-color)",
-            background: "var(--bg-muted)",
+            background: "rgba(255,255,255,0.04)",
             color: "var(--text-secondary)",
           }}
         >
@@ -1244,7 +1244,7 @@ export default function CompareModeLayout({
       className='border p-6'
       style={{
         borderColor: "var(--border-color)",
-        background: "var(--bg-surface)",
+        background: "rgba(255,255,255,0.02)",
       }}
     >
       <div

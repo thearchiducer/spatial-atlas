@@ -1,21 +1,34 @@
-function getTone(points) {
+function getToneStyle(points) {
   if (points >= 7) {
-    return "border-emerald-200 bg-emerald-50 text-emerald-900";
+    return {
+      borderColor: "rgba(16,185,129,0.35)",
+      background: "rgba(16,185,129,0.10)",
+      color: "#a7f3d0",
+    };
   }
 
   if (points >= 4) {
-    return "border-amber-200 bg-amber-50 text-amber-900";
+    return {
+      borderColor: "rgba(251,191,36,0.30)",
+      background: "rgba(251,191,36,0.10)",
+      color: "#fde68a",
+    };
   }
 
-  return "border-stone-200 bg-stone-50 text-stone-700";
+  return {
+    borderColor: "var(--border-color)",
+    background: "rgba(255,255,255,0.03)",
+    color: "var(--text-secondary)",
+  };
 }
 
 function ExplanationChip({ item, compact = false }) {
+  const toneStyle = getToneStyle(item.points);
+
   return (
     <div
-      className={`inline-flex min-h-[32px] items-center border ${getTone(
-        item.points,
-      )}`}
+      className='inline-flex min-h-[32px] items-center border'
+      style={toneStyle}
     >
       <span className='border-r border-current/20 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em]'>
         {item.label}
@@ -37,7 +50,8 @@ export default function SemanticExplanationChips({
     return null;
   }
 
-  const items = limit ? breakdown.slice(0, limit) : breakdown;
+  const items =
+    typeof limit === "number" ? breakdown.slice(0, limit) : breakdown;
 
   return (
     <div className='flex flex-wrap gap-2'>

@@ -1,24 +1,44 @@
 function annotationLabel(children) {
   return (
-    <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+    <div
+      className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+      style={{ color: "var(--text-muted)" }}
+    >
       {children}
     </div>
   );
 }
 
 function LegendTag({ children, tone = "stone" }) {
-  const toneClasses =
+  const toneStyles =
     tone === "core"
-      ? "border-blue-200 bg-blue-50 text-blue-700"
+      ? {
+          borderColor: "rgba(56,189,248,0.35)",
+          background: "rgba(56,189,248,0.10)",
+          color: "#bae6fd",
+        }
       : tone === "critical"
-        ? "border-red-200 bg-red-50 text-red-700"
+        ? {
+            borderColor: "rgba(248,113,113,0.35)",
+            background: "rgba(248,113,113,0.10)",
+            color: "#fecaca",
+          }
         : tone === "threshold"
-          ? "border-orange-200 bg-orange-50 text-orange-700"
-          : "border-stone-300 bg-white text-stone-700";
+          ? {
+              borderColor: "rgba(251,146,60,0.35)",
+              background: "rgba(251,146,60,0.10)",
+              color: "#fdba74",
+            }
+          : {
+              borderColor: "var(--border-color)",
+              background: "rgba(255,255,255,0.03)",
+              color: "var(--text-secondary)",
+            };
 
   return (
     <span
-      className={`border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] ${toneClasses}`}
+      className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
+      style={toneStyles}
     >
       {children}
     </span>
@@ -62,41 +82,53 @@ export default function SpatialDiagramPanel({ translator }) {
   function toneStyles(tone) {
     if (tone === "critical") {
       return {
-        fill: "#fef2f2",
-        stroke: "#dc2626",
-        label: "#991b1b",
+        fill: "rgba(248,113,113,0.10)",
+        stroke: "#f87171",
+        label: "#fecaca",
       };
     }
 
     if (tone === "core") {
       return {
-        fill: "#eff6ff",
-        stroke: "#2563eb",
-        label: "#1d4ed8",
+        fill: "rgba(56,189,248,0.10)",
+        stroke: "#38bdf8",
+        label: "#bae6fd",
       };
     }
 
     if (tone === "threshold") {
       return {
-        fill: "#fff7ed",
-        stroke: "#ea580c",
-        label: "#c2410c",
+        fill: "rgba(251,146,60,0.10)",
+        stroke: "#fb923c",
+        label: "#fdba74",
       };
     }
 
     return {
-      fill: "#f5f5f4",
+      fill: "rgba(255,255,255,0.03)",
       stroke: "#78716c",
-      label: "#57534e",
+      label: "#d6d3d1",
     };
   }
 
   return (
-    <section className='mt-4 border border-stone-200 bg-stone-50/60 p-4'>
-      <div className='flex flex-col gap-3 border-b border-stone-200 pb-4 md:flex-row md:items-start md:justify-between'>
+    <section
+      className='mt-4 border p-4'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "rgba(255,255,255,0.03)",
+      }}
+    >
+      <div
+        className='flex flex-col gap-3 border-b pb-4 md:flex-row md:items-start md:justify-between'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         <div>
           {annotationLabel("Diagram view")}
-          <div className='mt-1 text-sm text-stone-700'>
+          <div
+            className='mt-1 text-sm'
+            style={{ color: "var(--text-secondary)" }}
+          >
             A conceptual sequence of the translated spatial moves.
           </div>
         </div>
@@ -159,6 +191,7 @@ export default function SpatialDiagramPanel({ translator }) {
                   fill={style.fill}
                   stroke={style.stroke}
                   strokeWidth='1.8'
+                  rx='10'
                 />
 
                 <text
@@ -167,7 +200,7 @@ export default function SpatialDiagramPanel({ translator }) {
                   textAnchor='middle'
                   fontSize='10'
                   letterSpacing='0.14em'
-                  fill='#78716c'
+                  fill='#a8a29e'
                 >
                   {String(index + 1).padStart(2, "0")}
                 </text>
@@ -190,7 +223,10 @@ export default function SpatialDiagramPanel({ translator }) {
         </svg>
       </div>
 
-      <p className='mt-3 text-[11px] uppercase tracking-[0.08em] text-stone-500'>
+      <p
+        className='mt-3 text-[11px] uppercase tracking-[0.08em]'
+        style={{ color: "var(--text-muted)" }}
+      >
         Conceptual only · sequence and emphasis, not plan geometry.
       </p>
     </section>

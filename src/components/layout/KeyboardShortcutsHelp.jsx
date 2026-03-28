@@ -5,23 +5,45 @@ export default function KeyboardShortcutsHelp({ isOpen, onToggle }) {
       <button
         type='button'
         onClick={onToggle}
-        className='fixed bottom-5 right-5 z-50 rounded-full border border-stone-300 bg-white px-4 py-2 text-sm shadow-md transition hover:bg-stone-100'
+        className='fixed bottom-5 right-5 z-50 rounded-full border px-4 py-2 text-sm shadow-md transition'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "rgba(255,255,255,0.06)",
+          color: "var(--text-primary)",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = "rgba(255,255,255,0.10)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = "rgba(255,255,255,0.06)";
+        }}
       >
         ⌨ Shortcuts
       </button>
 
       {/* Panel */}
       {isOpen && (
-        <div className='fixed bottom-20 right-5 z-50 w-80 rounded-2xl border border-stone-300 bg-white p-4 shadow-lg'>
+        <div
+          className='fixed bottom-20 right-5 z-50 w-80 rounded-2xl border p-4 shadow-lg backdrop-blur'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(20,20,20,0.85)",
+            color: "var(--text-primary)",
+          }}
+        >
           <div className='flex items-center justify-between'>
-            <h3 className='text-sm font-semibold uppercase tracking-[0.12em] text-stone-600'>
+            <h3
+              className='text-sm font-semibold uppercase tracking-[0.12em]'
+              style={{ color: "var(--text-secondary)" }}
+            >
               Keyboard Shortcuts
             </h3>
 
             <button
               type='button'
               onClick={onToggle}
-              className='text-xs text-stone-500 hover:underline'
+              className='text-xs transition hover:underline'
+              style={{ color: "var(--text-muted)" }}
             >
               Close
             </button>
@@ -42,9 +64,22 @@ export default function KeyboardShortcutsHelp({ isOpen, onToggle }) {
 
 function ShortcutRow({ keys, label }) {
   return (
-    <div className='flex items-center justify-between rounded-lg border border-stone-200 px-3 py-2'>
-      <span className='text-stone-700'>{label}</span>
-      <span className='rounded-md bg-stone-100 px-2 py-0.5 text-xs font-mono text-stone-800'>
+    <div
+      className='flex items-center justify-between rounded-lg border px-3 py-2'
+      style={{
+        borderColor: "rgba(255,255,255,0.08)",
+        background: "rgba(255,255,255,0.03)",
+      }}
+    >
+      <span style={{ color: "var(--text-secondary)" }}>{label}</span>
+
+      <span
+        className='rounded-md px-2 py-0.5 text-xs font-mono'
+        style={{
+          background: "rgba(255,255,255,0.08)",
+          color: "var(--text-primary)",
+        }}
+      >
         {keys}
       </span>
     </div>

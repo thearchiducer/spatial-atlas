@@ -12,11 +12,24 @@ export default function ActiveFilters({ filters, updateFilter }) {
           key={key}
           type='button'
           onClick={() => updateFilter(key, "")}
-          className='flex items-center gap-2 rounded-full border border-stone-300 bg-white px-3 py-1 text-sm transition hover:bg-stone-100'
+          className='flex items-center gap-2 rounded-full border px-3 py-1 text-sm transition'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = "rgba(255,255,255,0.06)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "rgba(255,255,255,0.03)";
+          }}
         >
-          <span className='text-stone-600'>{key}:</span>
-          <strong className='text-stone-900'>{value}</strong>
-          <span className='text-stone-500'>×</span>
+          <span style={{ color: "var(--text-muted)" }}>{key}:</span>
+
+          <strong style={{ color: "var(--text-primary)" }}>{value}</strong>
+
+          <span style={{ color: "var(--text-muted)" }}>×</span>
         </button>
       ))}
     </div>

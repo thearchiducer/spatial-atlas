@@ -13,56 +13,111 @@ export default function HeroHeader({ metrics }) {
   const issuedOn = formatDateLabel();
 
   return (
-    <header className='border border-stone-300 bg-white'>
+    <header
+      className='border'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
       <div className='grid xl:grid-cols-[1.2fr_.8fr]'>
-        <div className='border-b border-stone-300 p-8 xl:border-b-0 xl:border-r xl:p-10'>
+        <div
+          className='border-b p-8 xl:border-b-0 xl:border-r xl:p-10'
+          style={{ borderColor: "var(--border-color)" }}
+        >
           <div className='grid gap-6 md:grid-cols-[1fr_auto] md:items-start'>
             <div>
-              <div className='mb-4 text-[11px] font-bold uppercase tracking-[0.22em] text-amber-800'>
+              <div
+                className='mb-4 text-[11px] font-bold uppercase tracking-[0.22em]'
+                style={{ color: "#fde68a" }}
+              >
                 Architectural Design System
               </div>
 
-              <h1 className='font-serif text-4xl leading-none tracking-tight text-stone-900 md:text-6xl'>
+              <h1
+                className='font-serif text-4xl leading-none tracking-tight md:text-6xl'
+                style={{ color: "var(--text-primary)" }}
+              >
                 Spatial Atlas
               </h1>
 
-              <p className='mt-4 max-w-3xl text-stone-600'>
+              <p
+                className='mt-4 max-w-3xl'
+                style={{ color: "var(--text-secondary)" }}
+              >
                 A structured system for organizing spatial types, relationships,
                 privacy gradients, circulation logic, and architectural
                 direction across scales.
               </p>
             </div>
 
-            <div className='min-w-[220px] border border-stone-300 bg-stone-50/40 p-4'>
-              <div className='grid gap-3 text-sm text-stone-700'>
+            <div
+              className='min-w-[220px] border p-4'
+              style={{
+                borderColor: "var(--border-color)",
+                background: "rgba(255,255,255,0.03)",
+              }}
+            >
+              <div
+                className='grid gap-3 text-sm'
+                style={{ color: "var(--text-secondary)" }}
+              >
                 <div>
-                  <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+                  <div
+                    className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+                    style={{ color: "var(--text-muted)" }}
+                  >
                     Project Code
                   </div>
-                  <div className='mt-1 font-medium text-stone-900'>SA-01</div>
+                  <div
+                    className='mt-1 font-medium'
+                    style={{ color: "var(--text-primary)" }}
+                  >
+                    SA-01
+                  </div>
                 </div>
 
                 <div>
-                  <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+                  <div
+                    className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+                    style={{ color: "var(--text-muted)" }}
+                  >
                     Version
                   </div>
-                  <div className='mt-1 font-medium text-stone-900'>v1.0</div>
+                  <div
+                    className='mt-1 font-medium'
+                    style={{ color: "var(--text-primary)" }}
+                  >
+                    v1.0
+                  </div>
                 </div>
 
                 <div>
-                  <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+                  <div
+                    className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+                    style={{ color: "var(--text-muted)" }}
+                  >
                     Type
                   </div>
-                  <div className='mt-1 font-medium text-stone-900'>
+                  <div
+                    className='mt-1 font-medium'
+                    style={{ color: "var(--text-primary)" }}
+                  >
                     Spatial Intelligence
                   </div>
                 </div>
 
                 <div>
-                  <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+                  <div
+                    className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+                    style={{ color: "var(--text-muted)" }}
+                  >
                     Issued
                   </div>
-                  <div className='mt-1 font-medium text-stone-900'>
+                  <div
+                    className='mt-1 font-medium'
+                    style={{ color: "var(--text-primary)" }}
+                  >
                     {issuedOn}
                   </div>
                 </div>
@@ -81,16 +136,31 @@ export default function HeroHeader({ metrics }) {
           </div>
         </div>
 
-        <aside className='bg-stone-50/50 p-8 xl:p-10'>
-          <div className='border-b border-stone-300 pb-4'>
-            <h2 className='text-sm font-semibold uppercase tracking-[0.18em] text-stone-700'>
+        <aside
+          className='p-8 xl:p-10'
+          style={{ background: "rgba(255,255,255,0.03)" }}
+        >
+          <div
+            className='border-b pb-4'
+            style={{ borderColor: "var(--border-color)" }}
+          >
+            <h2
+              className='text-sm font-semibold uppercase tracking-[0.18em]'
+              style={{ color: "var(--text-secondary)" }}
+            >
               System Logic
             </h2>
           </div>
 
-          <div className='mt-5 space-y-4 text-sm text-stone-600'>
+          <div
+            className='mt-5 space-y-4 text-sm'
+            style={{ color: "var(--text-secondary)" }}
+          >
             <div>
-              <div className='text-[10px] font-semibold uppercase tracking-[0.14em] text-stone-500'>
+              <div
+                className='text-[10px] font-semibold uppercase tracking-[0.14em]'
+                style={{ color: "var(--text-muted)" }}
+              >
                 Method
               </div>
               <p className='mt-1'>
@@ -99,7 +169,10 @@ export default function HeroHeader({ metrics }) {
             </div>
 
             <div>
-              <div className='text-[10px] font-semibold uppercase tracking-[0.14em] text-stone-500'>
+              <div
+                className='text-[10px] font-semibold uppercase tracking-[0.14em]'
+                style={{ color: "var(--text-muted)" }}
+              >
                 Reading
               </div>
               <p className='mt-1'>
@@ -110,7 +183,10 @@ export default function HeroHeader({ metrics }) {
             </div>
 
             <div>
-              <div className='text-[10px] font-semibold uppercase tracking-[0.14em] text-stone-500'>
+              <div
+                className='text-[10px] font-semibold uppercase tracking-[0.14em]'
+                style={{ color: "var(--text-muted)" }}
+              >
                 Use
               </div>
               <p className='mt-1'>
@@ -120,7 +196,10 @@ export default function HeroHeader({ metrics }) {
             </div>
 
             <div>
-              <div className='text-[10px] font-semibold uppercase tracking-[0.14em] text-stone-500'>
+              <div
+                className='text-[10px] font-semibold uppercase tracking-[0.14em]'
+                style={{ color: "var(--text-muted)" }}
+              >
                 Position
               </div>
               <p className='mt-1'>

@@ -19,14 +19,28 @@ import {
 function SelectField({ label, value, onChange, options }) {
   return (
     <label className='flex flex-col gap-1'>
-      <span className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+      <span
+        className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+        style={{ color: "var(--text-muted)" }}
+      >
         {label}
       </span>
 
       <select
         value={value}
         onChange={onChange}
-        className='border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 outline-none transition focus:border-stone-500'
+        className='border px-3 py-2 text-sm outline-none transition'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "var(--bg-surface)",
+          color: "var(--text-primary)",
+        }}
+        onFocus={(e) => {
+          e.currentTarget.style.borderColor = "rgba(56,189,248,0.45)";
+        }}
+        onBlur={(e) => {
+          e.currentTarget.style.borderColor = "var(--border-color)";
+        }}
       >
         {options.map((option) => {
           const optionValue =
@@ -46,14 +60,23 @@ function SelectField({ label, value, onChange, options }) {
 }
 
 function ActiveFilterTag({ children, tone = "neutral" }) {
-  const toneClass =
+  const style =
     tone === "accent"
-      ? "border-amber-300 bg-amber-50 text-amber-800"
-      : "border-stone-300 bg-white text-stone-700";
+      ? {
+          borderColor: "rgba(251,191,36,0.30)",
+          background: "rgba(251,191,36,0.10)",
+          color: "#fde68a",
+        }
+      : {
+          borderColor: "var(--border-color)",
+          background: "rgba(255,255,255,0.03)",
+          color: "var(--text-secondary)",
+        };
 
   return (
     <span
-      className={`border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] ${toneClass}`}
+      className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
+      style={style}
     >
       {children}
     </span>
@@ -93,13 +116,25 @@ export default function FilterToolbar({
     (filters.sortBy && filters.sortBy !== "term");
 
   return (
-    <section className='border border-stone-300 bg-white/90 p-4'>
+    <section
+      className='border p-4'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "rgba(255,255,255,0.04)",
+      }}
+    >
       <div className='space-y-4'>
-        <div className='border-b border-stone-200 pb-4'>
+        <div
+          className='border-b pb-4'
+          style={{ borderColor: "var(--border-color)" }}
+        >
           <div className='grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end'>
             <div>
               <label className='flex flex-col gap-1'>
-                <span className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+                <span
+                  className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+                  style={{ color: "var(--text-muted)" }}
+                >
                   Search atlas
                 </span>
 
@@ -111,7 +146,18 @@ export default function FilterToolbar({
                     updateFilter("query", event.target.value)
                   }
                   placeholder='Search by term, synonym, concept, or semantic intent'
-                  className='w-full border border-stone-300 bg-white px-4 py-3 text-sm text-stone-900 outline-none transition focus:border-stone-500'
+                  className='w-full border px-4 py-3 text-sm outline-none transition'
+                  style={{
+                    borderColor: "var(--border-color)",
+                    background: "var(--bg-surface)",
+                    color: "var(--text-primary)",
+                  }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderColor = "rgba(56,189,248,0.45)";
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderColor = "var(--border-color)";
+                  }}
                 />
               </label>
             </div>
@@ -120,7 +166,12 @@ export default function FilterToolbar({
               <button
                 type='button'
                 onClick={clearFilters}
-                className='border border-stone-300 bg-white px-3 py-2 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+                className='border px-3 py-2 text-[11px] uppercase tracking-[0.08em] transition'
+                style={{
+                  borderColor: "var(--border-color)",
+                  background: "rgba(255,255,255,0.03)",
+                  color: "var(--text-secondary)",
+                }}
               >
                 Clear filters
               </button>
@@ -128,7 +179,12 @@ export default function FilterToolbar({
               <button
                 type='button'
                 onClick={resetView}
-                className='border border-stone-300 bg-white px-3 py-2 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+                className='border px-3 py-2 text-[11px] uppercase tracking-[0.08em] transition'
+                style={{
+                  borderColor: "var(--border-color)",
+                  background: "rgba(255,255,255,0.03)",
+                  color: "var(--text-secondary)",
+                }}
               >
                 Reset view
               </button>
@@ -180,13 +236,25 @@ export default function FilterToolbar({
           />
         </div>
 
-        <div className='border border-stone-200 bg-stone-50/60 p-4'>
+        <div
+          className='border p-4'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+          }}
+        >
           <div className='flex flex-col gap-2 md:flex-row md:items-start md:justify-between'>
             <div>
-              <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+              <div
+                className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+                style={{ color: "var(--text-muted)" }}
+              >
                 Semantic filters
               </div>
-              <p className='mt-1 text-sm leading-relaxed text-stone-600'>
+              <p
+                className='mt-1 text-sm leading-relaxed'
+                style={{ color: "var(--text-secondary)" }}
+              >
                 Filter by privacy, enclosure, circulation, social role, spatial
                 logic, ritual weight, climate response, and cultural
                 specificity.
@@ -194,7 +262,14 @@ export default function FilterToolbar({
             </div>
 
             {hasSemanticFilters ? (
-              <span className='border border-amber-300 bg-amber-50 px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] text-amber-800'>
+              <span
+                className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
+                style={{
+                  borderColor: "rgba(251,191,36,0.30)",
+                  background: "rgba(251,191,36,0.10)",
+                  color: "#fde68a",
+                }}
+              >
                 Active
               </span>
             ) : null}
@@ -276,8 +351,14 @@ export default function FilterToolbar({
         </div>
 
         {hasAnyFilters ? (
-          <div className='border-t border-stone-200 pt-3'>
-            <div className='mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+          <div
+            className='border-t pt-3'
+            style={{ borderColor: "var(--border-color)" }}
+          >
+            <div
+              className='mb-2 text-[10px] font-semibold uppercase tracking-[0.16em]'
+              style={{ color: "var(--text-muted)" }}
+            >
               Active filters
             </div>
 

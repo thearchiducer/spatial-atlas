@@ -96,14 +96,23 @@ function createDraftFromEntry(entry) {
   };
 }
 
+// keep all imports the same
+
 function Field({ label, children, hint = "" }) {
   return (
     <label className='block space-y-1.5'>
-      <div className='text-xs font-semibold uppercase tracking-[0.12em] text-stone-500'>
+      <div
+        className='text-xs font-semibold uppercase tracking-[0.12em]'
+        style={{ color: "var(--text-muted)" }}
+      >
         {label}
       </div>
       {children}
-      {hint ? <div className='text-xs text-stone-500'>{hint}</div> : null}
+      {hint ? (
+        <div className='text-xs' style={{ color: "var(--text-muted)" }}>
+          {hint}
+        </div>
+      ) : null}
     </label>
   );
 }
@@ -112,7 +121,18 @@ function TextInput(props) {
   return (
     <input
       {...props}
-      className='w-full rounded-2xl border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 outline-none transition focus:border-stone-500'
+      className='w-full rounded-2xl border px-3 py-2 text-sm outline-none transition'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+        color: "var(--text-primary)",
+      }}
+      onFocus={(e) => {
+        e.currentTarget.style.borderColor = "rgba(56,189,248,0.45)";
+      }}
+      onBlur={(e) => {
+        e.currentTarget.style.borderColor = "var(--border-color)";
+      }}
     />
   );
 }
@@ -121,7 +141,12 @@ function SelectInput({ options, ...props }) {
   return (
     <select
       {...props}
-      className='w-full rounded-2xl border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 outline-none transition focus:border-stone-500'
+      className='w-full rounded-2xl border px-3 py-2 text-sm outline-none transition'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+        color: "var(--text-primary)",
+      }}
     >
       {options.map((option) => (
         <option key={option} value={option}>
@@ -136,7 +161,12 @@ function TextArea(props) {
   return (
     <textarea
       {...props}
-      className='min-h-[96px] w-full rounded-2xl border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 outline-none transition focus:border-stone-500'
+      className='min-h-[96px] w-full rounded-2xl border px-3 py-2 text-sm outline-none transition'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+        color: "var(--text-primary)",
+      }}
     />
   );
 }
@@ -190,16 +220,37 @@ export default function EntryEditorPanel({
   }
 
   return (
-    <section className='rounded-3xl border border-stone-300 bg-white/95 p-6 shadow-sm'>
+    <section
+      className='rounded-3xl border p-6 shadow-sm'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "rgba(255,255,255,0.04)",
+      }}
+    >
       <div className='flex flex-col gap-4 md:flex-row md:items-start md:justify-between'>
         <div>
-          <div className='mb-2 inline-flex rounded-full border border-rose-300 bg-rose-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-rose-800'>
+          <div
+            className='mb-2 inline-flex rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em]'
+            style={{
+              borderColor: "rgba(244,63,94,0.35)",
+              background: "rgba(244,63,94,0.10)",
+              color: "#fecdd3",
+            }}
+          >
             Entry editor mode
           </div>
-          <h2 className='text-2xl font-semibold tracking-tight text-stone-900'>
+
+          <h2
+            className='text-2xl font-semibold tracking-tight'
+            style={{ color: "var(--text-primary)" }}
+          >
             Edit {entry.term}
           </h2>
-          <p className='mt-2 text-sm text-stone-600'>
+
+          <p
+            className='mt-2 text-sm'
+            style={{ color: "var(--text-secondary)" }}
+          >
             Changes save to browser storage only and override the imported atlas
             data during local use.
           </p>
@@ -209,7 +260,12 @@ export default function EntryEditorPanel({
           <button
             type='button'
             onClick={handleSave}
-            className='rounded-full border border-stone-900 bg-stone-900 px-3 py-1.5 text-sm text-white transition hover:bg-stone-800'
+            className='rounded-full border px-3 py-1.5 text-sm transition'
+            style={{
+              borderColor: "rgba(16,185,129,0.35)",
+              background: "rgba(16,185,129,0.10)",
+              color: "#a7f3d0",
+            }}
           >
             Save entry
           </button>
@@ -217,7 +273,12 @@ export default function EntryEditorPanel({
           <button
             type='button'
             onClick={onClose}
-            className='rounded-full border border-stone-300 bg-white px-3 py-1.5 text-sm text-stone-700 transition hover:bg-stone-100'
+            className='rounded-full border px-3 py-1.5 text-sm transition'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "rgba(255,255,255,0.03)",
+              color: "var(--text-secondary)",
+            }}
           >
             Close editor
           </button>
@@ -226,7 +287,12 @@ export default function EntryEditorPanel({
             type='button'
             onClick={() => onResetEntry?.(entry.id)}
             disabled={!hasOverride}
-            className='rounded-full border border-stone-300 bg-white px-3 py-1.5 text-sm text-stone-700 transition hover:bg-stone-100 disabled:cursor-not-allowed disabled:opacity-50'
+            className='rounded-full border px-3 py-1.5 text-sm transition disabled:cursor-not-allowed disabled:opacity-50'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "rgba(255,255,255,0.03)",
+              color: "var(--text-secondary)",
+            }}
           >
             Reset this entry
           </button>
@@ -234,7 +300,12 @@ export default function EntryEditorPanel({
           <button
             type='button'
             onClick={onResetAll}
-            className='rounded-full border border-stone-300 bg-white px-3 py-1.5 text-sm text-stone-700 transition hover:bg-stone-100'
+            className='rounded-full border px-3 py-1.5 text-sm transition'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "rgba(255,255,255,0.03)",
+              color: "var(--text-secondary)",
+            }}
           >
             Reset all local edits
           </button>
@@ -243,35 +314,65 @@ export default function EntryEditorPanel({
 
       <div className='mt-4 flex flex-wrap gap-2 text-xs'>
         <span
-          className={`rounded-full px-2.5 py-1 font-semibold uppercase tracking-[0.12em] ${
+          className='rounded-full px-2.5 py-1 font-semibold uppercase tracking-[0.12em]'
+          style={
             isDirty
-              ? "bg-amber-100 text-amber-800"
-              : "bg-emerald-100 text-emerald-800"
-          }`}
+              ? {
+                  background: "rgba(251,191,36,0.10)",
+                  color: "#fde68a",
+                }
+              : {
+                  background: "rgba(16,185,129,0.10)",
+                  color: "#a7f3d0",
+                }
+          }
         >
           {isDirty ? "Unsaved changes" : "Saved state"}
         </span>
 
         {hasOverride ? (
-          <span className='rounded-full bg-sky-100 px-2.5 py-1 font-semibold uppercase tracking-[0.12em] text-sky-800'>
+          <span
+            className='rounded-full px-2.5 py-1 font-semibold uppercase tracking-[0.12em]'
+            style={{
+              background: "rgba(56,189,248,0.10)",
+              color: "#bae6fd",
+            }}
+          >
             Local override active
           </span>
         ) : null}
       </div>
 
       {issues.length > 0 ? (
-        <div className='mt-5 rounded-2xl border border-red-200 bg-red-50 p-4'>
-          <div className='text-xs font-semibold uppercase tracking-[0.12em] text-red-700'>
+        <div
+          className='mt-5 rounded-2xl border p-4'
+          style={{
+            borderColor: "rgba(248,113,113,0.35)",
+            background: "rgba(248,113,113,0.08)",
+          }}
+        >
+          <div
+            className='text-xs font-semibold uppercase tracking-[0.12em]'
+            style={{ color: "#fca5a5" }}
+          >
             Validation issues
           </div>
-          <ul className='mt-2 space-y-1 text-sm text-red-900'>
+
+          <ul className='mt-2 space-y-1 text-sm' style={{ color: "#fecaca" }}>
             {issues.map((issue) => (
               <li key={issue}>{issue}</li>
             ))}
           </ul>
         </div>
       ) : (
-        <div className='mt-5 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900'>
+        <div
+          className='mt-5 rounded-2xl border p-4 text-sm'
+          style={{
+            borderColor: "rgba(16,185,129,0.35)",
+            background: "rgba(16,185,129,0.08)",
+            color: "#a7f3d0",
+          }}
+        >
           No validation issues detected.
         </div>
       )}
@@ -383,8 +484,17 @@ export default function EntryEditorPanel({
             </Field>
           </div>
 
-          <div className='rounded-2xl border border-stone-200 bg-stone-50/80 p-4'>
-            <div className='mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-stone-500'>
+          <div
+            className='rounded-2xl border p-4'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "rgba(255,255,255,0.03)",
+            }}
+          >
+            <div
+              className='mb-4 text-xs font-semibold uppercase tracking-[0.12em]'
+              style={{ color: "var(--text-muted)" }}
+            >
               Semantic fields
             </div>
 

@@ -2,24 +2,50 @@ import { getSafeEntryIds } from "../../lib/boardUtils";
 
 function annotationLabel(children) {
   return (
-    <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+    <div
+      className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+      style={{ color: "var(--text-muted)" }}
+    >
       {children}
     </div>
   );
 }
 
 function SmallCard({ label, value, tone = "stone" }) {
-  const toneClasses =
+  const toneStyles =
     tone === "emerald"
-      ? "border-emerald-300 bg-emerald-50 text-emerald-950"
+      ? {
+          borderColor: "rgba(16,185,129,0.35)",
+          background: "rgba(16,185,129,0.10)",
+          color: "#d1fae5",
+        }
       : tone === "amber"
-        ? "border-amber-300 bg-amber-50 text-amber-950"
+        ? {
+            borderColor: "rgba(251,191,36,0.30)",
+            background: "rgba(251,191,36,0.10)",
+            color: "#fef3c7",
+          }
         : tone === "sky"
-          ? "border-sky-300 bg-sky-50 text-sky-950"
-          : "border-stone-300 bg-white text-stone-900";
+          ? {
+              borderColor: "rgba(56,189,248,0.35)",
+              background: "rgba(56,189,248,0.10)",
+              color: "#e0f2fe",
+            }
+          : {
+              borderColor: "var(--border-color)",
+              background: "rgba(255,255,255,0.03)",
+              color: "var(--text-primary)",
+            };
 
   return (
-    <div className={`border px-4 py-3 ${toneClasses}`}>
+    <div
+      className='border px-4 py-3'
+      style={{
+        borderColor: toneStyles.borderColor,
+        background: toneStyles.background,
+        color: toneStyles.color,
+      }}
+    >
       <div className='text-[10px] uppercase tracking-[0.12em] opacity-70'>
         {label}
       </div>
@@ -31,15 +57,34 @@ function SmallCard({ label, value, tone = "stone" }) {
 function EntryCountDelta({ beforeCount, afterCount }) {
   const delta = (afterCount || 0) - (beforeCount || 0);
 
-  const toneClasses =
+  const toneStyles =
     delta > 0
-      ? "border-emerald-300 bg-emerald-50 text-emerald-950"
+      ? {
+          borderColor: "rgba(16,185,129,0.35)",
+          background: "rgba(16,185,129,0.10)",
+          color: "#d1fae5",
+        }
       : delta < 0
-        ? "border-amber-300 bg-amber-50 text-amber-950"
-        : "border-stone-300 bg-stone-50 text-stone-900";
+        ? {
+            borderColor: "rgba(251,191,36,0.30)",
+            background: "rgba(251,191,36,0.10)",
+            color: "#fef3c7",
+          }
+        : {
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-primary)",
+          };
 
   return (
-    <div className={`border px-4 py-3 ${toneClasses}`}>
+    <div
+      className='border px-4 py-3'
+      style={{
+        borderColor: toneStyles.borderColor,
+        background: toneStyles.background,
+        color: toneStyles.color,
+      }}
+    >
       <div className='text-[10px] uppercase tracking-[0.12em] opacity-70'>
         Entry delta
       </div>
@@ -56,23 +101,49 @@ function EntryCountDelta({ beforeCount, afterCount }) {
 function BoardCard({ title, board, tone = "stone" }) {
   if (!board) {
     return (
-      <div className='border border-stone-300 bg-stone-50 p-4'>
-        <div className='text-sm text-stone-500'>No board available.</div>
+      <div
+        className='border p-4'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "rgba(255,255,255,0.03)",
+        }}
+      >
+        <div className='text-sm' style={{ color: "var(--text-muted)" }}>
+          No board available.
+        </div>
       </div>
     );
   }
 
-  const toneClasses =
+  const toneStyles =
     tone === "emerald"
-      ? "border-emerald-300 bg-emerald-50/60"
+      ? {
+          borderColor: "rgba(16,185,129,0.35)",
+          background: "rgba(16,185,129,0.08)",
+        }
       : tone === "sky"
-        ? "border-sky-300 bg-sky-50/60"
-        : "border-stone-300 bg-white";
+        ? {
+            borderColor: "rgba(56,189,248,0.35)",
+            background: "rgba(56,189,248,0.08)",
+          }
+        : {
+            borderColor: "var(--border-color)",
+            background: "var(--bg-surface)",
+          };
 
   return (
-    <div className={`border p-4 ${toneClasses}`}>
+    <div
+      className='border p-4'
+      style={{
+        borderColor: toneStyles.borderColor,
+        background: toneStyles.background,
+      }}
+    >
       {annotationLabel(title)}
-      <div className='mt-2 text-lg font-semibold text-stone-900'>
+      <div
+        className='mt-2 text-lg font-semibold'
+        style={{ color: "var(--text-primary)" }}
+      >
         {board?.name || "Untitled board"}
       </div>
 
@@ -92,9 +163,18 @@ function BoardCard({ title, board, tone = "stone" }) {
       </div>
 
       {board.derivedFromTransformationTitle ? (
-        <div className='mt-3 border border-stone-300 bg-white px-3 py-2 text-sm text-stone-700'>
+        <div
+          className='mt-3 border px-3 py-2 text-sm'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          }}
+        >
           Derived from transformation:{" "}
-          <strong>{board.derivedFromTransformationTitle}</strong>
+          <strong style={{ color: "var(--text-primary)" }}>
+            {board.derivedFromTransformationTitle}
+          </strong>
         </div>
       ) : null}
     </div>
@@ -125,15 +205,34 @@ export default function BoardEvolutionPanel({
 
   if (!activeBoard) {
     return (
-      <section className='space-y-5 rounded-3xl border border-stone-300 bg-white/90 p-5 shadow-sm'>
+      <section
+        className='space-y-5 rounded-3xl border p-5 shadow-sm'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "rgba(255,255,255,0.04)",
+        }}
+      >
         <div>
-          <div className='inline-flex border border-stone-300 bg-stone-50 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-700'>
+          <div
+            className='inline-flex border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em]'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "rgba(255,255,255,0.03)",
+              color: "var(--text-secondary)",
+            }}
+          >
             Board evolution
           </div>
-          <h2 className='mt-3 text-2xl font-semibold tracking-tight text-stone-900'>
+          <h2
+            className='mt-3 text-2xl font-semibold tracking-tight'
+            style={{ color: "var(--text-primary)" }}
+          >
             Evolution view
           </h2>
-          <p className='mt-2 text-sm leading-relaxed text-stone-600'>
+          <p
+            className='mt-2 text-sm leading-relaxed'
+            style={{ color: "var(--text-secondary)" }}
+          >
             Select an active board to inspect its evolution lineage.
           </p>
         </div>
@@ -158,17 +257,36 @@ export default function BoardEvolutionPanel({
     : 0;
 
   return (
-    <section className='space-y-5 rounded-3xl border border-stone-300 bg-white/90 p-5 shadow-sm'>
+    <section
+      className='space-y-5 rounded-3xl border p-5 shadow-sm'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "rgba(255,255,255,0.04)",
+      }}
+    >
       <div>
-        <div className='inline-flex border border-stone-300 bg-stone-50 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-700'>
+        <div
+          className='inline-flex border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em]'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          }}
+        >
           Board evolution
         </div>
 
-        <h2 className='mt-3 text-2xl font-semibold tracking-tight text-stone-900'>
+        <h2
+          className='mt-3 text-2xl font-semibold tracking-tight'
+          style={{ color: "var(--text-primary)" }}
+        >
           Evolution lineage
         </h2>
 
-        <p className='mt-2 text-sm leading-relaxed text-stone-600'>
+        <p
+          className='mt-2 text-sm leading-relaxed'
+          style={{ color: "var(--text-secondary)" }}
+        >
           Inspect the active board as part of an evolution chain from root board
           to source board to current state.
         </p>

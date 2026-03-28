@@ -1,24 +1,28 @@
 import { useState } from "react";
 
 function DrawerChip({ entry, tone = "stone", onSelectEntry, onRemove }) {
-  const toneClasses =
+  const toneStyles =
     tone === "sky"
-      ? "border-sky-300 bg-sky-50 text-sky-950"
-      : "border-amber-300 bg-amber-50 text-amber-950";
-
-  const buttonToneClasses =
-    tone === "sky"
-      ? "border-sky-200 text-sky-800 hover:bg-sky-100"
-      : "border-amber-200 text-amber-800 hover:bg-amber-100";
+      ? {
+          borderColor: "rgba(56,189,248,0.35)",
+          background: "rgba(56,189,248,0.10)",
+          color: "#bae6fd",
+        }
+      : {
+          borderColor: "rgba(251,191,36,0.30)",
+          background: "rgba(251,191,36,0.10)",
+          color: "#fde68a",
+        };
 
   return (
     <div
-      className={`flex items-center gap-2 border px-3 py-2 text-sm ${toneClasses}`}
+      className='flex items-center gap-2 border px-3 py-2 text-sm'
+      style={toneStyles}
     >
       <button
         type='button'
         onClick={() => onSelectEntry(entry.id)}
-        className='truncate font-medium text-left hover:underline'
+        className='truncate text-left font-medium hover:underline'
       >
         {entry.term}
       </button>
@@ -26,7 +30,12 @@ function DrawerChip({ entry, tone = "stone", onSelectEntry, onRemove }) {
       <button
         type='button'
         onClick={() => onRemove(entry.id)}
-        className={`border px-2 py-0.5 text-[10px] uppercase tracking-[0.08em] transition ${buttonToneClasses}`}
+        className='border px-2 py-0.5 text-[10px] uppercase tracking-[0.08em] transition'
+        style={{
+          borderColor: "rgba(255,255,255,0.15)",
+          background: "rgba(255,255,255,0.06)",
+          color: "var(--text-secondary)",
+        }}
       >
         Remove
       </button>
@@ -35,13 +44,21 @@ function DrawerChip({ entry, tone = "stone", onSelectEntry, onRemove }) {
 }
 
 function UtilityCounter({ label, value, tone = "stone" }) {
-  const toneClasses =
+  const toneStyles =
     tone === "sky"
-      ? "border-sky-300 bg-sky-50 text-sky-950"
-      : "border-amber-300 bg-amber-50 text-amber-950";
+      ? {
+          borderColor: "rgba(56,189,248,0.35)",
+          background: "rgba(56,189,248,0.10)",
+          color: "#bae6fd",
+        }
+      : {
+          borderColor: "rgba(251,191,36,0.30)",
+          background: "rgba(251,191,36,0.10)",
+          color: "#fde68a",
+        };
 
   return (
-    <div className={`border px-3 py-2 ${toneClasses}`}>
+    <div className='border px-3 py-2' style={toneStyles}>
       <div className='flex items-center gap-2'>
         <span className='text-[10px] font-semibold uppercase tracking-[0.16em]'>
           {label}
@@ -71,65 +88,103 @@ export default function AtlasQuickDrawer({
   }
 
   return (
-    <section className='sticky top-20 z-10 border border-stone-300 bg-white/95 p-4 backdrop-blur'>
+    <section
+      className='sticky top-20 z-10 border p-4 backdrop-blur'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "rgba(255,255,255,0.04)",
+      }}
+    >
       <div className='flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between'>
         <div className='flex flex-wrap gap-2'>
-          {hasCompare ? (
+          {hasCompare && (
             <UtilityCounter
               label='Compare'
               value={compareEntries.length}
               tone='sky'
             />
-          ) : null}
+          )}
 
-          {hasPinned ? (
+          {hasPinned && (
             <UtilityCounter
               label='Pinned'
               value={pinnedEntries.length}
               tone='amber'
             />
-          ) : null}
+          )}
         </div>
 
         <div className='flex flex-wrap gap-2'>
           <button
             type='button'
             onClick={() => setIsOpen((current) => !current)}
-            className='border border-stone-300 bg-white px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+            className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "rgba(255,255,255,0.03)",
+              color: "var(--text-secondary)",
+            }}
           >
             {isOpen ? "Hide drawer" : "Open drawer"}
           </button>
 
-          {hasCompare ? (
+          {hasCompare && (
             <button
               type='button'
               onClick={onClearCompare}
-              className='border border-sky-300 bg-white px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-sky-900 transition hover:bg-sky-50'
+              className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+              style={{
+                borderColor: "rgba(56,189,248,0.35)",
+                background: "rgba(56,189,248,0.10)",
+                color: "#bae6fd",
+              }}
             >
               Clear compare
             </button>
-          ) : null}
+          )}
 
-          {hasPinned ? (
+          {hasPinned && (
             <button
               type='button'
               onClick={onClearPinned}
-              className='border border-amber-300 bg-white px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-amber-900 transition hover:bg-amber-50'
+              className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+              style={{
+                borderColor: "rgba(251,191,36,0.30)",
+                background: "rgba(251,191,36,0.10)",
+                color: "#fde68a",
+              }}
             >
               Clear pinned
             </button>
-          ) : null}
+          )}
         </div>
       </div>
 
-      {isOpen ? (
+      {isOpen && (
         <div className='mt-4 grid gap-4 xl:grid-cols-2'>
-          <div className='border border-sky-200 bg-sky-50/40 p-4'>
-            <div className='border-b border-sky-200 pb-3'>
-              <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-sky-800'>
+          {/* Compare */}
+          <div
+            className='border p-4'
+            style={{
+              borderColor: "rgba(56,189,248,0.35)",
+              background: "rgba(56,189,248,0.08)",
+            }}
+          >
+            <div
+              className='border-b pb-3'
+              style={{ borderColor: "rgba(56,189,248,0.25)" }}
+            >
+              <div
+                className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+                style={{ color: "#bae6fd" }}
+              >
                 Compare drawer
               </div>
-              <p className='mt-2 text-sm leading-relaxed text-sky-900'>
+
+              <p
+                className='mt-2 text-sm leading-relaxed'
+                style={{ color: "#e0f2fe" }}
+              >
                 {hasCompare
                   ? `${compareEntries.length} selected for comparison`
                   : "No entries in compare"}
@@ -149,18 +204,35 @@ export default function AtlasQuickDrawer({
                 ))}
               </div>
             ) : (
-              <p className='mt-3 text-sm text-sky-800'>
+              <p className='mt-3 text-sm' style={{ color: "#bae6fd" }}>
                 Add entries from the cards or selected-entry panel.
               </p>
             )}
           </div>
 
-          <div className='border border-amber-200 bg-amber-50/40 p-4'>
-            <div className='border-b border-amber-200 pb-3'>
-              <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-amber-800'>
+          {/* Pinned */}
+          <div
+            className='border p-4'
+            style={{
+              borderColor: "rgba(251,191,36,0.30)",
+              background: "rgba(251,191,36,0.08)",
+            }}
+          >
+            <div
+              className='border-b pb-3'
+              style={{ borderColor: "rgba(251,191,36,0.25)" }}
+            >
+              <div
+                className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+                style={{ color: "#fde68a" }}
+              >
                 Pinned drawer
               </div>
-              <p className='mt-2 text-sm leading-relaxed text-amber-900'>
+
+              <p
+                className='mt-2 text-sm leading-relaxed'
+                style={{ color: "#fef3c7" }}
+              >
                 {hasPinned
                   ? `${pinnedEntries.length} saved favorites`
                   : "No pinned entries"}
@@ -180,13 +252,13 @@ export default function AtlasQuickDrawer({
                 ))}
               </div>
             ) : (
-              <p className='mt-3 text-sm text-amber-800'>
+              <p className='mt-3 text-sm' style={{ color: "#fde68a" }}>
                 Pin entries from the cards or selected-entry panel.
               </p>
             )}
           </div>
         </div>
-      ) : null}
+      )}
     </section>
   );
 }

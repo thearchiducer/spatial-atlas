@@ -1,15 +1,30 @@
-function navButtonClass(isActive) {
+function navButtonStyle(isActive) {
   return isActive
-    ? "border-stone-900 bg-stone-900 text-white"
-    : "border-stone-300 bg-white text-stone-700 hover:bg-stone-100";
+    ? {
+        borderColor: "rgba(56,189,248,0.35)",
+        background: "rgba(56,189,248,0.12)",
+        color: "#e0f2fe",
+      }
+    : {
+        borderColor: "var(--border-color)",
+        background: "rgba(255,255,255,0.03)",
+        color: "var(--text-secondary)",
+      };
 }
 
 function statusChip(label, value) {
   return (
-    <div className='border border-stone-300 bg-stone-50 px-2.5 py-1 text-[10px] uppercase tracking-[0.12em] text-stone-700'>
-      <span className='text-stone-500'>{label}</span>
-      <span className='mx-1 text-stone-400'>·</span>
-      <span className='text-stone-900'>{value}</span>
+    <div
+      className='border px-2.5 py-1 text-[10px] uppercase tracking-[0.12em]'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "rgba(255,255,255,0.03)",
+        color: "var(--text-secondary)",
+      }}
+    >
+      <span style={{ color: "var(--text-muted)" }}>{label}</span>
+      <span className='mx-1 opacity-50'>·</span>
+      <span style={{ color: "var(--text-primary)" }}>{value}</span>
     </div>
   );
 }
@@ -32,10 +47,19 @@ export default function ViewModeTopNav({
   ];
 
   return (
-    <section className='border border-stone-300 bg-white'>
+    <section
+      className='border'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "rgba(255,255,255,0.04)",
+      }}
+    >
       <div className='grid gap-3 px-4 py-3 xl:grid-cols-[1.2fr_.8fr] xl:items-center'>
         <div className='flex flex-col gap-3'>
-          <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+          <div
+            className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+            style={{ color: "var(--text-muted)" }}
+          >
             Workspace navigation
           </div>
 
@@ -45,9 +69,8 @@ export default function ViewModeTopNav({
                 key={mode.key}
                 type='button'
                 onClick={() => setActiveView(mode.key)}
-                className={`border px-3 py-1.5 text-[10px] uppercase tracking-[0.12em] transition ${navButtonClass(
-                  activeView === mode.key,
-                )}`}
+                className='border px-3 py-1.5 text-[10px] uppercase tracking-[0.12em] transition'
+                style={navButtonStyle(activeView === mode.key)}
                 title={`${mode.label} view (${mode.shortcut})`}
               >
                 <span>{mode.label}</span>
@@ -60,9 +83,8 @@ export default function ViewModeTopNav({
             <button
               type='button'
               onClick={() => setMinimalMode((current) => !current)}
-              className={`border px-3 py-1.5 text-[10px] uppercase tracking-[0.12em] transition ${navButtonClass(
-                minimalMode,
-              )}`}
+              className='border px-3 py-1.5 text-[10px] uppercase tracking-[0.12em] transition'
+              style={navButtonStyle(minimalMode)}
               title='Toggle minimal mode (M)'
             >
               <span>{minimalMode ? "Minimal on" : "Minimal off"}</span>
@@ -74,9 +96,8 @@ export default function ViewModeTopNav({
             <button
               type='button'
               onClick={() => setShowSecondaryTools((current) => !current)}
-              className={`border px-3 py-1.5 text-[10px] uppercase tracking-[0.12em] transition ${navButtonClass(
-                showSecondaryTools,
-              )}`}
+              className='border px-3 py-1.5 text-[10px] uppercase tracking-[0.12em] transition'
+              style={navButtonStyle(showSecondaryTools)}
               title='Toggle secondary tools (T)'
             >
               <span>Tools</span>
@@ -88,7 +109,12 @@ export default function ViewModeTopNav({
             <button
               type='button'
               onClick={onResetView}
-              className='border border-stone-300 bg-white px-3 py-1.5 text-[10px] uppercase tracking-[0.12em] text-stone-700 transition hover:bg-stone-100'
+              className='border px-3 py-1.5 text-[10px] uppercase tracking-[0.12em] transition'
+              style={{
+                borderColor: "var(--border-color)",
+                background: "rgba(255,255,255,0.03)",
+                color: "var(--text-secondary)",
+              }}
               title='Reset view (Shift+R)'
             >
               <span>Reset</span>

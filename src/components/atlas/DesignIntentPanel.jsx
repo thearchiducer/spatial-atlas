@@ -19,7 +19,10 @@ import SemanticExplanationChips from "../semantic/SemanticExplanationChips";
 
 function annotationLabel(children) {
   return (
-    <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+    <div
+      className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+      style={{ color: "var(--text-muted)" }}
+    >
       {children}
     </div>
   );
@@ -28,13 +31,28 @@ function annotationLabel(children) {
 function SelectField({ label, value, onChange, options }) {
   return (
     <label className='flex flex-col gap-1'>
-      <span className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+      <span
+        className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+        style={{ color: "var(--text-muted)" }}
+      >
         {label}
       </span>
+
       <select
         value={value}
         onChange={onChange}
-        className='border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 outline-none transition focus:border-stone-500'
+        className='border px-3 py-2 text-sm outline-none transition'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "var(--bg-surface)",
+          color: "var(--text-primary)",
+        }}
+        onFocus={(e) => {
+          e.currentTarget.style.borderColor = "rgba(56,189,248,0.45)";
+        }}
+        onBlur={(e) => {
+          e.currentTarget.style.borderColor = "var(--border-color)";
+        }}
       >
         {options.map((option) => (
           <option key={option || "any"} value={option}>
@@ -48,26 +66,60 @@ function SelectField({ label, value, onChange, options }) {
 
 function IntentMetric({ label, value }) {
   return (
-    <span className='border border-stone-300 bg-white px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700'>
+    <span
+      className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "rgba(255,255,255,0.03)",
+        color: "var(--text-secondary)",
+      }}
+    >
       {label} · {value}
     </span>
   );
 }
 
 function getMatchTone(label) {
-  if (label === "Strong fit") return "border-emerald-300 bg-emerald-50/30";
-  if (label === "Moderate fit") return "border-amber-300 bg-amber-50/30";
-  return "border-stone-300 bg-stone-50/40";
+  if (label === "Strong fit") {
+    return {
+      borderColor: "rgba(16,185,129,0.35)",
+      background: "rgba(16,185,129,0.08)",
+    };
+  }
+
+  if (label === "Moderate fit") {
+    return {
+      borderColor: "rgba(251,191,36,0.30)",
+      background: "rgba(251,191,36,0.08)",
+    };
+  }
+
+  return {
+    borderColor: "var(--border-color)",
+    background: "rgba(255,255,255,0.03)",
+  };
 }
 
 function SuggestionCard({ title, description, entries, onSelectEntry }) {
   return (
-    <section className='border border-stone-200 bg-white p-4'>
+    <section
+      className='border p-4'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
       {annotationLabel("Strategy group")}
-      <h3 className='mt-2 text-base font-semibold tracking-tight text-stone-900'>
+      <h3
+        className='mt-2 text-base font-semibold tracking-tight'
+        style={{ color: "var(--text-primary)" }}
+      >
         {title}
       </h3>
-      <p className='mt-1 text-sm leading-relaxed text-stone-600'>
+      <p
+        className='mt-1 text-sm leading-relaxed'
+        style={{ color: "var(--text-secondary)" }}
+      >
         {description}
       </p>
 
@@ -78,13 +130,20 @@ function SuggestionCard({ title, description, entries, onSelectEntry }) {
               key={entry.id}
               type='button'
               onClick={() => onSelectEntry && onSelectEntry(entry.id)}
-              className='border border-stone-300 bg-white px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+              className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+              style={{
+                borderColor: "var(--border-color)",
+                background: "rgba(255,255,255,0.03)",
+                color: "var(--text-secondary)",
+              }}
             >
               {entry.term}
             </button>
           ))
         ) : (
-          <span className='text-sm text-stone-500'>None</span>
+          <span className='text-sm' style={{ color: "var(--text-muted)" }}>
+            None
+          </span>
         )}
       </div>
     </section>
@@ -93,12 +152,21 @@ function SuggestionCard({ title, description, entries, onSelectEntry }) {
 
 function SequenceCard({ entries, onSelectEntry, onCompareEntry }) {
   return (
-    <section className='border border-indigo-200 bg-indigo-50/30 p-4'>
+    <section
+      className='border p-4'
+      style={{
+        borderColor: "rgba(99,102,241,0.35)",
+        background: "rgba(99,102,241,0.08)",
+      }}
+    >
       {annotationLabel("Proposed order")}
-      <h3 className='mt-2 text-base font-semibold tracking-tight text-indigo-950'>
+      <h3
+        className='mt-2 text-base font-semibold tracking-tight'
+        style={{ color: "#e0e7ff" }}
+      >
         Suggested spatial sequence
       </h3>
-      <p className='mt-1 text-sm leading-relaxed text-indigo-900/80'>
+      <p className='mt-1 text-sm leading-relaxed' style={{ color: "#c7d2fe" }}>
         A heuristic order from more public or transitional conditions toward
         more specific, protected, or internally resolved roles.
       </p>
@@ -110,18 +178,28 @@ function SequenceCard({ entries, onSelectEntry, onCompareEntry }) {
               <button
                 type='button'
                 onClick={() => onSelectEntry && onSelectEntry(entry.id)}
-                className='border border-indigo-200 bg-white px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-indigo-900 transition hover:bg-indigo-100'
+                className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+                style={{
+                  borderColor: "rgba(99,102,241,0.35)",
+                  background: "rgba(255,255,255,0.06)",
+                  color: "#e0e7ff",
+                }}
               >
                 {entry.term}
               </button>
 
               {index < entries.length - 1 ? (
-                <span className='text-sm font-semibold text-indigo-700'>→</span>
+                <span
+                  className='text-sm font-semibold'
+                  style={{ color: "#c7d2fe" }}
+                >
+                  →
+                </span>
               ) : null}
             </div>
           ))
         ) : (
-          <span className='text-sm text-indigo-900/70'>
+          <span className='text-sm' style={{ color: "#c7d2fe" }}>
             No sequence available.
           </span>
         )}
@@ -132,7 +210,12 @@ function SequenceCard({ entries, onSelectEntry, onCompareEntry }) {
           <button
             type='button'
             onClick={() => onCompareEntry && onCompareEntry(entries[0].id)}
-            className='border border-indigo-200 bg-white px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-indigo-900 transition hover:bg-indigo-100'
+            className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+            style={{
+              borderColor: "rgba(99,102,241,0.35)",
+              background: "rgba(255,255,255,0.06)",
+              color: "#e0e7ff",
+            }}
           >
             Start compare from first node
           </button>
@@ -148,27 +231,54 @@ function IntentMatchCard({
   onCompareEntry,
   onTogglePinEntry,
 }) {
+  const tone = getMatchTone(entry.__intentLabel);
+
   return (
-    <div className={`border p-4 ${getMatchTone(entry.__intentLabel)}`}>
-      <div className='flex items-start justify-between gap-3 border-b border-current/15 pb-4'>
+    <div
+      className='border p-4'
+      style={{
+        borderColor: tone.borderColor,
+        background: tone.background,
+      }}
+    >
+      <div
+        className='flex items-start justify-between gap-3 border-b pb-4'
+        style={{ borderColor: "rgba(255,255,255,0.08)" }}
+      >
         <button
           type='button'
           onClick={() => onSelectEntry && onSelectEntry(entry.id)}
           className='min-w-0 flex-1 text-left'
         >
-          <h3 className='text-base font-semibold tracking-tight text-stone-900 hover:underline'>
+          <h3
+            className='text-base font-semibold tracking-tight hover:underline'
+            style={{ color: "var(--text-primary)" }}
+          >
             {entry.term}
           </h3>
-          <p className='mt-2 text-sm leading-relaxed text-stone-600'>
+          <p
+            className='mt-2 text-sm leading-relaxed'
+            style={{ color: "var(--text-secondary)" }}
+          >
             {entry.description}
           </p>
         </button>
 
         <div className='text-right'>
-          <div className='border border-stone-200 bg-white px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700'>
+          <div
+            className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "rgba(255,255,255,0.03)",
+              color: "var(--text-secondary)",
+            }}
+          >
             {entry.__intentLabel}
           </div>
-          <div className='mt-2 text-xl font-semibold text-stone-900'>
+          <div
+            className='mt-2 text-xl font-semibold'
+            style={{ color: "var(--text-primary)" }}
+          >
             {entry.__intentScore}
           </div>
         </div>
@@ -192,13 +302,24 @@ function IntentMatchCard({
 
       {entry.__intentConflictBreakdown &&
       entry.__intentConflictBreakdown.length ? (
-        <div className='mt-4 border border-red-200 bg-red-50/40 p-3'>
+        <div
+          className='mt-4 border p-3'
+          style={{
+            borderColor: "rgba(248,113,113,0.35)",
+            background: "rgba(248,113,113,0.08)",
+          }}
+        >
           {annotationLabel("Conflicts reducing fit")}
           <div className='mt-2 flex flex-wrap gap-2'>
             {entry.__intentConflictBreakdown.map((item) => (
               <span
                 key={item.label}
-                className='border border-red-200 bg-white px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] text-red-800'
+                className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
+                style={{
+                  borderColor: "rgba(248,113,113,0.35)",
+                  background: "rgba(248,113,113,0.10)",
+                  color: "#fecaca",
+                }}
               >
                 {item.label} −{item.penalty}
               </span>
@@ -208,9 +329,18 @@ function IntentMatchCard({
       ) : null}
 
       {entry.__intentRationale && entry.__intentRationale.length ? (
-        <div className='mt-4 border border-stone-200 bg-white p-3'>
+        <div
+          className='mt-4 border p-3'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+          }}
+        >
           {annotationLabel("Why this appears")}
-          <ul className='mt-2 space-y-1 text-sm text-stone-700'>
+          <ul
+            className='mt-2 space-y-1 text-sm'
+            style={{ color: "var(--text-secondary)" }}
+          >
             {entry.__intentRationale.map((item) => (
               <li key={item}>• {item}</li>
             ))}
@@ -218,11 +348,19 @@ function IntentMatchCard({
         </div>
       ) : null}
 
-      <div className='mt-4 flex flex-wrap gap-2 border-t border-stone-200 pt-4'>
+      <div
+        className='mt-4 flex flex-wrap gap-2 border-t pt-4'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         <button
           type='button'
           onClick={() => onSelectEntry && onSelectEntry(entry.id)}
-          className='border border-stone-300 bg-white px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+          className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          }}
         >
           Open
         </button>
@@ -230,7 +368,12 @@ function IntentMatchCard({
         <button
           type='button'
           onClick={() => onCompareEntry && onCompareEntry(entry.id)}
-          className='border border-stone-300 bg-white px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+          className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          }}
         >
           Compare
         </button>
@@ -238,7 +381,12 @@ function IntentMatchCard({
         <button
           type='button'
           onClick={() => onTogglePinEntry && onTogglePinEntry(entry.id)}
-          className='border border-stone-300 bg-white px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+          className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          }}
         >
           Pin
         </button>
@@ -302,15 +450,30 @@ export default function DesignIntentPanel({
   }
 
   return (
-    <section className='border border-stone-300 bg-white p-5'>
+    <section
+      className='border p-5'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
       {annotationLabel("Design intent mode v2")}
 
-      <div className='mt-2 border-b border-stone-200 pb-4'>
-        <h2 className='text-xl font-semibold tracking-tight text-stone-900'>
+      <div
+        className='mt-2 border-b pb-4'
+        style={{ borderColor: "var(--border-color)" }}
+      >
+        <h2
+          className='text-xl font-semibold tracking-tight'
+          style={{ color: "var(--text-primary)" }}
+        >
           Design intent engine
         </h2>
 
-        <p className='mt-2 max-w-3xl text-sm leading-relaxed text-stone-600'>
+        <p
+          className='mt-2 max-w-3xl text-sm leading-relaxed'
+          style={{ color: "var(--text-secondary)" }}
+        >
           Define a design intent, then the atlas ranks entries by semantic fit,
           surfaces conflicts, groups strategy options, and proposes a possible
           sequence.
@@ -404,11 +567,19 @@ export default function DesignIntentPanel({
         />
       </div>
 
-      <div className='mt-5 flex flex-wrap items-center gap-2 border-t border-stone-200 pt-4'>
+      <div
+        className='mt-5 flex flex-wrap items-center gap-2 border-t pt-4'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         <button
           type='button'
           onClick={clearIntent}
-          className='border border-stone-300 bg-white px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+          className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          }}
         >
           Clear intent
         </button>
@@ -449,7 +620,10 @@ export default function DesignIntentPanel({
         />
       </div>
 
-      <div className='mt-6 space-y-3 border-t border-stone-200 pt-4'>
+      <div
+        className='mt-6 space-y-3 border-t pt-4'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         {results.matches.length ? (
           results.matches
             .slice(0, 10)
@@ -463,7 +637,14 @@ export default function DesignIntentPanel({
               />
             ))
         ) : (
-          <div className='border border-stone-300 bg-stone-50/60 p-4 text-sm text-stone-600'>
+          <div
+            className='border p-4 text-sm'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "rgba(255,255,255,0.03)",
+              color: "var(--text-secondary)",
+            }}
+          >
             Add one or more intent fields to generate ranked semantic matches.
           </div>
         )}

@@ -182,4 +182,7 @@
     right: 0;
     border-right-color: var(--border);
   }
+  .filter-chip:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
 }

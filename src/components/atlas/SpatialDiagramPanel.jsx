@@ -13,26 +13,26 @@ function LegendTag({ children, tone = "stone" }) {
   const toneStyles =
     tone === "core"
       ? {
-          borderColor: "rgba(56,189,248,0.35)",
-          background: "rgba(56,189,248,0.10)",
-          color: "#bae6fd",
+          borderColor: "rgba(56,189,248,0.22)",
+          background: "rgba(56,189,248,0.05)",
+          color: "#93c5fd",
         }
       : tone === "critical"
         ? {
-            borderColor: "rgba(248,113,113,0.35)",
-            background: "rgba(248,113,113,0.10)",
-            color: "#fecaca",
+            borderColor: "rgba(248,113,113,0.22)",
+            background: "rgba(248,113,113,0.05)",
+            color: "#fca5a5",
           }
         : tone === "threshold"
           ? {
-              borderColor: "rgba(251,146,60,0.35)",
-              background: "rgba(251,146,60,0.10)",
+              borderColor: "rgba(251,146,60,0.22)",
+              background: "rgba(251,146,60,0.05)",
               color: "#fdba74",
             }
           : {
-              borderColor: "var(--border-color)",
-              background: "rgba(255,255,255,0.03)",
-              color: "var(--text-secondary)",
+              borderColor: "rgba(168,85,247,0.22)",
+              background: "rgba(168,85,247,0.05)",
+              color: "#c4b5fd",
             };
 
   return (

@@ -409,7 +409,10 @@ function buildSemanticDiffInsights(leftEntry, rightEntry) {
 
 function annotationLabel(children) {
   return (
-    <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+    <div
+      className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+      style={{ color: "var(--text-muted)" }}
+    >
       {children}
     </div>
   );
@@ -418,11 +421,20 @@ function annotationLabel(children) {
 function DiffBadge({ same }) {
   return (
     <span
-      className={`border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] ${
+      className='border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em]'
+      style={
         same
-          ? "border-emerald-200 bg-emerald-50 text-emerald-800"
-          : "border-stone-300 bg-white text-stone-600"
-      }`}
+          ? {
+              borderColor: "rgba(16,185,129,0.35)",
+              background: "rgba(16,185,129,0.10)",
+              color: "#a7f3d0",
+            }
+          : {
+              borderColor: "var(--border-color)",
+              background: "var(--bg-muted)",
+              color: "var(--text-secondary)",
+            }
+      }
     >
       {same ? "Match" : "Different"}
     </span>
@@ -430,16 +442,29 @@ function DiffBadge({ same }) {
 }
 
 function SeverityBadge({ severity }) {
-  const classes =
+  const style =
     severity === "high"
-      ? "border-red-200 bg-red-50 text-red-800"
+      ? {
+          borderColor: "rgba(248,113,113,0.35)",
+          background: "rgba(248,113,113,0.10)",
+          color: "#fecaca",
+        }
       : severity === "medium"
-        ? "border-amber-200 bg-amber-50 text-amber-800"
-        : "border-stone-300 bg-white text-stone-700";
+        ? {
+            borderColor: "rgba(251,191,36,0.30)",
+            background: "rgba(251,191,36,0.10)",
+            color: "#fde68a",
+          }
+        : {
+            borderColor: "var(--border-color)",
+            background: "var(--bg-muted)",
+            color: "var(--text-secondary)",
+          };
 
   return (
     <span
-      className={`border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] ${classes}`}
+      className='border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em]'
+      style={style}
     >
       {severity}
     </span>
@@ -447,15 +472,34 @@ function SeverityBadge({ severity }) {
 }
 
 function SemanticScoreCard({ score, label, breakdown }) {
-  const toneClasses =
+  const toneStyles =
     score >= 72
-      ? "border-emerald-300 bg-emerald-50/40 text-emerald-900"
+      ? {
+          borderColor: "rgba(16,185,129,0.35)",
+          background: "rgba(16,185,129,0.08)",
+          color: "#d1fae5",
+        }
       : score >= 46
-        ? "border-amber-300 bg-amber-50/40 text-amber-900"
-        : "border-stone-300 bg-stone-50 text-stone-800";
+        ? {
+            borderColor: "rgba(251,191,36,0.30)",
+            background: "rgba(251,191,36,0.08)",
+            color: "#fde68a",
+          }
+        : {
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-primary)",
+          };
 
   return (
-    <section className={`border p-5 ${toneClasses}`}>
+    <section
+      className='border p-5'
+      style={{
+        borderColor: toneStyles.borderColor,
+        background: toneStyles.background,
+        color: toneStyles.color,
+      }}
+    >
       <div className='grid gap-4 lg:grid-cols-[minmax(0,1fr)_140px] lg:items-start'>
         <div>
           {annotationLabel("Semantic relationship")}
@@ -466,7 +510,13 @@ function SemanticScoreCard({ score, label, breakdown }) {
           </p>
         </div>
 
-        <div className='border border-current/20 bg-white/70 px-4 py-3 text-center'>
+        <div
+          className='border px-4 py-3 text-center'
+          style={{
+            borderColor: "rgba(255,255,255,0.10)",
+            background: "rgba(255,255,255,0.04)",
+          }}
+        >
           <div className='text-[10px] font-semibold uppercase tracking-[0.12em] opacity-70'>
             Similarity
           </div>
@@ -479,7 +529,13 @@ function SemanticScoreCard({ score, label, breakdown }) {
         </div>
       </div>
 
-      <div className='mt-4 border border-current/15 bg-white/60 p-4'>
+      <div
+        className='mt-4 border p-4'
+        style={{
+          borderColor: "rgba(255,255,255,0.10)",
+          background: "rgba(255,255,255,0.03)",
+        }}
+      >
         {annotationLabel("Score breakdown")}
         <div className='mt-3'>
           {breakdown.length ? (
@@ -497,13 +553,31 @@ function SemanticScoreCard({ score, label, breakdown }) {
 
 function NaturalLanguageSummary({ leftEntry, rightEntry, summary }) {
   return (
-    <section className='border border-stone-300 bg-white p-5'>
-      <h3 className='text-lg font-semibold tracking-tight text-stone-900'>
+    <section
+      className='border p-5'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <h3
+        className='text-lg font-semibold tracking-tight'
+        style={{ color: "var(--text-primary)" }}
+      >
         Natural-language reading
       </h3>
 
-      <div className='mt-4 space-y-3 text-sm text-stone-700'>
-        <div className='border border-emerald-200 bg-emerald-50/40 p-4'>
+      <div
+        className='mt-4 space-y-3 text-sm'
+        style={{ color: "var(--text-secondary)" }}
+      >
+        <div
+          className='border p-4'
+          style={{
+            borderColor: "rgba(16,185,129,0.30)",
+            background: "rgba(16,185,129,0.08)",
+          }}
+        >
           {annotationLabel("Similarities")}
           {summary.similarities.length ? (
             <ul className='mt-3 space-y-2 leading-relaxed'>
@@ -522,7 +596,13 @@ function NaturalLanguageSummary({ leftEntry, rightEntry, summary }) {
           )}
         </div>
 
-        <div className='border border-stone-200 bg-stone-50/60 p-4'>
+        <div
+          className='border p-4'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+          }}
+        >
           {annotationLabel("Differences")}
           {summary.differences.length ? (
             <ul className='mt-3 space-y-2 leading-relaxed'>
@@ -538,7 +618,13 @@ function NaturalLanguageSummary({ leftEntry, rightEntry, summary }) {
           )}
         </div>
 
-        <div className='border border-sky-200 bg-sky-50/40 p-4'>
+        <div
+          className='border p-4'
+          style={{
+            borderColor: "rgba(56,189,248,0.30)",
+            background: "rgba(56,189,248,0.08)",
+          }}
+        >
           {annotationLabel("Interpretation")}
           <div className='mt-3 space-y-2 leading-relaxed'>
             {summary.nuance.map((item) => (
@@ -553,8 +639,17 @@ function NaturalLanguageSummary({ leftEntry, rightEntry, summary }) {
 
 function SemanticDiffInsights({ insights }) {
   return (
-    <section className='border border-stone-300 bg-white p-5'>
-      <h3 className='text-lg font-semibold tracking-tight text-stone-900'>
+    <section
+      className='border p-5'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <h3
+        className='text-lg font-semibold tracking-tight'
+        style={{ color: "var(--text-primary)" }}
+      >
         Why they differ
       </h3>
 
@@ -562,16 +657,26 @@ function SemanticDiffInsights({ insights }) {
         {insights.map((item) => (
           <div
             key={`${item.label}-${item.title}`}
-            className='border border-stone-200 bg-stone-50/60 p-4'
+            className='border p-4'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "rgba(255,255,255,0.03)",
+            }}
           >
             <div className='flex flex-wrap items-center gap-2'>
-              <h4 className='text-sm font-semibold text-stone-900'>
+              <h4
+                className='text-sm font-semibold'
+                style={{ color: "var(--text-primary)" }}
+              >
                 {item.title}
               </h4>
               <SeverityBadge severity={item.severity} />
             </div>
 
-            <p className='mt-2 text-sm leading-relaxed text-stone-700'>
+            <p
+              className='mt-2 text-sm leading-relaxed'
+              style={{ color: "var(--text-secondary)" }}
+            >
               {item.description}
             </p>
           </div>
@@ -591,21 +696,53 @@ function CompareAttributeRow({ label, left, right }) {
       .toLowerCase();
 
   return (
-    <div className='grid gap-3 border-t border-stone-200 py-3 md:grid-cols-[160px_minmax(0,1fr)_minmax(0,1fr)_auto]'>
-      <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+    <div
+      className='grid gap-3 border-t py-3 md:grid-cols-[160px_minmax(0,1fr)_minmax(0,1fr)_auto]'
+      style={{ borderColor: "var(--border-color)" }}
+    >
+      <div
+        className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+        style={{ color: "var(--text-muted)" }}
+      >
         {label}
       </div>
 
       <div
-        className={`border px-3 py-2 text-sm ${same ? "border-emerald-200 bg-emerald-50 text-emerald-900" : "border-stone-200 bg-white text-stone-700"}`}
+        className='border px-3 py-2 text-sm'
+        style={
+          same
+            ? {
+                borderColor: "rgba(16,185,129,0.30)",
+                background: "rgba(16,185,129,0.08)",
+                color: "#d1fae5",
+              }
+            : {
+                borderColor: "var(--border-color)",
+                background: "var(--bg-surface)",
+                color: "var(--text-secondary)",
+              }
+        }
       >
-        {left || <span className='text-stone-400'>—</span>}
+        {left || <span style={{ color: "var(--text-muted)" }}>—</span>}
       </div>
 
       <div
-        className={`border px-3 py-2 text-sm ${same ? "border-emerald-200 bg-emerald-50 text-emerald-900" : "border-stone-200 bg-white text-stone-700"}`}
+        className='border px-3 py-2 text-sm'
+        style={
+          same
+            ? {
+                borderColor: "rgba(16,185,129,0.30)",
+                background: "rgba(16,185,129,0.08)",
+                color: "#d1fae5",
+              }
+            : {
+                borderColor: "var(--border-color)",
+                background: "var(--bg-surface)",
+                color: "var(--text-secondary)",
+              }
+        }
       >
-        {right || <span className='text-stone-400'>—</span>}
+        {right || <span style={{ color: "var(--text-muted)" }}>—</span>}
       </div>
 
       <div className='flex items-start justify-end md:justify-center'>
@@ -621,14 +758,29 @@ function CompareEntryHeader({
   onSelectEntry,
   onRemoveCompareEntry,
 }) {
-  const toneClasses =
+  const toneStyles =
     tone === "left"
-      ? "border-sky-300 bg-sky-50/40"
-      : "border-indigo-300 bg-indigo-50/40";
+      ? {
+          borderColor: "rgba(56,189,248,0.35)",
+          background: "rgba(56,189,248,0.08)",
+        }
+      : {
+          borderColor: "rgba(99,102,241,0.35)",
+          background: "rgba(99,102,241,0.08)",
+        };
 
   return (
-    <section className={`border p-5 ${toneClasses}`}>
-      <div className='flex items-start justify-between gap-3 border-b border-current/20 pb-4'>
+    <section
+      className='border p-5'
+      style={{
+        borderColor: toneStyles.borderColor,
+        background: toneStyles.background,
+      }}
+    >
+      <div
+        className='flex items-start justify-between gap-3 border-b pb-4'
+        style={{ borderColor: "rgba(255,255,255,0.10)" }}
+      >
         <div className='min-w-0 flex-1'>
           {annotationLabel(tone === "left" ? "Left entry" : "Right entry")}
 
@@ -637,12 +789,18 @@ function CompareEntryHeader({
             onClick={() => onSelectEntry(entry.id)}
             className='mt-2 text-left'
           >
-            <h3 className='text-xl font-semibold tracking-tight text-stone-900 hover:underline'>
+            <h3
+              className='text-xl font-semibold tracking-tight hover:underline'
+              style={{ color: "var(--text-primary)" }}
+            >
               {entry.term}
             </h3>
           </button>
 
-          <p className='mt-2 text-sm leading-relaxed text-stone-700'>
+          <p
+            className='mt-2 text-sm leading-relaxed'
+            style={{ color: "var(--text-secondary)" }}
+          >
             {entry.description}
           </p>
 
@@ -652,35 +810,55 @@ function CompareEntryHeader({
         <button
           type='button'
           onClick={() => onRemoveCompareEntry(entry.id)}
-          className='border border-stone-300 bg-white px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+          className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "var(--bg-muted)",
+            color: "var(--text-secondary)",
+          }}
         >
           Remove
         </button>
       </div>
 
-      <div className='mt-4 grid gap-2 text-sm text-stone-700 md:grid-cols-2'>
+      <div
+        className='mt-4 grid gap-2 text-sm md:grid-cols-2'
+        style={{ color: "var(--text-secondary)" }}
+      >
         <div>
-          <strong className='mr-2 text-stone-900'>Type</strong>
+          <strong className='mr-2' style={{ color: "var(--text-primary)" }}>
+            Type
+          </strong>
           {entry.type}
         </div>
         <div>
-          <strong className='mr-2 text-stone-900'>Scale</strong>
+          <strong className='mr-2' style={{ color: "var(--text-primary)" }}>
+            Scale
+          </strong>
           {entry.scale}
         </div>
         <div>
-          <strong className='mr-2 text-stone-900'>Domain</strong>
+          <strong className='mr-2' style={{ color: "var(--text-primary)" }}>
+            Domain
+          </strong>
           {entry.domain}
         </div>
         <div>
-          <strong className='mr-2 text-stone-900'>Status</strong>
+          <strong className='mr-2' style={{ color: "var(--text-primary)" }}>
+            Status
+          </strong>
           {entry.status}
         </div>
         <div>
-          <strong className='mr-2 text-stone-900'>Region</strong>
+          <strong className='mr-2' style={{ color: "var(--text-primary)" }}>
+            Region
+          </strong>
           {entry.region}
         </div>
         <div>
-          <strong className='mr-2 text-stone-900'>Source</strong>
+          <strong className='mr-2' style={{ color: "var(--text-primary)" }}>
+            Source
+          </strong>
           {entry.sourceCategory}
         </div>
       </div>
@@ -691,13 +869,37 @@ function CompareEntryHeader({
 function CompareListBlock({ title, shared, leftOnly, rightOnly }) {
   function renderItems(items, tone, emptyText) {
     if (!items.length) {
-      return <span className='text-sm text-stone-500'>{emptyText}</span>;
+      return (
+        <span className='text-sm' style={{ color: "var(--text-muted)" }}>
+          {emptyText}
+        </span>
+      );
     }
+
+    const toneStyles =
+      tone === "shared"
+        ? {
+            borderColor: "rgba(16,185,129,0.30)",
+            background: "rgba(16,185,129,0.10)",
+            color: "#d1fae5",
+          }
+        : tone === "left"
+          ? {
+              borderColor: "rgba(56,189,248,0.30)",
+              background: "rgba(56,189,248,0.10)",
+              color: "#bae6fd",
+            }
+          : {
+              borderColor: "rgba(99,102,241,0.30)",
+              background: "rgba(99,102,241,0.10)",
+              color: "#c7d2fe",
+            };
 
     return items.map((item) => (
       <span
         key={item}
-        className={`border px-3 py-1 text-[11px] uppercase tracking-[0.08em] ${tone}`}
+        className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em]'
+        style={toneStyles}
       >
         {item}
       </span>
@@ -705,42 +907,57 @@ function CompareListBlock({ title, shared, leftOnly, rightOnly }) {
   }
 
   return (
-    <section className='border border-stone-300 bg-white p-5'>
-      <h3 className='text-lg font-semibold tracking-tight text-stone-900'>
+    <section
+      className='border p-5'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <h3
+        className='text-lg font-semibold tracking-tight'
+        style={{ color: "var(--text-primary)" }}
+      >
         {title}
       </h3>
 
       <div className='mt-4 grid gap-4 lg:grid-cols-3'>
-        <div className='border border-emerald-200 bg-emerald-50/40 p-4'>
+        <div
+          className='border p-4'
+          style={{
+            borderColor: "rgba(16,185,129,0.30)",
+            background: "rgba(16,185,129,0.08)",
+          }}
+        >
           {annotationLabel("Shared")}
           <div className='mt-3 flex flex-wrap gap-2'>
-            {renderItems(
-              shared,
-              "border-emerald-200 bg-white text-emerald-900",
-              "None",
-            )}
+            {renderItems(shared, "shared", "None")}
           </div>
         </div>
 
-        <div className='border border-sky-200 bg-sky-50/40 p-4'>
+        <div
+          className='border p-4'
+          style={{
+            borderColor: "rgba(56,189,248,0.30)",
+            background: "rgba(56,189,248,0.08)",
+          }}
+        >
           {annotationLabel("Left only")}
           <div className='mt-3 flex flex-wrap gap-2'>
-            {renderItems(
-              leftOnly,
-              "border-sky-200 bg-white text-sky-900",
-              "None",
-            )}
+            {renderItems(leftOnly, "left", "None")}
           </div>
         </div>
 
-        <div className='border border-indigo-200 bg-indigo-50/40 p-4'>
+        <div
+          className='border p-4'
+          style={{
+            borderColor: "rgba(99,102,241,0.30)",
+            background: "rgba(99,102,241,0.08)",
+          }}
+        >
           {annotationLabel("Right only")}
           <div className='mt-3 flex flex-wrap gap-2'>
-            {renderItems(
-              rightOnly,
-              "border-indigo-200 bg-white text-indigo-900",
-              "None",
-            )}
+            {renderItems(rightOnly, "right", "None")}
           </div>
         </div>
       </div>

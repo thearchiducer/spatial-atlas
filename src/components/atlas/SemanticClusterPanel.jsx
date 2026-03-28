@@ -4,7 +4,10 @@ import SemanticExplanationChips from "../semantic/SemanticExplanationChips";
 
 function annotationLabel(children) {
   return (
-    <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+    <div
+      className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+      style={{ color: "var(--text-muted)" }}
+    >
       {children}
     </div>
   );
@@ -12,10 +15,10 @@ function annotationLabel(children) {
 
 function familyTone(index) {
   const tones = [
-    "border-sky-300 bg-sky-50/40 text-sky-950",
-    "border-emerald-300 bg-emerald-50/40 text-emerald-950",
-    "border-violet-300 bg-violet-50/40 text-violet-950",
-    "border-amber-300 bg-amber-50/40 text-amber-950",
+    "border-[rgba(56,189,248,0.35)] bg-[rgba(56,189,248,0.08)] text-[#e0f2fe]",
+    "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.08)] text-[#d1fae5]",
+    "border-[rgba(168,85,247,0.35)] bg-[rgba(168,85,247,0.08)] text-[#f3e8ff]",
+    "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.08)] text-[#fef3c7]",
   ];
 
   return tones[index % tones.length];
@@ -23,7 +26,14 @@ function familyTone(index) {
 
 function MetricChip({ label, value }) {
   return (
-    <span className='border border-stone-300 bg-white px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700'>
+    <span
+      className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "rgba(255,255,255,0.03)",
+        color: "var(--text-secondary)",
+      }}
+    >
       {label} · {value}
     </span>
   );
@@ -36,22 +46,44 @@ function ClusterEntryCard({
   onTogglePinEntry,
 }) {
   return (
-    <div className='border border-stone-200 bg-white p-4'>
-      <div className='flex items-start justify-between gap-3 border-b border-stone-200 pb-4'>
+    <div
+      className='border p-4'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='flex items-start justify-between gap-3 border-b pb-4'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         <button
           type='button'
           onClick={() => onSelectEntry && onSelectEntry(entry.id)}
           className='min-w-0 flex-1 text-left'
         >
-          <h4 className='text-base font-semibold tracking-tight text-stone-900 hover:underline'>
+          <h4
+            className='text-base font-semibold tracking-tight hover:underline'
+            style={{ color: "var(--text-primary)" }}
+          >
             {entry.term}
           </h4>
-          <p className='mt-2 text-sm leading-relaxed text-stone-600'>
+          <p
+            className='mt-2 text-sm leading-relaxed'
+            style={{ color: "var(--text-secondary)" }}
+          >
             {entry.description}
           </p>
         </button>
 
-        <div className='border border-stone-200 bg-stone-50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-stone-700'>
+        <div
+          className='border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          }}
+        >
           {entry.__clusterScore || 0}
         </div>
       </div>
@@ -77,11 +109,19 @@ function ClusterEntryCard({
         </div>
       ) : null}
 
-      <div className='mt-4 flex flex-wrap gap-2 border-t border-stone-200 pt-4'>
+      <div
+        className='mt-4 flex flex-wrap gap-2 border-t pt-4'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         <button
           type='button'
           onClick={() => onSelectEntry && onSelectEntry(entry.id)}
-          className='border border-stone-300 bg-white px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+          className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          }}
         >
           Open
         </button>
@@ -89,7 +129,12 @@ function ClusterEntryCard({
         <button
           type='button'
           onClick={() => onCompareEntry && onCompareEntry(entry.id)}
-          className='border border-stone-300 bg-white px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+          className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          }}
         >
           Compare
         </button>
@@ -97,7 +142,12 @@ function ClusterEntryCard({
         <button
           type='button'
           onClick={() => onTogglePinEntry && onTogglePinEntry(entry.id)}
-          className='border border-stone-300 bg-white px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+          className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          }}
         >
           Pin
         </button>
@@ -118,17 +168,35 @@ function ClusterCard({
     : cluster.entries.slice(0, 4);
 
   return (
-    <section className='border border-stone-200 bg-white p-4'>
-      <div className='flex flex-col gap-3 border-b border-stone-200 pb-4 md:flex-row md:items-start md:justify-between'>
+    <section
+      className='border p-4'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='flex flex-col gap-3 border-b pb-4 md:flex-row md:items-start md:justify-between'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         <div>
           {annotationLabel("Cluster")}
-          <h3 className='mt-2 text-base font-semibold tracking-tight text-stone-900'>
+          <h3
+            className='mt-2 text-base font-semibold tracking-tight'
+            style={{ color: "var(--text-primary)" }}
+          >
             {cluster.title}
           </h3>
-          <p className='mt-2 text-sm leading-relaxed text-stone-600'>
+          <p
+            className='mt-2 text-sm leading-relaxed'
+            style={{ color: "var(--text-secondary)" }}
+          >
             {cluster.description}
           </p>
-          <p className='mt-2 text-sm font-medium text-stone-700'>
+          <p
+            className='mt-2 text-sm font-medium'
+            style={{ color: "var(--text-secondary)" }}
+          >
             {cluster.summaryLabel}
           </p>
         </div>
@@ -154,11 +222,19 @@ function ClusterCard({
       </div>
 
       {cluster.entries.length > 4 ? (
-        <div className='mt-4 border-t border-stone-200 pt-4'>
+        <div
+          className='mt-4 border-t pt-4'
+          style={{ borderColor: "var(--border-color)" }}
+        >
           <button
             type='button'
             onClick={() => setIsExpanded((current) => !current)}
-            className='border border-stone-300 bg-white px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+            className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "rgba(255,255,255,0.03)",
+              color: "var(--text-secondary)",
+            }}
           >
             {isExpanded
               ? "Show less"
@@ -197,7 +273,14 @@ function FamilyPanel({
         <button
           type='button'
           onClick={() => onActivateFamily && onActivateFamily(family.id)}
-          className='border border-current/20 bg-white px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition hover:bg-white/80'
+          className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+          style={{
+            borderColor: "rgba(255,255,255,0.18)",
+            background: isActive
+              ? "rgba(255,255,255,0.12)"
+              : "rgba(255,255,255,0.06)",
+            color: "currentColor",
+          }}
         >
           {isActive ? "Active family" : "Focus family"}
         </button>
@@ -262,12 +345,24 @@ export default function SemanticClusterPanel({
 
   if (!families.length) {
     return (
-      <section className='border border-stone-300 bg-white p-6'>
+      <section
+        className='border p-6'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "var(--bg-surface)",
+        }}
+      >
         {annotationLabel("Semantic clusters")}
-        <h2 className='mt-2 text-xl font-semibold tracking-tight text-stone-900'>
+        <h2
+          className='mt-2 text-xl font-semibold tracking-tight'
+          style={{ color: "var(--text-primary)" }}
+        >
           No semantic clusters available
         </h2>
-        <p className='mt-2 text-sm leading-relaxed text-stone-600'>
+        <p
+          className='mt-2 text-sm leading-relaxed'
+          style={{ color: "var(--text-secondary)" }}
+        >
           Adjust your filters or expand the dataset to generate stronger
           semantic groupings.
         </p>
@@ -277,14 +372,29 @@ export default function SemanticClusterPanel({
 
   return (
     <div className='space-y-5'>
-      <section className='border border-stone-300 bg-white p-6'>
-        <div className='border-b border-stone-200 pb-4'>
+      <section
+        className='border p-6'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "var(--bg-surface)",
+        }}
+      >
+        <div
+          className='border-b pb-4'
+          style={{ borderColor: "var(--border-color)" }}
+        >
           {annotationLabel("Semantic clustering layout")}
-          <h2 className='mt-2 text-2xl font-semibold tracking-tight text-stone-900'>
+          <h2
+            className='mt-2 text-2xl font-semibold tracking-tight'
+            style={{ color: "var(--text-primary)" }}
+          >
             Semantic family map
           </h2>
 
-          <p className='mt-2 max-w-3xl text-sm leading-relaxed text-stone-600'>
+          <p
+            className='mt-2 max-w-3xl text-sm leading-relaxed'
+            style={{ color: "var(--text-secondary)" }}
+          >
             Entries are grouped into multiple family systems: by domain, by
             social role plus spatial logic, by privacy plus climate behavior,
             and by region plus cultural specificity.
@@ -300,7 +410,13 @@ export default function SemanticClusterPanel({
         ) : null}
       </section>
 
-      <section className='border border-stone-300 bg-white p-4'>
+      <section
+        className='border p-4'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "var(--bg-surface)",
+        }}
+      >
         <div className='flex flex-wrap gap-2'>
           {families.map((family, index) => {
             const isActive = family.id === resolvedActiveFamilyId;
@@ -314,7 +430,7 @@ export default function SemanticClusterPanel({
                   "border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition " +
                   (isActive
                     ? familyTone(index)
-                    : "border-stone-300 bg-white text-stone-700 hover:bg-stone-100")
+                    : "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-secondary)] hover:bg-[rgba(255,255,255,0.06)]")
                 }
               >
                 {family.title}

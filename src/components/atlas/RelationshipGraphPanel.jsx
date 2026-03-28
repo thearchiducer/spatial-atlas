@@ -4,7 +4,10 @@ import SemanticExplanationChips from "../semantic/SemanticExplanationChips";
 
 function annotationLabel(children) {
   return (
-    <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+    <div
+      className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+      style={{ color: "var(--text-muted)" }}
+    >
       {children}
     </div>
   );
@@ -13,17 +16,17 @@ function annotationLabel(children) {
 function relationTone(relation) {
   switch (relation) {
     case "related":
-      return "border-sky-300 bg-sky-50 text-sky-900";
+      return "border-[rgba(56,189,248,0.35)] bg-[rgba(56,189,248,0.10)] text-[#bae6fd]";
     case "same-type":
-      return "border-emerald-300 bg-emerald-50 text-emerald-900";
+      return "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.10)] text-[#a7f3d0]";
     case "same-domain":
-      return "border-amber-300 bg-amber-50 text-amber-900";
+      return "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.10)] text-[#fde68a]";
     case "same-region":
-      return "border-violet-300 bg-violet-50 text-violet-900";
+      return "border-[rgba(168,85,247,0.35)] bg-[rgba(168,85,247,0.10)] text-[#d8b4fe]";
     case "semantic-neighbor":
-      return "border-fuchsia-300 bg-fuchsia-50 text-fuchsia-900";
+      return "border-[rgba(217,70,239,0.35)] bg-[rgba(217,70,239,0.10)] text-[#f5d0fe]";
     default:
-      return "border-stone-300 bg-stone-50 text-stone-800";
+      return "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-secondary)]";
   }
 }
 
@@ -47,11 +50,11 @@ function relationColor(relation) {
 function strengthTone(strength) {
   switch (strength) {
     case "strong":
-      return "border-emerald-200 bg-emerald-50 text-emerald-900";
+      return "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.10)] text-[#a7f3d0]";
     case "medium":
-      return "border-amber-200 bg-amber-50 text-amber-900";
+      return "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.10)] text-[#fde68a]";
     default:
-      return "border-stone-200 bg-stone-50 text-stone-700";
+      return "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-secondary)]";
   }
 }
 
@@ -79,7 +82,14 @@ function clamp(value, min, max) {
 
 function LegendTag({ label, relation }) {
   return (
-    <span className='inline-flex items-center gap-2 border border-stone-300 bg-white px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700'>
+    <span
+      className='inline-flex items-center gap-2 border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "rgba(255,255,255,0.03)",
+        color: "var(--text-secondary)",
+      }}
+    >
       <span
         className='h-2.5 w-2.5'
         style={{ backgroundColor: relationColor(relation) }}
@@ -122,8 +132,8 @@ function GraphViewportControls({
 }) {
   function controlClass(primary = false) {
     return primary
-      ? "border-stone-900 bg-stone-900 text-white hover:bg-stone-800"
-      : "border-stone-300 bg-white text-stone-700 hover:bg-stone-100";
+      ? "border-[rgba(255,255,255,0.18)] bg-[rgba(255,255,255,0.08)] text-white hover:bg-[rgba(255,255,255,0.12)]"
+      : "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-secondary)] hover:bg-[rgba(255,255,255,0.06)]";
   }
 
   return (
@@ -171,7 +181,14 @@ function GraphViewportControls({
         Reset view
       </button>
 
-      <span className='border border-stone-300 bg-stone-50 px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-stone-700'>
+      <span
+        className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em]'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "rgba(255,255,255,0.03)",
+          color: "var(--text-secondary)",
+        }}
+      >
         Zoom {Math.round(zoom * 100)}%
       </span>
     </div>
@@ -196,8 +213,21 @@ function GraphCanvas({
   const highlightedNodeId = focusedNodeId || activeNodeId || null;
 
   return (
-    <section className='border border-stone-300 bg-white'>
-      <div className='border-b border-stone-200 bg-stone-50/60 px-4 py-2 text-[11px] text-stone-500'>
+    <section
+      className='border'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='border-b px-4 py-2 text-[11px]'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "rgba(255,255,255,0.03)",
+          color: "var(--text-muted)",
+        }}
+      >
         Drag to pan. Click a node to focus it. Hover to inspect it.
       </div>
 
@@ -372,7 +402,7 @@ function GraphNodeCard({
   return (
     <div
       className={`border p-3 ${relationTone(node.relation)} ${
-        isFocused ? "ring-2 ring-stone-300" : ""
+        isFocused ? "ring-2 ring-[rgba(255,255,255,0.18)]" : ""
       }`}
     >
       <div className='flex items-start justify-between gap-3 border-b border-current/15 pb-4'>
@@ -421,7 +451,12 @@ function GraphNodeCard({
         <button
           type='button'
           onClick={() => onFocusNode?.(node.id)}
-          className='border border-current/20 bg-white px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
+          className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
+          style={{
+            borderColor: "rgba(255,255,255,0.18)",
+            background: "rgba(255,255,255,0.08)",
+            color: "currentColor",
+          }}
         >
           Focus
         </button>
@@ -429,7 +464,12 @@ function GraphNodeCard({
         <button
           type='button'
           onClick={() => onCompareEntry?.(node.id)}
-          className='border border-current/20 bg-white px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
+          className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
+          style={{
+            borderColor: "rgba(255,255,255,0.18)",
+            background: "rgba(255,255,255,0.08)",
+            color: "currentColor",
+          }}
         >
           Compare
         </button>
@@ -437,7 +477,12 @@ function GraphNodeCard({
         <button
           type='button'
           onClick={() => onTogglePinEntry?.(node.id)}
-          className='border border-current/20 bg-white px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
+          className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
+          style={{
+            borderColor: "rgba(255,255,255,0.18)",
+            background: "rgba(255,255,255,0.08)",
+            color: "currentColor",
+          }}
         >
           Pin
         </button>
@@ -455,12 +500,26 @@ function GraphGroup({
   onFocusNode,
 }) {
   return (
-    <section className='border border-stone-300 bg-white p-5'>
-      <div className='border-b border-stone-200 pb-4'>
-        <h3 className='text-lg font-semibold tracking-tight text-stone-900'>
+    <section
+      className='border p-5'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='border-b pb-4'
+        style={{ borderColor: "var(--border-color)" }}
+      >
+        <h3
+          className='text-lg font-semibold tracking-tight'
+          style={{ color: "var(--text-primary)" }}
+        >
           {group.title}
         </h3>
-        <p className='mt-2 text-sm text-stone-600'>{group.description}</p>
+        <p className='mt-2 text-sm' style={{ color: "var(--text-secondary)" }}>
+          {group.description}
+        </p>
       </div>
 
       <div className='mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3'>
@@ -483,7 +542,14 @@ function GraphGroup({
 function HoverInspector({ node, onFocusNode }) {
   if (!node) {
     return (
-      <div className='border border-stone-200 bg-white p-4 text-sm text-stone-500'>
+      <div
+        className='border p-4 text-sm'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "var(--bg-surface)",
+          color: "var(--text-muted)",
+        }}
+      >
         Hover a node in the canvas to inspect its semantic profile.
       </div>
     );
@@ -530,7 +596,12 @@ function HoverInspector({ node, onFocusNode }) {
         <button
           type='button'
           onClick={() => onFocusNode?.(node.id)}
-          className='border border-current/20 bg-white px-3 py-1.5 text-[11px] uppercase tracking-[0.08em]'
+          className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em]'
+          style={{
+            borderColor: "rgba(255,255,255,0.18)",
+            background: "rgba(255,255,255,0.08)",
+            color: "currentColor",
+          }}
         >
           Focus this node
         </button>
@@ -601,14 +672,29 @@ function RelationshipGraphWorkspace({
 
   return (
     <>
-      <section className='border border-stone-300 bg-white p-5'>
-        <div className='flex flex-col gap-3 border-b border-stone-200 pb-4 xl:flex-row xl:items-start xl:justify-between'>
+      <section
+        className='border p-5'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "var(--bg-surface)",
+        }}
+      >
+        <div
+          className='flex flex-col gap-3 border-b pb-4 xl:flex-row xl:items-start xl:justify-between'
+          style={{ borderColor: "var(--border-color)" }}
+        >
           <div>
             {annotationLabel("Node + edge canvas")}
-            <h3 className='mt-2 text-xl font-semibold tracking-tight text-stone-900'>
+            <h3
+              className='mt-2 text-xl font-semibold tracking-tight'
+              style={{ color: "var(--text-primary)" }}
+            >
               Relational field canvas
             </h3>
-            <p className='mt-2 text-sm text-stone-600'>
+            <p
+              className='mt-2 text-sm'
+              style={{ color: "var(--text-secondary)" }}
+            >
               Use zoom, pan, and focus controls to navigate dense semantic
               neighborhoods.
             </p>
@@ -629,11 +715,25 @@ function RelationshipGraphWorkspace({
           <GraphCanvasLegend />
 
           {focusedNode ? (
-            <div className='border border-stone-300 bg-stone-50 px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-stone-700'>
+            <div
+              className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em]'
+              style={{
+                borderColor: "rgba(168,85,247,0.30)",
+                background: "rgba(168,85,247,0.10)",
+                color: "#d8b4fe",
+              }}
+            >
               Focused node · <strong>{focusedNode.term}</strong>
             </div>
           ) : (
-            <div className='border border-stone-300 bg-stone-50 px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-stone-500'>
+            <div
+              className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em]'
+              style={{
+                borderColor: "var(--border-color)",
+                background: "rgba(255,255,255,0.03)",
+                color: "var(--text-muted)",
+              }}
+            >
               No focused node
             </div>
           )}
@@ -655,9 +755,18 @@ function RelationshipGraphWorkspace({
             onPanChange={setPan}
           />
 
-          <section className='border border-stone-300 bg-white p-4'>
+          <section
+            className='border p-4'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "var(--bg-surface)",
+            }}
+          >
             {annotationLabel("Inspector")}
-            <h3 className='mt-2 text-lg font-semibold tracking-tight text-stone-900'>
+            <h3
+              className='mt-2 text-lg font-semibold tracking-tight'
+              style={{ color: "var(--text-primary)" }}
+            >
               Node inspector
             </h3>
 
@@ -694,12 +803,21 @@ export default function RelationshipGraphPanel({
 }) {
   if (!graph?.center) {
     return (
-      <section className='border border-stone-300 bg-white p-6'>
+      <section
+        className='border p-6'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "var(--bg-surface)",
+        }}
+      >
         {annotationLabel("Spatial relationship analysis")}
-        <h2 className='mt-2 text-2xl font-semibold tracking-tight text-stone-900'>
+        <h2
+          className='mt-2 text-2xl font-semibold tracking-tight'
+          style={{ color: "var(--text-primary)" }}
+        >
           Select an entry to build its relationship map
         </h2>
-        <p className='mt-2 text-sm text-stone-600'>
+        <p className='mt-2 text-sm' style={{ color: "var(--text-secondary)" }}>
           The graph view uses direct relations plus weighted semantic neighbors.
         </p>
       </section>
@@ -708,25 +826,52 @@ export default function RelationshipGraphPanel({
 
   return (
     <div className='space-y-6'>
-      <section className='border border-stone-300 bg-white p-6'>
-        <div className='border-b border-stone-200 pb-4'>
+      <section
+        className='border p-6'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "var(--bg-surface)",
+        }}
+      >
+        <div
+          className='border-b pb-4'
+          style={{ borderColor: "var(--border-color)" }}
+        >
           {annotationLabel("Spatial relationship analysis")}
-          <h2 className='mt-2 text-3xl font-semibold tracking-tight text-stone-900'>
+          <h2
+            className='mt-2 text-3xl font-semibold tracking-tight'
+            style={{ color: "var(--text-primary)" }}
+          >
             {graph.center.term}
           </h2>
 
-          <p className='mt-2 text-sm text-stone-600'>
+          <p
+            className='mt-2 text-sm'
+            style={{ color: "var(--text-secondary)" }}
+          >
             Explore direct relations and weighted semantic neighbors around the
             selected entry.
           </p>
         </div>
 
-        <div className='mt-5 border border-fuchsia-300 bg-fuchsia-50/40 p-5'>
+        <div
+          className='mt-5 border p-5'
+          style={{
+            borderColor: "rgba(217,70,239,0.35)",
+            background: "rgba(217,70,239,0.08)",
+          }}
+        >
           {annotationLabel("Center node")}
-          <div className='mt-2 text-2xl font-semibold text-stone-900'>
+          <div
+            className='mt-2 text-2xl font-semibold'
+            style={{ color: "var(--text-primary)" }}
+          >
             {graph.center.term}
           </div>
-          <div className='mt-2 text-sm text-stone-700'>
+          <div
+            className='mt-2 text-sm'
+            style={{ color: "var(--text-secondary)" }}
+          >
             {graph.center.type} · {graph.center.domain} · {graph.center.scale} ·{" "}
             {graph.center.region}
           </div>

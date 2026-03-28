@@ -3,35 +3,38 @@ import { compareDirectionVersionSnapshots } from "../../lib/directionVersions";
 
 function toneClasses(tone) {
   if (tone === "positive") {
-    return "border-emerald-200 bg-emerald-50 text-emerald-800";
+    return "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.10)] text-[#a7f3d0]";
   }
 
   if (tone === "negative") {
-    return "border-red-200 bg-red-50 text-red-800";
+    return "border-[rgba(248,113,113,0.35)] bg-[rgba(248,113,113,0.10)] text-[#fecaca]";
   }
 
   if (tone === "tradeoff") {
-    return "border-amber-200 bg-amber-50 text-amber-800";
+    return "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.10)] text-[#fde68a]";
   }
 
-  return "border-stone-200 bg-stone-50 text-stone-700";
+  return "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-secondary)]";
 }
 
 function strengthClasses(strength) {
   if (strength === "Clear") {
-    return "border-emerald-200 bg-emerald-50 text-emerald-700";
+    return "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.10)] text-[#a7f3d0]";
   }
 
   if (strength === "Developing") {
-    return "border-amber-200 bg-amber-50 text-amber-700";
+    return "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.10)] text-[#fde68a]";
   }
 
-  return "border-red-200 bg-red-50 text-red-700";
+  return "border-[rgba(248,113,113,0.35)] bg-[rgba(248,113,113,0.10)] text-[#fecaca]";
 }
 
 function annotationLabel(children) {
   return (
-    <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+    <div
+      className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+      style={{ color: "var(--text-muted)" }}
+    >
       {children}
     </div>
   );
@@ -39,7 +42,14 @@ function annotationLabel(children) {
 
 function EmptyState({ text }) {
   return (
-    <div className='border border-dashed border-stone-300 bg-stone-50 p-4 text-sm text-stone-500'>
+    <div
+      className='border border-dashed p-4 text-sm'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "rgba(255,255,255,0.03)",
+        color: "var(--text-muted)",
+      }}
+    >
       {text}
     </div>
   );
@@ -47,9 +57,18 @@ function EmptyState({ text }) {
 
 function StatCell({ label, value }) {
   return (
-    <div className='border border-stone-200 bg-white p-3'>
+    <div
+      className='border p-3'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
       {annotationLabel(label)}
-      <div className='mt-1 text-sm font-semibold text-stone-900'>
+      <div
+        className='mt-1 text-sm font-semibold'
+        style={{ color: "var(--text-primary)" }}
+      >
         {value || "—"}
       </div>
     </div>
@@ -61,19 +80,43 @@ function SnapshotCard({ snapshot, isActiveBoardVersion, onRestore, onDelete }) {
   const summary = snapshot?.packet?.summary;
 
   return (
-    <div className='border border-stone-300 bg-white p-4'>
-      <div className='flex flex-col gap-3 border-b border-stone-200 pb-4 md:flex-row md:items-start md:justify-between'>
+    <div
+      className='border p-4'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='flex flex-col gap-3 border-b pb-4 md:flex-row md:items-start md:justify-between'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         <div>
           {annotationLabel("Saved direction")}
-          <div className='mt-2 text-base font-semibold text-stone-900'>
+          <div
+            className='mt-2 text-base font-semibold'
+            style={{ color: "var(--text-primary)" }}
+          >
             {snapshot.label}
           </div>
-          <p className='mt-2 text-sm text-stone-600'>{snapshot.savedAtLabel}</p>
+          <p
+            className='mt-2 text-sm'
+            style={{ color: "var(--text-secondary)" }}
+          >
+            {snapshot.savedAtLabel}
+          </p>
         </div>
 
         <div className='flex flex-wrap gap-2'>
           {isActiveBoardVersion ? (
-            <span className='border border-sky-200 bg-sky-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-sky-800'>
+            <span
+              className='border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]'
+              style={{
+                borderColor: "rgba(56,189,248,0.35)",
+                background: "rgba(56,189,248,0.10)",
+                color: "#bae6fd",
+              }}
+            >
               Active board lineage
             </span>
           ) : null}
@@ -88,12 +131,21 @@ function SnapshotCard({ snapshot, isActiveBoardVersion, onRestore, onDelete }) {
         </div>
       </div>
 
-      <div className='mt-4 border border-stone-200 bg-stone-50/60 p-3'>
+      <div
+        className='mt-4 border p-3'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "rgba(255,255,255,0.03)",
+        }}
+      >
         {annotationLabel("Verdict")}
-        <div className='mt-2 text-sm font-semibold text-stone-900'>
+        <div
+          className='mt-2 text-sm font-semibold'
+          style={{ color: "var(--text-primary)" }}
+        >
           {identity?.title || "No identity"}
         </div>
-        <p className='mt-2 text-sm text-stone-700'>
+        <p className='mt-2 text-sm' style={{ color: "var(--text-secondary)" }}>
           {identity?.sentence || "No identity sentence available."}
         </p>
       </div>
@@ -106,25 +158,61 @@ function SnapshotCard({ snapshot, isActiveBoardVersion, onRestore, onDelete }) {
       </div>
 
       <div className='mt-4 flex flex-wrap gap-2'>
-        <span className='border border-stone-200 bg-stone-50 px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700'>
+        <span
+          className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em]'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          }}
+        >
           Entries · {snapshot.packet?.entries?.length || 0}
         </span>
-        <span className='border border-stone-200 bg-stone-50 px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700'>
+        <span
+          className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em]'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          }}
+        >
           Gaps · {snapshot.packet?.gapSignals?.length || 0}
         </span>
-        <span className='border border-stone-200 bg-stone-50 px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700'>
+        <span
+          className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em]'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          }}
+        >
           Tensions · {snapshot.packet?.tensions?.length || 0}
         </span>
-        <span className='border border-stone-200 bg-stone-50 px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700'>
+        <span
+          className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em]'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          }}
+        >
           Next moves · {snapshot.packet?.nextMoves?.length || 0}
         </span>
       </div>
 
-      <div className='mt-4 flex flex-wrap gap-2 border-t border-stone-200 pt-4'>
+      <div
+        className='mt-4 flex flex-wrap gap-2 border-t pt-4'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         <button
           type='button'
           onClick={() => onRestore(snapshot.id)}
-          className='border border-emerald-200 bg-emerald-50 px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-emerald-700 transition hover:bg-emerald-100'
+          className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
+          style={{
+            borderColor: "rgba(16,185,129,0.35)",
+            background: "rgba(16,185,129,0.10)",
+            color: "#a7f3d0",
+          }}
         >
           Restore to board
         </button>
@@ -132,7 +220,12 @@ function SnapshotCard({ snapshot, isActiveBoardVersion, onRestore, onDelete }) {
         <button
           type='button'
           onClick={() => onDelete(snapshot.id)}
-          className='border border-red-200 bg-red-50 px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-red-700 transition hover:bg-red-100'
+          className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
+          style={{
+            borderColor: "rgba(248,113,113,0.35)",
+            background: "rgba(248,113,113,0.10)",
+            color: "#fecaca",
+          }}
         >
           Delete snapshot
         </button>
@@ -144,14 +237,22 @@ function SnapshotCard({ snapshot, isActiveBoardVersion, onRestore, onDelete }) {
 function SnapshotPicker({ label, value, snapshots, onChange }) {
   return (
     <label className='flex flex-col gap-2'>
-      <span className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+      <span
+        className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+        style={{ color: "var(--text-muted)" }}
+      >
         {label}
       </span>
 
       <select
         value={value || ""}
         onChange={(event) => onChange(event.target.value)}
-        className='border border-stone-300 bg-white px-3 py-2 text-sm text-stone-800 outline-none transition focus:border-stone-500'
+        className='border px-3 py-2 text-sm outline-none transition'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "var(--bg-surface)",
+          color: "var(--text-primary)",
+        }}
       >
         {snapshots.map((snapshot) => (
           <option key={snapshot.id} value={snapshot.id}>
@@ -165,15 +266,21 @@ function SnapshotPicker({ label, value, snapshots, onChange }) {
 
 function CompareMetric({ label, leftValue, rightValue, changed }) {
   return (
-    <div className='border border-stone-200 bg-white p-3'>
+    <div
+      className='border p-3'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
       <div className='flex items-center justify-between gap-3'>
         {annotationLabel(label)}
 
         <span
           className={`border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] ${
             changed
-              ? "border-amber-200 bg-amber-50 text-amber-700"
-              : "border-stone-200 bg-stone-50 text-stone-600"
+              ? "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.10)] text-[#fde68a]"
+              : "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-secondary)]"
           }`}
         >
           {changed ? "Changed" : "Stable"}
@@ -181,10 +288,24 @@ function CompareMetric({ label, leftValue, rightValue, changed }) {
       </div>
 
       <div className='mt-3 grid gap-2 md:grid-cols-2'>
-        <div className='border border-stone-200 bg-stone-50/70 px-3 py-2 text-sm text-stone-700'>
+        <div
+          className='border px-3 py-2 text-sm'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          }}
+        >
           {leftValue || "—"}
         </div>
-        <div className='border border-stone-200 bg-stone-50/70 px-3 py-2 text-sm font-semibold text-stone-900'>
+        <div
+          className='border px-3 py-2 text-sm font-semibold'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-primary)",
+          }}
+        >
           {rightValue || "—"}
         </div>
       </div>
@@ -194,8 +315,19 @@ function CompareMetric({ label, leftValue, rightValue, changed }) {
 
 function DiffList({ title, items, emptyText, tone }) {
   return (
-    <div className='border border-stone-200 bg-white p-4'>
-      <div className='text-sm font-semibold text-stone-900'>{title}</div>
+    <div
+      className='border p-4'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='text-sm font-semibold'
+        style={{ color: "var(--text-primary)" }}
+      >
+        {title}
+      </div>
 
       {items.length ? (
         <div className='mt-3 flex flex-wrap gap-2'>
@@ -211,7 +343,9 @@ function DiffList({ title, items, emptyText, tone }) {
           ))}
         </div>
       ) : (
-        <p className='mt-2 text-sm text-stone-500'>{emptyText}</p>
+        <p className='mt-2 text-sm' style={{ color: "var(--text-muted)" }}>
+          {emptyText}
+        </p>
       )}
     </div>
   );
@@ -226,39 +360,81 @@ function SnapshotComparePanel({ comparison }) {
   const rightSummary = comparison.right?.packet?.summary;
 
   return (
-    <div className='mt-6 border border-stone-300 bg-white p-5'>
-      <div className='border-b border-stone-200 pb-4'>
+    <div
+      className='mt-6 border p-5'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='border-b pb-4'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         {annotationLabel("Compare snapshot")}
-        <h3 className='mt-2 text-lg font-semibold text-stone-900'>
+        <h3
+          className='mt-2 text-lg font-semibold'
+          style={{ color: "var(--text-primary)" }}
+        >
           Version comparison
         </h3>
       </div>
 
       <div className='mt-4 grid gap-4 xl:grid-cols-2'>
-        <div className='border border-stone-200 bg-white p-4'>
+        <div
+          className='border p-4'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "var(--bg-surface)",
+          }}
+        >
           {annotationLabel("Left snapshot")}
-          <div className='mt-2 text-base font-semibold text-stone-900'>
+          <div
+            className='mt-2 text-base font-semibold'
+            style={{ color: "var(--text-primary)" }}
+          >
             {comparison.left.label}
           </div>
-          <p className='mt-2 text-sm text-stone-700'>
+          <p
+            className='mt-2 text-sm'
+            style={{ color: "var(--text-secondary)" }}
+          >
             {leftIdentity?.sentence || "No identity sentence available."}
           </p>
         </div>
 
-        <div className='border border-stone-200 bg-white p-4'>
+        <div
+          className='border p-4'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "var(--bg-surface)",
+          }}
+        >
           {annotationLabel("Right snapshot")}
-          <div className='mt-2 text-base font-semibold text-stone-900'>
+          <div
+            className='mt-2 text-base font-semibold'
+            style={{ color: "var(--text-primary)" }}
+          >
             {comparison.right.label}
           </div>
-          <p className='mt-2 text-sm text-stone-700'>
+          <p
+            className='mt-2 text-sm'
+            style={{ color: "var(--text-secondary)" }}
+          >
             {rightIdentity?.sentence || "No identity sentence available."}
           </p>
         </div>
       </div>
 
-      <div className='mt-4 border border-stone-200 bg-stone-50/60 p-3'>
+      <div
+        className='mt-4 border p-3'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "rgba(255,255,255,0.03)",
+        }}
+      >
         {annotationLabel("What changed")}
-        <p className='mt-2 text-sm text-stone-700'>
+        <p className='mt-2 text-sm' style={{ color: "var(--text-secondary)" }}>
           This comparison highlights how the design direction shifted between
           two states of the board.
         </p>
@@ -406,14 +582,29 @@ export default function DirectionVersionsPanel({
   }, [leftSnapshot, rightSnapshot]);
 
   return (
-    <section className='border border-stone-300 bg-white p-5'>
-      <div className='flex flex-col gap-3 border-b border-stone-200 pb-4 md:flex-row md:items-start md:justify-between'>
+    <section
+      className='border p-5'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='flex flex-col gap-3 border-b pb-4 md:flex-row md:items-start md:justify-between'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         <div>
           {annotationLabel("Direction versioning")}
-          <h2 className='mt-2 text-xl font-semibold text-stone-900'>
+          <h2
+            className='mt-2 text-xl font-semibold'
+            style={{ color: "var(--text-primary)" }}
+          >
             Direction versions + compare snapshot
           </h2>
-          <p className='mt-2 text-sm leading-relaxed text-stone-600'>
+          <p
+            className='mt-2 text-sm leading-relaxed'
+            style={{ color: "var(--text-secondary)" }}
+          >
             Save snapshots of the current board direction, then compare how the
             verdict, tensions, gaps, entries, and next moves shift over time.
           </p>
@@ -424,12 +615,17 @@ export default function DirectionVersionsPanel({
             type='button'
             onClick={onSaveSnapshot}
             disabled={!activeBoard}
-            className='border border-stone-900 bg-stone-900 px-4 py-2 text-[11px] uppercase tracking-[0.08em] text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:border-stone-300 disabled:bg-stone-200 disabled:text-stone-500'
+            className='border px-4 py-2 text-[11px] uppercase tracking-[0.08em] transition disabled:cursor-not-allowed disabled:opacity-40'
+            style={{
+              borderColor: "rgba(16,185,129,0.35)",
+              background: "rgba(16,185,129,0.10)",
+              color: "#a7f3d0",
+            }}
           >
             Save direction version
           </button>
 
-          <p className='mt-2 text-xs text-stone-500'>
+          <p className='mt-2 text-xs' style={{ color: "var(--text-muted)" }}>
             Creates a snapshot you can compare later.
           </p>
         </div>
@@ -470,7 +666,14 @@ export default function DirectionVersionsPanel({
           </div>
 
           {leftSnapshot?.id === rightSnapshot?.id ? (
-            <div className='mt-5 border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800'>
+            <div
+              className='mt-5 border p-4 text-sm'
+              style={{
+                borderColor: "rgba(251,191,36,0.30)",
+                background: "rgba(251,191,36,0.08)",
+                color: "#fde68a",
+              }}
+            >
               Pick two different snapshots to compare them meaningfully.
             </div>
           ) : (

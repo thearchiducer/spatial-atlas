@@ -9,32 +9,55 @@ function formatDateLabel(value) {
 }
 
 function HistoryCard({ item, tone = "applied" }) {
-  const toneClasses =
+  const toneStyles =
     tone === "undone"
       ? {
-          container: "border-amber-300 bg-amber-50",
-          badge: "border-amber-300 bg-white text-amber-900",
+          containerBorder: "rgba(251,191,36,0.30)",
+          containerBg: "rgba(251,191,36,0.08)",
+          badgeBorder: "rgba(251,191,36,0.30)",
+          badgeBg: "rgba(251,191,36,0.10)",
+          badgeText: "#fde68a",
         }
       : {
-          container: "border-emerald-300 bg-emerald-50",
-          badge: "border-emerald-300 bg-white text-emerald-900",
+          containerBorder: "rgba(16,185,129,0.35)",
+          containerBg: "rgba(16,185,129,0.08)",
+          badgeBorder: "rgba(16,185,129,0.35)",
+          badgeBg: "rgba(16,185,129,0.10)",
+          badgeText: "#a7f3d0",
         };
 
   return (
-    <div className={`border p-4 ${toneClasses.container}`}>
+    <div
+      className='border p-4'
+      style={{
+        borderColor: toneStyles.containerBorder,
+        background: toneStyles.containerBg,
+      }}
+    >
       <div className='flex flex-wrap items-start justify-between gap-3'>
         <div>
-          <div className='text-sm font-semibold text-stone-900'>
+          <div
+            className='text-sm font-semibold'
+            style={{ color: "var(--text-primary)" }}
+          >
             {item.transformationTitle || "Unnamed transformation"}
           </div>
 
-          <div className='mt-1 text-[11px] uppercase tracking-[0.08em] text-stone-500'>
+          <div
+            className='mt-1 text-[11px] uppercase tracking-[0.08em]'
+            style={{ color: "var(--text-muted)" }}
+          >
             Direction {item.boardName || item.boardId || "Unknown"}
           </div>
         </div>
 
         <div
-          className={`border px-2 py-0.5 text-[10px] uppercase tracking-[0.12em] ${toneClasses.badge}`}
+          className='border px-2 py-0.5 text-[10px] uppercase tracking-[0.12em]'
+          style={{
+            borderColor: toneStyles.badgeBorder,
+            background: toneStyles.badgeBg,
+            color: toneStyles.badgeText,
+          }}
         >
           {tone === "undone" ? "Undone" : "Applied"}
         </div>
@@ -42,19 +65,31 @@ function HistoryCard({ item, tone = "applied" }) {
 
       <div className='mt-3 grid gap-3 md:grid-cols-2'>
         <div>
-          <div className='text-[10px] font-semibold uppercase tracking-[0.12em] text-stone-500'>
+          <div
+            className='text-[10px] font-semibold uppercase tracking-[0.12em]'
+            style={{ color: "var(--text-muted)" }}
+          >
             Time
           </div>
-          <div className='mt-1 text-sm text-stone-700'>
+          <div
+            className='mt-1 text-sm'
+            style={{ color: "var(--text-secondary)" }}
+          >
             {formatDateLabel(item.createdAt)}
           </div>
         </div>
 
         <div>
-          <div className='text-[10px] font-semibold uppercase tracking-[0.12em] text-stone-500'>
+          <div
+            className='text-[10px] font-semibold uppercase tracking-[0.12em]'
+            style={{ color: "var(--text-muted)" }}
+          >
             Added entries
           </div>
-          <div className='mt-1 text-sm text-stone-700'>
+          <div
+            className='mt-1 text-sm'
+            style={{ color: "var(--text-secondary)" }}
+          >
             {Array.isArray(item.addedEntryIds) ? item.addedEntryIds.length : 0}
           </div>
         </div>
@@ -62,7 +97,10 @@ function HistoryCard({ item, tone = "applied" }) {
 
       {Array.isArray(item.addedEntryIds) && item.addedEntryIds.length ? (
         <div className='mt-3'>
-          <div className='text-[10px] font-semibold uppercase tracking-[0.12em] text-stone-500'>
+          <div
+            className='text-[10px] font-semibold uppercase tracking-[0.12em]'
+            style={{ color: "var(--text-muted)" }}
+          >
             Applied entries
           </div>
 
@@ -70,7 +108,12 @@ function HistoryCard({ item, tone = "applied" }) {
             {item.addedEntryIds.map((id) => (
               <span
                 key={id}
-                className='border border-stone-300 bg-white px-2 py-1 text-[11px] text-stone-700'
+                className='border px-2 py-1 text-[11px]'
+                style={{
+                  borderColor: "var(--border-color)",
+                  background: "rgba(255,255,255,0.03)",
+                  color: "var(--text-secondary)",
+                }}
               >
                 {id}
               </span>
@@ -84,7 +127,14 @@ function HistoryCard({ item, tone = "applied" }) {
 
 function EmptyState({ text }) {
   return (
-    <div className='border border-stone-300 bg-stone-50 px-4 py-6 text-sm text-stone-500'>
+    <div
+      className='border px-4 py-6 text-sm'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "rgba(255,255,255,0.03)",
+        color: "var(--text-muted)",
+      }}
+    >
       {text}
     </div>
   );
@@ -102,44 +152,90 @@ export default function TransformationHistoryPanel({
     : [];
 
   return (
-    <section className='space-y-5 rounded-3xl border border-stone-300 bg-white/90 p-5 shadow-sm'>
+    <section
+      className='space-y-5 rounded-3xl border p-5 shadow-sm'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "rgba(255,255,255,0.04)",
+      }}
+    >
       <div>
-        <div className='inline-flex border border-stone-300 bg-stone-50 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-700'>
+        <div
+          className='inline-flex border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em]'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          }}
+        >
           Transformation history
         </div>
 
-        <h2 className='mt-3 text-2xl font-semibold tracking-tight text-stone-900'>
+        <h2
+          className='mt-3 text-2xl font-semibold tracking-tight'
+          style={{ color: "var(--text-primary)" }}
+        >
           Timeline of applied transformations
         </h2>
 
-        <p className='mt-2 text-sm leading-relaxed text-stone-600'>
+        <p
+          className='mt-2 text-sm leading-relaxed'
+          style={{ color: "var(--text-secondary)" }}
+        >
           Review the sequence of transformations that were applied or undone
           while developing board directions.
         </p>
       </div>
 
       <div className='grid gap-3 md:grid-cols-2 xl:grid-cols-4'>
-        <div className='border border-emerald-300 bg-emerald-50 px-4 py-3'>
-          <div className='text-[10px] uppercase tracking-[0.12em] text-emerald-900'>
+        <div
+          className='border px-4 py-3'
+          style={{
+            borderColor: "rgba(16,185,129,0.35)",
+            background: "rgba(16,185,129,0.10)",
+          }}
+        >
+          <div
+            className='text-[10px] uppercase tracking-[0.12em]'
+            style={{ color: "#a7f3d0" }}
+          >
             Applied stack
           </div>
-          <div className='mt-1 text-sm font-semibold text-emerald-950'>
+          <div
+            className='mt-1 text-sm font-semibold'
+            style={{ color: "#d1fae5" }}
+          >
             {applied.length}
           </div>
         </div>
 
-        <div className='border border-amber-300 bg-amber-50 px-4 py-3'>
-          <div className='text-[10px] uppercase tracking-[0.12em] text-amber-900'>
+        <div
+          className='border px-4 py-3'
+          style={{
+            borderColor: "rgba(251,191,36,0.30)",
+            background: "rgba(251,191,36,0.10)",
+          }}
+        >
+          <div
+            className='text-[10px] uppercase tracking-[0.12em]'
+            style={{ color: "#fde68a" }}
+          >
             Undone stack
           </div>
-          <div className='mt-1 text-sm font-semibold text-amber-950'>
+          <div
+            className='mt-1 text-sm font-semibold'
+            style={{ color: "#fef3c7" }}
+          >
             {undone.length}
           </div>
         </div>
       </div>
 
       <div className='space-y-4'>
-        <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+        <div
+          className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+          style={{ color: "var(--text-muted)" }}
+        >
           Applied transformations
         </div>
 
@@ -155,7 +251,10 @@ export default function TransformationHistoryPanel({
       </div>
 
       <div className='space-y-4'>
-        <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+        <div
+          className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+          style={{ color: "var(--text-muted)" }}
+        >
           Undone transformations
         </div>
 

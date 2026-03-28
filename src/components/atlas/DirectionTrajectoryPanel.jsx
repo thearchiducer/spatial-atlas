@@ -294,50 +294,48 @@ function getNodeToneClasses(type, isCurrent = false) {
   if (isCurrent) {
     return {
       dot: "bg-emerald-500",
-      card: "border-emerald-300 bg-emerald-50",
-      title: "text-emerald-950",
-      subtitle: "text-emerald-800",
+      card: "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.10)] text-[#d1fae5]",
     };
   }
 
   if (type === "source") {
     return {
-      dot: "bg-stone-400",
-      card: "border-stone-300 bg-white",
-      title: "text-stone-900",
-      subtitle: "text-stone-500",
+      dot: "bg-stone-500",
+      card: "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-primary)]",
     };
   }
 
   if (type === "transformation") {
     return {
       dot: "bg-violet-500",
-      card: "border-violet-300 bg-violet-50",
-      title: "text-violet-950",
-      subtitle: "text-violet-800",
+      card: "border-[rgba(168,85,247,0.35)] bg-[rgba(168,85,247,0.10)] text-[#e9d5ff]",
     };
   }
 
   if (type === "version") {
     return {
       dot: "bg-sky-500",
-      card: "border-sky-300 bg-sky-50",
-      title: "text-sky-950",
-      subtitle: "text-sky-800",
+      card: "border-[rgba(56,189,248,0.35)] bg-[rgba(56,189,248,0.10)] text-[#bae6fd]",
     };
   }
 
   return {
-    dot: "bg-stone-400",
-    card: "border-stone-300 bg-white",
-    title: "text-stone-900",
-    subtitle: "text-stone-500",
+    dot: "bg-stone-500",
+    card: "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-primary)]",
   };
 }
+
 function TrajectoryGraph({ nodes = [] }) {
   if (!nodes.length) {
     return (
-      <div className='border border-stone-200 bg-white px-3 py-2 text-sm text-stone-500'>
+      <div
+        className='border px-3 py-2 text-sm'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "rgba(255,255,255,0.03)",
+          color: "var(--text-muted)",
+        }}
+      >
         No trajectory graph is available yet.
       </div>
     );
@@ -357,14 +355,18 @@ function TrajectoryGraph({ nodes = [] }) {
           >
             {node.depth > 0 ? (
               <div
-                className='absolute left-[-14px] top-4 h-px w-3 bg-stone-300'
-                aria-hidden='true'
+                className='absolute left-[-14px] top-4 h-px w-3'
+                style={{ background: "var(--border-color)" }}
               />
             ) : null}
+
             <div className='flex w-5 flex-col items-center'>
               <div className={`mt-2 h-2.5 w-2.5 rounded-full ${tone.dot}`} />
               {!isLast ? (
-                <div className='mt-1 w-px flex-1 bg-stone-300' />
+                <div
+                  className='mt-1 w-px flex-1'
+                  style={{ background: "var(--border-color)" }}
+                />
               ) : null}
             </div>
 
@@ -374,12 +376,8 @@ function TrajectoryGraph({ nodes = [] }) {
                   node.isCurrent ? "ring-2 ring-emerald-400" : ""
                 }`}
               >
-                <div className={`text-sm font-semibold ${tone.title}`}>
-                  {node.title}
-                </div>
-                <div className={`mt-1 text-xs ${tone.subtitle}`}>
-                  {node.subtitle}
-                </div>
+                <div className='text-sm font-semibold'>{node.title}</div>
+                <div className='mt-1 text-xs opacity-80'>{node.subtitle}</div>
               </div>
             </div>
           </div>
@@ -388,6 +386,7 @@ function TrajectoryGraph({ nodes = [] }) {
     </div>
   );
 }
+
 function buildBoardBranchTree(projectBoards = [], activeBoardId = null) {
   const safeBoards = Array.isArray(projectBoards) ? projectBoards : [];
   const byParent = new Map();
@@ -524,12 +523,12 @@ export default function DirectionTrajectoryPanel({
 
   const statusToneClasses =
     directionStatus === "Established"
-      ? "border-emerald-300 bg-emerald-50 text-emerald-950"
+      ? "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.10)] text-[#d1fae5]"
       : directionStatus === "Stabilizing"
-        ? "border-sky-300 bg-sky-50 text-sky-950"
+        ? "border-[rgba(56,189,248,0.35)] bg-[rgba(56,189,248,0.10)] text-[#e0f2fe]"
         : directionStatus === "Evolving"
-          ? "border-amber-300 bg-amber-50 text-amber-950"
-          : "border-stone-300 bg-white text-stone-900";
+          ? "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.10)] text-[#fef3c7]"
+          : "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-primary)]";
 
   const latestTransformation = boardHistory[0] || null;
   const latestAddedCount = Array.isArray(latestTransformation?.addedEntryIds)
@@ -540,47 +539,98 @@ export default function DirectionTrajectoryPanel({
     ? branchNodes
     : buildTrajectoryGraphNodes(activeBoard, boardHistory, boardVersions);
   return (
-    <div className='border border-violet-300 bg-violet-50 p-4'>
-      <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-violet-800'>
+    <div
+      className='border p-4'
+      style={{
+        borderColor: "rgba(168,85,247,0.35)",
+        background: "rgba(168,85,247,0.08)",
+      }}
+    >
+      <div
+        className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+        style={{ color: "#d8b4fe" }}
+      >
         Direction trajectory
       </div>
 
-      <div className='mt-2 text-sm leading-relaxed text-stone-600'>
+      <div
+        className='mt-2 text-sm leading-relaxed'
+        style={{ color: "var(--text-secondary)" }}
+      >
         How this direction has evolved through transformations, saved versions,
         and repeated design decisions.
       </div>
 
       <div className='mt-4 grid gap-3 md:grid-cols-3'>
-        <div className='border border-violet-300 bg-white px-4 py-3'>
-          <div className='text-[10px] uppercase tracking-[0.12em] text-stone-500'>
+        <div
+          className='border px-4 py-3'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "var(--bg-surface)",
+          }}
+        >
+          <div
+            className='text-[10px] uppercase tracking-[0.12em]'
+            style={{ color: "var(--text-muted)" }}
+          >
             Active direction
           </div>
-          <div className='mt-1 text-sm font-semibold text-stone-900'>
+          <div
+            className='mt-1 text-sm font-semibold'
+            style={{ color: "var(--text-primary)" }}
+          >
             {boardName}
           </div>
         </div>
 
-        <div className='border border-sky-300 bg-sky-50 px-4 py-3'>
-          <div className='text-[10px] uppercase tracking-[0.12em] text-sky-800'>
+        <div
+          className='border px-4 py-3'
+          style={{
+            borderColor: "rgba(56,189,248,0.35)",
+            background: "rgba(56,189,248,0.10)",
+          }}
+        >
+          <div
+            className='text-[10px] uppercase tracking-[0.12em]'
+            style={{ color: "#bae6fd" }}
+          >
             Saved versions
           </div>
-          <div className='mt-1 text-sm font-semibold text-sky-950'>
+          <div
+            className='mt-1 text-sm font-semibold'
+            style={{ color: "#e0f2fe" }}
+          >
             {versionCount}
           </div>
         </div>
 
-        <div className='border border-emerald-300 bg-emerald-50 px-4 py-3'>
-          <div className='text-[10px] uppercase tracking-[0.12em] text-emerald-800'>
+        <div
+          className='border px-4 py-3'
+          style={{
+            borderColor: "rgba(16,185,129,0.35)",
+            background: "rgba(16,185,129,0.10)",
+          }}
+        >
+          <div
+            className='text-[10px] uppercase tracking-[0.12em]'
+            style={{ color: "#a7f3d0" }}
+          >
             Current entries
           </div>
-          <div className='mt-1 text-sm font-semibold text-emerald-950'>
+          <div
+            className='mt-1 text-sm font-semibold'
+            style={{ color: "#d1fae5" }}
+          >
             {currentEntryCount}
           </div>
         </div>
       </div>
 
       <div className='mt-4'>
-        <div className='text-xs font-semibold uppercase tracking-[0.12em] text-stone-500'>
+        <div
+          className='text-xs font-semibold uppercase tracking-[0.12em]'
+          style={{ color: "var(--text-muted)" }}
+        >
           Direction lineage
         </div>
 
@@ -588,32 +638,64 @@ export default function DirectionTrajectoryPanel({
       </div>
 
       <div className='mt-4'>
-        <div className='text-xs font-semibold uppercase tracking-[0.12em] text-stone-500'>
+        <div
+          className='text-xs font-semibold uppercase tracking-[0.12em]'
+          style={{ color: "var(--text-muted)" }}
+        >
           Structural shifts
         </div>
 
         <div className='mt-2 space-y-2'>
           {structuralDiff ? (
             <>
-              <div className='border border-stone-200 bg-white px-3 py-2 text-sm text-stone-700'>
+              <div
+                className='border px-3 py-2 text-sm'
+                style={{
+                  borderColor: "var(--border-color)",
+                  background: "rgba(255,255,255,0.03)",
+                  color: "var(--text-secondary)",
+                }}
+              >
                 Tensions{" "}
                 {structuralDiff.tensionsRemoved >= 0 ? "reduced" : "increased"}{" "}
                 ({Math.abs(structuralDiff.tensionsRemoved)})
               </div>
 
-              <div className='border border-stone-200 bg-white px-3 py-2 text-sm text-stone-700'>
+              <div
+                className='border px-3 py-2 text-sm'
+                style={{
+                  borderColor: "var(--border-color)",
+                  background: "rgba(255,255,255,0.03)",
+                  color: "var(--text-secondary)",
+                }}
+              >
                 Missing elements{" "}
                 {structuralDiff.missingResolved >= 0 ? "resolved" : "increased"}{" "}
                 ({Math.abs(structuralDiff.missingResolved)})
               </div>
 
-              <div className='border border-stone-200 bg-white px-3 py-2 text-sm text-stone-700'>
+              <div
+                className='border px-3 py-2 text-sm'
+                style={{
+                  borderColor: "var(--border-color)",
+                  background: "rgba(255,255,255,0.03)",
+                  color: "var(--text-secondary)",
+                }}
+              >
                 Strength signals{" "}
                 {structuralDiff.strengthsAdded >= 0 ? "added" : "reduced"} (
                 {Math.abs(structuralDiff.strengthsAdded)})
               </div>
+
               {previousVersion ? (
-                <div className='border border-stone-200 bg-white px-3 py-2 text-sm text-stone-700'>
+                <div
+                  className='border px-3 py-2 text-sm'
+                  style={{
+                    borderColor: "var(--border-color)",
+                    background: "rgba(255,255,255,0.03)",
+                    color: "var(--text-secondary)",
+                  }}
+                >
                   Entries{" "}
                   {currentEntryCount >= previousEntryCount
                     ? "increased"
@@ -623,15 +705,31 @@ export default function DirectionTrajectoryPanel({
               ) : null}
             </>
           ) : (
-            <div className='border border-stone-200 bg-white px-3 py-2 text-sm text-stone-500'>
+            <div
+              className='border px-3 py-2 text-sm'
+              style={{
+                borderColor: "var(--border-color)",
+                background: "rgba(255,255,255,0.03)",
+                color: "var(--text-muted)",
+              }}
+            >
               No structural comparison is available yet.
             </div>
           )}
 
           {latestTransformation ? (
-            <div className='border border-stone-200 bg-white px-3 py-2 text-sm text-stone-700'>
+            <div
+              className='border px-3 py-2 text-sm'
+              style={{
+                borderColor: "var(--border-color)",
+                background: "rgba(255,255,255,0.03)",
+                color: "var(--text-secondary)",
+              }}
+            >
               Latest transformation:{" "}
-              <strong>{latestTransformation.transformationTitle}</strong>
+              <strong style={{ color: "var(--text-primary)" }}>
+                {latestTransformation.transformationTitle}
+              </strong>
               {latestAddedCount > 0
                 ? ` · ${latestAddedCount} entr${
                     latestAddedCount === 1 ? "y" : "ies"
@@ -643,7 +741,10 @@ export default function DirectionTrajectoryPanel({
       </div>
 
       <div className='mt-4'>
-        <div className='text-xs font-semibold uppercase tracking-[0.12em] text-stone-500'>
+        <div
+          className='text-xs font-semibold uppercase tracking-[0.12em]'
+          style={{ color: "var(--text-muted)" }}
+        >
           Decision pattern
         </div>
 
@@ -652,13 +753,25 @@ export default function DirectionTrajectoryPanel({
             decisionPatternLines.map((line, index) => (
               <div
                 key={index}
-                className='border border-stone-200 bg-white px-3 py-2 text-sm text-stone-700'
+                className='border px-3 py-2 text-sm'
+                style={{
+                  borderColor: "var(--border-color)",
+                  background: "rgba(255,255,255,0.03)",
+                  color: "var(--text-secondary)",
+                }}
               >
                 • {line}
               </div>
             ))
           ) : (
-            <div className='border border-stone-200 bg-white px-3 py-2 text-sm text-stone-500'>
+            <div
+              className='border px-3 py-2 text-sm'
+              style={{
+                borderColor: "var(--border-color)",
+                background: "rgba(255,255,255,0.03)",
+                color: "var(--text-muted)",
+              }}
+            >
               Not enough decision history is available yet to identify a stable
               pattern.
             </div>
@@ -667,7 +780,10 @@ export default function DirectionTrajectoryPanel({
       </div>
 
       <div className='mt-4'>
-        <div className='text-xs font-semibold uppercase tracking-[0.12em] text-stone-500'>
+        <div
+          className='text-xs font-semibold uppercase tracking-[0.12em]'
+          style={{ color: "var(--text-muted)" }}
+        >
           Direction status
         </div>
 
@@ -680,7 +796,14 @@ export default function DirectionTrajectoryPanel({
       </div>
 
       {restoredVersions > 0 ? (
-        <div className='mt-4 border border-stone-200 bg-white px-3 py-2 text-sm text-stone-600'>
+        <div
+          className='mt-4 border px-3 py-2 text-sm'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          }}
+        >
           {restoredVersions} version{restoredVersions === 1 ? "" : "s"} restored
           in this decision profile.
         </div>

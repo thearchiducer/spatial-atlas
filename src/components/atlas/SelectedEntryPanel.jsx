@@ -2,7 +2,10 @@ import SemanticChips from "./SemanticChips";
 
 function annotationLabel(label) {
   return (
-    <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+    <div
+      className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+      style={{ color: "var(--text-muted)" }}
+    >
       {label}
     </div>
   );
@@ -10,12 +13,21 @@ function annotationLabel(label) {
 
 function DetailRow({ label, value }) {
   return (
-    <div className='grid gap-2 border-t border-stone-200 py-3 md:grid-cols-[140px_minmax(0,1fr)]'>
-      <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+    <div
+      className='grid gap-2 border-t py-3 md:grid-cols-[140px_minmax(0,1fr)]'
+      style={{ borderColor: "var(--border-color)" }}
+    >
+      <div
+        className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+        style={{ color: "var(--text-muted)" }}
+      >
         {label}
       </div>
-      <div className='text-sm leading-relaxed text-stone-800'>
-        {value || <span className='text-stone-400'>—</span>}
+      <div
+        className='text-sm leading-relaxed'
+        style={{ color: "var(--text-secondary)" }}
+      >
+        {value || <span style={{ color: "var(--text-muted)" }}>—</span>}
       </div>
     </div>
   );
@@ -29,7 +41,12 @@ function RelatedPill({ item, onRelatedClick }) {
     <button
       type='button'
       onClick={() => onRelatedClick(relatedId)}
-      className='border border-stone-300 bg-white px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+      className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-muted)",
+        color: "var(--text-secondary)",
+      }}
     >
       {relatedLabel}
     </button>
@@ -38,9 +55,23 @@ function RelatedPill({ item, onRelatedClick }) {
 
 function BreakdownChip({ item }) {
   return (
-    <div className='inline-flex items-center gap-2 border border-stone-300 bg-white px-3 py-1.5 text-sm text-stone-700'>
+    <div
+      className='inline-flex items-center gap-2 border px-3 py-1.5 text-sm'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+        color: "var(--text-secondary)",
+      }}
+    >
       <span>{item.label}</span>
-      <span className='border border-stone-200 bg-stone-50 px-2 py-0.5 text-[11px] font-semibold text-stone-700'>
+      <span
+        className='border px-2 py-0.5 text-[11px] font-semibold'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "var(--bg-muted)",
+          color: "var(--text-primary)",
+        }}
+      >
         +{item.points}
       </span>
     </div>
@@ -48,38 +79,67 @@ function BreakdownChip({ item }) {
 }
 
 function RecommendationCard({ title, tone, entries, onRelatedClick }) {
-  let toneClasses = "border-stone-300 bg-white";
-  let titleClasses = "text-stone-900";
-  let textClasses = "text-stone-600";
-  let buttonClasses =
-    "border-stone-300 bg-white text-stone-700 hover:bg-stone-100";
+  let toneStyles = {
+    borderColor: "var(--border-color)",
+    background: "var(--bg-surface)",
+    titleColor: "var(--text-primary)",
+    textColor: "var(--text-secondary)",
+    buttonBorder: "var(--border-color)",
+    buttonBg: "var(--bg-muted)",
+    buttonText: "var(--text-secondary)",
+  };
 
   if (tone === "sky") {
-    toneClasses = "border-sky-200 bg-sky-50/40";
-    titleClasses = "text-sky-950";
-    textClasses = "text-sky-900";
-    buttonClasses = "border-sky-200 bg-white text-sky-900 hover:bg-sky-100";
+    toneStyles = {
+      borderColor: "rgba(56,189,248,0.35)",
+      background: "rgba(56,189,248,0.08)",
+      titleColor: "#e0f2fe",
+      textColor: "#bae6fd",
+      buttonBorder: "rgba(56,189,248,0.35)",
+      buttonBg: "rgba(56,189,248,0.10)",
+      buttonText: "#bae6fd",
+    };
   } else if (tone === "emerald") {
-    toneClasses = "border-emerald-200 bg-emerald-50/40";
-    titleClasses = "text-emerald-950";
-    textClasses = "text-emerald-900";
-    buttonClasses =
-      "border-emerald-200 bg-white text-emerald-900 hover:bg-emerald-100";
+    toneStyles = {
+      borderColor: "rgba(16,185,129,0.35)",
+      background: "rgba(16,185,129,0.08)",
+      titleColor: "#d1fae5",
+      textColor: "#a7f3d0",
+      buttonBorder: "rgba(16,185,129,0.35)",
+      buttonBg: "rgba(16,185,129,0.10)",
+      buttonText: "#a7f3d0",
+    };
   } else if (tone === "violet") {
-    toneClasses = "border-violet-200 bg-violet-50/40";
-    titleClasses = "text-violet-950";
-    textClasses = "text-violet-900";
-    buttonClasses =
-      "border-violet-200 bg-white text-violet-900 hover:bg-violet-100";
+    toneStyles = {
+      borderColor: "rgba(168,85,247,0.35)",
+      background: "rgba(168,85,247,0.08)",
+      titleColor: "#f3e8ff",
+      textColor: "#d8b4fe",
+      buttonBorder: "rgba(168,85,247,0.35)",
+      buttonBg: "rgba(168,85,247,0.10)",
+      buttonText: "#d8b4fe",
+    };
   }
 
   return (
-    <section className={`border p-4 ${toneClasses}`}>
-      <div className='mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+    <section
+      className='border p-4'
+      style={{
+        borderColor: toneStyles.borderColor,
+        background: toneStyles.background,
+      }}
+    >
+      <div
+        className='mb-2 text-[10px] font-semibold uppercase tracking-[0.16em]'
+        style={{ color: "var(--text-muted)" }}
+      >
         Recommendation set
       </div>
 
-      <h3 className={`text-base font-semibold tracking-tight ${titleClasses}`}>
+      <h3
+        className='text-base font-semibold tracking-tight'
+        style={{ color: toneStyles.titleColor }}
+      >
         {title}
       </h3>
 
@@ -90,13 +150,20 @@ function RecommendationCard({ title, tone, entries, onRelatedClick }) {
               key={entry.id}
               type='button'
               onClick={() => onRelatedClick(entry.id)}
-              className={`border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition ${buttonClasses}`}
+              className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
+              style={{
+                borderColor: toneStyles.buttonBorder,
+                background: toneStyles.buttonBg,
+                color: toneStyles.buttonText,
+              }}
             >
               {entry.term}
             </button>
           ))
         ) : (
-          <span className={`text-sm ${textClasses}`}>None</span>
+          <span className='text-sm' style={{ color: toneStyles.textColor }}>
+            None
+          </span>
         )}
       </div>
     </section>
@@ -121,16 +188,28 @@ export default function SelectedEntryPanel({
 }) {
   if (!selectedEntry) {
     return (
-      <section className='border border-stone-300 bg-white p-5'>
-        <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+      <section
+        className='border p-5'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "var(--bg-surface)",
+        }}
+      >
+        <div
+          className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+          style={{ color: "var(--text-muted)" }}
+        >
           Entry reference
         </div>
 
-        <h2 className='mt-2 text-lg font-semibold tracking-tight text-stone-900'>
+        <h2
+          className='mt-2 text-lg font-semibold tracking-tight'
+          style={{ color: "var(--text-primary)" }}
+        >
           Entry detail
         </h2>
 
-        <p className='mt-2 text-sm text-stone-600'>
+        <p className='mt-2 text-sm' style={{ color: "var(--text-secondary)" }}>
           Select an entry or use search to inspect it here.
         </p>
       </section>
@@ -155,30 +234,59 @@ export default function SelectedEntryPanel({
     );
 
   return (
-    <section className='border border-stone-300 bg-white p-5'>
-      <div className='flex flex-col gap-4 border-b border-stone-200 pb-4 md:flex-row md:items-start md:justify-between'>
+    <section
+      className='border p-5'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='flex flex-col gap-4 border-b pb-4 md:flex-row md:items-start md:justify-between'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         <div>
-          <div className='mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+          <div
+            className='mb-2 text-[10px] font-semibold uppercase tracking-[0.16em]'
+            style={{ color: "var(--text-muted)" }}
+          >
             Selected entry
           </div>
 
-          <h2 className='text-2xl font-semibold tracking-tight text-stone-900'>
+          <h2
+            className='text-2xl font-semibold tracking-tight'
+            style={{ color: "var(--text-primary)" }}
+          >
             {selectedEntry.term}
           </h2>
 
-          <p className='mt-2 max-w-3xl text-sm leading-relaxed text-stone-700'>
+          <p
+            className='mt-2 max-w-3xl text-sm leading-relaxed'
+            style={{ color: "var(--text-secondary)" }}
+          >
             {selectedEntry.description}
           </p>
 
           {searchQuery ? (
-            <p className='mt-3 text-[11px] uppercase tracking-[0.08em] text-stone-500'>
+            <p
+              className='mt-3 text-[11px] uppercase tracking-[0.08em]'
+              style={{ color: "var(--text-muted)" }}
+            >
               Opened from search ·{" "}
-              <span className='font-medium text-stone-700'>{searchQuery}</span>
+              <span
+                className='font-medium'
+                style={{ color: "var(--text-secondary)" }}
+              >
+                {searchQuery}
+              </span>
             </p>
           ) : null}
 
           {isInActiveBoard ? (
-            <p className='mt-2 text-[11px] uppercase tracking-[0.08em] text-fuchsia-700'>
+            <p
+              className='mt-2 text-[11px] uppercase tracking-[0.08em]'
+              style={{ color: "#d8b4fe" }}
+            >
               {activeBoardName
                 ? `Active board · ${activeBoardName}`
                 : "Already in active board"}
@@ -190,11 +298,20 @@ export default function SelectedEntryPanel({
           <button
             type='button'
             onClick={() => onCompareEntry?.(selectedEntry.id)}
-            className={`border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition ${
+            className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+            style={
               isCompared
-                ? "border-sky-300 bg-sky-50 text-sky-900 hover:bg-sky-100"
-                : "border-stone-300 bg-white text-stone-700 hover:bg-stone-100"
-            }`}
+                ? {
+                    borderColor: "rgba(56,189,248,0.35)",
+                    background: "rgba(56,189,248,0.10)",
+                    color: "#bae6fd",
+                  }
+                : {
+                    borderColor: "var(--border-color)",
+                    background: "var(--bg-muted)",
+                    color: "var(--text-secondary)",
+                  }
+            }
           >
             {isCompared ? "Remove compare" : "Add compare"}
           </button>
@@ -202,11 +319,20 @@ export default function SelectedEntryPanel({
           <button
             type='button'
             onClick={() => onTogglePinEntry?.(selectedEntry.id)}
-            className={`border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition ${
+            className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+            style={
               isPinned
-                ? "border-amber-300 bg-amber-50 text-amber-900 hover:bg-amber-100"
-                : "border-stone-300 bg-white text-stone-700 hover:bg-stone-100"
-            }`}
+                ? {
+                    borderColor: "rgba(251,191,36,0.30)",
+                    background: "rgba(251,191,36,0.10)",
+                    color: "#fde68a",
+                  }
+                : {
+                    borderColor: "var(--border-color)",
+                    background: "var(--bg-muted)",
+                    color: "var(--text-secondary)",
+                  }
+            }
           >
             {isPinned ? "Unpin" : "Pin"}
           </button>
@@ -215,11 +341,20 @@ export default function SelectedEntryPanel({
             type='button'
             onClick={() => onAddToBoard?.(selectedEntry.id)}
             disabled={!onAddToBoard || isInActiveBoard}
-            className={`border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition ${
+            className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition disabled:cursor-not-allowed disabled:opacity-60'
+            style={
               isInActiveBoard
-                ? "border-fuchsia-300 bg-fuchsia-50 text-fuchsia-900"
-                : "border-stone-300 bg-white text-stone-700 hover:bg-stone-100"
-            } disabled:cursor-not-allowed disabled:opacity-60`}
+                ? {
+                    borderColor: "rgba(168,85,247,0.40)",
+                    background: "rgba(168,85,247,0.15)",
+                    color: "#d8b4fe",
+                  }
+                : {
+                    borderColor: "rgba(16,185,129,0.40)",
+                    background: "rgba(16,185,129,0.12)",
+                    color: "#6ee7b7",
+                  }
+            }
           >
             {isInActiveBoard ? "In board" : "Add board"}
           </button>
@@ -227,7 +362,12 @@ export default function SelectedEntryPanel({
           <button
             type='button'
             onClick={onPrintEntrySheet}
-            className='border border-stone-300 bg-white px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+            className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "var(--bg-muted)",
+              color: "var(--text-secondary)",
+            }}
           >
             Print sheet
           </button>
@@ -235,7 +375,12 @@ export default function SelectedEntryPanel({
           <button
             type='button'
             onClick={() => onEditEntry?.(selectedEntry.id)}
-            className='border border-stone-300 bg-white px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+            className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "var(--bg-muted)",
+              color: "var(--text-secondary)",
+            }}
           >
             Edit
           </button>
@@ -243,22 +388,42 @@ export default function SelectedEntryPanel({
           <button
             type='button'
             onClick={onClear}
-            className='border border-stone-300 bg-white px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+            className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "var(--bg-muted)",
+              color: "var(--text-secondary)",
+            }}
           >
             Clear
           </button>
         </div>
       </div>
 
-      <div className='mt-4 border border-stone-200 bg-stone-50/50 p-4'>
+      <div
+        className='mt-4 border p-4'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "rgba(255,255,255,0.03)",
+        }}
+      >
         {annotationLabel("Semantic profile")}
         <div className='mt-3'>
           <SemanticChips entry={selectedEntry} compact />
         </div>
       </div>
 
-      <div className='mt-6 border border-stone-200 bg-white p-4'>
-        <div className='mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+      <div
+        className='mt-6 border p-4'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "var(--bg-surface)",
+        }}
+      >
+        <div
+          className='mb-2 text-[10px] font-semibold uppercase tracking-[0.16em]'
+          style={{ color: "var(--text-muted)" }}
+        >
           Taxonomy fields
         </div>
 
@@ -275,7 +440,13 @@ export default function SelectedEntryPanel({
       </div>
 
       <div className='mt-6 grid gap-4 xl:grid-cols-2'>
-        <section className='border border-stone-200 bg-white p-4'>
+        <section
+          className='border p-4'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "var(--bg-surface)",
+          }}
+        >
           {annotationLabel("Synonyms")}
 
           <div className='mt-4 flex flex-wrap gap-2'>
@@ -283,20 +454,31 @@ export default function SelectedEntryPanel({
               selectedEntry.synonyms.map((item) => (
                 <span
                   key={item}
-                  className='border border-stone-300 bg-stone-50 px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700'
+                  className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em]'
+                  style={{
+                    borderColor: "var(--border-color)",
+                    background: "var(--bg-muted)",
+                    color: "var(--text-secondary)",
+                  }}
                 >
                   {item}
                 </span>
               ))
             ) : (
-              <span className='text-sm text-stone-500'>
+              <span className='text-sm' style={{ color: "var(--text-muted)" }}>
                 No synonyms listed.
               </span>
             )}
           </div>
         </section>
 
-        <section className='border border-stone-200 bg-white p-4'>
+        <section
+          className='border p-4'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "var(--bg-surface)",
+          }}
+        >
           {annotationLabel("Related entries")}
 
           <div className='mt-4 flex flex-wrap gap-2'>
@@ -316,7 +498,7 @@ export default function SelectedEntryPanel({
                 );
               })
             ) : (
-              <span className='text-sm text-stone-500'>
+              <span className='text-sm' style={{ color: "var(--text-muted)" }}>
                 No related entries listed.
               </span>
             )}
@@ -350,12 +532,24 @@ export default function SelectedEntryPanel({
       ) : null}
 
       {hasBreakdown ? (
-        <section className='mt-6 border border-stone-200 bg-white p-4'>
-          <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+        <section
+          className='mt-6 border p-4'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "var(--bg-surface)",
+          }}
+        >
+          <div
+            className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+            style={{ color: "var(--text-muted)" }}
+          >
             Recommendation explanation
           </div>
 
-          <p className='mt-2 text-sm text-stone-600'>
+          <p
+            className='mt-2 text-sm'
+            style={{ color: "var(--text-secondary)" }}
+          >
             Ranked candidates are explained using explicit semantic alignment
             rather than text guessing.
           </p>
@@ -374,14 +568,24 @@ export default function SelectedEntryPanel({
               .map((entry) => (
                 <div
                   key={entry.id}
-                  className='border border-stone-200 bg-stone-50/50 p-4'
+                  className='border p-4'
+                  style={{
+                    borderColor: "var(--border-color)",
+                    background: "rgba(255,255,255,0.03)",
+                  }}
                 >
                   <div className='flex flex-col gap-2 md:flex-row md:items-center md:justify-between'>
                     <div>
-                      <div className='text-sm font-semibold text-stone-900'>
+                      <div
+                        className='text-sm font-semibold'
+                        style={{ color: "var(--text-primary)" }}
+                      >
                         {entry.term}
                       </div>
-                      <div className='mt-1 text-[10px] uppercase tracking-[0.12em] text-stone-500'>
+                      <div
+                        className='mt-1 text-[10px] uppercase tracking-[0.12em]'
+                        style={{ color: "var(--text-muted)" }}
+                      >
                         {entry.recommendationReason || "semantic match"} · score{" "}
                         {entry.__score || 0}
                       </div>
@@ -390,7 +594,12 @@ export default function SelectedEntryPanel({
                     <button
                       type='button'
                       onClick={() => onRelatedClick(entry.id)}
-                      className='border border-stone-300 bg-white px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+                      className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
+                      style={{
+                        borderColor: "var(--border-color)",
+                        background: "var(--bg-muted)",
+                        color: "var(--text-secondary)",
+                      }}
                     >
                       Open
                     </button>
@@ -405,7 +614,10 @@ export default function SelectedEntryPanel({
                         />
                       ))
                     ) : (
-                      <span className='text-sm text-stone-500'>
+                      <span
+                        className='text-sm'
+                        style={{ color: "var(--text-muted)" }}
+                      >
                         No semantic breakdown available.
                       </span>
                     )}

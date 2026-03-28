@@ -5,19 +5,46 @@ import {
 } from "../../lib/userDecisionLearning";
 
 function SmallCard({ label, value, tone = "stone" }) {
-  const toneClasses =
+  const toneStyles =
     tone === "emerald"
-      ? "border-emerald-300 bg-emerald-50 text-emerald-950"
+      ? {
+          borderColor: "rgba(16,185,129,0.35)",
+          background: "rgba(16,185,129,0.10)",
+          color: "#d1fae5",
+        }
       : tone === "amber"
-        ? "border-amber-300 bg-amber-50 text-amber-950"
+        ? {
+            borderColor: "rgba(251,191,36,0.30)",
+            background: "rgba(251,191,36,0.10)",
+            color: "#fef3c7",
+          }
         : tone === "sky"
-          ? "border-sky-300 bg-sky-50 text-sky-950"
+          ? {
+              borderColor: "rgba(56,189,248,0.35)",
+              background: "rgba(56,189,248,0.10)",
+              color: "#e0f2fe",
+            }
           : tone === "violet"
-            ? "border-violet-300 bg-violet-50 text-violet-950"
-            : "border-stone-300 bg-white text-stone-900";
+            ? {
+                borderColor: "rgba(168,85,247,0.35)",
+                background: "rgba(168,85,247,0.10)",
+                color: "#f3e8ff",
+              }
+            : {
+                borderColor: "var(--border-color)",
+                background: "rgba(255,255,255,0.03)",
+                color: "var(--text-primary)",
+              };
 
   return (
-    <div className={`border px-4 py-3 ${toneClasses}`}>
+    <div
+      className='border px-4 py-3'
+      style={{
+        borderColor: toneStyles.borderColor,
+        background: toneStyles.background,
+        color: toneStyles.color,
+      }}
+    >
       <div className='text-[10px] uppercase tracking-[0.12em] opacity-70'>
         {label}
       </div>
@@ -27,19 +54,43 @@ function SmallCard({ label, value, tone = "stone" }) {
 }
 
 function ListBlock({ title, items, tone = "stone", emptyText = "No items." }) {
-  const containerClasses =
+  const containerStyles =
     tone === "emerald"
-      ? "border-emerald-300 bg-emerald-50"
+      ? {
+          borderColor: "rgba(16,185,129,0.35)",
+          background: "rgba(16,185,129,0.08)",
+        }
       : tone === "amber"
-        ? "border-amber-300 bg-amber-50"
+        ? {
+            borderColor: "rgba(251,191,36,0.30)",
+            background: "rgba(251,191,36,0.08)",
+          }
         : tone === "sky"
-          ? "border-sky-300 bg-sky-50"
-          : "border-stone-300 bg-white";
+          ? {
+              borderColor: "rgba(56,189,248,0.35)",
+              background: "rgba(56,189,248,0.08)",
+            }
+          : {
+              borderColor: "var(--border-color)",
+              background: "var(--bg-surface)",
+            };
 
   return (
-    <div className={`border ${containerClasses}`}>
-      <div className='border-b border-stone-200 px-4 py-3'>
-        <div className='text-xs font-semibold uppercase tracking-[0.12em] text-stone-500'>
+    <div
+      className='border'
+      style={{
+        borderColor: containerStyles.borderColor,
+        background: containerStyles.background,
+      }}
+    >
+      <div
+        className='border-b px-4 py-3'
+        style={{ borderColor: "rgba(255,255,255,0.08)" }}
+      >
+        <div
+          className='text-xs font-semibold uppercase tracking-[0.12em]'
+          style={{ color: "var(--text-muted)" }}
+        >
           {title}
         </div>
       </div>
@@ -49,18 +100,30 @@ function ListBlock({ title, items, tone = "stone", emptyText = "No items." }) {
           items.map((item) => (
             <div
               key={item.key}
-              className='border border-stone-200 bg-white px-3 py-3'
+              className='border px-3 py-3'
+              style={{
+                borderColor: "var(--border-color)",
+                background: "rgba(255,255,255,0.03)",
+              }}
             >
-              <div className='text-sm font-semibold text-stone-900'>
+              <div
+                className='text-sm font-semibold'
+                style={{ color: "var(--text-primary)" }}
+              >
                 {item.label || item.title}
               </div>
-              <div className='mt-1 text-sm leading-relaxed text-stone-600'>
+              <div
+                className='mt-1 text-sm leading-relaxed'
+                style={{ color: "var(--text-secondary)" }}
+              >
                 {item.note}
               </div>
             </div>
           ))
         ) : (
-          <div className='text-sm text-stone-500'>{emptyText}</div>
+          <div className='text-sm' style={{ color: "var(--text-muted)" }}>
+            {emptyText}
+          </div>
         )}
       </div>
     </div>
@@ -74,19 +137,37 @@ function EntryChipList({
   onSelectEntry,
   tone = "stone",
 }) {
-  const toneClasses =
+  const toneStyles =
     tone === "emerald"
-      ? "border-emerald-300 bg-emerald-50 text-emerald-900 hover:bg-emerald-100"
+      ? {
+          borderColor: "rgba(16,185,129,0.35)",
+          background: "rgba(16,185,129,0.10)",
+          color: "#a7f3d0",
+          hover: "rgba(16,185,129,0.16)",
+        }
       : tone === "amber"
-        ? "border-amber-300 bg-amber-50 text-amber-900 hover:bg-amber-100"
-        : "border-stone-300 bg-white text-stone-700 hover:bg-stone-100";
+        ? {
+            borderColor: "rgba(251,191,36,0.30)",
+            background: "rgba(251,191,36,0.10)",
+            color: "#fde68a",
+            hover: "rgba(251,191,36,0.16)",
+          }
+        : {
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+            hover: "rgba(255,255,255,0.06)",
+          };
 
   return (
     <div className='mt-3'>
-      <div className='text-[10px] font-semibold uppercase tracking-[0.12em] text-stone-500'>
+      <div
+        className='text-[10px] font-semibold uppercase tracking-[0.12em]'
+        style={{ color: "var(--text-muted)" }}
+      >
         {title}
       </div>
-      <div className='mt-1 text-xs text-stone-500'>
+      <div className='mt-1 text-xs' style={{ color: "var(--text-muted)" }}>
         Click to inspect or focus this entry.
       </div>
       {items.length ? (
@@ -98,15 +179,28 @@ function EntryChipList({
               onClick={() => {
                 onSelectEntry?.(item.id);
               }}
-              className={`border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] transition transform active:scale-95 hover:shadow-sm ${toneClasses}`}
+              className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] transition transform active:scale-95 hover:shadow-sm'
+              style={{
+                borderColor: toneStyles.borderColor,
+                background: toneStyles.background,
+                color: toneStyles.color,
+              }}
               title={`Open ${item.term}`}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = toneStyles.hover;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = toneStyles.background;
+              }}
             >
               {item.term}
             </button>
           ))}
         </div>
       ) : (
-        <div className='mt-2 text-sm text-stone-500'>{emptyText}</div>
+        <div className='mt-2 text-sm' style={{ color: "var(--text-muted)" }}>
+          {emptyText}
+        </div>
       )}
     </div>
   );
@@ -121,9 +215,21 @@ function RecommendationBlock({
   onIgnoreRecommendation,
 }) {
   return (
-    <div className='border border-stone-300 bg-white'>
-      <div className='border-b border-stone-200 px-4 py-3'>
-        <div className='text-xs font-semibold uppercase tracking-[0.12em] text-stone-500'>
+    <div
+      className='border'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='border-b px-4 py-3'
+        style={{ borderColor: "var(--border-color)" }}
+      >
+        <div
+          className='text-xs font-semibold uppercase tracking-[0.12em]'
+          style={{ color: "var(--text-muted)" }}
+        >
           {title}
         </div>
       </div>
@@ -133,34 +239,71 @@ function RecommendationBlock({
           items.map((item) => (
             <div
               key={item.key}
-              className='border border-stone-200 bg-stone-50 px-3 py-3'
+              className='border px-3 py-3'
+              style={{
+                borderColor: "var(--border-color)",
+                background: "rgba(255,255,255,0.03)",
+              }}
             >
               <div className='flex flex-wrap items-center gap-2'>
-                <div className='text-sm font-semibold text-stone-900'>
+                <div
+                  className='text-sm font-semibold'
+                  style={{ color: "var(--text-primary)" }}
+                >
                   {item.title}
                 </div>
 
-                <div className='border border-stone-300 bg-white px-2 py-0.5 text-[10px] uppercase tracking-[0.12em] text-stone-600'>
+                <div
+                  className='border px-2 py-0.5 text-[10px] uppercase tracking-[0.12em]'
+                  style={{
+                    borderColor: "var(--border-color)",
+                    background: "rgba(255,255,255,0.03)",
+                    color: "var(--text-muted)",
+                  }}
+                >
                   {item.priority}
                 </div>
 
-                <div className='border border-stone-300 bg-white px-2 py-0.5 text-[10px] uppercase tracking-[0.12em] text-stone-600'>
+                <div
+                  className='border px-2 py-0.5 text-[10px] uppercase tracking-[0.12em]'
+                  style={{
+                    borderColor: "var(--border-color)",
+                    background: "rgba(255,255,255,0.03)",
+                    color: "var(--text-muted)",
+                  }}
+                >
                   {item.category}
                 </div>
 
                 {typeof item.learningScore === "number" ? (
-                  <div className='border border-violet-300 bg-violet-50 px-2 py-0.5 text-[10px] uppercase tracking-[0.12em] text-violet-900'>
+                  <div
+                    className='border px-2 py-0.5 text-[10px] uppercase tracking-[0.12em]'
+                    style={{
+                      borderColor: "rgba(168,85,247,0.35)",
+                      background: "rgba(168,85,247,0.10)",
+                      color: "#d8b4fe",
+                    }}
+                  >
                     Learning {item.learningScore}
                   </div>
                 ) : null}
               </div>
 
-              <div className='mt-2 text-sm leading-relaxed text-stone-600'>
-                <strong className='text-stone-900'>Why:</strong> {item.why}
+              <div
+                className='mt-2 text-sm leading-relaxed'
+                style={{ color: "var(--text-secondary)" }}
+              >
+                <strong style={{ color: "var(--text-primary)" }}>Why:</strong>{" "}
+                {item.why}
               </div>
 
-              <div className='mt-2 text-sm leading-relaxed text-stone-600'>
-                <strong className='text-stone-900'>Action:</strong>{" "}
+              <div
+                className='mt-2 text-sm leading-relaxed'
+                style={{ color: "var(--text-secondary)" }}
+              >
+                <strong style={{ color: "var(--text-primary)" }}>
+                  Action:
+                </strong>{" "}
                 {item.action}
               </div>
 
@@ -180,7 +323,10 @@ function RecommendationBlock({
                 tone='amber'
               />
 
-              <div className='mt-2 text-xs text-stone-500'>
+              <div
+                className='mt-2 text-xs'
+                style={{ color: "var(--text-muted)" }}
+              >
                 Applying this will update the board structure.
               </div>
 
@@ -188,7 +334,12 @@ function RecommendationBlock({
                 <button
                   type='button'
                   onClick={() => onAcceptRecommendation?.(item)}
-                  className='border border-emerald-300 bg-emerald-50 px-3 py-1 text-[10px] uppercase tracking-[0.12em] text-emerald-900 transition hover:bg-emerald-100'
+                  className='border px-3 py-1 text-[10px] uppercase tracking-[0.12em] transition'
+                  style={{
+                    borderColor: "rgba(16,185,129,0.35)",
+                    background: "rgba(16,185,129,0.10)",
+                    color: "#a7f3d0",
+                  }}
                 >
                   Apply recommendation
                 </button>
@@ -196,7 +347,12 @@ function RecommendationBlock({
                 <button
                   type='button'
                   onClick={() => onIgnoreRecommendation?.(item)}
-                  className='border border-stone-300 bg-white px-3 py-1 text-[10px] uppercase tracking-[0.12em] text-stone-700 transition hover:bg-stone-100'
+                  className='border px-3 py-1 text-[10px] uppercase tracking-[0.12em] transition'
+                  style={{
+                    borderColor: "var(--border-color)",
+                    background: "rgba(255,255,255,0.03)",
+                    color: "var(--text-secondary)",
+                  }}
                 >
                   Dismiss
                 </button>
@@ -204,7 +360,9 @@ function RecommendationBlock({
             </div>
           ))
         ) : (
-          <div className='text-sm text-stone-500'>{emptyText}</div>
+          <div className='text-sm' style={{ color: "var(--text-muted)" }}>
+            {emptyText}
+          </div>
         )}
       </div>
     </div>
@@ -215,8 +373,17 @@ function PreferenceProfileBlock({ decisionProfile }) {
   if (!decisionProfile) return null;
 
   return (
-    <div className='border border-violet-300 bg-violet-50 px-4 py-4'>
-      <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+    <div
+      className='border px-4 py-4'
+      style={{
+        borderColor: "rgba(168,85,247,0.35)",
+        background: "rgba(168,85,247,0.08)",
+      }}
+    >
+      <div
+        className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+        style={{ color: "#d8b4fe" }}
+      >
         Learned preference profile
       </div>
 
@@ -253,18 +420,33 @@ function DecisionProfileSourceBlock({
     (activeBoardDecisionProfile?.totals?.restoredVersions || 0) > 0;
 
   return (
-    <div className='border border-violet-300 bg-violet-50 px-4 py-4'>
-      <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+    <div
+      className='border px-4 py-4'
+      style={{
+        borderColor: "rgba(168,85,247,0.35)",
+        background: "rgba(168,85,247,0.08)",
+      }}
+    >
+      <div
+        className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+        style={{ color: "#d8b4fe" }}
+      >
         Learning scope
       </div>
 
-      <div className='mt-2 text-sm font-semibold text-stone-900'>
+      <div
+        className='mt-2 text-sm font-semibold'
+        style={{ color: "var(--text-primary)" }}
+      >
         {boardHasData
           ? "Board-specific profile active"
           : "Global fallback profile active"}
       </div>
 
-      <div className='mt-2 text-sm leading-relaxed text-stone-600'>
+      <div
+        className='mt-2 text-sm leading-relaxed'
+        style={{ color: "var(--text-secondary)" }}
+      >
         {boardHasData
           ? "This board has enough interaction history to generate its own learned preference profile."
           : "This board does not yet have enough local history, so the system is using broader global behavior as fallback."}
@@ -291,18 +473,38 @@ function DecisionProfileSourceBlock({
     </div>
   );
 }
+
 function DecisionProfileMaturityBlock({ decisionProfile }) {
   const maturity = getDecisionProfileMaturity(decisionProfile);
 
-  const toneClasses =
+  const toneStyles =
     maturity.level === "established"
-      ? "border-emerald-300 bg-emerald-50 text-emerald-950"
+      ? {
+          borderColor: "rgba(16,185,129,0.35)",
+          background: "rgba(16,185,129,0.10)",
+          color: "#d1fae5",
+        }
       : maturity.level === "emerging"
-        ? "border-amber-300 bg-amber-50 text-amber-950"
-        : "border-stone-300 bg-stone-50 text-stone-900";
+        ? {
+            borderColor: "rgba(251,191,36,0.30)",
+            background: "rgba(251,191,36,0.10)",
+            color: "#fef3c7",
+          }
+        : {
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-primary)",
+          };
 
   return (
-    <div className={`border px-4 py-4 ${toneClasses}`}>
+    <div
+      className='border px-4 py-4'
+      style={{
+        borderColor: toneStyles.borderColor,
+        background: toneStyles.background,
+        color: toneStyles.color,
+      }}
+    >
       <div className='text-[10px] font-semibold uppercase tracking-[0.16em] opacity-75'>
         Learning maturity
       </div>
@@ -320,6 +522,7 @@ function DecisionProfileMaturityBlock({ decisionProfile }) {
     </div>
   );
 }
+
 function DecisionProfileTotalsBlock({ decisionProfile }) {
   const totals = decisionProfile?.totals || {};
 
@@ -401,17 +604,36 @@ export default function BoardIntelligencePanel({
   };
 
   return (
-    <section className='space-y-5 rounded-3xl border border-stone-300 bg-white/90 p-5 shadow-sm'>
+    <section
+      className='space-y-5 rounded-3xl border p-5 shadow-sm'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "rgba(255,255,255,0.04)",
+      }}
+    >
       <div>
-        <div className='inline-flex border border-sky-300 bg-sky-50 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-sky-900'>
+        <div
+          className='inline-flex border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em]'
+          style={{
+            borderColor: "rgba(56,189,248,0.35)",
+            background: "rgba(56,189,248,0.10)",
+            color: "#bae6fd",
+          }}
+        >
           Board intelligence
         </div>
 
-        <h2 className='mt-3 text-2xl font-semibold tracking-tight text-stone-900'>
+        <h2
+          className='mt-3 text-2xl font-semibold tracking-tight'
+          style={{ color: "var(--text-primary)" }}
+        >
           {analysis.boardName}
         </h2>
 
-        <p className='mt-2 text-sm leading-relaxed text-stone-600'>
+        <p
+          className='mt-2 text-sm leading-relaxed'
+          style={{ color: "var(--text-secondary)" }}
+        >
           {analysis.summary}
         </p>
       </div>
@@ -459,22 +681,44 @@ export default function BoardIntelligencePanel({
         <ListBlock title='Tensions' items={analysis.tensions} tone='amber' />
         <ListBlock title='Next moves' items={analysis.nextMoves} tone='sky' />
       </div>
-      <div className='border border-violet-300 bg-violet-50 px-4 py-4'>
-        <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-violet-800'>
+      <div
+        className='border px-4 py-4'
+        style={{
+          borderColor: "rgba(168,85,247,0.35)",
+          background: "rgba(168,85,247,0.08)",
+        }}
+      >
+        <div
+          className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+          style={{ color: "#d8b4fe" }}
+        >
           Directional recommendations
         </div>
         {resolvedComparison ? (
-          <div className='mt-3 border border-sky-300 bg-sky-50 px-3 py-2 text-sm leading-relaxed text-sky-950'>
+          <div
+            className='mt-3 border px-3 py-2 text-sm leading-relaxed'
+            style={{
+              borderColor: "rgba(56,189,248,0.35)",
+              background: "rgba(56,189,248,0.10)",
+              color: "#bae6fd",
+            }}
+          >
             Recommendations currently include comparison-aware guidance derived
             from the stronger/weaker board relationship.
           </div>
         ) : null}
-        <div className='mt-2 text-sm font-semibold text-stone-900'>
+        <div
+          className='mt-2 text-sm font-semibold'
+          style={{ color: "var(--text-primary)" }}
+        >
           {personalizedRecommendations.length
             ? `${personalizedRecommendations.length} personalized recommendations available.`
             : "No urgent recommendations."}
         </div>
-        <div className='mt-2 text-sm leading-relaxed text-stone-600'>
+        <div
+          className='mt-2 text-sm leading-relaxed'
+          style={{ color: "var(--text-secondary)" }}
+        >
           These recommendations are actionable, clickable, and re-ordered by the
           learned preference profile for this board.
         </div>

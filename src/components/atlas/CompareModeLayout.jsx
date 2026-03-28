@@ -1346,8 +1346,17 @@ export default function CompareModeLayout({
         />
       </div>
 
-      <section className='mt-6 border border-stone-300 bg-stone-50/60 p-5'>
-        <h3 className='text-lg font-semibold tracking-tight text-stone-900'>
+      <section
+        className='mt-6 border p-5'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "rgba(255,255,255,0.03)",
+        }}
+      >
+        <h3
+          className='text-lg font-semibold tracking-tight'
+          style={{ color: "var(--text-primary)" }}
+        >
           Attribute diff
         </h3>
 

@@ -17,18 +17,36 @@ export default function ComparePanel({
   const entry = compareEntries[0];
 
   return (
-    <section className='border border-sky-300 bg-sky-50/50 p-5'>
-      <div className='flex flex-col gap-4 border-b border-sky-200 pb-4 md:flex-row md:items-start md:justify-between'>
+    <section
+      className='border p-5'
+      style={{
+        borderColor: "rgba(56,189,248,0.35)",
+        background: "rgba(56,189,248,0.08)",
+      }}
+    >
+      <div
+        className='flex flex-col gap-4 border-b pb-4 md:flex-row md:items-start md:justify-between'
+        style={{ borderColor: "rgba(56,189,248,0.25)" }}
+      >
         <div>
-          <div className='mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-sky-800'>
+          <div
+            className='mb-2 text-[10px] font-semibold uppercase tracking-[0.16em]'
+            style={{ color: "#bae6fd" }}
+          >
             Compare mode · 1 of 2 selected
           </div>
 
-          <h2 className='text-lg font-semibold tracking-tight text-sky-950'>
+          <h2
+            className='text-lg font-semibold tracking-tight'
+            style={{ color: "#e0f2fe" }}
+          >
             Compare entries
           </h2>
 
-          <p className='mt-2 text-sm leading-relaxed text-sky-900'>
+          <p
+            className='mt-2 text-sm leading-relaxed'
+            style={{ color: "#bae6fd" }}
+          >
             Add one more entry to open the full split-screen comparison sheet.
           </p>
         </div>
@@ -36,16 +54,30 @@ export default function ComparePanel({
         <button
           type='button'
           onClick={onClearCompare}
-          className='border border-sky-300 bg-white px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-sky-900 transition hover:bg-sky-100'
+          className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+          style={{
+            borderColor: "rgba(56,189,248,0.35)",
+            background: "rgba(56,189,248,0.10)",
+            color: "#bae6fd",
+          }}
         >
           Clear compare
         </button>
       </div>
 
-      <div className='mt-4 border border-sky-200 bg-white p-4'>
+      <div
+        className='mt-4 border p-4'
+        style={{
+          borderColor: "rgba(56,189,248,0.25)",
+          background: "rgba(255,255,255,0.03)",
+        }}
+      >
         <div className='flex items-start justify-between gap-3'>
           <div className='min-w-0 flex-1'>
-            <div className='mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-sky-700'>
+            <div
+              className='mb-2 text-[10px] font-semibold uppercase tracking-[0.16em]'
+              style={{ color: "#7dd3fc" }}
+            >
               Selected candidate
             </div>
 
@@ -54,12 +86,18 @@ export default function ComparePanel({
               onClick={() => onSelectEntry(entry.id)}
               className='text-left'
             >
-              <div className='truncate text-base font-semibold tracking-tight text-sky-950 hover:underline'>
+              <div
+                className='truncate text-base font-semibold tracking-tight hover:underline'
+                style={{ color: "#e0f2fe" }}
+              >
                 {entry.term}
               </div>
             </button>
 
-            <p className='mt-2 text-sm leading-relaxed text-sky-900'>
+            <p
+              className='mt-2 text-sm leading-relaxed'
+              style={{ color: "#bae6fd" }}
+            >
               {entry.description}
             </p>
 
@@ -69,7 +107,12 @@ export default function ComparePanel({
           <button
             type='button'
             onClick={() => onRemoveCompareEntry(entry.id)}
-            className='border border-sky-200 bg-white px-3 py-1 text-[11px] uppercase tracking-[0.08em] text-sky-800 transition hover:bg-sky-100'
+            className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
+            style={{
+              borderColor: "rgba(56,189,248,0.30)",
+              background: "rgba(56,189,248,0.10)",
+              color: "#bae6fd",
+            }}
           >
             Remove
           </button>

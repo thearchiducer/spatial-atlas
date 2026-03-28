@@ -2,7 +2,10 @@ import { buildLayout } from "../../lib/layoutEngine";
 
 function annotationLabel(children) {
   return (
-    <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+    <div
+      className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+      style={{ color: "var(--text-muted)" }}
+    >
       {children}
     </div>
   );
@@ -10,19 +13,37 @@ function annotationLabel(children) {
 
 function Section({ index, title, description, children }) {
   return (
-    <section className='border border-stone-300 bg-white p-4'>
-      <div className='border-b border-stone-200 pb-4'>
+    <section
+      className='border p-4'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='border-b pb-4'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         <div className='grid gap-3 md:grid-cols-[72px_minmax(0,1fr)] md:items-end'>
-          <div className='text-[10px] font-semibold uppercase tracking-[0.18em] text-stone-500'>
+          <div
+            className='text-[10px] font-semibold uppercase tracking-[0.18em]'
+            style={{ color: "var(--text-muted)" }}
+          >
             {index}
           </div>
 
           <div>
-            <h3 className='text-base font-semibold tracking-tight text-stone-900'>
+            <h3
+              className='text-base font-semibold tracking-tight'
+              style={{ color: "var(--text-primary)" }}
+            >
               {title}
             </h3>
             {description ? (
-              <p className='mt-2 text-sm leading-relaxed text-stone-600'>
+              <p
+                className='mt-2 text-sm leading-relaxed'
+                style={{ color: "var(--text-secondary)" }}
+              >
                 {description}
               </p>
             ) : null}
@@ -37,18 +58,29 @@ function Section({ index, title, description, children }) {
 
 function SequenceView({ sequence }) {
   if (!sequence.length) {
-    return <p className='text-sm text-stone-500'>No sequence generated.</p>;
+    return (
+      <p className='text-sm' style={{ color: "var(--text-muted)" }}>
+        No sequence generated.
+      </p>
+    );
   }
 
   return (
     <div className='flex flex-wrap items-center gap-2'>
       {sequence.map((entry, index) => (
         <div key={entry.id} className='flex items-center gap-2'>
-          <span className='border border-stone-300 bg-white px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-stone-800'>
+          <span
+            className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em]'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "rgba(255,255,255,0.03)",
+              color: "var(--text-primary)",
+            }}
+          >
             {entry.term}
           </span>
           {index < sequence.length - 1 ? (
-            <span className='text-stone-400'>→</span>
+            <span style={{ color: "var(--text-muted)" }}>→</span>
           ) : null}
         </div>
       ))}
@@ -57,21 +89,65 @@ function SequenceView({ sequence }) {
 }
 
 function ZoneBlock({ title, items, tone }) {
-  let toneClass = "border-stone-200 bg-white";
+  let style = {
+    borderColor: "var(--border-color)",
+    background: "rgba(255,255,255,0.03)",
+    titleColor: "var(--text-muted)",
+    chipBorder: "var(--border-color)",
+    chipBackground: "rgba(255,255,255,0.03)",
+    chipText: "var(--text-secondary)",
+  };
 
   if (tone === "public") {
-    toneClass = "border-sky-200 bg-sky-50/40";
+    style = {
+      borderColor: "rgba(56,189,248,0.30)",
+      background: "rgba(56,189,248,0.08)",
+      titleColor: "#7dd3fc",
+      chipBorder: "rgba(56,189,248,0.30)",
+      chipBackground: "rgba(56,189,248,0.10)",
+      chipText: "#bae6fd",
+    };
   } else if (tone === "transition") {
-    toneClass = "border-amber-200 bg-amber-50/40";
+    style = {
+      borderColor: "rgba(251,191,36,0.30)",
+      background: "rgba(251,191,36,0.08)",
+      titleColor: "#fde68a",
+      chipBorder: "rgba(251,191,36,0.30)",
+      chipBackground: "rgba(251,191,36,0.10)",
+      chipText: "#fde68a",
+    };
   } else if (tone === "private") {
-    toneClass = "border-emerald-200 bg-emerald-50/40";
+    style = {
+      borderColor: "rgba(16,185,129,0.30)",
+      background: "rgba(16,185,129,0.08)",
+      titleColor: "#a7f3d0",
+      chipBorder: "rgba(16,185,129,0.30)",
+      chipBackground: "rgba(16,185,129,0.10)",
+      chipText: "#a7f3d0",
+    };
   } else if (tone === "service") {
-    toneClass = "border-violet-200 bg-violet-50/40";
+    style = {
+      borderColor: "rgba(168,85,247,0.30)",
+      background: "rgba(168,85,247,0.08)",
+      titleColor: "#d8b4fe",
+      chipBorder: "rgba(168,85,247,0.30)",
+      chipBackground: "rgba(168,85,247,0.10)",
+      chipText: "#d8b4fe",
+    };
   }
 
   return (
-    <div className={"border p-3 " + toneClass}>
-      <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+    <div
+      className='border p-3'
+      style={{
+        borderColor: style.borderColor,
+        background: style.background,
+      }}
+    >
+      <div
+        className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+        style={{ color: style.titleColor }}
+      >
         {title}
       </div>
 
@@ -80,13 +156,21 @@ function ZoneBlock({ title, items, tone }) {
           items.map((entry) => (
             <span
               key={entry.id}
-              className='border border-stone-300 bg-white px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] text-stone-700'
+              className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
+              style={{
+                borderColor: style.chipBorder,
+                background: style.chipBackground,
+                color: style.chipText,
+              }}
             >
               {entry.term}
             </span>
           ))
         ) : (
-          <span className='text-[11px] uppercase tracking-[0.08em] text-stone-400'>
+          <span
+            className='text-[11px] uppercase tracking-[0.08em]'
+            style={{ color: "var(--text-muted)" }}
+          >
             None
           </span>
         )}
@@ -113,33 +197,61 @@ function ZoningView({ zones }) {
 function CirculationView({ circulation, pattern }) {
   if (!circulation && !pattern) {
     return (
-      <p className='text-sm text-stone-500'>No circulation logic detected.</p>
+      <p className='text-sm' style={{ color: "var(--text-muted)" }}>
+        No circulation logic detected.
+      </p>
     );
   }
 
   return (
     <div className='grid gap-3 md:grid-cols-2'>
-      <div className='border border-stone-200 bg-stone-50/60 p-4'>
+      <div
+        className='border p-4'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "rgba(255,255,255,0.03)",
+        }}
+      >
         {annotationLabel("Circulation")}
         {circulation ? (
-          <div className='mt-2 text-sm text-stone-700'>
-            <strong className='text-stone-900'>{circulation.type}</strong> —{" "}
-            {circulation.description}
+          <div
+            className='mt-2 text-sm'
+            style={{ color: "var(--text-secondary)" }}
+          >
+            <strong style={{ color: "var(--text-primary)" }}>
+              {circulation.type}
+            </strong>{" "}
+            — {circulation.description}
           </div>
         ) : (
-          <div className='mt-2 text-sm text-stone-500'>None</div>
+          <div className='mt-2 text-sm' style={{ color: "var(--text-muted)" }}>
+            None
+          </div>
         )}
       </div>
 
-      <div className='border border-stone-200 bg-stone-50/60 p-4'>
+      <div
+        className='border p-4'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "rgba(255,255,255,0.03)",
+        }}
+      >
         {annotationLabel("Pattern")}
         {pattern ? (
-          <div className='mt-2 text-sm text-stone-700'>
-            <strong className='text-stone-900'>{pattern.type}</strong> —{" "}
-            {pattern.description}
+          <div
+            className='mt-2 text-sm'
+            style={{ color: "var(--text-secondary)" }}
+          >
+            <strong style={{ color: "var(--text-primary)" }}>
+              {pattern.type}
+            </strong>{" "}
+            — {pattern.description}
           </div>
         ) : (
-          <div className='mt-2 text-sm text-stone-500'>None</div>
+          <div className='mt-2 text-sm' style={{ color: "var(--text-muted)" }}>
+            None
+          </div>
         )}
       </div>
     </div>
@@ -149,7 +261,9 @@ function CirculationView({ circulation, pattern }) {
 function AdjacencyView({ layout, entriesById }) {
   if (!layout.edges.length) {
     return (
-      <p className='text-sm text-stone-500'>No adjacency edges generated.</p>
+      <p className='text-sm' style={{ color: "var(--text-muted)" }}>
+        No adjacency edges generated.
+      </p>
     );
   }
 
@@ -162,12 +276,22 @@ function AdjacencyView({ layout, entriesById }) {
         return (
           <div
             key={edge.from + "|" + edge.to + "|" + edge.type}
-            className='border border-stone-200 bg-stone-50/60 p-3'
+            className='border p-3'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "rgba(255,255,255,0.03)",
+            }}
           >
-            <div className='text-sm font-semibold text-stone-900'>
+            <div
+              className='text-sm font-semibold'
+              style={{ color: "var(--text-primary)" }}
+            >
               {(from && from.term) || edge.from} → {(to && to.term) || edge.to}
             </div>
-            <div className='mt-1 text-[11px] uppercase tracking-[0.08em] text-stone-500'>
+            <div
+              className='mt-1 text-[11px] uppercase tracking-[0.08em]'
+              style={{ color: "var(--text-muted)" }}
+            >
               {edge.label} · {edge.strength}
             </div>
           </div>
@@ -180,21 +304,41 @@ function AdjacencyView({ layout, entriesById }) {
 function NarrativeView({ layout }) {
   return (
     <div className='space-y-3'>
-      <div className='border border-stone-200 bg-stone-50/60 p-4 text-sm leading-relaxed text-stone-700'>
+      <div
+        className='border p-4 text-sm leading-relaxed'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "rgba(255,255,255,0.03)",
+          color: "var(--text-secondary)",
+        }}
+      >
         {layout.narrative}
       </div>
 
       {layout.warnings && layout.warnings.length ? (
-        <div className='border border-amber-200 bg-amber-50 p-4'>
+        <div
+          className='border p-4'
+          style={{
+            borderColor: "rgba(251,191,36,0.30)",
+            background: "rgba(251,191,36,0.08)",
+          }}
+        >
           {annotationLabel("Layout warnings")}
-          <ul className='mt-3 space-y-2 text-sm text-amber-900'>
+          <ul className='mt-3 space-y-2 text-sm' style={{ color: "#fde68a" }}>
             {layout.warnings.map((warning) => (
               <li key={warning}>• {warning}</li>
             ))}
           </ul>
         </div>
       ) : (
-        <div className='border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900'>
+        <div
+          className='border p-4 text-sm'
+          style={{
+            borderColor: "rgba(16,185,129,0.30)",
+            background: "rgba(16,185,129,0.08)",
+            color: "#a7f3d0",
+          }}
+        >
           No major layout warnings detected.
         </div>
       )}
@@ -204,7 +348,11 @@ function NarrativeView({ layout }) {
 
 function BranchView({ branches, entriesById }) {
   if (!branches.length) {
-    return <p className='text-sm text-stone-500'>No branch data available.</p>;
+    return (
+      <p className='text-sm' style={{ color: "var(--text-muted)" }}>
+        No branch data available.
+      </p>
+    );
   }
 
   return (
@@ -218,14 +366,30 @@ function BranchView({ branches, entriesById }) {
           .filter(Boolean);
 
         return (
-          <div key={branch.id} className='border border-stone-200 bg-white p-3'>
-            <div className='text-sm font-semibold text-stone-900'>
+          <div
+            key={branch.id}
+            className='border p-3'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "var(--bg-surface)",
+            }}
+          >
+            <div
+              className='text-sm font-semibold'
+              style={{ color: "var(--text-primary)" }}
+            >
               {branch.term}
             </div>
-            <div className='mt-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+            <div
+              className='mt-2 text-[10px] font-semibold uppercase tracking-[0.16em]'
+              style={{ color: "var(--text-muted)" }}
+            >
               Connects to
             </div>
-            <div className='mt-2 text-sm text-stone-700'>
+            <div
+              className='mt-2 text-sm'
+              style={{ color: "var(--text-secondary)" }}
+            >
               {nextTerms.length ? nextTerms.join(", ") : "No outgoing links"}
             </div>
           </div>
@@ -718,21 +882,43 @@ function VisualLayoutRenderer({ layout }) {
 
   if (!canvas.nodes.length) {
     return (
-      <div className='border border-stone-200 bg-stone-50/60 p-4 text-sm text-stone-500'>
+      <div
+        className='border p-4 text-sm'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "rgba(255,255,255,0.03)",
+          color: "var(--text-muted)",
+        }}
+      >
         No visual layout could be rendered.
       </div>
     );
   }
 
   return (
-    <section className='border border-stone-300 bg-white p-5'>
-      <div className='flex flex-col gap-3 border-b border-stone-200 pb-4 md:flex-row md:items-start md:justify-between'>
+    <section
+      className='border p-5'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='flex flex-col gap-3 border-b pb-4 md:flex-row md:items-start md:justify-between'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         <div>
           {annotationLabel("Visual layout renderer")}
-          <h3 className='mt-2 text-lg font-semibold tracking-tight text-stone-900'>
+          <h3
+            className='mt-2 text-lg font-semibold tracking-tight'
+            style={{ color: "var(--text-primary)" }}
+          >
             Architectural layout renderer
           </h3>
-          <p className='mt-2 text-sm leading-relaxed text-stone-600'>
+          <p
+            className='mt-2 text-sm leading-relaxed'
+            style={{ color: "var(--text-secondary)" }}
+          >
             Clean architectural logic with fixed zone bands, a dominant
             circulation spine, and branch nodes anchored to connected axis
             rooms.
@@ -747,7 +933,13 @@ function VisualLayoutRenderer({ layout }) {
         </div>
       </div>
 
-      <div className='mt-5 overflow-x-auto border border-stone-200 bg-stone-50/60 p-4'>
+      <div
+        className='mt-5 overflow-x-auto border p-4'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "rgba(255,255,255,0.03)",
+        }}
+      >
         <svg
           width={canvas.width}
           height={canvas.height}
@@ -919,13 +1111,25 @@ export default function LayoutPanel({ activeBoard = null }) {
 
   if (!activeBoard) {
     return (
-      <section className='border border-stone-300 bg-white p-5'>
+      <section
+        className='border p-5'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "var(--bg-surface)",
+        }}
+      >
         {annotationLabel("Layout generator")}
-        <h2 className='mt-2 text-xl font-semibold tracking-tight text-stone-900'>
+        <h2
+          className='mt-2 text-xl font-semibold tracking-tight'
+          style={{ color: "var(--text-primary)" }}
+        >
           Spatial logic engine
         </h2>
 
-        <p className='mt-2 text-sm leading-relaxed text-stone-600'>
+        <p
+          className='mt-2 text-sm leading-relaxed'
+          style={{ color: "var(--text-secondary)" }}
+        >
           Open a project board to generate spatial sequence, zoning, adjacency,
           circulation, and a visual concept diagram.
         </p>
@@ -935,14 +1139,29 @@ export default function LayoutPanel({ activeBoard = null }) {
 
   return (
     <div className='space-y-4'>
-      <section className='border border-stone-300 bg-white p-5'>
-        <div className='border-b border-stone-200 pb-4'>
+      <section
+        className='border p-5'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "var(--bg-surface)",
+        }}
+      >
+        <div
+          className='border-b pb-4'
+          style={{ borderColor: "var(--border-color)" }}
+        >
           {annotationLabel("Layout generator")}
-          <h2 className='mt-2 text-xl font-semibold tracking-tight text-stone-900'>
+          <h2
+            className='mt-2 text-xl font-semibold tracking-tight'
+            style={{ color: "var(--text-primary)" }}
+          >
             Spatial logic engine
           </h2>
 
-          <p className='mt-2 max-w-3xl text-sm leading-relaxed text-stone-600'>
+          <p
+            className='mt-2 max-w-3xl text-sm leading-relaxed'
+            style={{ color: "var(--text-secondary)" }}
+          >
             Convert the active board into a readable spatial sequence, zoning
             system, circulation logic, adjacency structure, and conceptual
             diagram.

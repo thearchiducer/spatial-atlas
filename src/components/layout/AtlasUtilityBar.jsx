@@ -6,22 +6,43 @@ function UtilityTag({
   onAction,
   children = null,
 }) {
-  const toneClasses =
+  const toneStyles =
     tone === "sky"
-      ? "border-sky-300 bg-sky-50 text-sky-950"
+      ? {
+          borderColor: "rgba(56,189,248,0.35)",
+          background: "rgba(56,189,248,0.10)",
+          color: "#bae6fd",
+          actionBorder: "rgba(56,189,248,0.25)",
+          actionBackground: "rgba(255,255,255,0.06)",
+          actionColor: "#e0f2fe",
+        }
       : tone === "amber"
-        ? "border-amber-300 bg-amber-50 text-amber-950"
-        : "border-stone-300 bg-white text-stone-900";
-
-  const actionToneClasses =
-    tone === "sky"
-      ? "border-sky-200 text-sky-800 hover:bg-sky-100"
-      : tone === "amber"
-        ? "border-amber-200 text-amber-800 hover:bg-amber-100"
-        : "border-stone-200 text-stone-700 hover:bg-stone-100";
+        ? {
+            borderColor: "rgba(251,191,36,0.30)",
+            background: "rgba(251,191,36,0.10)",
+            color: "#fde68a",
+            actionBorder: "rgba(251,191,36,0.25)",
+            actionBackground: "rgba(255,255,255,0.06)",
+            actionColor: "#fef3c7",
+          }
+        : {
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-primary)",
+            actionBorder: "rgba(255,255,255,0.12)",
+            actionBackground: "rgba(255,255,255,0.06)",
+            actionColor: "var(--text-secondary)",
+          };
 
   return (
-    <div className={`border px-3 py-2 ${toneClasses}`}>
+    <div
+      className='border px-3 py-2'
+      style={{
+        borderColor: toneStyles.borderColor,
+        background: toneStyles.background,
+        color: toneStyles.color,
+      }}
+    >
       <div className='flex flex-wrap items-center gap-2'>
         <span className='text-[10px] font-semibold uppercase tracking-[0.16em]'>
           {label}
@@ -36,7 +57,12 @@ function UtilityTag({
         <button
           type='button'
           onClick={onAction}
-          className={`border px-2 py-0.5 text-[10px] uppercase tracking-[0.08em] transition ${actionToneClasses}`}
+          className='border px-2 py-0.5 text-[10px] uppercase tracking-[0.08em] transition'
+          style={{
+            borderColor: toneStyles.actionBorder,
+            background: toneStyles.actionBackground,
+            color: toneStyles.actionColor,
+          }}
         >
           {actionLabel}
         </button>
@@ -46,18 +72,35 @@ function UtilityTag({
 }
 
 function QuickReferenceButton({ tone = "stone", children, onClick }) {
-  const toneClasses =
+  const toneStyles =
     tone === "sky"
-      ? "border-sky-300 bg-white text-sky-900 hover:bg-sky-50"
+      ? {
+          borderColor: "rgba(56,189,248,0.35)",
+          background: "rgba(56,189,248,0.10)",
+          color: "#bae6fd",
+        }
       : tone === "amber"
-        ? "border-amber-300 bg-white text-amber-900 hover:bg-amber-50"
-        : "border-stone-300 bg-white text-stone-700 hover:bg-stone-100";
+        ? {
+            borderColor: "rgba(251,191,36,0.30)",
+            background: "rgba(251,191,36,0.10)",
+            color: "#fde68a",
+          }
+        : {
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          };
 
   return (
     <button
       type='button'
       onClick={onClick}
-      className={`border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition ${toneClasses}`}
+      className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+      style={{
+        borderColor: toneStyles.borderColor,
+        background: toneStyles.background,
+        color: toneStyles.color,
+      }}
     >
       {children}
     </button>
@@ -65,7 +108,7 @@ function QuickReferenceButton({ tone = "stone", children, onClick }) {
 }
 
 export default function AtlasUtilityBar({
-  theme = "light",
+  theme = { theme },
   activeBoard,
   selectedEntry,
   compareEntries,
@@ -86,23 +129,22 @@ export default function AtlasUtilityBar({
 
   return (
     <section
-      className={
-        "sticky top-20 z-10 border p-4 backdrop-blur " +
-        (theme === "dark"
-          ? "border-stone-700 bg-stone-900/95"
-          : "border-stone-300 bg-white/95")
-      }
+      className='sticky top-20 z-10 border p-4 backdrop-blur'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "rgba(255,255,255,0.04)",
+      }}
     >
       <div className='flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between'>
         <div className='flex flex-wrap gap-2'>
           {hasActiveBoard && (
             <div
-              className={
-                "border px-3 py-2 " +
-                (theme === "dark"
-                  ? "border-violet-700 bg-violet-950 text-violet-100"
-                  : "border-violet-300 bg-violet-50 text-violet-950")
-              }
+              className='border px-3 py-2'
+              style={{
+                borderColor: "rgba(168,85,247,0.35)",
+                background: "rgba(168,85,247,0.10)",
+                color: "#d8b4fe",
+              }}
             >
               <div className='flex flex-wrap items-center gap-2'>
                 <span className='text-[10px] font-semibold uppercase tracking-[0.16em]'>
@@ -110,11 +152,20 @@ export default function AtlasUtilityBar({
                 </span>
                 <span className='text-sm font-medium'>{activeBoard.name}</span>
               </div>
-              <div className='border border-stone-300 bg-stone-50 px-3 py-2 text-xs text-stone-700'>
+
+              <div
+                className='mt-2 border px-3 py-2 text-xs'
+                style={{
+                  borderColor: "rgba(255,255,255,0.12)",
+                  background: "rgba(255,255,255,0.04)",
+                  color: "var(--text-secondary)",
+                }}
+              >
                 Flow: Select → Add to board → Compare → Transform
               </div>
             </div>
           )}
+
           {hasSelected && (
             <UtilityTag
               label='Selected'
@@ -125,6 +176,7 @@ export default function AtlasUtilityBar({
                 type='button'
                 onClick={() => onSelectEntry(selectedEntry.id)}
                 className='text-sm font-medium hover:underline'
+                style={{ color: "inherit" }}
               >
                 {selectedEntry.term}
               </button>

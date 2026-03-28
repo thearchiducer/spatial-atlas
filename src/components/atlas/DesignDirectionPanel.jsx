@@ -1565,13 +1565,32 @@ export default function DesignDirectionPanel({
 
   if (!activeBoard) {
     return (
-      <section className='border border-stone-300 bg-white p-5'>
-        {annotationLabel("Design direction")}
-        <h2 className='mt-2 text-xl font-semibold text-stone-900'>
+      <section
+        className='rounded-3xl border p-5 shadow-sm'
+        style={{
+          borderColor: "var(--border-color)",
+          background: "rgba(255,255,255,0.04)",
+        }}
+      >
+        <div
+          className='mb-2 inline-flex rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em]'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          }}
+        >
+          Design direction
+        </div>
+
+        <h2
+          className='text-xl font-semibold'
+          style={{ color: "var(--text-primary)" }}
+        >
           Project direction summary
         </h2>
 
-        <p className='mt-2 text-sm text-stone-600'>
+        <p className='mt-2 text-sm' style={{ color: "var(--text-secondary)" }}>
           Open a board to see what kind of project logic is forming, what is
           missing, and what to do next.
         </p>
@@ -1584,23 +1603,42 @@ export default function DesignDirectionPanel({
   }
 
   return (
-    <section className='border border-stone-300 bg-white p-5'>
+    <section
+      className='border p-6'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-base)", // IMPORTANT: not surface
+      }}
+    >
       {annotationLabel("Design direction")}
 
-      <div className='mt-2 flex flex-col gap-3 border-b border-stone-200 pb-4 md:flex-row md:items-start md:justify-between'>
+      <div className='flex flex-col gap-3 md:flex-row md:items-start md:justify-between'>
         <div>
-          <h2 className='text-xl font-semibold text-stone-900'>
+          <h2
+            className='text-xl font-semibold'
+            style={{ color: "var(--text-primary)" }}
+          >
             Project direction summary
           </h2>
-          <p className='mt-2 text-sm leading-relaxed text-stone-600'>
+          <p
+            className='mt-2 text-sm'
+            style={{ color: "var(--text-secondary)" }}
+          >
             This panel turns the active board into a final design verdict,
             conceptual identity, diagram-level spatial moves, and
             decision-tested next actions.
           </p>
         </div>
 
-        <span className='border border-stone-200 bg-stone-50 px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-stone-700'>
-          Active board · {activeBoard.name || "Untitled board"}
+        <span
+          className='rounded-full border px-3 py-1.5 text-xs'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "rgba(255,255,255,0.03)",
+            color: "var(--text-secondary)",
+          }}
+        >
+          Active board: {activeBoard.name || "Untitled board"}
         </span>
       </div>
 
@@ -1618,25 +1656,37 @@ export default function DesignDirectionPanel({
       <SpatialMovesTranslatorPanel translator={spatialTranslator} />
 
       <div
-        className='mt-5 border p-4'
+        className='mt-5 rounded-2xl border p-4'
         style={{
           borderColor: "var(--border-color)",
           background: "rgba(255,255,255,0.03)",
         }}
       >
-        {annotationLabel("Board character")}
+        <div
+          className='text-xs font-semibold uppercase tracking-[0.12em]'
+          style={{ color: "var(--text-muted)" }}
+        >
+          Board character
+        </div>
         <div
           className='mt-2 text-sm font-semibold'
           style={{ color: "var(--text-primary)" }}
         >
           {summary.boardCharacter}
         </div>
-        <p className='mt-2 text-sm text-stone-600'>{summary.spatialPattern}</p>
+        <p className='mt-2 text-sm' style={{ color: "var(--text-secondary)" }}>
+          {summary.spatialPattern}
+        </p>
       </div>
 
       <div className='mt-6'>
-        <h3 className='text-base font-semibold text-stone-900'>Next moves</h3>
-        <p className='mt-1 text-sm text-stone-600'>
+        <h3
+          className='text-base font-semibold'
+          style={{ color: "var(--text-primary)" }}
+        >
+          Next moves
+        </h3>
+        <p className='mt-1 text-sm' style={{ color: "var(--text-secondary)" }}>
           Open a move to see suggested entries, why they matter, how the board
           changes if you add them, which exact issues are resolved or
           introduced, and how confident the system is about each option.
@@ -1672,10 +1722,13 @@ export default function DesignDirectionPanel({
       />
 
       <div className='mt-6'>
-        <h3 className='text-base font-semibold text-stone-900'>
+        <h3
+          className='text-base font-semibold'
+          style={{ color: "var(--text-primary)" }}
+        >
           Missing elements
         </h3>
-        <p className='mt-1 text-sm text-stone-600'>
+        <p className='mt-1 text-sm' style={{ color: "var(--text-secondary)" }}>
           Gaps that weaken spatial logic or sequencing.
         </p>
 
@@ -1696,8 +1749,13 @@ export default function DesignDirectionPanel({
       </div>
 
       <div className='mt-6'>
-        <h3 className='text-base font-semibold text-stone-900'>Tensions</h3>
-        <p className='mt-1 text-sm text-stone-600'>
+        <h3
+          className='text-base font-semibold'
+          style={{ color: "var(--text-primary)" }}
+        >
+          Tensions
+        </h3>
+        <p className='mt-1 text-sm' style={{ color: "var(--text-secondary)" }}>
           Conflicts that need a design decision before the board becomes a
           strong brief.
         </p>

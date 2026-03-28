@@ -1240,14 +1240,29 @@ export default function CompareModeLayout({
   }
 
   return (
-    <section className='border border-stone-300 bg-white p-6'>
-      <div className='flex flex-col gap-4 border-b border-stone-200 pb-4 md:flex-row md:items-start md:justify-between'>
+    <section
+      className='border p-6'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='flex flex-col gap-4 border-b pb-4 md:flex-row md:items-start md:justify-between'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         <div>
           {annotationLabel("Compare mode layout")}
-          <h2 className='mt-2 text-2xl font-semibold tracking-tight text-stone-900'>
+          <h2
+            className='mt-2 text-2xl font-semibold tracking-tight'
+            style={{ color: "var(--text-primary)" }}
+          >
             Side-by-side comparison
           </h2>
-          <p className='mt-2 max-w-3xl text-sm leading-relaxed text-stone-600'>
+          <p
+            className='mt-2 max-w-3xl text-sm leading-relaxed'
+            style={{ color: "var(--text-secondary)" }}
+          >
             Review the structural similarities and conceptual differences
             between two atlas entries in one screen.
           </p>
@@ -1257,7 +1272,12 @@ export default function CompareModeLayout({
           <button
             type='button'
             onClick={handlePrintCompareSheet}
-            className='border border-stone-300 px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+            className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "rgba(255,255,255,0.03)",
+              color: "var(--text-secondary)",
+            }}
           >
             Print / Save PDF
           </button>
@@ -1265,7 +1285,12 @@ export default function CompareModeLayout({
           <button
             type='button'
             onClick={onCopyCompareLink}
-            className='border border-stone-300 px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+            className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "rgba(255,255,255,0.03)",
+              color: "var(--text-secondary)",
+            }}
           >
             {compareLinkCopied ? "Compare link copied" : "Copy compare link"}
           </button>
@@ -1273,7 +1298,12 @@ export default function CompareModeLayout({
           <button
             type='button'
             onClick={onClearCompare}
-            className='border border-stone-300 px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-stone-700 transition hover:bg-stone-100'
+            className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+            style={{
+              borderColor: "var(--border-color)",
+              background: "rgba(255,255,255,0.03)",
+              color: "var(--text-secondary)",
+            }}
           >
             Exit compare mode
           </button>

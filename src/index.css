@@ -47,6 +47,23 @@
   --tone-violet-border: rgba(168, 85, 247, 0.24);
   --tone-violet-text: #7c3aed;
 
+  /* layout zone tones */
+  --zone-public-bg: rgba(56, 189, 248, 0.08);
+  --zone-public-border: rgba(56, 189, 248, 0.24);
+  --zone-public-text: #0369a1;
+
+  --zone-transition-bg: rgba(251, 191, 36, 0.1);
+  --zone-transition-border: rgba(251, 191, 36, 0.26);
+  --zone-transition-text: #b45309;
+
+  --zone-private-bg: rgba(16, 185, 129, 0.08);
+  --zone-private-border: rgba(16, 185, 129, 0.24);
+  --zone-private-text: #047857;
+
+  --zone-service-bg: rgba(168, 85, 247, 0.08);
+  --zone-service-border: rgba(168, 85, 247, 0.24);
+  --zone-service-text: #7c3aed;
+
   /* layout */
   --radius-sm: 8px;
   --radius-md: 14px;
@@ -98,6 +115,23 @@
   --tone-violet-bg: rgba(168, 85, 247, 0.1);
   --tone-violet-border: rgba(168, 85, 247, 0.24);
   --tone-violet-text: #c4b5fd;
+
+  /* layout zone tones */
+  --zone-public-bg: rgba(56, 189, 248, 0.08);
+  --zone-public-border: rgba(56, 189, 248, 0.24);
+  --zone-public-text: #93c5fd;
+
+  --zone-transition-bg: rgba(251, 191, 36, 0.1);
+  --zone-transition-border: rgba(251, 191, 36, 0.24);
+  --zone-transition-text: #fde68a;
+
+  --zone-private-bg: rgba(16, 185, 129, 0.1);
+  --zone-private-border: rgba(16, 185, 129, 0.24);
+  --zone-private-text: #86efac;
+
+  --zone-service-bg: rgba(168, 85, 247, 0.1);
+  --zone-service-border: rgba(168, 85, 247, 0.24);
+  --zone-service-text: #c4b5fd;
 
   /* layout */
   --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.28);

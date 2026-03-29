@@ -2810,274 +2810,267 @@ export default function App() {
   };
 
   return (
-    <div
-      data-theme={theme}
-      className={
-        "min-h-screen px-4 py-5 md:px-6 " +
-        (theme === "dark"
-          ? "bg-stone-950 text-stone-100"
-          : "bg-[radial-gradient(circle_at_top_left,rgba(120,80,30,0.10),transparent_28%),linear-gradient(180deg,#f6f3ed_0%,#f5f1e8_100%)] text-stone-900")
-      }
-    >
-      <div className='mx-auto flex max-w-7xl flex-col gap-5'>
-        <OnboardingHeader theme={theme} />
+    <div data-theme={theme} className={theme === "dark" ? "dark" : ""}>
+      <div
+        className='min-h-screen px-4 py-5 md:px-6'
+        style={{
+          background: "var(--bg-page)",
+          color: "var(--text-primary)",
+        }}
+      >
+        <div className='mx-auto flex max-w-7xl flex-col gap-5'>
+          <OnboardingHeader theme={theme} />
 
-        {activeProjectBoard ? (
-          <div
-            className='border px-3 py-2 text-xs font-semibold'
-            style={{
-              borderColor: "rgba(168,85,247,0.35)",
-              background: "rgba(168,85,247,0.10)",
-              color: "#d8b4fe",
-            }}
-          >
-            Active board: {activeProjectBoard.name}
-          </div>
-        ) : (
-          <div
-            className='border px-3 py-2 text-xs font-semibold'
-            style={{
-              borderColor: "rgba(251,191,36,0.30)",
-              background: "rgba(251,191,36,0.10)",
-              color: "#fde68a",
-            }}
-          >
-            No active board — open or create one to start
-          </div>
-        )}
+          {activeProjectBoard ? (
+            <div
+              className='border px-3 py-2 text-xs font-semibold'
+              style={{
+                borderColor: "var(--tone-violet-border)",
+                background: "var(--tone-violet-bg)",
+                color: "var(--tone-violet-text)",
+              }}
+            >
+              Active board: {activeProjectBoard.name}
+            </div>
+          ) : (
+            <div
+              className='border px-3 py-2 text-xs font-semibold'
+              style={{
+                borderColor: "var(--tone-warning-border)",
+                background: "var(--tone-warning-bg)",
+                color: "var(--tone-warning-text)",
+              }}
+            >
+              No active board — open or create one to start
+            </div>
+          )}
 
-        <div className='flex justify-end'>
-          <button
-            type='button'
-            onClick={() =>
-              setTheme((current) => (current === "light" ? "dark" : "light"))
-            }
-            className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
-            style={{
-              borderColor: "var(--border-color)",
-              background: "rgba(255,255,255,0.04)",
-              color: "var(--text-secondary)",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "rgba(255,255,255,0.08)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "rgba(255,255,255,0.04)";
-            }}
-          >
-            {theme === "light" ? "Dark mode" : "Light mode"}
-          </button>
+          <div className='flex justify-end'>
+            <button
+              type='button'
+              onClick={() =>
+                setTheme((current) => (current === "light" ? "dark" : "light"))
+              }
+              className='ui-button px-3 py-1.5 text-[11px] uppercase tracking-[0.08em]'
+            >
+              {theme === "light" ? "Dark mode" : "Light mode"}
+            </button>
+          </div>
+
+          {!minimalMode ? (
+            <HeroHeader metrics={atlas.metrics} theme={theme} />
+          ) : null}
+          {minimalMode && (
+            <div className='border border-sky-300 bg-sky-50 px-3 py-2 text-xs text-sky-900'>
+              Focus mode — simplified view for step-by-step use
+            </div>
+          )}
+          <FilterToolbar
+            filters={atlas.filters}
+            updateFilter={atlas.updateFilter}
+            clearFilters={atlas.clearFilters}
+            resetView={handleResetView}
+          />
+
+          <ViewModeTopNav
+            activeView={activeView}
+            setActiveView={setActiveView}
+            minimalMode={minimalMode}
+            setMinimalMode={setMinimalMode}
+            selectedEntry={selectedEntry}
+            activeBoard={activeProjectBoard}
+            onResetView={handleResetView}
+            showSecondaryTools={showSecondaryTools}
+            setShowSecondaryTools={setShowSecondaryTools}
+          />
+
+          {!minimalMode ? (
+            <>
+              <AtlasUtilityBar
+                theme={theme}
+                activeBoard={activeProjectBoard}
+                selectedEntry={selectedEntry}
+                compareEntries={compareEntries}
+                pinnedEntries={pinnedEntries}
+                onSelectEntry={handleSelectEntry}
+                onClearSelection={handleClearSelection}
+                onClearCompare={handleClearCompare}
+                onClearPinned={handleClearPinned}
+              />
+              <AtlasQuickDrawer
+                compareEntries={compareEntries}
+                pinnedEntries={pinnedEntries}
+                onSelectEntry={handleSelectEntry}
+                onRemoveCompareEntry={handleRemoveCompareEntry}
+                onRemovePinnedEntry={handleRemovePinnedEntry}
+                onClearCompare={handleClearCompare}
+                onClearPinned={handleClearPinned}
+              />
+            </>
+          ) : null}
+
+          {minimalMode ? (
+            <MinimalView
+              atlas={atlas}
+              topSearchReasons={topSearchReasons}
+              handleRelatedClick={handleRelatedClick}
+              handleSelectEntry={handleSelectEntry}
+              handleCompareEntry={handleCompareEntry}
+              handleTogglePinEntry={handleTogglePinEntry}
+              handleAddEntryToBoard={handleAddEntryToBoardWithLogging}
+              highlightedEntryId={highlightedEntryId}
+              compareEntryIds={compareEntryIds}
+              pinnedEntryIds={pinnedEntryIds}
+              activeBoardEntryIds={activeBoardEntryIds}
+              activeProjectBoard={activeProjectBoard}
+            />
+          ) : (
+            <div className='grid gap-5 xl:grid-cols-[280px_minmax(0,1fr)]'>
+              <Sidebar groupedSections={atlas.groupedSections} />
+
+              <main className='space-y-5'>
+                <DebugPanel validationErrors={validationErrors} />
+
+                {isAtlasView ? (
+                  <AtlasView
+                    theme={theme}
+                    atlas={atlas}
+                    topSearchReasons={topSearchReasons}
+                    hasPinnedEntries={hasPinnedEntries}
+                    pinnedEntries={pinnedEntries}
+                    isCompareMode={isCompareMode}
+                    compareEntries={compareEntries}
+                    compareLinkCopied={compareLinkCopied}
+                    highlightedEntryId={highlightedEntryId}
+                    compareEntryIds={compareEntryIds}
+                    pinnedEntryIds={pinnedEntryIds}
+                    activeBoardEntryIds={activeBoardEntryIds}
+                    activeProjectBoard={activeProjectBoard}
+                    selectedEntry={selectedEntry}
+                    recommendedEntries={recommendedEntries}
+                    editingEntry={editingEntry}
+                    isEditingDirty={isEditingDirty}
+                    entryOverrides={entryOverrides}
+                    hasSelection={hasSelection}
+                    projectBoards={projectBoards}
+                    hydratedActiveProjectBoard={hydratedActiveProjectBoard}
+                    lastIntentSummaryLabel={lastIntentSummaryLabel}
+                    hasBoard={hasBoard}
+                    activeProjectBoardId={activeProjectBoardId}
+                    directionVersions={directionVersions}
+                    hasSavedCollectionsFlag={hasSavedCollectionsFlag}
+                    savedCollections={savedCollections}
+                    hasCompareHistoryFlag={hasCompareHistoryFlag}
+                    compareHistory={compareHistory}
+                    hasOverridesFlag={hasOverridesFlag}
+                    entries={entries}
+                    secondaryToolsOpen={secondaryToolsOpen}
+                    secondaryToolsCount={secondaryToolsCount}
+                    handleSelectEntry={handleSelectEntry}
+                    handleRemovePinnedEntry={handleRemovePinnedEntry}
+                    handleClearPinned={handleClearPinned}
+                    handleRemoveCompareEntry={handleRemoveCompareEntry}
+                    handleClearCompare={handleClearCompare}
+                    handleCopyCompareLink={handleCopyCompareLink}
+                    handleRelatedClick={handleRelatedClick}
+                    handleCompareEntry={handleCompareEntry}
+                    handleTogglePinEntry={handleTogglePinEntry}
+                    handleAddEntryToBoard={handleAddEntryToBoardWithLogging}
+                    handleClearSelection={handleClearSelection}
+                    handlePrintEntrySheet={handlePrintEntrySheet}
+                    handleOpenEditor={handleOpenEditor}
+                    handleSaveEntryOverride={handleSaveEntryOverride}
+                    handleCloseEditor={handleCloseEditor}
+                    handleResetEntryOverride={handleResetEntryOverride}
+                    handleResetAllEntryOverrides={handleResetAllEntryOverrides}
+                    handleDesignIntentChange={handleDesignIntentChange}
+                    handleCreateProjectBoard={handleCreateProjectBoard}
+                    handleOpenProjectBoard={handleOpenProjectBoard}
+                    handleDeleteProjectBoard={handleDeleteProjectBoard}
+                    handleAddSelectedEntryToBoard={
+                      handleAddSelectedEntryToBoard
+                    }
+                    handleAddComparePairToBoard={handleAddComparePairToBoard}
+                    handleRemoveBoardEntry={handleRemoveBoardEntry}
+                    handleRemoveEntryFromBoard={handleRemoveEntryFromBoard}
+                    handleRemoveBoardComparePair={handleRemoveBoardComparePair}
+                    handleOpenCompareHistoryItem={handleOpenCompareHistoryItem}
+                    handleUpdateBoardNotes={handleUpdateBoardNotes}
+                    handleExportBoardSheet={handleExportBoardSheet}
+                    handleSaveDirectionVersion={handleSaveDirectionVersion}
+                    handleDeleteDirectionVersion={handleDeleteDirectionVersion}
+                    handleRestoreDirectionVersion={
+                      handleRestoreDirectionVersionWithLogging
+                    }
+                    decisionProfile={decisionProfile}
+                    onAcceptRecommendation={handleAcceptRecommendation}
+                    onIgnoreRecommendation={handleIgnoreRecommendation}
+                    onSelectEntry={handleSelectEntry}
+                    handleCreateCollectionFromPinned={
+                      handleCreateCollectionFromPinned
+                    }
+                    handleCreateCollectionFromCompare={
+                      handleCreateCollectionFromCompare
+                    }
+                    handleCreateCollectionFromSelectedAndPinned={
+                      handleCreateCollectionFromSelectedAndPinned
+                    }
+                    handleOpenCollection={handleOpenCollection}
+                    handleDeleteCollection={handleDeleteCollection}
+                    handleRemoveCompareHistoryItem={
+                      handleRemoveCompareHistoryItem
+                    }
+                    handleClearCompareHistory={handleClearCompareHistory}
+                    handleExportDataset={handleExportDataset}
+                    handleExportOverrides={handleExportOverrides}
+                    handleImportPayload={handleImportPayload}
+                    setShowSecondaryTools={setShowSecondaryTools}
+                  />
+                ) : isClusterView ? (
+                  <ClusterView
+                    atlas={atlas}
+                    topSearchReasons={topSearchReasons}
+                    semanticClusters={semanticClusters}
+                    onSelectEntry={handleSelectEntry}
+                    onCompareEntry={handleCompareEntry}
+                    onTogglePinEntry={handleTogglePinEntry}
+                  />
+                ) : isGraphView ? (
+                  <GraphView
+                    entryGraph={entryGraph}
+                    onSelectEntryInGraph={handleSelectEntryInGraph}
+                    onCompareEntry={handleCompareEntry}
+                    onTogglePinEntry={handleTogglePinEntry}
+                  />
+                ) : null}
+              </main>
+            </div>
+          )}
         </div>
 
-        {!minimalMode ? <HeroHeader metrics={atlas.metrics} /> : null}
-        {minimalMode && (
-          <div className='border border-sky-300 bg-sky-50 px-3 py-2 text-xs text-sky-900'>
-            Focus mode — simplified view for step-by-step use
-          </div>
-        )}
-        <FilterToolbar
-          filters={atlas.filters}
-          updateFilter={atlas.updateFilter}
-          clearFilters={atlas.clearFilters}
-          resetView={handleResetView}
+        <SecondaryToolsDock
+          isOpen={showSecondaryTools}
+          onClose={() => setShowSecondaryTools(false)}
+          width={secondaryToolsDockWidth}
+          setWidth={setSecondaryToolsDockWidth}
+          boardContext={boardContext}
+          decisionContext={decisionContext}
+          historyContext={historyContext}
+          historyActions={historyActions}
+          datasetContext={datasetContext}
+          uiContext={uiContext}
+          hasBoard={hasBoard}
+          hasSavedCollectionsFlag={hasSavedCollectionsFlag}
+          hasCompareHistoryFlag={hasCompareHistoryFlag}
+          hasOverridesFlag={hasOverridesFlag}
+          hasSelection={hasSelection}
         />
-
-        <ViewModeTopNav
-          activeView={activeView}
-          setActiveView={setActiveView}
-          minimalMode={minimalMode}
-          setMinimalMode={setMinimalMode}
-          selectedEntry={selectedEntry}
-          activeBoard={activeProjectBoard}
-          onResetView={handleResetView}
-          showSecondaryTools={showSecondaryTools}
-          setShowSecondaryTools={setShowSecondaryTools}
+        <KeyboardShortcutsHelp
+          isOpen={showShortcuts}
+          onToggle={toggleShortcuts}
         />
-
-        {!minimalMode ? (
-          <>
-            <AtlasUtilityBar
-              theme={theme}
-              activeBoard={activeProjectBoard}
-              selectedEntry={selectedEntry}
-              compareEntries={compareEntries}
-              pinnedEntries={pinnedEntries}
-              onSelectEntry={handleSelectEntry}
-              onClearSelection={handleClearSelection}
-              onClearCompare={handleClearCompare}
-              onClearPinned={handleClearPinned}
-            />
-            <AtlasQuickDrawer
-              compareEntries={compareEntries}
-              pinnedEntries={pinnedEntries}
-              onSelectEntry={handleSelectEntry}
-              onRemoveCompareEntry={handleRemoveCompareEntry}
-              onRemovePinnedEntry={handleRemovePinnedEntry}
-              onClearCompare={handleClearCompare}
-              onClearPinned={handleClearPinned}
-            />
-          </>
-        ) : null}
-
-        {minimalMode ? (
-          <MinimalView
-            atlas={atlas}
-            topSearchReasons={topSearchReasons}
-            handleRelatedClick={handleRelatedClick}
-            handleSelectEntry={handleSelectEntry}
-            handleCompareEntry={handleCompareEntry}
-            handleTogglePinEntry={handleTogglePinEntry}
-            handleAddEntryToBoard={handleAddEntryToBoardWithLogging}
-            highlightedEntryId={highlightedEntryId}
-            compareEntryIds={compareEntryIds}
-            pinnedEntryIds={pinnedEntryIds}
-            activeBoardEntryIds={activeBoardEntryIds}
-            activeProjectBoard={activeProjectBoard}
-          />
-        ) : (
-          <div className='grid gap-5 xl:grid-cols-[280px_minmax(0,1fr)]'>
-            <Sidebar groupedSections={atlas.groupedSections} />
-
-            <main className='space-y-5'>
-              <DebugPanel validationErrors={validationErrors} />
-
-              {isAtlasView ? (
-                <AtlasView
-                  theme={theme}
-                  atlas={atlas}
-                  topSearchReasons={topSearchReasons}
-                  hasPinnedEntries={hasPinnedEntries}
-                  pinnedEntries={pinnedEntries}
-                  isCompareMode={isCompareMode}
-                  compareEntries={compareEntries}
-                  compareLinkCopied={compareLinkCopied}
-                  highlightedEntryId={highlightedEntryId}
-                  compareEntryIds={compareEntryIds}
-                  pinnedEntryIds={pinnedEntryIds}
-                  activeBoardEntryIds={activeBoardEntryIds}
-                  activeProjectBoard={activeProjectBoard}
-                  selectedEntry={selectedEntry}
-                  recommendedEntries={recommendedEntries}
-                  editingEntry={editingEntry}
-                  isEditingDirty={isEditingDirty}
-                  entryOverrides={entryOverrides}
-                  hasSelection={hasSelection}
-                  projectBoards={projectBoards}
-                  hydratedActiveProjectBoard={hydratedActiveProjectBoard}
-                  lastIntentSummaryLabel={lastIntentSummaryLabel}
-                  hasBoard={hasBoard}
-                  activeProjectBoardId={activeProjectBoardId}
-                  directionVersions={directionVersions}
-                  hasSavedCollectionsFlag={hasSavedCollectionsFlag}
-                  savedCollections={savedCollections}
-                  hasCompareHistoryFlag={hasCompareHistoryFlag}
-                  compareHistory={compareHistory}
-                  hasOverridesFlag={hasOverridesFlag}
-                  entries={entries}
-                  secondaryToolsOpen={secondaryToolsOpen}
-                  secondaryToolsCount={secondaryToolsCount}
-                  handleSelectEntry={handleSelectEntry}
-                  handleRemovePinnedEntry={handleRemovePinnedEntry}
-                  handleClearPinned={handleClearPinned}
-                  handleRemoveCompareEntry={handleRemoveCompareEntry}
-                  handleClearCompare={handleClearCompare}
-                  handleCopyCompareLink={handleCopyCompareLink}
-                  handleRelatedClick={handleRelatedClick}
-                  handleCompareEntry={handleCompareEntry}
-                  handleTogglePinEntry={handleTogglePinEntry}
-                  handleAddEntryToBoard={handleAddEntryToBoardWithLogging}
-                  handleClearSelection={handleClearSelection}
-                  handlePrintEntrySheet={handlePrintEntrySheet}
-                  handleOpenEditor={handleOpenEditor}
-                  handleSaveEntryOverride={handleSaveEntryOverride}
-                  handleCloseEditor={handleCloseEditor}
-                  handleResetEntryOverride={handleResetEntryOverride}
-                  handleResetAllEntryOverrides={handleResetAllEntryOverrides}
-                  handleDesignIntentChange={handleDesignIntentChange}
-                  handleCreateProjectBoard={handleCreateProjectBoard}
-                  handleOpenProjectBoard={handleOpenProjectBoard}
-                  handleDeleteProjectBoard={handleDeleteProjectBoard}
-                  handleAddSelectedEntryToBoard={handleAddSelectedEntryToBoard}
-                  handleAddComparePairToBoard={handleAddComparePairToBoard}
-                  handleRemoveBoardEntry={handleRemoveBoardEntry}
-                  handleRemoveEntryFromBoard={handleRemoveEntryFromBoard}
-                  handleRemoveBoardComparePair={handleRemoveBoardComparePair}
-                  handleOpenCompareHistoryItem={handleOpenCompareHistoryItem}
-                  handleUpdateBoardNotes={handleUpdateBoardNotes}
-                  handleExportBoardSheet={handleExportBoardSheet}
-                  handleSaveDirectionVersion={handleSaveDirectionVersion}
-                  handleDeleteDirectionVersion={handleDeleteDirectionVersion}
-                  handleRestoreDirectionVersion={
-                    handleRestoreDirectionVersionWithLogging
-                  }
-                  decisionProfile={decisionProfile}
-                  onAcceptRecommendation={handleAcceptRecommendation}
-                  onIgnoreRecommendation={handleIgnoreRecommendation}
-                  onSelectEntry={handleSelectEntry}
-                  handleCreateCollectionFromPinned={
-                    handleCreateCollectionFromPinned
-                  }
-                  handleCreateCollectionFromCompare={
-                    handleCreateCollectionFromCompare
-                  }
-                  handleCreateCollectionFromSelectedAndPinned={
-                    handleCreateCollectionFromSelectedAndPinned
-                  }
-                  handleOpenCollection={handleOpenCollection}
-                  handleDeleteCollection={handleDeleteCollection}
-                  handleRemoveCompareHistoryItem={
-                    handleRemoveCompareHistoryItem
-                  }
-                  handleClearCompareHistory={handleClearCompareHistory}
-                  handleExportDataset={handleExportDataset}
-                  handleExportOverrides={handleExportOverrides}
-                  handleImportPayload={handleImportPayload}
-                  setShowSecondaryTools={setShowSecondaryTools}
-                />
-              ) : isClusterView ? (
-                <ClusterView
-                  atlas={atlas}
-                  topSearchReasons={topSearchReasons}
-                  semanticClusters={semanticClusters}
-                  onSelectEntry={handleSelectEntry}
-                  onCompareEntry={handleCompareEntry}
-                  onTogglePinEntry={handleTogglePinEntry}
-                />
-              ) : isGraphView ? (
-                <GraphView
-                  entryGraph={entryGraph}
-                  onSelectEntryInGraph={handleSelectEntryInGraph}
-                  onCompareEntry={handleCompareEntry}
-                  onTogglePinEntry={handleTogglePinEntry}
-                />
-              ) : null}
-            </main>
-          </div>
-        )}
+        <Analytics />
       </div>
-
-      <SecondaryToolsDock
-        isOpen={showSecondaryTools}
-        onClose={() => setShowSecondaryTools(false)}
-        width={secondaryToolsDockWidth}
-        setWidth={setSecondaryToolsDockWidth}
-        boardContext={boardContext}
-        decisionContext={decisionContext}
-        historyContext={historyContext}
-        historyActions={historyActions}
-        datasetContext={datasetContext}
-        uiContext={uiContext}
-        hasBoard={hasBoard}
-        hasSavedCollectionsFlag={hasSavedCollectionsFlag}
-        hasCompareHistoryFlag={hasCompareHistoryFlag}
-        hasOverridesFlag={hasOverridesFlag}
-        hasSelection={hasSelection}
-      />
-      <KeyboardShortcutsHelp
-        isOpen={showShortcuts}
-        onToggle={toggleShortcuts}
-      />
-      <Analytics />
     </div>
   );
 }

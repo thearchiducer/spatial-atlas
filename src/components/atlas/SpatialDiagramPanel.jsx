@@ -13,26 +13,26 @@ function LegendTag({ children, tone = "stone" }) {
   const toneStyles =
     tone === "core"
       ? {
-          borderColor: "rgba(56, 189, 248, 0.22)",
-          background: "rgba(56, 189, 248, 0.05)",
-          color: "#93c5fd",
+          borderColor: "var(--tone-info-border)",
+          background: "var(--tone-info-bg)",
+          color: "var(--tone-info-text)",
         }
       : tone === "critical"
         ? {
-            borderColor: "rgba(248, 113, 113, 0.22)",
-            background: "rgba(248, 113, 113, 0.05)",
-            color: "#fca5a5",
+            borderColor: "var(--tone-danger-border)",
+            background: "var(--tone-danger-bg)",
+            color: "var(--tone-danger-text)",
           }
         : tone === "threshold"
           ? {
-              borderColor: "rgba(251, 146, 60, 0.22)",
-              background: "rgba(251, 146, 60, 0.05)",
-              color: "#fdba74",
+              borderColor: "var(--tone-warning-border)",
+              background: "var(--tone-warning-bg)",
+              color: "var(--tone-warning-text)",
             }
           : {
-              borderColor: "rgba(168, 85, 247, 0.22)",
-              background: "rgba(168, 85, 247, 0.05)",
-              color: "#c4b5fd",
+              borderColor: "var(--tone-violet-border)",
+              background: "var(--tone-violet-bg)",
+              color: "var(--tone-violet-text)",
             };
 
   return (
@@ -82,32 +82,32 @@ export default function SpatialDiagramPanel({ translator }) {
   function toneStyles(tone) {
     if (tone === "critical") {
       return {
-        fill: "rgba(248,113,113,0.10)",
-        stroke: "#f87171",
-        label: "#fecaca",
+        fill: "var(--tone-danger-bg)",
+        stroke: "var(--tone-danger-border)",
+        label: "var(--tone-danger-text)",
       };
     }
 
     if (tone === "core") {
       return {
-        fill: "rgba(56,189,248,0.10)",
-        stroke: "#38bdf8",
-        label: "#bae6fd",
+        fill: "var(--tone-info-bg)",
+        stroke: "var(--tone-info-border)",
+        label: "var(--tone-info-text)",
       };
     }
 
     if (tone === "threshold") {
       return {
-        fill: "rgba(251,146,60,0.10)",
-        stroke: "#fb923c",
-        label: "#fdba74",
+        fill: "var(--tone-warning-bg)",
+        stroke: "var(--tone-warning-border)",
+        label: "var(--tone-warning-text)",
       };
     }
 
     return {
-      fill: "rgba(255,255,255,0.03)",
-      stroke: "#78716c",
-      label: "#d6d3d1",
+      fill: "var(--bg-muted)",
+      stroke: "var(--border-color)",
+      label: "var(--text-secondary)",
     };
   }
 
@@ -116,7 +116,7 @@ export default function SpatialDiagramPanel({ translator }) {
       className='mt-4 border p-4'
       style={{
         borderColor: "var(--border-color)",
-        background: "rgba(255,255,255,0.03)",
+        background: "var(--bg-muted)",
       }}
     >
       <div
@@ -157,7 +157,7 @@ export default function SpatialDiagramPanel({ translator }) {
               orient='auto'
               markerUnits='strokeWidth'
             >
-              <path d='M0,0 L0,6 L9,3 z' fill='#a8a29e' />
+              <path d='M0,0 L0,6 L9,3 z' fill='var(--text-muted)' />
             </marker>
           </defs>
 
@@ -171,7 +171,7 @@ export default function SpatialDiagramPanel({ translator }) {
                 y1={node.y}
                 x2={nextNode.x - 54}
                 y2={nextNode.y}
-                stroke='#a8a29e'
+                stroke='var(--text-muted)'
                 strokeWidth='1.6'
                 markerEnd='url(#diagram-arrow)'
               />
@@ -200,7 +200,7 @@ export default function SpatialDiagramPanel({ translator }) {
                   textAnchor='middle'
                   fontSize='10'
                   letterSpacing='0.14em'
-                  fill='#a8a29e'
+                  fill='var(--text-muted)'
                 >
                   {String(index + 1).padStart(2, "0")}
                 </text>

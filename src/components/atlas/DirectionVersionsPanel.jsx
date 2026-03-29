@@ -1,32 +1,60 @@
 import { useMemo, useState } from "react";
 import { compareDirectionVersionSnapshots } from "../../lib/directionVersions";
 
-function toneClasses(tone) {
+function toneStyles(tone) {
   if (tone === "positive") {
-    return "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.10)] text-[#a7f3d0]";
+    return {
+      borderColor: "var(--tone-success-border)",
+      background: "var(--tone-success-bg)",
+      color: "var(--tone-success-text)",
+    };
   }
 
   if (tone === "negative") {
-    return "border-[rgba(248,113,113,0.35)] bg-[rgba(248,113,113,0.10)] text-[#fecaca]";
+    return {
+      borderColor: "var(--tone-danger-border)",
+      background: "var(--tone-danger-bg)",
+      color: "var(--tone-danger-text)",
+    };
   }
 
   if (tone === "tradeoff") {
-    return "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.10)] text-[#fde68a]";
+    return {
+      borderColor: "var(--tone-warning-border)",
+      background: "var(--tone-warning-bg)",
+      color: "var(--tone-warning-text)",
+    };
   }
 
-  return "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-secondary)]";
+  return {
+    borderColor: "var(--border-color)",
+    background: "var(--bg-muted)",
+    color: "var(--text-secondary)",
+  };
 }
 
-function strengthClasses(strength) {
+function strengthStyles(strength) {
   if (strength === "Clear") {
-    return "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.10)] text-[#a7f3d0]";
+    return {
+      borderColor: "var(--tone-success-border)",
+      background: "var(--tone-success-bg)",
+      color: "var(--tone-success-text)",
+    };
   }
 
   if (strength === "Developing") {
-    return "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.10)] text-[#fde68a]";
+    return {
+      borderColor: "var(--tone-warning-border)",
+      background: "var(--tone-warning-bg)",
+      color: "var(--tone-warning-text)",
+    };
   }
 
-  return "border-[rgba(248,113,113,0.35)] bg-[rgba(248,113,113,0.10)] text-[#fecaca]";
+  return {
+    borderColor: "var(--tone-danger-border)",
+    background: "var(--tone-danger-bg)",
+    color: "var(--tone-danger-text)",
+  };
 }
 
 function annotationLabel(children) {
@@ -46,7 +74,7 @@ function EmptyState({ text }) {
       className='border border-dashed p-4 text-sm'
       style={{
         borderColor: "var(--border-color)",
-        background: "rgba(255,255,255,0.03)",
+        background: "var(--bg-muted)",
         color: "var(--text-muted)",
       }}
     >
@@ -112,9 +140,9 @@ function SnapshotCard({ snapshot, isActiveBoardVersion, onRestore, onDelete }) {
             <span
               className='border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]'
               style={{
-                borderColor: "rgba(56,189,248,0.35)",
-                background: "rgba(56,189,248,0.10)",
-                color: "#bae6fd",
+                borderColor: "var(--tone-info-border)",
+                background: "var(--tone-info-bg)",
+                color: "var(--tone-info-text)",
               }}
             >
               Active board lineage
@@ -122,9 +150,8 @@ function SnapshotCard({ snapshot, isActiveBoardVersion, onRestore, onDelete }) {
           ) : null}
 
           <span
-            className={`border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] ${strengthClasses(
-              identity?.strength,
-            )}`}
+            className='border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]'
+            style={strengthStyles(identity?.strength)}
           >
             {identity?.strength || "Unknown"}
           </span>
@@ -135,7 +162,7 @@ function SnapshotCard({ snapshot, isActiveBoardVersion, onRestore, onDelete }) {
         className='mt-4 border p-3'
         style={{
           borderColor: "var(--border-color)",
-          background: "rgba(255,255,255,0.03)",
+          background: "var(--bg-muted)",
         }}
       >
         {annotationLabel("Verdict")}
@@ -162,7 +189,7 @@ function SnapshotCard({ snapshot, isActiveBoardVersion, onRestore, onDelete }) {
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em]'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -172,7 +199,7 @@ function SnapshotCard({ snapshot, isActiveBoardVersion, onRestore, onDelete }) {
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em]'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -182,7 +209,7 @@ function SnapshotCard({ snapshot, isActiveBoardVersion, onRestore, onDelete }) {
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em]'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -192,7 +219,7 @@ function SnapshotCard({ snapshot, isActiveBoardVersion, onRestore, onDelete }) {
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em]'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -209,9 +236,9 @@ function SnapshotCard({ snapshot, isActiveBoardVersion, onRestore, onDelete }) {
           onClick={() => onRestore(snapshot.id)}
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
           style={{
-            borderColor: "rgba(16,185,129,0.35)",
-            background: "rgba(16,185,129,0.10)",
-            color: "#a7f3d0",
+            borderColor: "var(--tone-success-border)",
+            background: "var(--tone-success-bg)",
+            color: "var(--tone-success-text)",
           }}
         >
           Restore to board
@@ -222,9 +249,9 @@ function SnapshotCard({ snapshot, isActiveBoardVersion, onRestore, onDelete }) {
           onClick={() => onDelete(snapshot.id)}
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
           style={{
-            borderColor: "rgba(248,113,113,0.35)",
-            background: "rgba(248,113,113,0.10)",
-            color: "#fecaca",
+            borderColor: "var(--tone-danger-border)",
+            background: "var(--tone-danger-bg)",
+            color: "var(--tone-danger-text)",
           }}
         >
           Delete snapshot
@@ -277,11 +304,20 @@ function CompareMetric({ label, leftValue, rightValue, changed }) {
         {annotationLabel(label)}
 
         <span
-          className={`border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] ${
+          className='border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.08em]'
+          style={
             changed
-              ? "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.10)] text-[#fde68a]"
-              : "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-secondary)]"
-          }`}
+              ? {
+                  borderColor: "var(--tone-warning-border)",
+                  background: "var(--tone-warning-bg)",
+                  color: "var(--tone-warning-text)",
+                }
+              : {
+                  borderColor: "var(--border-color)",
+                  background: "var(--bg-muted)",
+                  color: "var(--text-secondary)",
+                }
+          }
         >
           {changed ? "Changed" : "Stable"}
         </span>
@@ -292,7 +328,7 @@ function CompareMetric({ label, leftValue, rightValue, changed }) {
           className='border px-3 py-2 text-sm'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -302,7 +338,7 @@ function CompareMetric({ label, leftValue, rightValue, changed }) {
           className='border px-3 py-2 text-sm font-semibold'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-primary)",
           }}
         >
@@ -334,9 +370,8 @@ function DiffList({ title, items, emptyText, tone }) {
           {items.map((item) => (
             <span
               key={title + "-" + (item.id || item.title || item.term)}
-              className={`border px-3 py-1 text-[11px] uppercase tracking-[0.08em] ${toneClasses(
-                tone,
-              )}`}
+              className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em]'
+              style={toneStyles(tone)}
             >
               {item.term || item.title}
             </span>
@@ -430,7 +465,7 @@ function SnapshotComparePanel({ comparison }) {
         className='mt-4 border p-3'
         style={{
           borderColor: "var(--border-color)",
-          background: "rgba(255,255,255,0.03)",
+          background: "var(--bg-muted)",
         }}
       >
         {annotationLabel("What changed")}
@@ -617,9 +652,9 @@ export default function DirectionVersionsPanel({
             disabled={!activeBoard}
             className='border px-4 py-2 text-[11px] uppercase tracking-[0.08em] transition disabled:cursor-not-allowed disabled:opacity-40'
             style={{
-              borderColor: "rgba(16,185,129,0.35)",
-              background: "rgba(16,185,129,0.10)",
-              color: "#a7f3d0",
+              borderColor: "var(--tone-success-border)",
+              background: "var(--tone-success-bg)",
+              color: "var(--tone-success-text)",
             }}
           >
             Save direction version
@@ -669,9 +704,9 @@ export default function DirectionVersionsPanel({
             <div
               className='mt-5 border p-4 text-sm'
               style={{
-                borderColor: "rgba(251,191,36,0.30)",
-                background: "rgba(251,191,36,0.08)",
-                color: "#fde68a",
+                borderColor: "var(--tone-warning-border)",
+                background: "var(--tone-warning-bg)",
+                color: "var(--tone-warning-text)",
               }}
             >
               Pick two different snapshots to compare them meaningfully.

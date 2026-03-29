@@ -40,7 +40,7 @@ function BoardPicker({ label, value, boards, onChange }) {
         className='border px-3 py-2 text-sm outline-none transition'
         style={{
           borderColor: "var(--border-color)",
-          background: "var(--bg-surface)",
+          background: "var(--bg-muted)",
           color: "var(--text-primary)",
         }}
       >
@@ -58,31 +58,31 @@ function MetricCard({ label, value, tone = "stone" }) {
   const toneStyles =
     tone === "emerald"
       ? {
-          borderColor: "rgba(16,185,129,0.35)",
-          background: "rgba(16,185,129,0.10)",
-          color: "#d1fae5",
+          borderColor: "var(--tone-success-border)",
+          background: "var(--tone-success-bg)",
+          color: "var(--tone-success-text)",
         }
       : tone === "amber"
         ? {
-            borderColor: "rgba(251,191,36,0.30)",
-            background: "rgba(251,191,36,0.10)",
-            color: "#fef3c7",
+            borderColor: "var(--tone-warning-border)",
+            background: "var(--tone-warning-bg)",
+            color: "var(--tone-warning-text)",
           }
         : tone === "sky"
           ? {
-              borderColor: "rgba(56,189,248,0.35)",
-              background: "rgba(56,189,248,0.10)",
-              color: "#e0f2fe",
+              borderColor: "var(--tone-info-border)",
+              background: "var(--tone-info-bg)",
+              color: "var(--tone-info-text)",
             }
           : tone === "violet"
             ? {
-                borderColor: "rgba(168,85,247,0.35)",
-                background: "rgba(168,85,247,0.10)",
-                color: "#f3e8ff",
+                borderColor: "var(--tone-violet-border)",
+                background: "var(--tone-violet-bg)",
+                color: "var(--tone-violet-text)",
               }
             : {
                 borderColor: "var(--border-color)",
-                background: "rgba(255,255,255,0.03)",
+                background: "var(--bg-muted)",
                 color: "var(--text-primary)",
               };
 
@@ -113,25 +113,25 @@ function ListBlock({
   function getToneClasses(tone) {
     if (tone === "emerald") {
       return {
-        chipBorder: "rgba(16,185,129,0.35)",
-        chipBg: "rgba(16,185,129,0.10)",
-        chipText: "#a7f3d0",
-        text: "#a7f3d0",
+        chipBorder: "var(--tone-success-border)",
+        chipBg: "var(--tone-success-bg)",
+        chipText: "var(--tone-success-text)",
+        text: "var(--tone-success-text)",
       };
     }
 
     if (tone === "amber") {
       return {
-        chipBorder: "rgba(251,191,36,0.30)",
-        chipBg: "rgba(251,191,36,0.10)",
-        chipText: "#fde68a",
-        text: "#fde68a",
+        chipBorder: "var(--tone-warning-border)",
+        chipBg: "var(--tone-warning-bg)",
+        chipText: "var(--tone-warning-text)",
+        text: "var(--tone-warning-text)",
       };
     }
 
     return {
       chipBorder: "var(--border-color)",
-      chipBg: "rgba(255,255,255,0.03)",
+      chipBg: "var(--bg-muted)",
       chipText: "var(--text-secondary)",
       text: "var(--text-secondary)",
     };
@@ -142,7 +142,7 @@ function ListBlock({
       className='border'
       style={{
         borderColor: "var(--border-color)",
-        background: "var(--bg-surface)",
+        background: "var(--bg-subtle)",
       }}
     >
       <div
@@ -157,10 +157,7 @@ function ListBlock({
         </div>
       </div>
 
-      <div
-        className='divide-y'
-        style={{ borderColor: "rgba(255,255,255,0.06)" }}
-      >
+      <div className='divide-y' style={{ borderColor: "var(--border-color)" }}>
         {items.length ? (
           items.map((item) => {
             const hasWinner = item.winner;
@@ -207,7 +204,7 @@ function ListBlock({
                       className='border px-2 py-0.5 text-[10px] uppercase tracking-[0.12em]'
                       style={{
                         borderColor: "var(--border-color)",
-                        background: "rgba(255,255,255,0.03)",
+                        background: "var(--bg-muted)",
                         color: "var(--text-muted)",
                       }}
                     >
@@ -291,24 +288,24 @@ function BoardSummaryCard({
   const toneStyles =
     boardTone === "A"
       ? {
-          containerBorder: "rgba(16,185,129,0.35)",
-          containerBg: "rgba(16,185,129,0.08)",
-          badgeBorder: "rgba(16,185,129,0.35)",
-          badgeBg: "rgba(16,185,129,0.14)",
-          badgeText: "#d1fae5",
-          scoreBorder: "rgba(16,185,129,0.35)",
-          scoreBg: "rgba(16,185,129,0.10)",
-          scoreText: "#a7f3d0",
+          containerBorder: "var(--tone-success-border)",
+          containerBg: "var(--tone-success-bg)",
+          badgeBorder: "var(--tone-success-border)",
+          badgeBg: "var(--tone-success-bg)",
+          badgeText: "var(--tone-success-text)",
+          scoreBorder: "var(--tone-success-border)",
+          scoreBg: "var(--tone-success-bg)",
+          scoreText: "var(--tone-success-text)",
         }
       : {
-          containerBorder: "rgba(251,191,36,0.30)",
-          containerBg: "rgba(251,191,36,0.08)",
-          badgeBorder: "rgba(251,191,36,0.30)",
-          badgeBg: "rgba(251,191,36,0.14)",
-          badgeText: "#fef3c7",
-          scoreBorder: "rgba(251,191,36,0.30)",
-          scoreBg: "rgba(251,191,36,0.10)",
-          scoreText: "#fde68a",
+          containerBorder: "var(--tone-warning-border)",
+          containerBg: "var(--tone-warning-bg)",
+          badgeBorder: "var(--tone-warning-border)",
+          badgeBg: "var(--tone-warning-bg)",
+          badgeText: "var(--tone-warning-text)",
+          scoreBorder: "var(--tone-warning-border)",
+          scoreBg: "var(--tone-warning-bg)",
+          scoreText: "var(--tone-warning-text)",
         };
 
   return (
@@ -316,12 +313,12 @@ function BoardSummaryCard({
       className='border p-4'
       style={{
         borderColor: toneStyles.containerBorder,
-        background: toneStyles.containerBg,
+        background: "var(--bg-surface)",
       }}
     >
       <div
         className='flex flex-col gap-3 border-b pb-4 md:flex-row md:items-start md:justify-between'
-        style={{ borderColor: "rgba(255,255,255,0.10)" }}
+        style={{ borderColor: "var(--border-color)" }}
       >
         <div>
           {annotationLabel(title)}
@@ -425,8 +422,8 @@ function VerdictPanel({ comparison, boardA, boardB }) {
     <div
       className='border p-5'
       style={{
-        borderColor: "rgba(56,189,248,0.35)",
-        background: "rgba(56,189,248,0.08)",
+        borderColor: "var(--tone-info-border)",
+        background: "var(--tone-info-bg)",
       }}
     >
       {annotationLabel("Comparison verdict")}
@@ -464,8 +461,8 @@ function PreferenceVerdictPanel({ comparison, boardA, boardB }) {
     <div
       className='border p-5'
       style={{
-        borderColor: "rgba(168,85,247,0.35)",
-        background: "rgba(168,85,247,0.08)",
+        borderColor: "var(--tone-violet-border)",
+        background: "var(--tone-violet-bg)",
       }}
     >
       {annotationLabel("Preference-aware verdict")}
@@ -512,23 +509,23 @@ function EntryChipList({
   const toneStyles =
     tone === "emerald"
       ? {
-          borderColor: "rgba(16,185,129,0.35)",
-          background: "rgba(16,185,129,0.10)",
-          color: "#a7f3d0",
-          hover: "rgba(16,185,129,0.16)",
+          borderColor: "var(--tone-success-border)",
+          background: "var(--tone-success-bg)",
+          color: "var(--tone-success-text)",
+          hover: "var(--tone-success-bg)",
         }
       : tone === "amber"
         ? {
-            borderColor: "rgba(251,191,36,0.30)",
-            background: "rgba(251,191,36,0.10)",
-            color: "#fde68a",
-            hover: "rgba(251,191,36,0.16)",
+            borderColor: "var(--tone-warning-border)",
+            background: "var(--tone-warning-bg)",
+            color: "var(--tone-warning-text)",
+            hover: "var(--tone-warning-bg)",
           }
         : {
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
-            hover: "rgba(255,255,255,0.06)",
+            hover: "var(--bg-subtle)",
           };
 
   return (
@@ -586,7 +583,7 @@ function TransformationPlanBlock({
       className='border'
       style={{
         borderColor: "var(--border-color)",
-        background: "var(--bg-surface)",
+        background: "var(--bg-subtle)",
       }}
     >
       <div
@@ -619,7 +616,7 @@ function TransformationPlanBlock({
                 className='border px-3 py-3'
                 style={{
                   borderColor: "var(--border-color)",
-                  background: "rgba(255,255,255,0.03)",
+                  background: "var(--bg-muted)",
                 }}
               >
                 <div className='flex flex-wrap items-center gap-2'>
@@ -633,7 +630,7 @@ function TransformationPlanBlock({
                     className='border px-2 py-0.5 text-[10px] uppercase tracking-[0.12em]'
                     style={{
                       borderColor: "var(--border-color)",
-                      background: "rgba(255,255,255,0.03)",
+                      background: "var(--bg-muted)",
                       color: "var(--text-muted)",
                     }}
                   >
@@ -683,9 +680,9 @@ function TransformationPlanBlock({
                     }
                     className='border px-3 py-1 text-[10px] uppercase tracking-[0.12em] transition'
                     style={{
-                      borderColor: "rgba(16,185,129,0.35)",
-                      background: "rgba(16,185,129,0.10)",
-                      color: "#a7f3d0",
+                      borderColor: "var(--tone-success-border)",
+                      background: "var(--tone-success-bg)",
+                      color: "var(--tone-success-text)",
                     }}
                   >
                     Preview transformation
@@ -723,12 +720,12 @@ function UndoTransformationBlock({
       className='border p-4'
       style={{
         borderColor: "var(--border-color)",
-        background: "rgba(255,255,255,0.03)",
+        background: "var(--bg-muted)",
       }}
     >
       <div
         className='text-[10px] font-semibold uppercase tracking-[0.16em]'
-        style={{ color: "#fde68a" }}
+        style={{ color: "var(--tone-warning-text)" }}
       >
         Transformation history controls
       </div>
@@ -783,9 +780,9 @@ function UndoTransformationBlock({
           disabled={!appliedCount}
           className='border px-3 py-1.5 text-[10px] uppercase tracking-[0.12em] transition disabled:cursor-not-allowed disabled:opacity-40'
           style={{
-            borderColor: "rgba(251,191,36,0.30)",
-            background: "rgba(251,191,36,0.10)",
-            color: "#fde68a",
+            borderColor: "var(--tone-warning-border)",
+            background: "var(--tone-warning-bg)",
+            color: "var(--tone-warning-text)",
           }}
         >
           Undo last transformation
@@ -797,9 +794,9 @@ function UndoTransformationBlock({
           disabled={!undoneCount}
           className='border px-3 py-1.5 text-[10px] uppercase tracking-[0.12em] transition disabled:cursor-not-allowed disabled:opacity-40'
           style={{
-            borderColor: "rgba(251,191,36,0.30)",
-            background: "rgba(251,191,36,0.10)",
-            color: "#fde68a",
+            borderColor: "var(--tone-warning-border)",
+            background: "var(--tone-warning-bg)",
+            color: "var(--tone-warning-text)",
           }}
         >
           Redo last transformation
@@ -1002,7 +999,7 @@ export default function BoardComparisonPanel({
         className='border p-5'
         style={{
           borderColor: "var(--border-color)",
-          background: "var(--bg-surface)",
+          background: "var(--bg-muted)",
         }}
       >
         {annotationLabel("Board comparison")}
@@ -1026,7 +1023,7 @@ export default function BoardComparisonPanel({
       className='border p-5'
       style={{
         borderColor: "var(--border-color)",
-        background: "var(--bg-surface)",
+        background: "var(--bg-subtle)",
       }}
     >
       {annotationLabel("Board comparison")}
@@ -1076,9 +1073,9 @@ export default function BoardComparisonPanel({
         <div
           className='mt-5 border p-4 text-sm'
           style={{
-            borderColor: "rgba(251,191,36,0.30)",
-            background: "rgba(251,191,36,0.08)",
-            color: "#fde68a",
+            borderColor: "var(--tone-warning-border)",
+            background: "var(--tone-warning-bg)",
+            color: "var(--tone-warning-text)",
           }}
         >
           Pick two different boards to get a meaningful comparison.
@@ -1087,9 +1084,9 @@ export default function BoardComparisonPanel({
         <div
           className='mt-5 border p-4 text-sm'
           style={{
-            borderColor: "rgba(251,191,36,0.30)",
-            background: "rgba(251,191,36,0.08)",
-            color: "#fde68a",
+            borderColor: "var(--tone-warning-border)",
+            background: "var(--tone-warning-bg)",
+            color: "var(--tone-warning-text)",
           }}
         >
           Comparison could not be generated for the selected boards.

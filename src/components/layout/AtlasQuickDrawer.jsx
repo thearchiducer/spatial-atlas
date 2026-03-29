@@ -4,14 +4,14 @@ function DrawerChip({ entry, tone = "stone", onSelectEntry, onRemove }) {
   const toneStyles =
     tone === "sky"
       ? {
-          borderColor: "rgba(56,189,248,0.35)",
-          background: "rgba(56,189,248,0.10)",
-          color: "#bae6fd",
+          borderColor: "var(--tone-info-border)",
+          background: "var(--tone-info-bg)",
+          color: "var(--tone-info-text)",
         }
       : {
-          borderColor: "rgba(251,191,36,0.30)",
-          background: "rgba(251,191,36,0.10)",
-          color: "#fde68a",
+          borderColor: "var(--tone-warning-border)",
+          background: "var(--tone-warning-bg)",
+          color: "var(--tone-warning-text)",
         };
 
   return (
@@ -32,8 +32,8 @@ function DrawerChip({ entry, tone = "stone", onSelectEntry, onRemove }) {
         onClick={() => onRemove(entry.id)}
         className='border px-2 py-0.5 text-[10px] uppercase tracking-[0.08em] transition'
         style={{
-          borderColor: "rgba(255,255,255,0.15)",
-          background: "rgba(255,255,255,0.06)",
+          borderColor: "var(--border-color)",
+          background: "var(--bg-muted)",
           color: "var(--text-secondary)",
         }}
       >
@@ -47,14 +47,14 @@ function UtilityCounter({ label, value, tone = "stone" }) {
   const toneStyles =
     tone === "sky"
       ? {
-          borderColor: "rgba(56,189,248,0.35)",
-          background: "rgba(56,189,248,0.10)",
-          color: "#bae6fd",
+          borderColor: "var(--tone-info-border)",
+          background: "var(--tone-info-bg)",
+          color: "var(--tone-info-text)",
         }
       : {
-          borderColor: "rgba(251,191,36,0.30)",
-          background: "rgba(251,191,36,0.10)",
-          color: "#fde68a",
+          borderColor: "var(--tone-warning-border)",
+          background: "var(--tone-warning-bg)",
+          color: "var(--tone-warning-text)",
         };
 
   return (
@@ -92,7 +92,7 @@ export default function AtlasQuickDrawer({
       className='sticky top-20 z-10 border p-4 backdrop-blur'
       style={{
         borderColor: "var(--border-color)",
-        background: "rgba(255,255,255,0.04)",
+        background: "var(--bg-subtle)",
       }}
     >
       <div className='flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between'>
@@ -121,7 +121,7 @@ export default function AtlasQuickDrawer({
             className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
             style={{
               borderColor: "var(--border-color)",
-              background: "rgba(255,255,255,0.03)",
+              background: "var(--bg-muted)",
               color: "var(--text-secondary)",
             }}
           >
@@ -134,9 +134,9 @@ export default function AtlasQuickDrawer({
               onClick={onClearCompare}
               className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
               style={{
-                borderColor: "rgba(56,189,248,0.35)",
-                background: "rgba(56,189,248,0.10)",
-                color: "#bae6fd",
+                borderColor: "var(--tone-info-border)",
+                background: "var(--tone-info-bg)",
+                color: "var(--tone-info-text)",
               }}
             >
               Clear compare
@@ -149,9 +149,9 @@ export default function AtlasQuickDrawer({
               onClick={onClearPinned}
               className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
               style={{
-                borderColor: "rgba(251,191,36,0.30)",
-                background: "rgba(251,191,36,0.10)",
-                color: "#fde68a",
+                borderColor: "var(--tone-warning-border)",
+                background: "var(--tone-warning-bg)",
+                color: "var(--tone-warning-text)",
               }}
             >
               Clear pinned
@@ -162,28 +162,27 @@ export default function AtlasQuickDrawer({
 
       {isOpen && (
         <div className='mt-4 grid gap-4 xl:grid-cols-2'>
-          {/* Compare */}
           <div
             className='border p-4'
             style={{
-              borderColor: "rgba(56,189,248,0.35)",
-              background: "rgba(56,189,248,0.08)",
+              borderColor: "var(--tone-info-border)",
+              background: "var(--tone-info-bg)",
             }}
           >
             <div
               className='border-b pb-3'
-              style={{ borderColor: "rgba(56,189,248,0.25)" }}
+              style={{ borderColor: "var(--tone-info-border)" }}
             >
               <div
                 className='text-[10px] font-semibold uppercase tracking-[0.16em]'
-                style={{ color: "#bae6fd" }}
+                style={{ color: "var(--tone-info-text)" }}
               >
                 Compare drawer
               </div>
 
               <p
                 className='mt-2 text-sm leading-relaxed'
-                style={{ color: "#e0f2fe" }}
+                style={{ color: "var(--text-primary)" }}
               >
                 {hasCompare
                   ? `${compareEntries.length} selected for comparison`
@@ -204,34 +203,36 @@ export default function AtlasQuickDrawer({
                 ))}
               </div>
             ) : (
-              <p className='mt-3 text-sm' style={{ color: "#bae6fd" }}>
+              <p
+                className='mt-3 text-sm'
+                style={{ color: "var(--tone-info-text)" }}
+              >
                 Add entries from the cards or selected-entry panel.
               </p>
             )}
           </div>
 
-          {/* Pinned */}
           <div
             className='border p-4'
             style={{
-              borderColor: "rgba(251,191,36,0.30)",
-              background: "rgba(251,191,36,0.08)",
+              borderColor: "var(--tone-warning-border)",
+              background: "var(--tone-warning-bg)",
             }}
           >
             <div
               className='border-b pb-3'
-              style={{ borderColor: "rgba(251,191,36,0.25)" }}
+              style={{ borderColor: "var(--tone-warning-border)" }}
             >
               <div
                 className='text-[10px] font-semibold uppercase tracking-[0.16em]'
-                style={{ color: "#fde68a" }}
+                style={{ color: "var(--tone-warning-text)" }}
               >
                 Pinned drawer
               </div>
 
               <p
                 className='mt-2 text-sm leading-relaxed'
-                style={{ color: "#fef3c7" }}
+                style={{ color: "var(--text-primary)" }}
               >
                 {hasPinned
                   ? `${pinnedEntries.length} saved favorites`
@@ -252,7 +253,10 @@ export default function AtlasQuickDrawer({
                 ))}
               </div>
             ) : (
-              <p className='mt-3 text-sm' style={{ color: "#fde68a" }}>
+              <p
+                className='mt-3 text-sm'
+                style={{ color: "var(--tone-warning-text)" }}
+              >
                 Pin entries from the cards or selected-entry panel.
               </p>
             )}

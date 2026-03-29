@@ -18,22 +18,43 @@ function SectionToggle({
   onToggle,
   tone = "stone",
 }) {
-  const toneClasses =
+  const toneStyles =
     tone === "sky"
-      ? "border-[rgba(56,189,248,0.35)] bg-[rgba(56,189,248,0.08)] text-[#e0f2fe]"
+      ? {
+          borderColor: "var(--tone-info-border)",
+          background: "var(--tone-info-bg)",
+          color: "var(--tone-info-text)",
+        }
       : tone === "amber"
-        ? "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.08)] text-[#fef3c7]"
+        ? {
+            borderColor: "var(--tone-warning-border)",
+            background: "var(--tone-warning-bg)",
+            color: "var(--tone-warning-text)",
+          }
         : tone === "emerald"
-          ? "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.08)] text-[#d1fae5]"
+          ? {
+              borderColor: "var(--tone-success-border)",
+              background: "var(--tone-success-bg)",
+              color: "var(--tone-success-text)",
+            }
           : tone === "violet"
-            ? "border-[rgba(168,85,247,0.35)] bg-[rgba(168,85,247,0.08)] text-[#f3e8ff]"
-            : "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-primary)]";
+            ? {
+                borderColor: "var(--tone-violet-border)",
+                background: "var(--tone-violet-bg)",
+                color: "var(--tone-violet-text)",
+              }
+            : {
+                borderColor: "var(--border-color)",
+                background: "var(--bg-muted)",
+                color: "var(--text-primary)",
+              };
 
   return (
     <button
       type='button'
       onClick={onToggle}
-      className={`flex w-full items-start justify-between gap-4 border px-4 py-3 text-left transition hover:bg-[rgba(255,255,255,0.04)] ${toneClasses}`}
+      className='flex w-full items-start justify-between gap-4 border px-4 py-3 text-left transition'
+      style={toneStyles}
     >
       <div className='min-w-0'>
         <div className='flex flex-wrap items-center gap-2'>
@@ -532,7 +553,7 @@ export default function SecondaryToolsPanel({
           ? undefined
           : {
               borderColor: "var(--border-color)",
-              background: "rgba(255,255,255,0.03)",
+              background: "var(--bg-subtle)",
             }
       }
     >
@@ -571,7 +592,7 @@ export default function SecondaryToolsPanel({
             className='border px-3 py-1.5 text-[10px] uppercase tracking-[0.12em] transition'
             style={{
               borderColor: "var(--border-color)",
-              background: "rgba(255,255,255,0.03)",
+              background: "var(--bg-muted)",
               color: "var(--text-secondary)",
             }}
           >
@@ -598,22 +619,22 @@ export default function SecondaryToolsPanel({
           style={
             contextSummary.tone === "sky"
               ? {
-                  borderColor: "rgba(56,189,248,0.35)",
-                  background: "rgba(56,189,248,0.08)",
+                  borderColor: "var(--tone-info-border)",
+                  background: "var(--tone-info-bg)",
                 }
               : contextSummary.tone === "emerald"
                 ? {
-                    borderColor: "rgba(16,185,129,0.35)",
-                    background: "rgba(16,185,129,0.08)",
+                    borderColor: "var(--tone-success-border)",
+                    background: "var(--tone-success-bg)",
                   }
                 : contextSummary.tone === "amber"
                   ? {
-                      borderColor: "rgba(251,191,36,0.30)",
-                      background: "rgba(251,191,36,0.08)",
+                      borderColor: "var(--tone-warning-border)",
+                      background: "var(--tone-warning-bg)",
                     }
                   : {
                       borderColor: "var(--border-color)",
-                      background: "rgba(255,255,255,0.03)",
+                      background: "var(--bg-muted)",
                     }
           }
         >
@@ -641,10 +662,15 @@ export default function SecondaryToolsPanel({
             key={section.key}
             className={
               section.priority <= 15
-                ? "ring-1 ring-[rgba(255,255,255,0.10)]"
+                ? "ring-1"
                 : section.priority <= 30
                   ? "opacity-100"
                   : "opacity-85"
+            }
+            style={
+              section.priority <= 15
+                ? { boxShadow: `inset 0 0 0 1px var(--border-color)` }
+                : undefined
             }
           >
             {section.node}

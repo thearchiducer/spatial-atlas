@@ -48,7 +48,7 @@ function SelectField({ label, value, onChange, options }) {
           color: "var(--text-primary)",
         }}
         onFocus={(e) => {
-          e.currentTarget.style.borderColor = "rgba(56,189,248,0.45)";
+          e.currentTarget.style.borderColor = "var(--tone-info-border)";
         }}
         onBlur={(e) => {
           e.currentTarget.style.borderColor = "var(--border-color)";
@@ -70,7 +70,7 @@ function IntentMetric({ label, value }) {
       className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
       style={{
         borderColor: "var(--border-color)",
-        background: "rgba(255,255,255,0.03)",
+        background: "var(--bg-muted)",
         color: "var(--text-secondary)",
       }}
     >
@@ -82,21 +82,21 @@ function IntentMetric({ label, value }) {
 function getMatchTone(label) {
   if (label === "Strong fit") {
     return {
-      borderColor: "rgba(16,185,129,0.35)",
-      background: "rgba(16,185,129,0.08)",
+      borderColor: "var(--tone-success-border)",
+      background: "var(--tone-success-bg)",
     };
   }
 
   if (label === "Moderate fit") {
     return {
-      borderColor: "rgba(251,191,36,0.30)",
-      background: "rgba(251,191,36,0.08)",
+      borderColor: "var(--tone-warning-border)",
+      background: "var(--tone-warning-bg)",
     };
   }
 
   return {
     borderColor: "var(--border-color)",
-    background: "rgba(255,255,255,0.03)",
+    background: "var(--bg-muted)",
   };
 }
 
@@ -133,7 +133,7 @@ function SuggestionCard({ title, description, entries, onSelectEntry }) {
               className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
               style={{
                 borderColor: "var(--border-color)",
-                background: "rgba(255,255,255,0.03)",
+                background: "var(--bg-muted)",
                 color: "var(--text-secondary)",
               }}
             >
@@ -155,18 +155,21 @@ function SequenceCard({ entries, onSelectEntry, onCompareEntry }) {
     <section
       className='border p-4'
       style={{
-        borderColor: "rgba(99,102,241,0.35)",
-        background: "rgba(99,102,241,0.08)",
+        borderColor: "var(--tone-violet-border)",
+        background: "var(--tone-violet-bg)",
       }}
     >
       {annotationLabel("Proposed order")}
       <h3
         className='mt-2 text-base font-semibold tracking-tight'
-        style={{ color: "#e0e7ff" }}
+        style={{ color: "var(--text-primary)" }}
       >
         Suggested spatial sequence
       </h3>
-      <p className='mt-1 text-sm leading-relaxed' style={{ color: "#c7d2fe" }}>
+      <p
+        className='mt-1 text-sm leading-relaxed'
+        style={{ color: "var(--tone-violet-text)" }}
+      >
         A heuristic order from more public or transitional conditions toward
         more specific, protected, or internally resolved roles.
       </p>
@@ -180,9 +183,9 @@ function SequenceCard({ entries, onSelectEntry, onCompareEntry }) {
                 onClick={() => onSelectEntry && onSelectEntry(entry.id)}
                 className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
                 style={{
-                  borderColor: "rgba(99,102,241,0.35)",
-                  background: "rgba(255,255,255,0.06)",
-                  color: "#e0e7ff",
+                  borderColor: "var(--tone-violet-border)",
+                  background: "var(--bg-muted)",
+                  color: "var(--text-primary)",
                 }}
               >
                 {entry.term}
@@ -191,7 +194,7 @@ function SequenceCard({ entries, onSelectEntry, onCompareEntry }) {
               {index < entries.length - 1 ? (
                 <span
                   className='text-sm font-semibold'
-                  style={{ color: "#c7d2fe" }}
+                  style={{ color: "var(--tone-violet-text)" }}
                 >
                   →
                 </span>
@@ -199,7 +202,10 @@ function SequenceCard({ entries, onSelectEntry, onCompareEntry }) {
             </div>
           ))
         ) : (
-          <span className='text-sm' style={{ color: "#c7d2fe" }}>
+          <span
+            className='text-sm'
+            style={{ color: "var(--tone-violet-text)" }}
+          >
             No sequence available.
           </span>
         )}
@@ -212,9 +218,9 @@ function SequenceCard({ entries, onSelectEntry, onCompareEntry }) {
             onClick={() => onCompareEntry && onCompareEntry(entries[0].id)}
             className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
             style={{
-              borderColor: "rgba(99,102,241,0.35)",
-              background: "rgba(255,255,255,0.06)",
-              color: "#e0e7ff",
+              borderColor: "var(--tone-violet-border)",
+              background: "var(--bg-muted)",
+              color: "var(--text-primary)",
             }}
           >
             Start compare from first node
@@ -243,7 +249,7 @@ function IntentMatchCard({
     >
       <div
         className='flex items-start justify-between gap-3 border-b pb-4'
-        style={{ borderColor: "rgba(255,255,255,0.08)" }}
+        style={{ borderColor: "var(--border-color)" }}
       >
         <button
           type='button'
@@ -269,7 +275,7 @@ function IntentMatchCard({
             className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
             style={{
               borderColor: "var(--border-color)",
-              background: "rgba(255,255,255,0.03)",
+              background: "var(--bg-muted)",
               color: "var(--text-secondary)",
             }}
           >
@@ -305,8 +311,8 @@ function IntentMatchCard({
         <div
           className='mt-4 border p-3'
           style={{
-            borderColor: "rgba(248,113,113,0.35)",
-            background: "rgba(248,113,113,0.08)",
+            borderColor: "var(--tone-danger-border)",
+            background: "var(--tone-danger-bg)",
           }}
         >
           {annotationLabel("Conflicts reducing fit")}
@@ -316,9 +322,9 @@ function IntentMatchCard({
                 key={item.label}
                 className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
                 style={{
-                  borderColor: "rgba(248,113,113,0.35)",
-                  background: "rgba(248,113,113,0.10)",
-                  color: "#fecaca",
+                  borderColor: "var(--tone-danger-border)",
+                  background: "var(--tone-danger-bg)",
+                  color: "var(--tone-danger-text)",
                 }}
               >
                 {item.label} −{item.penalty}
@@ -333,7 +339,7 @@ function IntentMatchCard({
           className='mt-4 border p-3'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
           }}
         >
           {annotationLabel("Why this appears")}
@@ -358,7 +364,7 @@ function IntentMatchCard({
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -371,7 +377,7 @@ function IntentMatchCard({
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -384,7 +390,7 @@ function IntentMatchCard({
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -577,7 +583,7 @@ export default function DesignIntentPanel({
           className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -641,7 +647,7 @@ export default function DesignIntentPanel({
             className='border p-4 text-sm'
             style={{
               borderColor: "var(--border-color)",
-              background: "rgba(255,255,255,0.03)",
+              background: "var(--bg-muted)",
               color: "var(--text-secondary)",
             }}
           >

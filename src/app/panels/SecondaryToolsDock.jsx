@@ -133,7 +133,7 @@ export default function SecondaryToolsDock({
               className='border px-2 py-1 text-[10px] uppercase tracking-[0.12em]'
               style={{
                 borderColor: "var(--border-color)",
-                background: "rgba(255,255,255,0.03)",
+                background: "var(--bg-muted)",
                 color: "var(--text-secondary)",
               }}
               title='Current snapped dock width'
@@ -147,7 +147,7 @@ export default function SecondaryToolsDock({
               className='border px-3 py-1.5 text-[10px] uppercase tracking-[0.12em] transition'
               style={{
                 borderColor: "var(--border-color)",
-                background: "rgba(255,255,255,0.03)",
+                background: "var(--bg-muted)",
                 color: "var(--text-secondary)",
               }}
             >
@@ -173,13 +173,13 @@ export default function SecondaryToolsDock({
                   style={
                     isActive
                       ? {
-                          borderColor: "rgba(168,85,247,0.35)",
-                          background: "rgba(168,85,247,0.10)",
-                          color: "#d8b4fe",
+                          borderColor: "var(--tone-violet-border)",
+                          background: "var(--tone-violet-bg)",
+                          color: "var(--tone-violet-text)",
                         }
                       : {
                           borderColor: "var(--border-color)",
-                          background: "rgba(255,255,255,0.03)",
+                          background: "var(--bg-muted)",
                           color: "var(--text-secondary)",
                         }
                   }

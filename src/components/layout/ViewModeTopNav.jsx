@@ -1,13 +1,13 @@
 function navButtonStyle(isActive) {
   return isActive
     ? {
-        borderColor: "rgba(56,189,248,0.35)",
-        background: "rgba(56,189,248,0.12)",
-        color: "#e0f2fe",
+        borderColor: "var(--tone-info-border)",
+        background: "var(--tone-info-bg)",
+        color: "var(--tone-info-text)",
       }
     : {
         borderColor: "var(--border-color)",
-        background: "rgba(255,255,255,0.03)",
+        background: "var(--bg-muted)",
         color: "var(--text-secondary)",
       };
 }
@@ -18,7 +18,7 @@ function statusChip(label, value) {
       className='border px-2.5 py-1 text-[10px] uppercase tracking-[0.12em]'
       style={{
         borderColor: "var(--border-color)",
-        background: "rgba(255,255,255,0.03)",
+        background: "var(--bg-muted)",
         color: "var(--text-secondary)",
       }}
     >
@@ -51,7 +51,7 @@ export default function ViewModeTopNav({
       className='border'
       style={{
         borderColor: "var(--border-color)",
-        background: "rgba(255,255,255,0.04)",
+        background: "var(--bg-subtle)",
       }}
     >
       <div className='grid gap-3 px-4 py-3 xl:grid-cols-[1.2fr_.8fr] xl:items-center'>
@@ -112,7 +112,7 @@ export default function ViewModeTopNav({
               className='border px-3 py-1.5 text-[10px] uppercase tracking-[0.12em] transition'
               style={{
                 borderColor: "var(--border-color)",
-                background: "rgba(255,255,255,0.03)",
+                background: "var(--bg-muted)",
                 color: "var(--text-secondary)",
               }}
               title='Reset view (Shift+R)'

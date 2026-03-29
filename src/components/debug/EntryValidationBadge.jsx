@@ -8,9 +8,9 @@ export default function EntryValidationBadge({ issues }) {
       <span
         className='rounded-full border px-3 py-1 text-xs font-medium'
         style={{
-          borderColor: "rgba(251,191,36,0.30)",
-          background: "rgba(251,191,36,0.10)",
-          color: "#fde68a",
+          borderColor: "var(--tone-warning-border)",
+          background: "var(--tone-warning-bg)",
+          color: "var(--tone-warning-text)",
         }}
       >
         {issues.length} issue{issues.length === 1 ? "" : "s"}
@@ -19,9 +19,9 @@ export default function EntryValidationBadge({ issues }) {
       <div
         className='max-w-[240px] rounded-2xl border p-3 text-left text-xs shadow-sm'
         style={{
-          borderColor: "rgba(251,191,36,0.25)",
-          background: "rgba(251,191,36,0.08)",
-          color: "#fef3c7",
+          borderColor: "var(--tone-warning-border)",
+          background: "var(--tone-warning-bg)",
+          color: "var(--text-primary)",
         }}
       >
         <ul className='list-disc space-y-1 pl-4'>

@@ -8,31 +8,31 @@ function SmallCard({ label, value, tone = "stone" }) {
   const toneStyles =
     tone === "emerald"
       ? {
-          borderColor: "rgba(16,185,129,0.35)",
-          background: "rgba(16,185,129,0.10)",
-          color: "#d1fae5",
+          borderColor: "var(--tone-success-border)",
+          background: "var(--tone-success-bg)",
+          color: "var(--tone-success-text)",
         }
       : tone === "amber"
         ? {
-            borderColor: "rgba(251,191,36,0.30)",
-            background: "rgba(251,191,36,0.10)",
-            color: "#fef3c7",
+            borderColor: "var(--tone-warning-border)",
+            background: "var(--tone-warning-bg)",
+            color: "var(--tone-warning-text)",
           }
         : tone === "sky"
           ? {
-              borderColor: "rgba(56,189,248,0.35)",
-              background: "rgba(56,189,248,0.10)",
-              color: "#e0f2fe",
+              borderColor: "var(--tone-info-border)",
+              background: "var(--tone-info-bg)",
+              color: "var(--tone-info-text)",
             }
           : tone === "violet"
             ? {
-                borderColor: "rgba(168,85,247,0.35)",
-                background: "rgba(168,85,247,0.10)",
-                color: "#f3e8ff",
+                borderColor: "var(--tone-violet-border)",
+                background: "var(--tone-violet-bg)",
+                color: "var(--tone-violet-text)",
               }
             : {
                 borderColor: "var(--border-color)",
-                background: "rgba(255,255,255,0.03)",
+                background: "var(--bg-muted)",
                 color: "var(--text-primary)",
               };
 
@@ -57,18 +57,18 @@ function ListBlock({ title, items, tone = "stone", emptyText = "No items." }) {
   const containerStyles =
     tone === "emerald"
       ? {
-          borderColor: "rgba(16,185,129,0.35)",
-          background: "rgba(16,185,129,0.08)",
+          borderColor: "var(--tone-success-border)",
+          background: "var(--tone-success-bg)",
         }
       : tone === "amber"
         ? {
-            borderColor: "rgba(251,191,36,0.30)",
-            background: "rgba(251,191,36,0.08)",
+            borderColor: "var(--tone-warning-border)",
+            background: "var(--tone-warning-bg)",
           }
         : tone === "sky"
           ? {
-              borderColor: "rgba(56,189,248,0.35)",
-              background: "rgba(56,189,248,0.08)",
+              borderColor: "var(--tone-info-border)",
+              background: "var(--tone-info-bg)",
             }
           : {
               borderColor: "var(--border-color)",
@@ -85,7 +85,7 @@ function ListBlock({ title, items, tone = "stone", emptyText = "No items." }) {
     >
       <div
         className='border-b px-4 py-3'
-        style={{ borderColor: "rgba(255,255,255,0.08)" }}
+        style={{ borderColor: "var(--border-color)" }}
       >
         <div
           className='text-xs font-semibold uppercase tracking-[0.12em]'
@@ -103,7 +103,7 @@ function ListBlock({ title, items, tone = "stone", emptyText = "No items." }) {
               className='border px-3 py-3'
               style={{
                 borderColor: "var(--border-color)",
-                background: "rgba(255,255,255,0.03)",
+                background: "var(--bg-muted)",
               }}
             >
               <div
@@ -140,23 +140,23 @@ function EntryChipList({
   const toneStyles =
     tone === "emerald"
       ? {
-          borderColor: "rgba(16,185,129,0.35)",
-          background: "rgba(16,185,129,0.10)",
-          color: "#a7f3d0",
-          hover: "rgba(16,185,129,0.16)",
+          borderColor: "var(--tone-success-border)",
+          background: "var(--tone-success-bg)",
+          color: "var(--tone-success-text)",
+          hover: "var(--tone-success-bg)",
         }
       : tone === "amber"
         ? {
-            borderColor: "rgba(251,191,36,0.30)",
-            background: "rgba(251,191,36,0.10)",
-            color: "#fde68a",
-            hover: "rgba(251,191,36,0.16)",
+            borderColor: "var(--tone-warning-border)",
+            background: "var(--tone-warning-bg)",
+            color: "var(--tone-warning-text)",
+            hover: "var(--tone-warning-bg)",
           }
         : {
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
-            hover: "rgba(255,255,255,0.06)",
+            hover: "var(--bg-subtle)",
           };
 
   return (
@@ -242,7 +242,7 @@ function RecommendationBlock({
               className='border px-3 py-3'
               style={{
                 borderColor: "var(--border-color)",
-                background: "rgba(255,255,255,0.03)",
+                background: "var(--bg-muted)",
               }}
             >
               <div className='flex flex-wrap items-center gap-2'>
@@ -257,7 +257,7 @@ function RecommendationBlock({
                   className='border px-2 py-0.5 text-[10px] uppercase tracking-[0.12em]'
                   style={{
                     borderColor: "var(--border-color)",
-                    background: "rgba(255,255,255,0.03)",
+                    background: "var(--bg-muted)",
                     color: "var(--text-muted)",
                   }}
                 >
@@ -268,7 +268,7 @@ function RecommendationBlock({
                   className='border px-2 py-0.5 text-[10px] uppercase tracking-[0.12em]'
                   style={{
                     borderColor: "var(--border-color)",
-                    background: "rgba(255,255,255,0.03)",
+                    background: "var(--bg-muted)",
                     color: "var(--text-muted)",
                   }}
                 >
@@ -279,9 +279,9 @@ function RecommendationBlock({
                   <div
                     className='border px-2 py-0.5 text-[10px] uppercase tracking-[0.12em]'
                     style={{
-                      borderColor: "rgba(168,85,247,0.35)",
-                      background: "rgba(168,85,247,0.10)",
-                      color: "#d8b4fe",
+                      borderColor: "var(--tone-violet-border)",
+                      background: "var(--tone-violet-bg)",
+                      color: "var(--tone-violet-text)",
                     }}
                   >
                     Learning {item.learningScore}
@@ -336,9 +336,9 @@ function RecommendationBlock({
                   onClick={() => onAcceptRecommendation?.(item)}
                   className='border px-3 py-1 text-[10px] uppercase tracking-[0.12em] transition'
                   style={{
-                    borderColor: "rgba(16,185,129,0.35)",
-                    background: "rgba(16,185,129,0.10)",
-                    color: "#a7f3d0",
+                    borderColor: "var(--tone-success-border)",
+                    background: "var(--tone-success-bg)",
+                    color: "var(--tone-success-text)",
                   }}
                 >
                   Apply recommendation
@@ -350,7 +350,7 @@ function RecommendationBlock({
                   className='border px-3 py-1 text-[10px] uppercase tracking-[0.12em] transition'
                   style={{
                     borderColor: "var(--border-color)",
-                    background: "rgba(255,255,255,0.03)",
+                    background: "var(--bg-muted)",
                     color: "var(--text-secondary)",
                   }}
                 >
@@ -376,13 +376,13 @@ function PreferenceProfileBlock({ decisionProfile }) {
     <div
       className='border px-4 py-4'
       style={{
-        borderColor: "rgba(168,85,247,0.35)",
-        background: "rgba(168,85,247,0.08)",
+        borderColor: "var(--tone-violet-border)",
+        background: "var(--tone-violet-bg)",
       }}
     >
       <div
         className='text-[10px] font-semibold uppercase tracking-[0.16em]'
-        style={{ color: "#d8b4fe" }}
+        style={{ color: "var(--tone-violet-text)" }}
       >
         Learned preference profile
       </div>
@@ -423,13 +423,13 @@ function DecisionProfileSourceBlock({
     <div
       className='border px-4 py-4'
       style={{
-        borderColor: "rgba(168,85,247,0.35)",
-        background: "rgba(168,85,247,0.08)",
+        borderColor: "var(--tone-violet-border)",
+        background: "var(--tone-violet-bg)",
       }}
     >
       <div
         className='text-[10px] font-semibold uppercase tracking-[0.16em]'
-        style={{ color: "#d8b4fe" }}
+        style={{ color: "var(--tone-violet-text)" }}
       >
         Learning scope
       </div>
@@ -480,19 +480,19 @@ function DecisionProfileMaturityBlock({ decisionProfile }) {
   const toneStyles =
     maturity.level === "established"
       ? {
-          borderColor: "rgba(16,185,129,0.35)",
-          background: "rgba(16,185,129,0.10)",
-          color: "#d1fae5",
+          borderColor: "var(--tone-success-border)",
+          background: "var(--tone-success-bg)",
+          color: "var(--tone-success-text)",
         }
       : maturity.level === "emerging"
         ? {
-            borderColor: "rgba(251,191,36,0.30)",
-            background: "rgba(251,191,36,0.10)",
-            color: "#fef3c7",
+            borderColor: "var(--tone-warning-border)",
+            background: "var(--tone-warning-bg)",
+            color: "var(--tone-warning-text)",
           }
         : {
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-primary)",
           };
 
@@ -608,16 +608,16 @@ export default function BoardIntelligencePanel({
       className='space-y-5 rounded-3xl border p-5 shadow-sm'
       style={{
         borderColor: "var(--border-color)",
-        background: "rgba(255,255,255,0.04)",
+        background: "var(--bg-subtle)",
       }}
     >
       <div>
         <div
           className='inline-flex border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em]'
           style={{
-            borderColor: "rgba(56,189,248,0.35)",
-            background: "rgba(56,189,248,0.10)",
-            color: "#bae6fd",
+            borderColor: "var(--tone-info-border)",
+            background: "var(--tone-info-bg)",
+            color: "var(--tone-info-text)",
           }}
         >
           Board intelligence
@@ -684,13 +684,13 @@ export default function BoardIntelligencePanel({
       <div
         className='border px-4 py-4'
         style={{
-          borderColor: "rgba(168,85,247,0.35)",
-          background: "rgba(168,85,247,0.08)",
+          borderColor: "var(--tone-violet-border)",
+          background: "var(--tone-violet-bg)",
         }}
       >
         <div
           className='text-[10px] font-semibold uppercase tracking-[0.16em]'
-          style={{ color: "#d8b4fe" }}
+          style={{ color: "var(--tone-violet-text)" }}
         >
           Directional recommendations
         </div>
@@ -698,9 +698,9 @@ export default function BoardIntelligencePanel({
           <div
             className='mt-3 border px-3 py-2 text-sm leading-relaxed'
             style={{
-              borderColor: "rgba(56,189,248,0.35)",
-              background: "rgba(56,189,248,0.10)",
-              color: "#bae6fd",
+              borderColor: "var(--tone-info-border)",
+              background: "var(--tone-info-bg)",
+              color: "var(--tone-info-text)",
             }}
           >
             Recommendations currently include comparison-aware guidance derived

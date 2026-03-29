@@ -12,29 +12,29 @@ function annotationLabel(children) {
 function toneForPoints(points) {
   if (points >= 8) {
     return {
-      borderColor: "rgba(16,185,129,0.35)",
-      background: "rgba(16,185,129,0.10)",
-      color: "#d1fae5",
-      badgeBackground: "rgba(16,185,129,0.14)",
-      badgeColor: "#a7f3d0",
+      borderColor: "var(--tone-success-border)",
+      background: "var(--tone-success-bg)",
+      color: "var(--tone-success-text)",
+      badgeBackground: "var(--tone-success-bg)",
+      badgeColor: "var(--tone-success-text)",
     };
   }
 
   if (points >= 4) {
     return {
-      borderColor: "rgba(251,191,36,0.30)",
-      background: "rgba(251,191,36,0.10)",
-      color: "#fef3c7",
-      badgeBackground: "rgba(251,191,36,0.14)",
-      badgeColor: "#fde68a",
+      borderColor: "var(--tone-warning-border)",
+      background: "var(--tone-warning-bg)",
+      color: "var(--tone-warning-text)",
+      badgeBackground: "var(--tone-warning-bg)",
+      badgeColor: "var(--tone-warning-text)",
     };
   }
 
   return {
     borderColor: "var(--border-color)",
-    background: "rgba(255,255,255,0.03)",
+    background: "var(--bg-muted)",
     color: "var(--text-secondary)",
-    badgeBackground: "rgba(255,255,255,0.06)",
+    badgeBackground: "var(--bg-subtle)",
     badgeColor: "var(--text-primary)",
   };
 }
@@ -174,7 +174,7 @@ export default function EntryScoringInspectorPanel({
           className='border p-4'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
           }}
         >
           <div className='grid gap-4 md:grid-cols-2'>
@@ -219,7 +219,7 @@ export default function EntryScoringInspectorPanel({
           className='border p-4 text-center'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
           }}
         >
           {annotationLabel("Raw inspector score")}
@@ -266,7 +266,7 @@ export default function EntryScoringInspectorPanel({
                     <div
                       className='border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]'
                       style={{
-                        borderColor: "rgba(255,255,255,0.16)",
+                        borderColor: "var(--border-color)",
                         background: tone.badgeBackground,
                         color: tone.badgeColor,
                       }}
@@ -282,7 +282,7 @@ export default function EntryScoringInspectorPanel({
               className='border border-dashed p-4 text-sm'
               style={{
                 borderColor: "var(--border-color)",
-                background: "rgba(255,255,255,0.03)",
+                background: "var(--bg-muted)",
                 color: "var(--text-secondary)",
               }}
             >
@@ -294,7 +294,7 @@ export default function EntryScoringInspectorPanel({
             className='border border-dashed p-4 text-sm'
             style={{
               borderColor: "var(--border-color)",
-              background: "rgba(255,255,255,0.03)",
+              background: "var(--bg-muted)",
               color: "var(--text-secondary)",
             }}
           >

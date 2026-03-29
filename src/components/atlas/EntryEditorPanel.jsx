@@ -96,8 +96,6 @@ function createDraftFromEntry(entry) {
   };
 }
 
-// keep all imports the same
-
 function Field({ label, children, hint = "" }) {
   return (
     <label className='block space-y-1.5'>
@@ -128,7 +126,7 @@ function TextInput(props) {
         color: "var(--text-primary)",
       }}
       onFocus={(e) => {
-        e.currentTarget.style.borderColor = "rgba(56,189,248,0.45)";
+        e.currentTarget.style.borderColor = "var(--tone-info-border)";
       }}
       onBlur={(e) => {
         e.currentTarget.style.borderColor = "var(--border-color)";
@@ -224,7 +222,7 @@ export default function EntryEditorPanel({
       className='rounded-3xl border p-6 shadow-sm'
       style={{
         borderColor: "var(--border-color)",
-        background: "rgba(255,255,255,0.04)",
+        background: "var(--bg-subtle)",
       }}
     >
       <div className='flex flex-col gap-4 md:flex-row md:items-start md:justify-between'>
@@ -232,9 +230,9 @@ export default function EntryEditorPanel({
           <div
             className='mb-2 inline-flex rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em]'
             style={{
-              borderColor: "rgba(244,63,94,0.35)",
-              background: "rgba(244,63,94,0.10)",
-              color: "#fecdd3",
+              borderColor: "var(--tone-danger-border)",
+              background: "var(--tone-danger-bg)",
+              color: "var(--tone-danger-text)",
             }}
           >
             Entry editor mode
@@ -262,9 +260,9 @@ export default function EntryEditorPanel({
             onClick={handleSave}
             className='rounded-full border px-3 py-1.5 text-sm transition'
             style={{
-              borderColor: "rgba(16,185,129,0.35)",
-              background: "rgba(16,185,129,0.10)",
-              color: "#a7f3d0",
+              borderColor: "var(--tone-success-border)",
+              background: "var(--tone-success-bg)",
+              color: "var(--tone-success-text)",
             }}
           >
             Save entry
@@ -276,7 +274,7 @@ export default function EntryEditorPanel({
             className='rounded-full border px-3 py-1.5 text-sm transition'
             style={{
               borderColor: "var(--border-color)",
-              background: "rgba(255,255,255,0.03)",
+              background: "var(--bg-muted)",
               color: "var(--text-secondary)",
             }}
           >
@@ -290,7 +288,7 @@ export default function EntryEditorPanel({
             className='rounded-full border px-3 py-1.5 text-sm transition disabled:cursor-not-allowed disabled:opacity-50'
             style={{
               borderColor: "var(--border-color)",
-              background: "rgba(255,255,255,0.03)",
+              background: "var(--bg-muted)",
               color: "var(--text-secondary)",
             }}
           >
@@ -303,7 +301,7 @@ export default function EntryEditorPanel({
             className='rounded-full border px-3 py-1.5 text-sm transition'
             style={{
               borderColor: "var(--border-color)",
-              background: "rgba(255,255,255,0.03)",
+              background: "var(--bg-muted)",
               color: "var(--text-secondary)",
             }}
           >
@@ -318,12 +316,12 @@ export default function EntryEditorPanel({
           style={
             isDirty
               ? {
-                  background: "rgba(251,191,36,0.10)",
-                  color: "#fde68a",
+                  background: "var(--tone-warning-bg)",
+                  color: "var(--tone-warning-text)",
                 }
               : {
-                  background: "rgba(16,185,129,0.10)",
-                  color: "#a7f3d0",
+                  background: "var(--tone-success-bg)",
+                  color: "var(--tone-success-text)",
                 }
           }
         >
@@ -334,8 +332,8 @@ export default function EntryEditorPanel({
           <span
             className='rounded-full px-2.5 py-1 font-semibold uppercase tracking-[0.12em]'
             style={{
-              background: "rgba(56,189,248,0.10)",
-              color: "#bae6fd",
+              background: "var(--tone-info-bg)",
+              color: "var(--tone-info-text)",
             }}
           >
             Local override active
@@ -347,18 +345,21 @@ export default function EntryEditorPanel({
         <div
           className='mt-5 rounded-2xl border p-4'
           style={{
-            borderColor: "rgba(248,113,113,0.35)",
-            background: "rgba(248,113,113,0.08)",
+            borderColor: "var(--tone-danger-border)",
+            background: "var(--tone-danger-bg)",
           }}
         >
           <div
             className='text-xs font-semibold uppercase tracking-[0.12em]'
-            style={{ color: "#fca5a5" }}
+            style={{ color: "var(--tone-danger-text)" }}
           >
             Validation issues
           </div>
 
-          <ul className='mt-2 space-y-1 text-sm' style={{ color: "#fecaca" }}>
+          <ul
+            className='mt-2 space-y-1 text-sm'
+            style={{ color: "var(--tone-danger-text)" }}
+          >
             {issues.map((issue) => (
               <li key={issue}>{issue}</li>
             ))}
@@ -368,9 +369,9 @@ export default function EntryEditorPanel({
         <div
           className='mt-5 rounded-2xl border p-4 text-sm'
           style={{
-            borderColor: "rgba(16,185,129,0.35)",
-            background: "rgba(16,185,129,0.08)",
-            color: "#a7f3d0",
+            borderColor: "var(--tone-success-border)",
+            background: "var(--tone-success-bg)",
+            color: "var(--tone-success-text)",
           }}
         >
           No validation issues detected.
@@ -488,7 +489,7 @@ export default function EntryEditorPanel({
             className='rounded-2xl border p-4'
             style={{
               borderColor: "var(--border-color)",
-              background: "rgba(255,255,255,0.03)",
+              background: "var(--bg-muted)",
             }}
           >
             <div

@@ -290,38 +290,65 @@ function buildTrajectoryGraphNodes(activeBoard, boardHistory, boardVersions) {
 
   return nodes;
 }
-function getNodeToneClasses(type, isCurrent = false) {
+function getNodeToneStyles(type, isCurrent = false) {
   if (isCurrent) {
     return {
-      dot: "bg-emerald-500",
-      card: "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.10)] text-[#d1fae5]",
+      dot: "var(--tone-success-text)",
+      card: {
+        borderColor: "var(--tone-success-border)",
+        background: "var(--tone-success-bg)",
+        color: "var(--tone-success-text)",
+      },
+      ring: {
+        boxShadow: `inset 0 0 0 2px var(--tone-success-border)`,
+      },
     };
   }
 
   if (type === "source") {
     return {
-      dot: "bg-stone-500",
-      card: "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-primary)]",
+      dot: "var(--text-muted)",
+      card: {
+        borderColor: "var(--border-color)",
+        background: "var(--bg-muted)",
+        color: "var(--text-primary)",
+      },
+      ring: undefined,
     };
   }
 
   if (type === "transformation") {
     return {
-      dot: "bg-violet-500",
-      card: "border-[rgba(168,85,247,0.35)] bg-[rgba(168,85,247,0.10)] text-[#e9d5ff]",
+      dot: "var(--tone-violet-text)",
+      card: {
+        borderColor: "var(--tone-violet-border)",
+        background: "var(--tone-violet-bg)",
+        color: "var(--tone-violet-text)",
+      },
+      ring: undefined,
     };
   }
 
   if (type === "version") {
     return {
-      dot: "bg-sky-500",
-      card: "border-[rgba(56,189,248,0.35)] bg-[rgba(56,189,248,0.10)] text-[#bae6fd]",
+      dot: "var(--tone-info-text)",
+      card: {
+        borderColor: "var(--tone-info-border)",
+        background: "var(--tone-info-bg)",
+        color: "var(--tone-info-text)",
+      },
+      ring: undefined,
     };
   }
 
   return {
-    dot: "bg-stone-500",
-    card: "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-primary)]",
+    dot: "var(--text-muted)",
+    card: {
+      borderColor: "var(--border-color)",
+      background: "var(--bg-muted)",
+      color: "var(--text-primary)",
+    },
+    ring: undefined,
   };
 }
 
@@ -332,7 +359,7 @@ function TrajectoryGraph({ nodes = [] }) {
         className='border px-3 py-2 text-sm'
         style={{
           borderColor: "var(--border-color)",
-          background: "rgba(255,255,255,0.03)",
+          background: "var(--bg-muted)",
           color: "var(--text-muted)",
         }}
       >
@@ -344,7 +371,7 @@ function TrajectoryGraph({ nodes = [] }) {
   return (
     <div className='mt-2 space-y-0'>
       {nodes.map((node, index) => {
-        const tone = getNodeToneClasses(node.type, node.isCurrent);
+        const tone = getNodeToneStyles(node.type, node.isCurrent);
         const isLast = index === nodes.length - 1;
 
         return (
@@ -361,7 +388,10 @@ function TrajectoryGraph({ nodes = [] }) {
             ) : null}
 
             <div className='flex w-5 flex-col items-center'>
-              <div className={`mt-2 h-2.5 w-2.5 rounded-full ${tone.dot}`} />
+              <div
+                className='mt-2 h-2.5 w-2.5 rounded-full'
+                style={{ background: tone.dot }}
+              />
               {!isLast ? (
                 <div
                   className='mt-1 w-px flex-1'
@@ -372,9 +402,11 @@ function TrajectoryGraph({ nodes = [] }) {
 
             <div className='flex-1 pb-4'>
               <div
-                className={`border px-3 py-2 ${tone.card} ${
-                  node.isCurrent ? "ring-2 ring-emerald-400" : ""
-                }`}
+                className='border px-3 py-2'
+                style={{
+                  ...tone.card,
+                  ...(tone.ring || {}),
+                }}
               >
                 <div className='text-sm font-semibold'>{node.title}</div>
                 <div className='mt-1 text-xs opacity-80'>{node.subtitle}</div>
@@ -521,14 +553,30 @@ export default function DirectionTrajectoryPanel({
     missingCount: currentCounts.missingCount,
   });
 
-  const statusToneClasses =
+  const statusToneStyles =
     directionStatus === "Established"
-      ? "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.10)] text-[#d1fae5]"
+      ? {
+          borderColor: "var(--tone-success-border)",
+          background: "var(--tone-success-bg)",
+          color: "var(--tone-success-text)",
+        }
       : directionStatus === "Stabilizing"
-        ? "border-[rgba(56,189,248,0.35)] bg-[rgba(56,189,248,0.10)] text-[#e0f2fe]"
+        ? {
+            borderColor: "var(--tone-info-border)",
+            background: "var(--tone-info-bg)",
+            color: "var(--tone-info-text)",
+          }
         : directionStatus === "Evolving"
-          ? "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.10)] text-[#fef3c7]"
-          : "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-primary)]";
+          ? {
+              borderColor: "var(--tone-warning-border)",
+              background: "var(--tone-warning-bg)",
+              color: "var(--tone-warning-text)",
+            }
+          : {
+              borderColor: "var(--border-color)",
+              background: "var(--bg-muted)",
+              color: "var(--text-primary)",
+            };
 
   const latestTransformation = boardHistory[0] || null;
   const latestAddedCount = Array.isArray(latestTransformation?.addedEntryIds)
@@ -542,13 +590,13 @@ export default function DirectionTrajectoryPanel({
     <div
       className='border p-4'
       style={{
-        borderColor: "rgba(168,85,247,0.35)",
-        background: "rgba(168,85,247,0.08)",
+        borderColor: "var(--tone-violet-border)",
+        background: "var(--tone-violet-bg)",
       }}
     >
       <div
         className='text-[10px] font-semibold uppercase tracking-[0.16em]'
-        style={{ color: "#d8b4fe" }}
+        style={{ color: "var(--tone-violet-text)" }}
       >
         Direction trajectory
       </div>
@@ -586,19 +634,19 @@ export default function DirectionTrajectoryPanel({
         <div
           className='border px-4 py-3'
           style={{
-            borderColor: "rgba(56,189,248,0.35)",
-            background: "rgba(56,189,248,0.10)",
+            borderColor: "var(--tone-info-border)",
+            background: "var(--tone-info-bg)",
           }}
         >
           <div
             className='text-[10px] uppercase tracking-[0.12em]'
-            style={{ color: "#bae6fd" }}
+            style={{ color: "var(--tone-info-text)" }}
           >
             Saved versions
           </div>
           <div
             className='mt-1 text-sm font-semibold'
-            style={{ color: "#e0f2fe" }}
+            style={{ color: "var(--text-primary)" }}
           >
             {versionCount}
           </div>
@@ -607,19 +655,19 @@ export default function DirectionTrajectoryPanel({
         <div
           className='border px-4 py-3'
           style={{
-            borderColor: "rgba(16,185,129,0.35)",
-            background: "rgba(16,185,129,0.10)",
+            borderColor: "var(--tone-success-border)",
+            background: "var(--tone-success-bg)",
           }}
         >
           <div
             className='text-[10px] uppercase tracking-[0.12em]'
-            style={{ color: "#a7f3d0" }}
+            style={{ color: "var(--tone-success-text)" }}
           >
             Current entries
           </div>
           <div
             className='mt-1 text-sm font-semibold'
-            style={{ color: "#d1fae5" }}
+            style={{ color: "var(--text-primary)" }}
           >
             {currentEntryCount}
           </div>
@@ -652,7 +700,7 @@ export default function DirectionTrajectoryPanel({
                 className='border px-3 py-2 text-sm'
                 style={{
                   borderColor: "var(--border-color)",
-                  background: "rgba(255,255,255,0.03)",
+                  background: "var(--bg-muted)",
                   color: "var(--text-secondary)",
                 }}
               >
@@ -665,7 +713,7 @@ export default function DirectionTrajectoryPanel({
                 className='border px-3 py-2 text-sm'
                 style={{
                   borderColor: "var(--border-color)",
-                  background: "rgba(255,255,255,0.03)",
+                  background: "var(--bg-muted)",
                   color: "var(--text-secondary)",
                 }}
               >
@@ -678,7 +726,7 @@ export default function DirectionTrajectoryPanel({
                 className='border px-3 py-2 text-sm'
                 style={{
                   borderColor: "var(--border-color)",
-                  background: "rgba(255,255,255,0.03)",
+                  background: "var(--bg-muted)",
                   color: "var(--text-secondary)",
                 }}
               >
@@ -692,7 +740,7 @@ export default function DirectionTrajectoryPanel({
                   className='border px-3 py-2 text-sm'
                   style={{
                     borderColor: "var(--border-color)",
-                    background: "rgba(255,255,255,0.03)",
+                    background: "var(--bg-muted)",
                     color: "var(--text-secondary)",
                   }}
                 >
@@ -709,7 +757,7 @@ export default function DirectionTrajectoryPanel({
               className='border px-3 py-2 text-sm'
               style={{
                 borderColor: "var(--border-color)",
-                background: "rgba(255,255,255,0.03)",
+                background: "var(--bg-muted)",
                 color: "var(--text-muted)",
               }}
             >
@@ -722,7 +770,7 @@ export default function DirectionTrajectoryPanel({
               className='border px-3 py-2 text-sm'
               style={{
                 borderColor: "var(--border-color)",
-                background: "rgba(255,255,255,0.03)",
+                background: "var(--bg-muted)",
                 color: "var(--text-secondary)",
               }}
             >
@@ -756,7 +804,7 @@ export default function DirectionTrajectoryPanel({
                 className='border px-3 py-2 text-sm'
                 style={{
                   borderColor: "var(--border-color)",
-                  background: "rgba(255,255,255,0.03)",
+                  background: "var(--bg-muted)",
                   color: "var(--text-secondary)",
                 }}
               >
@@ -768,7 +816,7 @@ export default function DirectionTrajectoryPanel({
               className='border px-3 py-2 text-sm'
               style={{
                 borderColor: "var(--border-color)",
-                background: "rgba(255,255,255,0.03)",
+                background: "var(--bg-muted)",
                 color: "var(--text-muted)",
               }}
             >
@@ -788,7 +836,8 @@ export default function DirectionTrajectoryPanel({
         </div>
 
         <div
-          className={`mt-2 inline-flex items-center gap-2 border px-3 py-2 text-sm font-semibold ${statusToneClasses}`}
+          className='mt-2 inline-flex items-center gap-2 border px-3 py-2 text-sm font-semibold'
+          style={statusToneStyles}
         >
           <span className='h-2 w-2 rounded-full bg-current' />
           {directionStatus}
@@ -800,7 +849,7 @@ export default function DirectionTrajectoryPanel({
           className='mt-4 border px-3 py-2 text-sm'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >

@@ -16,45 +16,81 @@ function annotationLabel(children) {
 function relationTone(relation) {
   switch (relation) {
     case "related":
-      return "border-[rgba(56,189,248,0.35)] bg-[rgba(56,189,248,0.10)] text-[#bae6fd]";
+      return {
+        borderColor: "var(--tone-info-border)",
+        background: "var(--tone-info-bg)",
+        color: "var(--tone-info-text)",
+      };
     case "same-type":
-      return "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.10)] text-[#a7f3d0]";
+      return {
+        borderColor: "var(--tone-success-border)",
+        background: "var(--tone-success-bg)",
+        color: "var(--tone-success-text)",
+      };
     case "same-domain":
-      return "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.10)] text-[#fde68a]";
+      return {
+        borderColor: "var(--tone-warning-border)",
+        background: "var(--tone-warning-bg)",
+        color: "var(--tone-warning-text)",
+      };
     case "same-region":
-      return "border-[rgba(168,85,247,0.35)] bg-[rgba(168,85,247,0.10)] text-[#d8b4fe]";
+      return {
+        borderColor: "var(--tone-violet-border)",
+        background: "var(--tone-violet-bg)",
+        color: "var(--tone-violet-text)",
+      };
     case "semantic-neighbor":
-      return "border-[rgba(217,70,239,0.35)] bg-[rgba(217,70,239,0.10)] text-[#f5d0fe]";
+      return {
+        borderColor: "var(--tone-violet-border)",
+        background: "var(--tone-violet-bg)",
+        color: "var(--tone-violet-text)",
+      };
     default:
-      return "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-secondary)]";
+      return {
+        borderColor: "var(--border-color)",
+        background: "var(--bg-muted)",
+        color: "var(--text-secondary)",
+      };
   }
 }
 
 function relationColor(relation) {
   switch (relation) {
     case "related":
-      return "#0ea5e9";
+      return "var(--tone-info-text)";
     case "same-type":
-      return "#10b981";
+      return "var(--tone-success-text)";
     case "same-domain":
-      return "#f59e0b";
+      return "var(--tone-warning-text)";
     case "same-region":
-      return "#8b5cf6";
+      return "var(--tone-violet-text)";
     case "semantic-neighbor":
-      return "#d946ef";
+      return "var(--tone-violet-text)";
     default:
-      return "#78716c";
+      return "var(--text-muted)";
   }
 }
 
 function strengthTone(strength) {
   switch (strength) {
     case "strong":
-      return "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.10)] text-[#a7f3d0]";
+      return {
+        borderColor: "var(--tone-success-border)",
+        background: "var(--tone-success-bg)",
+        color: "var(--tone-success-text)",
+      };
     case "medium":
-      return "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.10)] text-[#fde68a]";
+      return {
+        borderColor: "var(--tone-warning-border)",
+        background: "var(--tone-warning-bg)",
+        color: "var(--tone-warning-text)",
+      };
     default:
-      return "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-secondary)]";
+      return {
+        borderColor: "var(--border-color)",
+        background: "var(--bg-muted)",
+        color: "var(--text-secondary)",
+      };
   }
 }
 
@@ -86,7 +122,7 @@ function LegendTag({ label, relation }) {
       className='inline-flex items-center gap-2 border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
       style={{
         borderColor: "var(--border-color)",
-        background: "rgba(255,255,255,0.03)",
+        background: "var(--bg-muted)",
         color: "var(--text-secondary)",
       }}
     >
@@ -130,10 +166,18 @@ function GraphViewportControls({
   onCenterSelected,
   hasSelectedNode,
 }) {
-  function controlClass(primary = false) {
+  function controlStyle(primary = false) {
     return primary
-      ? "border-[rgba(255,255,255,0.18)] bg-[rgba(255,255,255,0.08)] text-white hover:bg-[rgba(255,255,255,0.12)]"
-      : "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-secondary)] hover:bg-[rgba(255,255,255,0.06)]";
+      ? {
+          borderColor: "var(--tone-violet-border)",
+          background: "var(--tone-violet-bg)",
+          color: "var(--tone-violet-text)",
+        }
+      : {
+          borderColor: "var(--border-color)",
+          background: "var(--bg-muted)",
+          color: "var(--text-secondary)",
+        };
   }
 
   return (
@@ -141,7 +185,8 @@ function GraphViewportControls({
       <button
         type='button'
         onClick={onZoomOut}
-        className={`border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition ${controlClass()}`}
+        className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+        style={controlStyle()}
       >
         Zoom out
       </button>
@@ -149,7 +194,8 @@ function GraphViewportControls({
       <button
         type='button'
         onClick={onZoomIn}
-        className={`border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition ${controlClass()}`}
+        className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+        style={controlStyle()}
       >
         Zoom in
       </button>
@@ -157,7 +203,8 @@ function GraphViewportControls({
       <button
         type='button'
         onClick={onCenterGraph}
-        className={`border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition ${controlClass()}`}
+        className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+        style={controlStyle()}
       >
         Center graph
       </button>
@@ -166,7 +213,8 @@ function GraphViewportControls({
         type='button'
         onClick={onCenterSelected}
         disabled={!hasSelectedNode}
-        className={`border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition ${controlClass()} disabled:cursor-not-allowed disabled:opacity-50`}
+        className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+        style={controlStyle()}
       >
         Focus selected node
       </button>
@@ -174,9 +222,8 @@ function GraphViewportControls({
       <button
         type='button'
         onClick={onResetView}
-        className={`border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition ${controlClass(
-          true,
-        )}`}
+        className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+        style={controlStyle(true)}
       >
         Reset view
       </button>
@@ -185,7 +232,7 @@ function GraphViewportControls({
         className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em]'
         style={{
           borderColor: "var(--border-color)",
-          background: "rgba(255,255,255,0.03)",
+          background: "var(--bg-muted)",
           color: "var(--text-secondary)",
         }}
       >
@@ -224,7 +271,7 @@ function GraphCanvas({
         className='border-b px-4 py-2 text-[11px]'
         style={{
           borderColor: "var(--border-color)",
-          background: "rgba(255,255,255,0.03)",
+          background: "var(--bg-muted)",
           color: "var(--text-muted)",
         }}
       >
@@ -310,20 +357,21 @@ function GraphCanvas({
               cx={canvas.center.x}
               cy={canvas.center.y}
               r={canvas.center.radius + 10}
-              fill='rgba(68,64,60,0.06)'
+              fill='var(--bg-muted)'
             />
             <circle
               cx={canvas.center.x}
               cy={canvas.center.y}
               r={canvas.center.radius}
-              fill='#1c1917'
+              fill='var(--bg-subtle)'
               filter='url(#softShadow)'
             />
             <text
               x={canvas.center.x}
               y={canvas.center.y - 2}
               textAnchor='middle'
-              className='fill-white text-[14px] font-semibold'
+              style={{ fill: "var(--text-primary)" }}
+              className='text-[14px] font-semibold'
             >
               {canvas.center.term.length > 18
                 ? `${canvas.center.term.slice(0, 18)}…`
@@ -333,7 +381,8 @@ function GraphCanvas({
               x={canvas.center.x}
               y={canvas.center.y + 16}
               textAnchor='middle'
-              className='fill-stone-200 text-[10px]'
+              style={{ fill: "var(--text-muted)" }}
+              className='text-[10px]'
             >
               center
             </text>
@@ -362,7 +411,7 @@ function GraphCanvas({
                 >
                   <circle
                     r={radius + 7}
-                    fill='rgba(255,255,255,0.9)'
+                    fill='var(--bg-surface)'
                     stroke={relationColor(node.relation)}
                     strokeWidth={isFocused ? 4 : isHovered ? 3 : 1.5}
                   />
@@ -375,7 +424,8 @@ function GraphCanvas({
                   <text
                     y={3}
                     textAnchor='middle'
-                    className='fill-white text-[10px] font-semibold'
+                    style={{ fill: "var(--text-primary)" }}
+                    className='text-[10px] font-semibold'
                   >
                     {node.term.length > 13
                       ? `${node.term.slice(0, 13)}…`
@@ -401,9 +451,13 @@ function GraphNodeCard({
 }) {
   return (
     <div
-      className={`border p-3 ${relationTone(node.relation)} ${
-        isFocused ? "ring-2 ring-[rgba(255,255,255,0.18)]" : ""
-      }`}
+      className={`border p-3 ${isFocused ? "ring-2" : ""}`}
+      style={{
+        ...relationTone(node.relation),
+        ...(isFocused
+          ? { boxShadow: `inset 0 0 0 2px var(--border-color)` }
+          : {}),
+      }}
     >
       <div className='flex items-start justify-between gap-3 border-b border-current/15 pb-4'>
         <button
@@ -418,9 +472,8 @@ function GraphNodeCard({
         </button>
 
         <div
-          className={`border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] ${strengthTone(
-            node.strength,
-          )}`}
+          className='border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]'
+          style={strengthTone(node.strength)}
         >
           {strengthLabel(node.strength)}
         </div>
@@ -453,8 +506,8 @@ function GraphNodeCard({
           onClick={() => onFocusNode?.(node.id)}
           className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
           style={{
-            borderColor: "rgba(255,255,255,0.18)",
-            background: "rgba(255,255,255,0.08)",
+            background: "var(--bg-muted)",
+            borderColor: "var(--border-color)",
             color: "currentColor",
           }}
         >
@@ -466,8 +519,8 @@ function GraphNodeCard({
           onClick={() => onCompareEntry?.(node.id)}
           className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
           style={{
-            borderColor: "rgba(255,255,255,0.18)",
-            background: "rgba(255,255,255,0.08)",
+            background: "var(--bg-muted)",
+            borderColor: "var(--border-color)",
             color: "currentColor",
           }}
         >
@@ -479,8 +532,8 @@ function GraphNodeCard({
           onClick={() => onTogglePinEntry?.(node.id)}
           className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
           style={{
-            borderColor: "rgba(255,255,255,0.18)",
-            background: "rgba(255,255,255,0.08)",
+            background: "var(--bg-muted)",
+            borderColor: "var(--border-color)",
             color: "currentColor",
           }}
         >
@@ -556,7 +609,7 @@ function HoverInspector({ node, onFocusNode }) {
   }
 
   return (
-    <div className={`border p-4 ${relationTone(node.relation)}`}>
+    <div className='border p-4' style={relationTone(node.relation)}>
       <div className='flex items-start justify-between gap-3 border-b border-current/15 pb-4'>
         <div>
           <div className='text-lg font-semibold'>{node.term}</div>
@@ -565,9 +618,8 @@ function HoverInspector({ node, onFocusNode }) {
           </div>
         </div>
         <div
-          className={`border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] ${strengthTone(
-            node.strength,
-          )}`}
+          className='border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]'
+          style={strengthTone(node.strength)}
         >
           {strengthLabel(node.strength)}
         </div>
@@ -598,8 +650,8 @@ function HoverInspector({ node, onFocusNode }) {
           onClick={() => onFocusNode?.(node.id)}
           className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em]'
           style={{
-            borderColor: "rgba(255,255,255,0.18)",
-            background: "rgba(255,255,255,0.08)",
+            background: "var(--bg-muted)",
+            borderColor: "var(--border-color)",
             color: "currentColor",
           }}
         >
@@ -718,9 +770,9 @@ function RelationshipGraphWorkspace({
             <div
               className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em]'
               style={{
-                borderColor: "rgba(168,85,247,0.30)",
-                background: "rgba(168,85,247,0.10)",
-                color: "#d8b4fe",
+                borderColor: "var(--tone-violet-border)",
+                background: "var(--tone-violet-bg)",
+                color: "var(--tone-violet-text)",
               }}
             >
               Focused node · <strong>{focusedNode.term}</strong>
@@ -730,7 +782,7 @@ function RelationshipGraphWorkspace({
               className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em]'
               style={{
                 borderColor: "var(--border-color)",
-                background: "rgba(255,255,255,0.03)",
+                background: "var(--bg-muted)",
                 color: "var(--text-muted)",
               }}
             >
@@ -857,8 +909,8 @@ export default function RelationshipGraphPanel({
         <div
           className='mt-5 border p-5'
           style={{
-            borderColor: "rgba(217,70,239,0.35)",
-            background: "rgba(217,70,239,0.08)",
+            borderColor: "var(--tone-violet-border)",
+            background: "var(--tone-violet-bg)",
           }}
         >
           {annotationLabel("Center node")}

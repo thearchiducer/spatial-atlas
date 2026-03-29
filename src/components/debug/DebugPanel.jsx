@@ -11,8 +11,8 @@ export default function DebugPanel({ validationErrors }) {
     <section
       className='rounded-3xl border shadow-sm'
       style={{
-        borderColor: "rgba(251,191,36,0.30)",
-        background: "rgba(251,191,36,0.08)",
+        borderColor: "var(--tone-warning-border)",
+        background: "var(--tone-warning-bg)",
       }}
     >
       <button
@@ -23,17 +23,24 @@ export default function DebugPanel({ validationErrors }) {
         <div>
           <h2
             className='text-lg font-semibold tracking-tight'
-            style={{ color: "#fef3c7" }}
+            style={{ color: "var(--text-primary)" }}
           >
             Dataset validation issues
           </h2>
-          <p className='mt-1 text-sm' style={{ color: "#fde68a" }}>
+
+          <p
+            className='mt-1 text-sm'
+            style={{ color: "var(--tone-warning-text)" }}
+          >
             {validationErrors.length} issue
             {validationErrors.length === 1 ? "" : "s"} detected
           </p>
         </div>
 
-        <span className='text-sm font-medium' style={{ color: "#fef3c7" }}>
+        <span
+          className='text-sm font-medium'
+          style={{ color: "var(--text-primary)" }}
+        >
           {isOpen ? "Hide" : "Show"}
         </span>
       </button>
@@ -41,15 +48,18 @@ export default function DebugPanel({ validationErrors }) {
       {isOpen && (
         <div
           className='border-t px-6 pb-6 pt-4'
-          style={{ borderColor: "rgba(251,191,36,0.25)" }}
+          style={{ borderColor: "var(--tone-warning-border)" }}
         >
-          <p className='mb-4 text-sm' style={{ color: "#fde68a" }}>
+          <p
+            className='mb-4 text-sm'
+            style={{ color: "var(--tone-warning-text)" }}
+          >
             Your atlas still renders, but these entries should be corrected.
           </p>
 
           <ul
             className='list-disc space-y-2 pl-5 text-sm'
-            style={{ color: "#fef3c7" }}
+            style={{ color: "var(--text-primary)" }}
           >
             {validationErrors.map((error) => (
               <li key={error}>{error}</li>

@@ -15,10 +15,26 @@ function annotationLabel(children) {
 
 function familyTone(index) {
   const tones = [
-    "border-[rgba(56,189,248,0.35)] bg-[rgba(56,189,248,0.08)] text-[#e0f2fe]",
-    "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.08)] text-[#d1fae5]",
-    "border-[rgba(168,85,247,0.35)] bg-[rgba(168,85,247,0.08)] text-[#f3e8ff]",
-    "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.08)] text-[#fef3c7]",
+    {
+      borderColor: "var(--tone-info-border)",
+      background: "var(--tone-info-bg)",
+      color: "var(--tone-info-text)",
+    },
+    {
+      borderColor: "var(--tone-success-border)",
+      background: "var(--tone-success-bg)",
+      color: "var(--tone-success-text)",
+    },
+    {
+      borderColor: "var(--tone-violet-border)",
+      background: "var(--tone-violet-bg)",
+      color: "var(--tone-violet-text)",
+    },
+    {
+      borderColor: "var(--tone-warning-border)",
+      background: "var(--tone-warning-bg)",
+      color: "var(--tone-warning-text)",
+    },
   ];
 
   return tones[index % tones.length];
@@ -30,7 +46,7 @@ function MetricChip({ label, value }) {
       className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
       style={{
         borderColor: "var(--border-color)",
-        background: "rgba(255,255,255,0.03)",
+        background: "var(--bg-muted)",
         color: "var(--text-secondary)",
       }}
     >
@@ -80,7 +96,7 @@ function ClusterEntryCard({
           className='border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -119,7 +135,7 @@ function ClusterEntryCard({
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -132,7 +148,7 @@ function ClusterEntryCard({
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -145,7 +161,7 @@ function ClusterEntryCard({
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -232,7 +248,7 @@ function ClusterCard({
             className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
             style={{
               borderColor: "var(--border-color)",
-              background: "rgba(255,255,255,0.03)",
+              background: "var(--bg-muted)",
               color: "var(--text-secondary)",
             }}
           >
@@ -256,9 +272,17 @@ function FamilyPanel({
   onTogglePinEntry,
 }) {
   const isActive = family.id === activeFamilyId;
+  const toneStyle = familyTone(index);
 
   return (
-    <section className={"border p-5 " + familyTone(index)}>
+    <section
+      className='border p-5'
+      style={{
+        borderColor: toneStyle.borderColor,
+        background: toneStyle.background,
+        color: toneStyle.color,
+      }}
+    >
       <div className='flex flex-col gap-3 border-b border-current/15 pb-4 md:flex-row md:items-start md:justify-between'>
         <div>
           {annotationLabel("Semantic family")}
@@ -420,17 +444,22 @@ export default function SemanticClusterPanel({
         <div className='flex flex-wrap gap-2'>
           {families.map((family, index) => {
             const isActive = family.id === resolvedActiveFamilyId;
+            const toneStyle = familyTone(index);
 
             return (
               <button
                 key={family.id}
                 type='button'
                 onClick={() => setActiveFamilyId(family.id)}
-                className={
-                  "border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition " +
-                  (isActive
-                    ? familyTone(index)
-                    : "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-secondary)] hover:bg-[rgba(255,255,255,0.06)]")
+                className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
+                style={
+                  isActive
+                    ? toneStyle
+                    : {
+                        borderColor: "var(--border-color)",
+                        background: "var(--bg-muted)",
+                        color: "var(--text-secondary)",
+                      }
                 }
               >
                 {family.title}

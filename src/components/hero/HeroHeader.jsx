@@ -29,7 +29,7 @@ export default function HeroHeader({ metrics }) {
             <div>
               <div
                 className='mb-4 text-[11px] font-bold uppercase tracking-[0.22em]'
-                style={{ color: "#fde68a" }}
+                style={{ color: "var(--tone-warning-text)" }}
               >
                 Architectural Design System
               </div>
@@ -55,7 +55,7 @@ export default function HeroHeader({ metrics }) {
               className='min-w-[220px] border p-4'
               style={{
                 borderColor: "var(--border-color)",
-                background: "rgba(255,255,255,0.03)",
+                background: "var(--bg-muted)",
               }}
             >
               <div
@@ -138,7 +138,7 @@ export default function HeroHeader({ metrics }) {
 
         <aside
           className='p-8 xl:p-10'
-          style={{ background: "rgba(255,255,255,0.03)" }}
+          style={{ background: "var(--bg-muted)" }}
         >
           <div
             className='border-b pb-4'

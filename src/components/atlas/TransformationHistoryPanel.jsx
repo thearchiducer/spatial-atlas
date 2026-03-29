@@ -12,18 +12,18 @@ function HistoryCard({ item, tone = "applied" }) {
   const toneStyles =
     tone === "undone"
       ? {
-          containerBorder: "rgba(251,191,36,0.30)",
-          containerBg: "rgba(251,191,36,0.08)",
-          badgeBorder: "rgba(251,191,36,0.30)",
-          badgeBg: "rgba(251,191,36,0.10)",
-          badgeText: "#fde68a",
+          containerBorder: "var(--tone-warning-border)",
+          containerBg: "var(--tone-warning-bg)",
+          badgeBorder: "var(--tone-warning-border)",
+          badgeBg: "var(--tone-warning-bg)",
+          badgeText: "var(--tone-warning-text)",
         }
       : {
-          containerBorder: "rgba(16,185,129,0.35)",
-          containerBg: "rgba(16,185,129,0.08)",
-          badgeBorder: "rgba(16,185,129,0.35)",
-          badgeBg: "rgba(16,185,129,0.10)",
-          badgeText: "#a7f3d0",
+          containerBorder: "var(--tone-success-border)",
+          containerBg: "var(--tone-success-bg)",
+          badgeBorder: "var(--tone-success-border)",
+          badgeBg: "var(--tone-success-bg)",
+          badgeText: "var(--tone-success-text)",
         };
 
   return (
@@ -111,7 +111,7 @@ function HistoryCard({ item, tone = "applied" }) {
                 className='border px-2 py-1 text-[11px]'
                 style={{
                   borderColor: "var(--border-color)",
-                  background: "rgba(255,255,255,0.03)",
+                  background: "var(--bg-muted)",
                   color: "var(--text-secondary)",
                 }}
               >
@@ -131,7 +131,7 @@ function EmptyState({ text }) {
       className='border px-4 py-6 text-sm'
       style={{
         borderColor: "var(--border-color)",
-        background: "rgba(255,255,255,0.03)",
+        background: "var(--bg-muted)",
         color: "var(--text-muted)",
       }}
     >
@@ -156,7 +156,7 @@ export default function TransformationHistoryPanel({
       className='space-y-5 rounded-3xl border p-5 shadow-sm'
       style={{
         borderColor: "var(--border-color)",
-        background: "rgba(255,255,255,0.04)",
+        background: "var(--bg-subtle)",
       }}
     >
       <div>
@@ -164,7 +164,7 @@ export default function TransformationHistoryPanel({
           className='inline-flex border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em]'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -191,19 +191,19 @@ export default function TransformationHistoryPanel({
         <div
           className='border px-4 py-3'
           style={{
-            borderColor: "rgba(16,185,129,0.35)",
-            background: "rgba(16,185,129,0.10)",
+            borderColor: "var(--tone-success-border)",
+            background: "var(--tone-success-bg)",
           }}
         >
           <div
             className='text-[10px] uppercase tracking-[0.12em]'
-            style={{ color: "#a7f3d0" }}
+            style={{ color: "var(--tone-success-text)" }}
           >
             Applied stack
           </div>
           <div
             className='mt-1 text-sm font-semibold'
-            style={{ color: "#d1fae5" }}
+            style={{ color: "var(--text-primary)" }}
           >
             {applied.length}
           </div>
@@ -212,19 +212,19 @@ export default function TransformationHistoryPanel({
         <div
           className='border px-4 py-3'
           style={{
-            borderColor: "rgba(251,191,36,0.30)",
-            background: "rgba(251,191,36,0.10)",
+            borderColor: "var(--tone-warning-border)",
+            background: "var(--tone-warning-bg)",
           }}
         >
           <div
             className='text-[10px] uppercase tracking-[0.12em]'
-            style={{ color: "#fde68a" }}
+            style={{ color: "var(--tone-warning-text)" }}
           >
             Undone stack
           </div>
           <div
             className='mt-1 text-sm font-semibold'
-            style={{ color: "#fef3c7" }}
+            style={{ color: "var(--text-primary)" }}
           >
             {undone.length}
           </div>

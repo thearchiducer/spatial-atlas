@@ -15,25 +15,25 @@ function SmallCard({ label, value, tone = "stone" }) {
   const toneStyles =
     tone === "emerald"
       ? {
-          borderColor: "rgba(16,185,129,0.35)",
-          background: "rgba(16,185,129,0.10)",
-          color: "#d1fae5",
+          borderColor: "var(--tone-success-border)",
+          background: "var(--tone-success-bg)",
+          color: "var(--tone-success-text)",
         }
       : tone === "amber"
         ? {
-            borderColor: "rgba(251,191,36,0.30)",
-            background: "rgba(251,191,36,0.10)",
-            color: "#fef3c7",
+            borderColor: "var(--tone-warning-border)",
+            background: "var(--tone-warning-bg)",
+            color: "var(--tone-warning-text)",
           }
         : tone === "sky"
           ? {
-              borderColor: "rgba(56,189,248,0.35)",
-              background: "rgba(56,189,248,0.10)",
-              color: "#e0f2fe",
+              borderColor: "var(--tone-info-border)",
+              background: "var(--tone-info-bg)",
+              color: "var(--tone-info-text)",
             }
           : {
               borderColor: "var(--border-color)",
-              background: "rgba(255,255,255,0.03)",
+              background: "var(--bg-muted)",
               color: "var(--text-primary)",
             };
 
@@ -60,19 +60,19 @@ function EntryCountDelta({ beforeCount, afterCount }) {
   const toneStyles =
     delta > 0
       ? {
-          borderColor: "rgba(16,185,129,0.35)",
-          background: "rgba(16,185,129,0.10)",
-          color: "#d1fae5",
+          borderColor: "var(--tone-success-border)",
+          background: "var(--tone-success-bg)",
+          color: "var(--tone-success-text)",
         }
       : delta < 0
         ? {
-            borderColor: "rgba(251,191,36,0.30)",
-            background: "rgba(251,191,36,0.10)",
-            color: "#fef3c7",
+            borderColor: "var(--tone-warning-border)",
+            background: "var(--tone-warning-bg)",
+            color: "var(--tone-warning-text)",
           }
         : {
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-primary)",
           };
 
@@ -105,7 +105,7 @@ function BoardCard({ title, board, tone = "stone" }) {
         className='border p-4'
         style={{
           borderColor: "var(--border-color)",
-          background: "rgba(255,255,255,0.03)",
+          background: "var(--bg-muted)",
         }}
       >
         <div className='text-sm' style={{ color: "var(--text-muted)" }}>
@@ -118,13 +118,13 @@ function BoardCard({ title, board, tone = "stone" }) {
   const toneStyles =
     tone === "emerald"
       ? {
-          borderColor: "rgba(16,185,129,0.35)",
-          background: "rgba(16,185,129,0.08)",
+          borderColor: "var(--tone-success-border)",
+          background: "var(--tone-success-bg)",
         }
       : tone === "sky"
         ? {
-            borderColor: "rgba(56,189,248,0.35)",
-            background: "rgba(56,189,248,0.08)",
+            borderColor: "var(--tone-info-border)",
+            background: "var(--tone-info-bg)",
           }
         : {
             borderColor: "var(--border-color)",
@@ -167,7 +167,7 @@ function BoardCard({ title, board, tone = "stone" }) {
           className='mt-3 border px-3 py-2 text-sm'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -209,7 +209,7 @@ export default function BoardEvolutionPanel({
         className='space-y-5 rounded-3xl border p-5 shadow-sm'
         style={{
           borderColor: "var(--border-color)",
-          background: "rgba(255,255,255,0.04)",
+          background: "var(--bg-subtle)",
         }}
       >
         <div>
@@ -217,7 +217,7 @@ export default function BoardEvolutionPanel({
             className='inline-flex border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em]'
             style={{
               borderColor: "var(--border-color)",
-              background: "rgba(255,255,255,0.03)",
+              background: "var(--bg-muted)",
               color: "var(--text-secondary)",
             }}
           >
@@ -261,7 +261,7 @@ export default function BoardEvolutionPanel({
       className='space-y-5 rounded-3xl border p-5 shadow-sm'
       style={{
         borderColor: "var(--border-color)",
-        background: "rgba(255,255,255,0.04)",
+        background: "var(--bg-subtle)",
       }}
     >
       <div>
@@ -269,7 +269,7 @@ export default function BoardEvolutionPanel({
           className='inline-flex border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em]'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >

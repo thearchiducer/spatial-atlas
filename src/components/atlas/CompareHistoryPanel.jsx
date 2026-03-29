@@ -12,32 +12,32 @@ export default function CompareHistoryPanel({
     <section
       className='border p-5'
       style={{
-        borderColor: "rgba(168,85,247,0.35)",
-        background: "rgba(168,85,247,0.08)",
+        borderColor: "var(--tone-violet-border)",
+        background: "var(--tone-violet-bg)",
       }}
     >
       <div
         className='flex flex-col gap-4 border-b pb-4 md:flex-row md:items-start md:justify-between'
-        style={{ borderColor: "rgba(168,85,247,0.25)" }}
+        style={{ borderColor: "var(--tone-violet-border)" }}
       >
         <div>
           <div
             className='mb-2 text-[10px] font-semibold uppercase tracking-[0.16em]'
-            style={{ color: "#d8b4fe" }}
+            style={{ color: "var(--tone-violet-text)" }}
           >
             Compare history · {compareHistory.length}
           </div>
 
           <h2
             className='text-lg font-semibold tracking-tight'
-            style={{ color: "#f3e8ff" }}
+            style={{ color: "var(--text-primary)" }}
           >
             Recent comparisons
           </h2>
 
           <p
             className='mt-2 text-sm leading-relaxed'
-            style={{ color: "#e9d5ff" }}
+            style={{ color: "var(--tone-violet-text)" }}
           >
             Reopen earlier comparison states without rebuilding them manually.
           </p>
@@ -48,9 +48,9 @@ export default function CompareHistoryPanel({
           onClick={onClearCompareHistory}
           className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
           style={{
-            borderColor: "rgba(168,85,247,0.35)",
-            background: "rgba(168,85,247,0.10)",
-            color: "#e9d5ff",
+            borderColor: "var(--tone-violet-border)",
+            background: "var(--tone-violet-bg)",
+            color: "var(--tone-violet-text)",
           }}
         >
           Clear history
@@ -110,9 +110,9 @@ export default function CompareHistoryPanel({
                   onClick={() => onOpenCompareHistoryItem(item.ids)}
                   className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
                   style={{
-                    borderColor: "rgba(168,85,247,0.35)",
-                    background: "rgba(168,85,247,0.10)",
-                    color: "#d8b4fe",
+                    borderColor: "var(--tone-violet-border)",
+                    background: "var(--tone-violet-bg)",
+                    color: "var(--tone-violet-text)",
                   }}
                 >
                   Open compare
@@ -124,7 +124,7 @@ export default function CompareHistoryPanel({
                   className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
                   style={{
                     borderColor: "var(--border-color)",
-                    background: "rgba(255,255,255,0.03)",
+                    background: "var(--bg-muted)",
                     color: "var(--text-secondary)",
                   }}
                 >

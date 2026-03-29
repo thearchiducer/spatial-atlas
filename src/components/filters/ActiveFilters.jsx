@@ -15,14 +15,14 @@ export default function ActiveFilters({ filters, updateFilter }) {
           className='flex items-center gap-2 rounded-full border px-3 py-1 text-sm transition'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = "rgba(255,255,255,0.06)";
+            e.currentTarget.style.background = "var(--bg-subtle)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = "rgba(255,255,255,0.03)";
+            e.currentTarget.style.background = "var(--bg-muted)";
           }}
         >
           <span style={{ color: "var(--text-muted)" }}>{key}:</span>

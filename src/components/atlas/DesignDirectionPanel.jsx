@@ -543,105 +543,200 @@ function buildImpactPreview(moveTitle, entry, currentEntries) {
 
 function toneClasses(tone) {
   if (tone === "positive") {
-    return "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.10)] text-[#a7f3d0]";
+    return {
+      borderColor: "var(--tone-success-border)",
+      background: "var(--tone-success-bg)",
+      color: "var(--tone-success-text)",
+    };
   }
 
   if (tone === "negative") {
-    return "border-[rgba(248,113,113,0.35)] bg-[rgba(248,113,113,0.10)] text-[#fecaca]";
+    return {
+      borderColor: "var(--tone-danger-border)",
+      background: "var(--tone-danger-bg)",
+      color: "var(--tone-danger-text)",
+    };
   }
 
   if (tone === "tradeoff") {
-    return "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.10)] text-[#fde68a]";
+    return {
+      borderColor: "var(--tone-warning-border)",
+      background: "var(--tone-warning-bg)",
+      color: "var(--tone-warning-text)",
+    };
   }
 
-  return "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-secondary)]";
+  return {
+    borderColor: "var(--border-color)",
+    background: "var(--bg-muted)",
+    color: "var(--text-secondary)",
+  };
 }
 
 function confidenceBadgeClasses(tone, selected) {
-  const base =
-    "border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em]";
+  const baseStyle = {
+    borderWidth: "1px",
+    borderStyle: "solid",
+  };
 
   if (tone === "positive") {
-    return `${base} ${
-      selected
-        ? "border-[rgba(16,185,129,0.45)] bg-[rgba(16,185,129,0.20)] text-[#d1fae5]"
-        : "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.10)] text-[#a7f3d0]"
-    }`;
+    return selected
+      ? {
+          ...baseStyle,
+          borderColor: "var(--tone-success-border)",
+          background: "var(--tone-success-bg)",
+          color: "var(--text-primary)",
+        }
+      : {
+          ...baseStyle,
+          borderColor: "var(--tone-success-border)",
+          background: "var(--tone-success-bg)",
+          color: "var(--tone-success-text)",
+        };
   }
 
   if (tone === "negative") {
-    return `${base} ${
-      selected
-        ? "border-[rgba(248,113,113,0.45)] bg-[rgba(248,113,113,0.20)] text-[#fee2e2]"
-        : "border-[rgba(248,113,113,0.35)] bg-[rgba(248,113,113,0.10)] text-[#fecaca]"
-    }`;
+    return selected
+      ? {
+          ...baseStyle,
+          borderColor: "var(--tone-danger-border)",
+          background: "var(--tone-danger-bg)",
+          color: "var(--text-primary)",
+        }
+      : {
+          ...baseStyle,
+          borderColor: "var(--tone-danger-border)",
+          background: "var(--tone-danger-bg)",
+          color: "var(--tone-danger-text)",
+        };
   }
 
   if (tone === "tradeoff") {
-    return `${base} ${
-      selected
-        ? "border-[rgba(251,191,36,0.40)] bg-[rgba(251,191,36,0.18)] text-[#fef3c7]"
-        : "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.10)] text-[#fde68a]"
-    }`;
+    return selected
+      ? {
+          ...baseStyle,
+          borderColor: "var(--tone-warning-border)",
+          background: "var(--tone-warning-bg)",
+          color: "var(--text-primary)",
+        }
+      : {
+          ...baseStyle,
+          borderColor: "var(--tone-warning-border)",
+          background: "var(--tone-warning-bg)",
+          color: "var(--tone-warning-text)",
+        };
   }
 
-  return `${base} ${
-    selected
-      ? "border-[rgba(255,255,255,0.18)] bg-[rgba(255,255,255,0.08)] text-white"
-      : "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-secondary)]"
-  }`;
+  return selected
+    ? {
+        ...baseStyle,
+        borderColor: "var(--border-color)",
+        background: "var(--bg-subtle)",
+        color: "var(--text-primary)",
+      }
+    : {
+        ...baseStyle,
+        borderColor: "var(--border-color)",
+        background: "var(--bg-muted)",
+        color: "var(--text-secondary)",
+      };
 }
 
 function confidencePanelClasses(tone) {
   if (tone === "positive") {
-    return "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.08)]";
+    return {
+      borderColor: "var(--tone-success-border)",
+      background: "var(--tone-success-bg)",
+    };
   }
 
   if (tone === "negative") {
-    return "border-[rgba(248,113,113,0.35)] bg-[rgba(248,113,113,0.08)]";
+    return {
+      borderColor: "var(--tone-danger-border)",
+      background: "var(--tone-danger-bg)",
+    };
   }
 
   if (tone === "tradeoff") {
-    return "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.08)]";
+    return {
+      borderColor: "var(--tone-warning-border)",
+      background: "var(--tone-warning-bg)",
+    };
   }
 
-  return "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)]";
+  return {
+    borderColor: "var(--border-color)",
+    background: "var(--bg-muted)",
+  };
 }
 
 function strengthClasses(strength) {
   if (strength === "Clear") {
-    return "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.10)] text-[#a7f3d0]";
+    return {
+      borderColor: "var(--tone-success-border)",
+      background: "var(--tone-success-bg)",
+      color: "var(--tone-success-text)",
+    };
   }
 
   if (strength === "Developing") {
-    return "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.10)] text-[#fde68a]";
+    return {
+      borderColor: "var(--tone-warning-border)",
+      background: "var(--tone-warning-bg)",
+      color: "var(--tone-warning-text)",
+    };
   }
 
-  return "border-[rgba(248,113,113,0.35)] bg-[rgba(248,113,113,0.10)] text-[#fecaca]";
+  return {
+    borderColor: "var(--tone-danger-border)",
+    background: "var(--tone-danger-bg)",
+    color: "var(--tone-danger-text)",
+  };
 }
 
 function priorityClasses(priority) {
   if (priority === "Critical") {
-    return "border-[rgba(248,113,113,0.35)] bg-[rgba(248,113,113,0.10)] text-[#fecaca]";
+    return {
+      borderColor: "var(--tone-danger-border)",
+      background: "var(--tone-danger-bg)",
+      color: "var(--tone-danger-text)",
+    };
   }
 
   if (priority === "Core") {
-    return "border-[rgba(56,189,248,0.35)] bg-[rgba(56,189,248,0.10)] text-[#bae6fd]";
+    return {
+      borderColor: "var(--tone-info-border)",
+      background: "var(--tone-info-bg)",
+      color: "var(--tone-info-text)",
+    };
   }
 
-  return "border-[var(--border-color)] bg-[rgba(255,255,255,0.03)] text-[var(--text-secondary)]";
+  return {
+    borderColor: "var(--border-color)",
+    background: "var(--bg-muted)",
+    color: "var(--text-secondary)",
+  };
 }
 
 function verdictToneClasses(strength) {
   if (strength === "Clear") {
-    return "border-[rgba(16,185,129,0.35)] bg-[rgba(16,185,129,0.08)]";
+    return {
+      borderColor: "var(--tone-success-border)",
+      background: "var(--tone-success-bg)",
+    };
   }
 
   if (strength === "Developing") {
-    return "border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.08)]";
+    return {
+      borderColor: "var(--tone-warning-border)",
+      background: "var(--tone-warning-bg)",
+    };
   }
 
-  return "border-[rgba(248,113,113,0.35)] bg-[rgba(248,113,113,0.08)]";
+  return {
+    borderColor: "var(--tone-danger-border)",
+    background: "var(--tone-danger-bg)",
+  };
 }
 
 function verdictMessage(identity, summary) {
@@ -693,7 +788,10 @@ function FinalVerdictBanner({ identity, summary }) {
   if (!identity || !summary) return null;
 
   return (
-    <div className={`mt-5 border p-5 ${verdictToneClasses(identity.strength)}`}>
+    <div
+      className='mt-5 border p-5'
+      style={verdictToneClasses(identity.strength)}
+    >
       <div className='border-b border-current/15 pb-4'>
         {annotationLabel("Final design verdict")}
         <div
@@ -723,7 +821,7 @@ function FinalVerdictBanner({ identity, summary }) {
           className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em]'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -734,7 +832,7 @@ function FinalVerdictBanner({ identity, summary }) {
           className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em]'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -745,7 +843,7 @@ function FinalVerdictBanner({ identity, summary }) {
           className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em]'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -771,7 +869,7 @@ function IdentityPanel({ identity }) {
       className='mt-5 border p-4'
       style={{
         borderColor: "var(--border-color)",
-        background: "rgba(255,255,255,0.03)",
+        background: "var(--bg-muted)",
       }}
     >
       <div className='flex flex-col gap-3 md:flex-row md:items-start md:justify-between'>
@@ -792,9 +890,8 @@ function IdentityPanel({ identity }) {
         </div>
 
         <span
-          className={`border px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] ${strengthClasses(
-            identity.strength,
-          )}`}
+          className='border px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.08em]'
+          style={strengthClasses(identity.strength)}
         >
           {identity.strength}
         </span>
@@ -807,7 +904,7 @@ function IdentityPanel({ identity }) {
             className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em]'
             style={{
               borderColor: "var(--border-color)",
-              background: "rgba(255,255,255,0.03)",
+              background: "var(--bg-muted)",
               color: "var(--text-secondary)",
             }}
           >
@@ -849,9 +946,8 @@ function SpatialMoveCard({ move, index }) {
         </div>
 
         <span
-          className={`border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] ${priorityClasses(
-            move.priority,
-          )}`}
+          className='border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]'
+          style={priorityClasses(move.priority)}
         >
           {move.priority}
         </span>
@@ -862,7 +958,7 @@ function SpatialMoveCard({ move, index }) {
           className='border p-3'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
           }}
         >
           {annotationLabel("Spatial instruction")}
@@ -878,7 +974,7 @@ function SpatialMoveCard({ move, index }) {
           className='border p-3'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
           }}
         >
           {annotationLabel("Diagram cue")}
@@ -894,7 +990,7 @@ function SpatialMoveCard({ move, index }) {
           className='border p-3'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
           }}
         >
           {annotationLabel("Avoid")}
@@ -988,7 +1084,7 @@ function EmptyCard({ text }) {
       className='border border-dashed p-4 text-sm'
       style={{
         borderColor: "var(--border-color)",
-        background: "rgba(255,255,255,0.02)",
+        background: "var(--bg-muted)",
         color: "var(--text-muted)",
       }}
     >
@@ -1010,10 +1106,10 @@ function SuggestedEntryChip({
       className='flex flex-wrap items-center gap-2 border p-2 transition'
       style={{
         borderColor: isSelected
-          ? "rgba(255,255,255,0.18)"
+          ? "var(--border-strong)"
           : "var(--border-color)",
-        background: isSelected ? "rgba(255,255,255,0.06)" : "var(--bg-surface)",
-        color: isSelected ? "#ffffff" : "var(--text-primary)",
+        background: isSelected ? "var(--bg-subtle)" : "var(--bg-surface)",
+        color: "var(--text-primary)",
       }}
     >
       <button
@@ -1023,13 +1119,13 @@ function SuggestedEntryChip({
         style={
           isSelected
             ? {
-                borderColor: "rgba(255,255,255,0.20)",
-                background: "rgba(255,255,255,0.08)",
-                color: "#ffffff",
+                borderColor: "var(--border-strong)",
+                background: "var(--bg-muted)",
+                color: "var(--text-primary)",
               }
             : {
                 borderColor: "var(--border-color)",
-                background: "rgba(255,255,255,0.03)",
+                background: "var(--bg-muted)",
                 color: "var(--text-secondary)",
               }
         }
@@ -1038,7 +1134,10 @@ function SuggestedEntryChip({
         {entry.term}
       </button>
 
-      <span className={confidenceBadgeClasses(confidence.tone, isSelected)}>
+      <span
+        className='border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em]'
+        style={confidenceBadgeClasses(confidence.tone, isSelected)}
+      >
         {confidence.label}
       </span>
 
@@ -1046,19 +1145,13 @@ function SuggestedEntryChip({
         type='button'
         onClick={() => onAdd(entry.id)}
         className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
-        style={
-          isSelected
-            ? {
-                borderColor: "rgba(16,185,129,0.45)",
-                background: "rgba(16,185,129,0.20)",
-                color: "#d1fae5",
-              }
-            : {
-                borderColor: "rgba(16,185,129,0.35)",
-                background: "rgba(16,185,129,0.10)",
-                color: "#a7f3d0",
-              }
-        }
+        style={{
+          borderColor: "var(--tone-success-border)",
+          background: "var(--tone-success-bg)",
+          color: isSelected
+            ? "var(--text-primary)"
+            : "var(--tone-success-text)",
+        }}
         title={`Add ${entry.term} to board`}
       >
         Add
@@ -1115,7 +1208,7 @@ function DiffList({ title, items, emptyText, tone }) {
       className='border p-3'
       style={{
         borderColor: "var(--border-color)",
-        background: "rgba(255,255,255,0.03)",
+        background: "var(--bg-muted)",
       }}
     >
       {annotationLabel(title)}
@@ -1125,9 +1218,8 @@ function DiffList({ title, items, emptyText, tone }) {
           {items.map((item) => (
             <span
               key={title + "-" + item.title}
-              className={`border px-3 py-1 text-[11px] uppercase tracking-[0.08em] ${toneClasses(
-                tone,
-              )}`}
+              className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em]'
+              style={toneClasses(tone)}
             >
               {item.title}
             </span>
@@ -1146,9 +1238,7 @@ function DecisionConfidenceCard({ confidence }) {
   if (!confidence) return null;
 
   return (
-    <div
-      className={`mt-4 border p-4 ${confidencePanelClasses(confidence.tone)}`}
-    >
+    <div className='...' style={confidencePanelClasses(confidence.tone)}>
       <div className='flex flex-col gap-3 md:flex-row md:items-start md:justify-between'>
         <div>
           {annotationLabel("Decision confidence")}
@@ -1166,7 +1256,7 @@ function DecisionConfidenceCard({ confidence }) {
               className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em]'
               style={{
                 borderColor: "var(--border-color)",
-                background: "rgba(255,255,255,0.03)",
+                background: "var(--bg-muted)",
                 color: "var(--text-secondary)",
               }}
             >
@@ -1183,7 +1273,7 @@ function DecisionConfidenceCard({ confidence }) {
             className='border px-3 py-2 text-sm'
             style={{
               borderColor: "var(--border-color)",
-              background: "rgba(255,255,255,0.03)",
+              background: "var(--bg-muted)",
               color: "var(--text-secondary)",
             }}
           >
@@ -1231,7 +1321,7 @@ function ImpactPreviewCard({ preview, entryTitle }) {
           className='border p-3'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
           }}
         >
           {annotationLabel("Before")}
@@ -1247,7 +1337,7 @@ function ImpactPreviewCard({ preview, entryTitle }) {
           className='border p-3'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
           }}
         >
           {annotationLabel("After")}
@@ -1357,7 +1447,7 @@ function NextMoveCard({
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.04)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
           onMouseEnter={(e) => {
@@ -1376,7 +1466,7 @@ function NextMoveCard({
           className='mt-4 border p-3'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
           }}
         >
           <div className='flex flex-col gap-2 md:flex-row md:items-center md:justify-between'>
@@ -1439,7 +1529,7 @@ function RemovableEntryRow({ entry, onRemove }) {
       className='flex items-center gap-2 border px-3 py-2'
       style={{
         borderColor: "var(--border-color)",
-        background: "rgba(255,255,255,0.03)",
+        background: "var(--bg-muted)",
       }}
     >
       <div className='min-w-0 flex-1'>
@@ -1618,14 +1708,14 @@ export default function DesignDirectionPanel({
         className='rounded-3xl border p-5 shadow-sm'
         style={{
           borderColor: "var(--border-color)",
-          background: "rgba(255,255,255,0.04)",
+          background: "var(--bg-muted)",
         }}
       >
         <div
           className='mb-2 inline-flex rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em]'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -1683,7 +1773,7 @@ export default function DesignDirectionPanel({
           className='rounded-full border px-3 py-1.5 text-xs'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -1708,7 +1798,7 @@ export default function DesignDirectionPanel({
         className='mt-5 rounded-2xl border p-4'
         style={{
           borderColor: "var(--border-color)",
-          background: "rgba(255,255,255,0.03)",
+          background: "var(--bg-muted)",
         }}
       >
         <div

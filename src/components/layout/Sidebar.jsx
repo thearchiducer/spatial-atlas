@@ -33,12 +33,12 @@ export default function Sidebar({ groupedSections }) {
             href={`#${section.id}`}
             className='grid grid-cols-[44px_minmax(0,1fr)_auto] items-center gap-3 border-b px-5 py-3 text-sm transition'
             style={{
-              borderColor: "rgba(255,255,255,0.06)",
+              borderColor: "var(--border-color)",
               color: "var(--text-secondary)",
               background: "transparent",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "rgba(255,255,255,0.04)";
+              e.currentTarget.style.background = "var(--bg-muted)";
               e.currentTarget.style.color = "var(--text-primary)";
             }}
             onMouseLeave={(e) => {

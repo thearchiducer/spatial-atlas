@@ -73,7 +73,7 @@ function SequenceView({ sequence }) {
             className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em]'
             style={{
               borderColor: "var(--border-color)",
-              background: "rgba(255,255,255,0.03)",
+              background: "var(--bg-muted)",
               color: "var(--text-primary)",
             }}
           >
@@ -209,7 +209,7 @@ function CirculationView({ circulation, pattern }) {
         className='border p-4'
         style={{
           borderColor: "var(--border-color)",
-          background: "rgba(255,255,255,0.03)",
+          background: "var(--bg-muted)",
         }}
       >
         {annotationLabel("Circulation")}
@@ -234,7 +234,7 @@ function CirculationView({ circulation, pattern }) {
         className='border p-4'
         style={{
           borderColor: "var(--border-color)",
-          background: "rgba(255,255,255,0.03)",
+          background: "var(--bg-muted)",
         }}
       >
         {annotationLabel("Pattern")}
@@ -279,7 +279,7 @@ function AdjacencyView({ layout, entriesById }) {
             className='border p-3'
             style={{
               borderColor: "var(--border-color)",
-              background: "rgba(255,255,255,0.03)",
+              background: "var(--bg-muted)",
             }}
           >
             <div
@@ -308,7 +308,7 @@ function NarrativeView({ layout }) {
         className='border p-4 text-sm leading-relaxed'
         style={{
           borderColor: "var(--border-color)",
-          background: "rgba(255,255,255,0.03)",
+          background: "var(--bg-muted)",
           color: "var(--text-secondary)",
         }}
       >
@@ -889,7 +889,7 @@ function VisualLayoutRenderer({ layout }) {
         className='border p-4 text-sm'
         style={{
           borderColor: "var(--border-color)",
-          background: "rgba(255,255,255,0.03)",
+          background: "var(--bg-muted)",
           color: "var(--text-muted)",
         }}
       >
@@ -940,7 +940,7 @@ function VisualLayoutRenderer({ layout }) {
         className='mt-5 overflow-x-auto border p-4'
         style={{
           borderColor: "var(--border-color)",
-          background: "rgba(255,255,255,0.02)",
+          background: "var(--bg-muted)",
         }}
       >
         <svg
@@ -1059,7 +1059,7 @@ function VisualLayoutRenderer({ layout }) {
                   width={node.width}
                   height={node.height}
                   rx='8'
-                  fill='rgba(255,255,255,0.03)'
+                  fill='var(--bg-muted)'
                   stroke={tone.stroke}
                   strokeWidth={node.renderMode === "axis" ? 2.8 : 2}
                 />

@@ -36,7 +36,7 @@ function SelectField({ label, value, onChange, options }) {
           color: "var(--text-primary)",
         }}
         onFocus={(e) => {
-          e.currentTarget.style.borderColor = "rgba(56,189,248,0.45)";
+          e.currentTarget.style.borderColor = "var(--tone-info-border)";
         }}
         onBlur={(e) => {
           e.currentTarget.style.borderColor = "var(--border-color)";
@@ -63,13 +63,13 @@ function ActiveFilterTag({ children, tone = "neutral" }) {
   const style =
     tone === "accent"
       ? {
-          borderColor: "rgba(251,191,36,0.30)",
-          background: "rgba(251,191,36,0.10)",
-          color: "#fde68a",
+          borderColor: "var(--tone-warning-border)",
+          background: "var(--tone-warning-bg)",
+          color: "var(--tone-warning-text)",
         }
       : {
           borderColor: "var(--border-color)",
-          background: "rgba(255,255,255,0.03)",
+          background: "var(--bg-muted)",
           color: "var(--text-secondary)",
         };
 
@@ -120,7 +120,7 @@ export default function FilterToolbar({
       className='border p-4'
       style={{
         borderColor: "var(--border-color)",
-        background: "rgba(255,255,255,0.04)",
+        background: "var(--bg-subtle)",
       }}
     >
       <div className='space-y-4'>
@@ -153,7 +153,8 @@ export default function FilterToolbar({
                     color: "var(--text-primary)",
                   }}
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(56,189,248,0.45)";
+                    e.currentTarget.style.borderColor =
+                      "var(--tone-info-border)";
                   }}
                   onBlur={(e) => {
                     e.currentTarget.style.borderColor = "var(--border-color)";
@@ -169,7 +170,7 @@ export default function FilterToolbar({
                 className='border px-3 py-2 text-[11px] uppercase tracking-[0.08em] transition'
                 style={{
                   borderColor: "var(--border-color)",
-                  background: "rgba(255,255,255,0.03)",
+                  background: "var(--bg-muted)",
                   color: "var(--text-secondary)",
                 }}
               >
@@ -182,7 +183,7 @@ export default function FilterToolbar({
                 className='border px-3 py-2 text-[11px] uppercase tracking-[0.08em] transition'
                 style={{
                   borderColor: "var(--border-color)",
-                  background: "rgba(255,255,255,0.03)",
+                  background: "var(--bg-muted)",
                   color: "var(--text-secondary)",
                 }}
               >
@@ -240,7 +241,7 @@ export default function FilterToolbar({
           className='border p-4'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
           }}
         >
           <div className='flex flex-col gap-2 md:flex-row md:items-start md:justify-between'>
@@ -265,9 +266,9 @@ export default function FilterToolbar({
               <span
                 className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
                 style={{
-                  borderColor: "rgba(251,191,36,0.30)",
-                  background: "rgba(251,191,36,0.10)",
-                  color: "#fde68a",
+                  borderColor: "var(--tone-warning-border)",
+                  background: "var(--tone-warning-bg)",
+                  color: "var(--tone-warning-text)",
                 }}
               >
                 Active

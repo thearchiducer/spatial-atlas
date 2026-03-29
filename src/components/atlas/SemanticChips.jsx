@@ -8,37 +8,37 @@ function Chip({ label, value, tone = "stone" }) {
   const toneStyles =
     tone === "sky"
       ? {
-          borderColor: "rgba(56,189,248,0.35)",
-          background: "rgba(56,189,248,0.10)",
-          color: "#bae6fd",
+          borderColor: "var(--tone-info-border)",
+          background: "var(--tone-info-bg)",
+          color: "var(--tone-info-text)",
         }
       : tone === "emerald"
         ? {
-            borderColor: "rgba(16,185,129,0.35)",
-            background: "rgba(16,185,129,0.10)",
-            color: "#a7f3d0",
+            borderColor: "var(--tone-success-border)",
+            background: "var(--tone-success-bg)",
+            color: "var(--tone-success-text)",
           }
         : tone === "amber"
           ? {
-              borderColor: "rgba(251,191,36,0.30)",
-              background: "rgba(251,191,36,0.10)",
-              color: "#fde68a",
+              borderColor: "var(--tone-warning-border)",
+              background: "var(--tone-warning-bg)",
+              color: "var(--tone-warning-text)",
             }
           : tone === "violet"
             ? {
-                borderColor: "rgba(168,85,247,0.35)",
-                background: "rgba(168,85,247,0.10)",
-                color: "#d8b4fe",
+                borderColor: "var(--tone-violet-border)",
+                background: "var(--tone-violet-bg)",
+                color: "var(--tone-violet-text)",
               }
             : tone === "rose"
               ? {
-                  borderColor: "rgba(244,63,94,0.35)",
-                  background: "rgba(244,63,94,0.10)",
-                  color: "#fecdd3",
+                  borderColor: "var(--tone-danger-border)",
+                  background: "var(--tone-danger-bg)",
+                  color: "var(--tone-danger-text)",
                 }
               : {
                   borderColor: "var(--border-color)",
-                  background: "rgba(255,255,255,0.03)",
+                  background: "var(--bg-muted)",
                   color: "var(--text-secondary)",
                 };
 
@@ -49,7 +49,7 @@ function Chip({ label, value, tone = "stone" }) {
     >
       <span
         className='border-r px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em]'
-        style={{ borderColor: "rgba(255,255,255,0.12)" }}
+        style={{ borderColor: "var(--border-color)" }}
       >
         {label}
       </span>
@@ -58,6 +58,7 @@ function Chip({ label, value, tone = "stone" }) {
     </div>
   );
 }
+
 export default function SemanticChips({
   entry,
   compact = false,

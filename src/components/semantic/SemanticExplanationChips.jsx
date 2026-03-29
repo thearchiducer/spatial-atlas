@@ -1,23 +1,23 @@
 function getToneStyle(points) {
   if (points >= 7) {
     return {
-      borderColor: "rgba(16,185,129,0.35)",
-      background: "rgba(16,185,129,0.10)",
-      color: "#a7f3d0",
+      borderColor: "var(--tone-success-border)",
+      background: "var(--tone-success-bg)",
+      color: "var(--tone-success-text)",
     };
   }
 
   if (points >= 4) {
     return {
-      borderColor: "rgba(251,191,36,0.30)",
-      background: "rgba(251,191,36,0.10)",
-      color: "#fde68a",
+      borderColor: "var(--tone-warning-border)",
+      background: "var(--tone-warning-bg)",
+      color: "var(--tone-warning-text)",
     };
   }
 
   return {
     borderColor: "var(--border-color)",
-    background: "rgba(255,255,255,0.03)",
+    background: "var(--bg-muted)",
     color: "var(--text-secondary)",
   };
 }

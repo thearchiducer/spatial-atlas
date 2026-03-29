@@ -40,8 +40,8 @@ function HighlightedText({ text, query }) {
       <mark
         key={`${part}-${index}`}
         style={{
-          background: "rgba(251,191,36,0.18)",
-          color: "var(--text-primary)",
+          background: "var(--tone-warning-bg)",
+          color: "var(--tone-warning-text)",
           padding: "0 2px",
           borderRadius: "2px",
         }}
@@ -136,32 +136,31 @@ export default function EntryCard({
 
   const stateStyle = isHighlighted
     ? {
-        borderColor: "rgba(251,191,36,0.55)",
+        borderColor: "var(--tone-warning-border)",
         boxShadow:
-          "0 0 0 1px rgba(251,191,36,0.18), 0 10px 18px rgba(0,0,0,0.35)",
+          "0 0 0 1px var(--tone-warning-border), 0 10px 18px rgba(0,0,0,0.35)",
       }
     : isCompared
       ? {
-          borderColor: "rgba(56,189,248,0.55)",
+          borderColor: "var(--tone-info-border)",
           boxShadow:
-            "0 0 0 1px rgba(56,189,248,0.18), 0 10px 18px rgba(0,0,0,0.35)",
+            "0 0 0 1px var(--tone-info-border), 0 10px 18px rgba(0,0,0,0.35)",
         }
       : isPinned
         ? {
-            borderColor: "rgba(251,191,36,0.45)",
+            borderColor: "var(--tone-warning-border)",
             boxShadow:
-              "0 0 0 1px rgba(251,191,36,0.14), 0 8px 16px rgba(0,0,0,0.30)",
+              "0 0 0 1px var(--tone-warning-border), 0 8px 16px rgba(0,0,0,0.30)",
           }
         : isInActiveBoard
           ? {
-              borderColor: "rgba(168,85,247,0.50)",
+              borderColor: "var(--tone-violet-border)",
               boxShadow:
-                "0 0 0 1px rgba(168,85,247,0.16), 0 8px 16px rgba(0,0,0,0.30)",
+                "0 0 0 1px var(--tone-violet-border), 0 8px 16px rgba(0,0,0,0.30)",
             }
           : {
               borderColor: "var(--border-color)",
-              boxShadow:
-                "0 0 0 1px rgba(255,255,255,0.02), 0 6px 12px rgba(0,0,0,0.25)",
+              boxShadow: "var(--shadow-card)",
             };
 
   return (
@@ -177,8 +176,7 @@ export default function EntryCard({
       }}
       onMouseEnter={(e) => {
         if (isHighlighted || isCompared || isPinned || isInActiveBoard) return;
-        e.currentTarget.style.boxShadow =
-          "0 0 0 1px rgba(255,255,255,0.05), 0 10px 18px rgba(0,0,0,0.35)";
+        e.currentTarget.style.boxShadow = "var(--shadow-card)";
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.boxShadow = stateStyle.boxShadow;
@@ -186,7 +184,7 @@ export default function EntryCard({
     >
       <div
         className='flex items-start justify-between gap-4 border-b pb-3'
-        style={{ borderColor: "rgba(255,255,255,0.08)" }}
+        style={{ borderColor: "var(--border-color)" }}
       >
         <div className='min-w-0 flex-1'>
           <div
@@ -225,13 +223,13 @@ export default function EntryCard({
           style={
             isCompared
               ? {
-                  borderColor: "rgba(56,189,248,0.35)",
-                  background: "rgba(56,189,248,0.10)",
-                  color: "#bae6fd",
+                  borderColor: "var(--tone-info-border)",
+                  background: "var(--tone-info-bg)",
+                  color: "var(--tone-info-text)",
                 }
               : {
                   borderColor: "var(--border-color)",
-                  background: "rgba(255,255,255,0.03)",
+                  background: "var(--bg-muted)",
                   color: "var(--text-secondary)",
                 }
           }
@@ -246,13 +244,13 @@ export default function EntryCard({
           style={
             isPinned
               ? {
-                  borderColor: "rgba(251,191,36,0.30)",
-                  background: "rgba(251,191,36,0.10)",
-                  color: "#fde68a",
+                  borderColor: "var(--tone-warning-border)",
+                  background: "var(--tone-warning-bg)",
+                  color: "var(--tone-warning-text)",
                 }
               : {
                   borderColor: "var(--border-color)",
-                  background: "rgba(255,255,255,0.03)",
+                  background: "var(--bg-muted)",
                   color: "var(--text-secondary)",
                 }
           }
@@ -266,15 +264,15 @@ export default function EntryCard({
           disabled={!onAddToBoard}
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.1em] transition disabled:cursor-not-allowed disabled:opacity-60'
           style={{
-            background: "rgba(16,185,129,0.12)",
-            borderColor: "rgba(16,185,129,0.4)",
-            color: "#6ee7b7",
+            background: "var(--tone-success-bg)",
+            borderColor: "var(--tone-success-border)",
+            color: "var(--tone-success-text)",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = "rgba(16,185,129,0.2)";
+            e.currentTarget.style.background = "var(--tone-success-bg)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = "rgba(16,185,129,0.12)";
+            e.currentTarget.style.background = "var(--tone-success-bg)";
           }}
         >
           Add to active board
@@ -286,15 +284,15 @@ export default function EntryCard({
           disabled={!onRemoveFromBoard || boardEntryCount < 1}
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.1em] transition disabled:cursor-not-allowed disabled:opacity-60'
           style={{
-            background: "rgba(251,191,36,0.08)",
-            borderColor: "rgba(251,191,36,0.25)",
-            color: "var(--text-primary)",
+            background: "var(--tone-warning-bg)",
+            borderColor: "var(--tone-warning-border)",
+            color: "var(--tone-warning-text)",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = "rgba(251,191,36,0.2)";
+            e.currentTarget.style.background = "var(--tone-warning-bg)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = "rgba(251,191,36,0.12)";
+            e.currentTarget.style.background = "var(--tone-warning-bg)";
           }}
         >
           Remove from active board
@@ -304,9 +302,9 @@ export default function EntryCard({
           <span
             className='border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em]'
             style={{
-              background: "rgba(168,85,247,0.15)",
-              borderColor: "rgba(168,85,247,0.4)",
-              color: "#d8b4fe",
+              background: "var(--tone-violet-bg)",
+              borderColor: "var(--tone-violet-border)",
+              color: "var(--tone-violet-text)",
             }}
           >
             In board · {boardEntryCount}
@@ -323,7 +321,7 @@ export default function EntryCard({
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.1em] transition'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -334,9 +332,9 @@ export default function EntryCard({
           <span
             className='border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em]'
             style={{
-              borderColor: "rgba(56,189,248,0.35)",
-              background: "rgba(56,189,248,0.10)",
-              color: "#bae6fd",
+              borderColor: "var(--tone-info-border)",
+              background: "var(--tone-info-bg)",
+              color: "var(--tone-info-text)",
             }}
           >
             Comparing
@@ -347,9 +345,9 @@ export default function EntryCard({
           <span
             className='border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em]'
             style={{
-              borderColor: "rgba(251,191,36,0.30)",
-              background: "rgba(251,191,36,0.10)",
-              color: "#fde68a",
+              borderColor: "var(--tone-warning-border)",
+              background: "var(--tone-warning-bg)",
+              color: "var(--tone-warning-text)",
             }}
           >
             Favorite
@@ -360,9 +358,9 @@ export default function EntryCard({
           <span
             className='border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em]'
             style={{
-              background: "rgba(168,85,247,0.15)",
-              borderColor: "rgba(168,85,247,0.4)",
-              color: "#d8b4fe",
+              background: "var(--tone-violet-bg)",
+              borderColor: "var(--tone-violet-border)",
+              color: "var(--tone-violet-text)",
             }}
           >
             {activeBoardName ? `Board · ${activeBoardName}` : "In active board"}
@@ -374,22 +372,24 @@ export default function EntryCard({
         <div
           className='border px-3 py-2 text-sm'
           style={{
-            borderColor: "rgba(56,189,248,0.35)",
-            background: "rgba(56,189,248,0.08)",
-            color: "#e0f2fe",
+            borderColor: "var(--tone-info-border)",
+            background: "var(--tone-info-bg)",
+            color: "var(--tone-info-text)",
           }}
         >
           <div className='mt-1 flex flex-wrap items-center gap-2'>
-            <strong style={{ color: "#bae6fd" }}>Matched by</strong>
+            <strong style={{ color: "var(--tone-info-text)" }}>
+              Matched by
+            </strong>
 
             {searchWhy.map((reason) => (
               <span
                 key={reason}
                 className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
                 style={{
-                  borderColor: "rgba(56,189,248,0.30)",
-                  background: "rgba(255,255,255,0.06)",
-                  color: "#bae6fd",
+                  borderColor: "var(--tone-info-border)",
+                  background: "var(--bg-muted)",
+                  color: "var(--tone-info-text)",
                 }}
               >
                 {reason}
@@ -399,7 +399,7 @@ export default function EntryCard({
             {searchScore !== null && (
               <span
                 className='ml-auto text-[10px] font-semibold uppercase tracking-[0.14em]'
-                style={{ color: "#7dd3fc" }}
+                style={{ color: "var(--tone-info-text)" }}
               >
                 Score {searchScore}
               </span>
@@ -411,7 +411,7 @@ export default function EntryCard({
         <>
           <div
             className='border-t pt-3'
-            style={{ borderColor: "rgba(255,255,255,0.12)" }}
+            style={{ borderColor: "var(--border-color)" }}
           >
             <div className='mb-2'>{annotationLabel("Synonyms")}</div>
             <div
@@ -489,7 +489,7 @@ export default function EntryCard({
                     className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] transition'
                     style={{
                       borderColor: "var(--border-color)",
-                      background: "rgba(255,255,255,0.03)",
+                      background: "var(--bg-muted)",
                       color: "var(--text-secondary)",
                     }}
                   >

@@ -15,7 +15,7 @@ function CollectionChip({ children }) {
       className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
       style={{
         borderColor: "var(--border-color)",
-        background: "rgba(255,255,255,0.03)",
+        background: "var(--bg-muted)",
         color: "var(--text-secondary)",
       }}
     >
@@ -61,7 +61,7 @@ function CollectionCard({ collection, onOpenCollection, onDeleteCollection }) {
           className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -96,9 +96,9 @@ function CollectionCard({ collection, onOpenCollection, onDeleteCollection }) {
           onClick={() => onOpenCollection?.(collection)}
           className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
           style={{
-            borderColor: "rgba(56,189,248,0.35)",
-            background: "rgba(56,189,248,0.10)",
-            color: "#bae6fd",
+            borderColor: "var(--tone-info-border)",
+            background: "var(--tone-info-bg)",
+            color: "var(--tone-info-text)",
           }}
         >
           Open collection
@@ -155,9 +155,9 @@ export default function SavedCollectionsPanel({
           disabled={pinnedEntries.length === 0}
           className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition disabled:cursor-not-allowed disabled:opacity-50'
           style={{
-            borderColor: "rgba(16,185,129,0.35)",
-            background: "rgba(16,185,129,0.10)",
-            color: "#a7f3d0",
+            borderColor: "var(--tone-success-border)",
+            background: "var(--tone-success-bg)",
+            color: "var(--tone-success-text)",
           }}
         >
           Save pinned as collection
@@ -170,7 +170,7 @@ export default function SavedCollectionsPanel({
           className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition disabled:cursor-not-allowed disabled:opacity-50'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -184,7 +184,7 @@ export default function SavedCollectionsPanel({
           className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition disabled:cursor-not-allowed disabled:opacity-50'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -213,7 +213,7 @@ export default function SavedCollectionsPanel({
             className='border border-dashed p-4 text-sm'
             style={{
               borderColor: "var(--border-color)",
-              background: "rgba(255,255,255,0.03)",
+              background: "var(--bg-muted)",
               color: "var(--text-muted)",
             }}
           >

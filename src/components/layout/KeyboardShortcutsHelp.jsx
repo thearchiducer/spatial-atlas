@@ -1,33 +1,31 @@
 export default function KeyboardShortcutsHelp({ isOpen, onToggle }) {
   return (
     <>
-      {/* Toggle Button */}
       <button
         type='button'
         onClick={onToggle}
         className='fixed bottom-5 right-5 z-50 rounded-full border px-4 py-2 text-sm shadow-md transition'
         style={{
           borderColor: "var(--border-color)",
-          background: "rgba(255,255,255,0.06)",
+          background: "var(--bg-muted)",
           color: "var(--text-primary)",
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.background = "rgba(255,255,255,0.10)";
+          e.currentTarget.style.background = "var(--bg-subtle)";
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.background = "rgba(255,255,255,0.06)";
+          e.currentTarget.style.background = "var(--bg-muted)";
         }}
       >
         ⌨ Shortcuts
       </button>
 
-      {/* Panel */}
       {isOpen && (
         <div
           className='fixed bottom-20 right-5 z-50 w-80 rounded-2xl border p-4 shadow-lg backdrop-blur'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(20,20,20,0.85)",
+            background: "var(--bg-surface)",
             color: "var(--text-primary)",
           }}
         >
@@ -67,8 +65,8 @@ function ShortcutRow({ keys, label }) {
     <div
       className='flex items-center justify-between rounded-lg border px-3 py-2'
       style={{
-        borderColor: "rgba(255,255,255,0.08)",
-        background: "rgba(255,255,255,0.03)",
+        borderColor: "var(--border-color)",
+        background: "var(--bg-muted)",
       }}
     >
       <span style={{ color: "var(--text-secondary)" }}>{label}</span>
@@ -76,7 +74,7 @@ function ShortcutRow({ keys, label }) {
       <span
         className='rounded-md px-2 py-0.5 text-xs font-mono'
         style={{
-          background: "rgba(255,255,255,0.08)",
+          background: "var(--bg-subtle)",
           color: "var(--text-primary)",
         }}
       >

@@ -91,33 +91,33 @@ function RecommendationCard({ title, tone, entries, onRelatedClick }) {
 
   if (tone === "sky") {
     toneStyles = {
-      borderColor: "rgba(56,189,248,0.35)",
-      background: "rgba(56,189,248,0.08)",
-      titleColor: "#e0f2fe",
-      textColor: "#bae6fd",
-      buttonBorder: "rgba(56,189,248,0.35)",
-      buttonBg: "rgba(56,189,248,0.10)",
-      buttonText: "#bae6fd",
+      borderColor: "var(--tone-info-border)",
+      background: "var(--tone-info-bg)",
+      titleColor: "var(--tone-info-text)",
+      textColor: "var(--tone-info-text)",
+      buttonBorder: "var(--tone-info-border)",
+      buttonBg: "var(--tone-info-bg)",
+      buttonText: "var(--tone-info-text)",
     };
   } else if (tone === "emerald") {
     toneStyles = {
-      borderColor: "rgba(16,185,129,0.35)",
-      background: "rgba(16,185,129,0.08)",
-      titleColor: "#d1fae5",
-      textColor: "#a7f3d0",
-      buttonBorder: "rgba(16,185,129,0.35)",
-      buttonBg: "rgba(16,185,129,0.10)",
-      buttonText: "#a7f3d0",
+      borderColor: "var(--tone-success-border)",
+      background: "var(--tone-success-bg)",
+      titleColor: "var(--tone-success-text)",
+      textColor: "var(--tone-success-text)",
+      buttonBorder: "var(--tone-success-border)",
+      buttonBg: "var(--tone-success-bg)",
+      buttonText: "var(--tone-success-text)",
     };
   } else if (tone === "violet") {
     toneStyles = {
-      borderColor: "rgba(168,85,247,0.35)",
-      background: "rgba(168,85,247,0.08)",
-      titleColor: "#f3e8ff",
-      textColor: "#d8b4fe",
-      buttonBorder: "rgba(168,85,247,0.35)",
-      buttonBg: "rgba(168,85,247,0.10)",
-      buttonText: "#d8b4fe",
+      borderColor: "var(--tone-violet-border)",
+      background: "var(--tone-violet-bg)",
+      titleColor: "var(--tone-violet-text)",
+      textColor: "var(--tone-violet-text)",
+      buttonBorder: "var(--tone-violet-border)",
+      buttonBg: "var(--tone-violet-bg)",
+      buttonText: "var(--tone-violet-text)",
     };
   }
 
@@ -285,7 +285,7 @@ export default function SelectedEntryPanel({
           {isInActiveBoard ? (
             <p
               className='mt-2 text-[11px] uppercase tracking-[0.08em]'
-              style={{ color: "#d8b4fe" }}
+              style={{ color: "var(--tone-violet-text)" }}
             >
               {activeBoardName
                 ? `Active board · ${activeBoardName}`
@@ -302,9 +302,9 @@ export default function SelectedEntryPanel({
             style={
               isCompared
                 ? {
-                    borderColor: "rgba(56,189,248,0.35)",
-                    background: "rgba(56,189,248,0.10)",
-                    color: "#bae6fd",
+                    borderColor: "var(--tone-info-border)",
+                    background: "var(--tone-info-bg)",
+                    color: "var(--tone-info-text)",
                   }
                 : {
                     borderColor: "var(--border-color)",
@@ -323,9 +323,9 @@ export default function SelectedEntryPanel({
             style={
               isPinned
                 ? {
-                    borderColor: "rgba(251,191,36,0.30)",
-                    background: "rgba(251,191,36,0.10)",
-                    color: "#fde68a",
+                    borderColor: "var(--tone-warning-border)",
+                    background: "var(--tone-warning-bg)",
+                    color: "var(--tone-warning-text)",
                   }
                 : {
                     borderColor: "var(--border-color)",
@@ -345,14 +345,14 @@ export default function SelectedEntryPanel({
             style={
               isInActiveBoard
                 ? {
-                    borderColor: "rgba(168,85,247,0.40)",
-                    background: "rgba(168,85,247,0.15)",
-                    color: "#d8b4fe",
+                    borderColor: "var(--tone-violet-border)",
+                    background: "var(--tone-violet-bg)",
+                    color: "var(--tone-violet-text)",
                   }
                 : {
-                    borderColor: "rgba(16,185,129,0.40)",
-                    background: "rgba(16,185,129,0.12)",
-                    color: "#6ee7b7",
+                    borderColor: "var(--tone-success-border)",
+                    background: "var(--tone-success-bg)",
+                    color: "var(--tone-success-text)",
                   }
             }
           >
@@ -404,7 +404,7 @@ export default function SelectedEntryPanel({
         className='mt-4 border p-4'
         style={{
           borderColor: "var(--border-color)",
-          background: "rgba(255,255,255,0.03)",
+          background: "var(--bg-muted)",
         }}
       >
         {annotationLabel("Semantic profile")}
@@ -571,7 +571,7 @@ export default function SelectedEntryPanel({
                   className='border p-4'
                   style={{
                     borderColor: "var(--border-color)",
-                    background: "rgba(255,255,255,0.03)",
+                    background: "var(--bg-muted)",
                   }}
                 >
                   <div className='flex flex-col gap-2 md:flex-row md:items-center md:justify-between'>

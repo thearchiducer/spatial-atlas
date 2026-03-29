@@ -11,7 +11,7 @@ export default function MinimalDirectionView({ activeBoard }) {
 
   if (!activeBoard || !packet) {
     return (
-      <div className='text-center text-stone-400 py-20'>
+      <div className='py-20 text-center' style={{ color: "var(--text-muted)" }}>
         No direction available.
       </div>
     );
@@ -21,56 +21,79 @@ export default function MinimalDirectionView({ activeBoard }) {
 
   return (
     <div>
-      {/* Title */}
       <div className='mb-10'>
-        <h1 className='text-2xl font-semibold tracking-tight'>
+        <h1
+          className='text-2xl font-semibold tracking-tight'
+          style={{ color: "var(--text-primary)" }}
+        >
           Design Direction
         </h1>
-        <p className='text-sm text-stone-500 mt-2'>
+
+        <p className='mt-2 text-sm' style={{ color: "var(--text-muted)" }}>
           Architectural decision output
         </p>
       </div>
 
-      {/* VERDICT */}
       <div className='mb-12'>
-        <h2 className='text-lg uppercase tracking-wide text-stone-500'>
+        <h2
+          className='text-lg uppercase tracking-wide'
+          style={{ color: "var(--text-muted)" }}
+        >
           Final Direction
         </h2>
 
-        <p className='mt-4 text-2xl font-medium leading-relaxed'>
+        <p
+          className='mt-4 text-2xl font-medium leading-relaxed'
+          style={{ color: "var(--text-primary)" }}
+        >
           {identity?.statement || "Define a clear architectural direction."}
         </p>
       </div>
 
-      {/* KEY CHARACTER */}
       <div className='mb-10'>
-        <h3 className='text-sm uppercase tracking-wide text-stone-400'>
+        <h3
+          className='text-sm uppercase tracking-wide'
+          style={{ color: "var(--text-muted)" }}
+        >
           Spatial Character
         </h3>
 
-        <p className='mt-2 text-lg text-stone-700'>
+        <p className='mt-2 text-lg' style={{ color: "var(--text-secondary)" }}>
           {summary?.boardCharacter || "—"}
         </p>
       </div>
 
-      {/* MOVES */}
       <div className='mb-10'>
-        <h3 className='text-sm uppercase tracking-wide text-stone-400'>
+        <h3
+          className='text-sm uppercase tracking-wide'
+          style={{ color: "var(--text-muted)" }}
+        >
           Key Moves
         </h3>
 
-        <ul className='mt-3 space-y-2 text-sm text-stone-700'>
+        <ul
+          className='mt-3 space-y-2 text-sm'
+          style={{ color: "var(--text-secondary)" }}
+        >
           {(translator?.moves || []).slice(0, 4).map((move, i) => (
             <li key={i}>• {move.title}</li>
           ))}
         </ul>
       </div>
 
-      {/* TOGGLE */}
-      <div className='border-t border-stone-200 pt-6'>
+      <div
+        className='border-t pt-6'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         <button
+          type='button'
           onClick={() => setShowDetails((v) => !v)}
-          className='text-sm text-stone-500 hover:text-stone-900'
+          className='border px-3 py-1.5 text-sm transition'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "var(--bg-muted)",
+            color: "var(--text-secondary)",
+          }}
         >
           {showDetails ? "Hide details" : "Show details"}
         </button>
@@ -98,10 +121,16 @@ export default function MinimalDirectionView({ activeBoard }) {
 function DetailBlock({ title, children }) {
   return (
     <div>
-      <div className='text-xs uppercase tracking-wide text-stone-400'>
+      <div
+        className='text-xs uppercase tracking-wide'
+        style={{ color: "var(--text-muted)" }}
+      >
         {title}
       </div>
-      <div className='mt-1 text-sm text-stone-700'>{children || "—"}</div>
+
+      <div className='mt-1 text-sm' style={{ color: "var(--text-secondary)" }}>
+        {children || "—"}
+      </div>
     </div>
   );
 }

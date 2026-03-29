@@ -2,44 +2,50 @@ export default function TypeBadge({ type }) {
   const styles = {
     Room: {
       borderColor: "var(--border-color)",
-      background: "rgba(255,255,255,0.03)",
+      background: "var(--bg-muted)",
       color: "var(--text-primary)",
     },
+
     Circulation: {
-      borderColor: "rgba(168,85,247,0.35)",
-      background: "rgba(168,85,247,0.10)",
-      color: "#d8b4fe",
+      borderColor: "var(--tone-violet-border)",
+      background: "var(--tone-violet-bg)",
+      color: "var(--tone-violet-text)",
     },
+
     Threshold: {
-      borderColor: "rgba(16,185,129,0.35)",
-      background: "rgba(16,185,129,0.10)",
-      color: "#a7f3d0",
+      borderColor: "var(--tone-success-border)",
+      background: "var(--tone-success-bg)",
+      color: "var(--tone-success-text)",
     },
+
     Zone: {
-      borderColor: "rgba(251,191,36,0.30)",
-      background: "rgba(251,191,36,0.10)",
-      color: "#fde68a",
+      borderColor: "var(--tone-warning-border)",
+      background: "var(--tone-warning-bg)",
+      color: "var(--tone-warning-text)",
     },
+
     "Open Space": {
-      borderColor: "rgba(34,197,94,0.35)",
-      background: "rgba(34,197,94,0.10)",
-      color: "#bbf7d0",
+      borderColor: "var(--tone-success-border)",
+      background: "var(--tone-success-bg)",
+      color: "var(--tone-success-text)",
     },
+
     Technical: {
-      borderColor: "rgba(148,163,184,0.35)",
-      background: "rgba(148,163,184,0.10)",
-      color: "#cbd5e1",
+      borderColor: "var(--border-color)",
+      background: "var(--bg-subtle)",
+      color: "var(--text-secondary)",
     },
+
     Concept: {
-      borderColor: "rgba(244,63,94,0.35)",
-      background: "rgba(244,63,94,0.10)",
-      color: "#fecdd3",
+      borderColor: "var(--tone-danger-border)",
+      background: "var(--tone-danger-bg)",
+      color: "var(--tone-danger-text)",
     },
   };
 
   const style = styles[type] || {
     borderColor: "var(--border-color)",
-    background: "rgba(255,255,255,0.03)",
+    background: "var(--bg-muted)",
     color: "var(--text-primary)",
   };
 

@@ -1,10 +1,10 @@
-export default function OnboardingHeader({ theme = "light" }) {
+export default function OnboardingHeader() {
   return (
     <div
       className='border-b px-6 py-6'
       style={{
         borderColor: "var(--border-color)",
-        background: theme === "dark" ? "var(--bg-base)" : "var(--bg-surface)",
+        background: "var(--bg-surface)",
       }}
     >
       <div className='max-w-5xl'>
@@ -26,9 +26,9 @@ export default function OnboardingHeader({ theme = "light" }) {
         <div
           className='mt-3 border px-3 py-2 text-xs'
           style={{
-            borderColor: "rgba(56,189,248,0.35)",
-            background: "rgba(56,189,248,0.10)",
-            color: "#bae6fd",
+            borderColor: "var(--tone-info-border)",
+            background: "var(--tone-info-bg)",
+            color: "var(--tone-info-text)",
           }}
         >
           A sample board has been created to help you explore the workflow.
@@ -46,9 +46,9 @@ export default function OnboardingHeader({ theme = "light" }) {
         <div
           className='mt-4 inline-block border px-3 py-2 text-xs font-semibold'
           style={{
-            borderColor: "rgba(16,185,129,0.35)",
-            background: "rgba(16,185,129,0.10)",
-            color: "#a7f3d0",
+            borderColor: "var(--tone-success-border)",
+            background: "var(--tone-success-bg)",
+            color: "var(--tone-success-text)",
           }}
         >
           Start with two boards to explore a direction
@@ -57,11 +57,12 @@ export default function OnboardingHeader({ theme = "light" }) {
 
       <div className='mt-4 flex gap-2'>
         <button
+          type='button'
           onClick={() => window.scrollTo({ top: 600, behavior: "smooth" })}
           className='border px-3 py-1 text-xs uppercase tracking-[0.1em] transition'
           style={{
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           }}
         >
@@ -69,14 +70,15 @@ export default function OnboardingHeader({ theme = "light" }) {
         </button>
 
         <button
+          type='button'
           onClick={() =>
             alert("Select an entry → then click 'Add to active board'")
           }
           className='border px-3 py-1 text-xs uppercase tracking-[0.1em] transition'
           style={{
-            borderColor: "rgba(16,185,129,0.35)",
-            background: "rgba(16,185,129,0.10)",
-            color: "#a7f3d0",
+            borderColor: "var(--tone-success-border)",
+            background: "var(--tone-success-bg)",
+            color: "var(--tone-success-text)",
           }}
         >
           How to start

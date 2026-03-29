@@ -9,28 +9,28 @@ function UtilityTag({
   const toneStyles =
     tone === "sky"
       ? {
-          borderColor: "rgba(56,189,248,0.35)",
-          background: "rgba(56,189,248,0.10)",
-          color: "#bae6fd",
-          actionBorder: "rgba(56,189,248,0.25)",
-          actionBackground: "rgba(255,255,255,0.06)",
-          actionColor: "#e0f2fe",
+          borderColor: "var(--tone-info-border)",
+          background: "var(--tone-info-bg)",
+          color: "var(--tone-info-text)",
+          actionBorder: "var(--tone-info-border)",
+          actionBackground: "var(--bg-muted)",
+          actionColor: "var(--text-primary)",
         }
       : tone === "amber"
         ? {
-            borderColor: "rgba(251,191,36,0.30)",
-            background: "rgba(251,191,36,0.10)",
-            color: "#fde68a",
-            actionBorder: "rgba(251,191,36,0.25)",
-            actionBackground: "rgba(255,255,255,0.06)",
-            actionColor: "#fef3c7",
+            borderColor: "var(--tone-warning-border)",
+            background: "var(--tone-warning-bg)",
+            color: "var(--tone-warning-text)",
+            actionBorder: "var(--tone-warning-border)",
+            actionBackground: "var(--bg-muted)",
+            actionColor: "var(--text-primary)",
           }
         : {
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-primary)",
-            actionBorder: "rgba(255,255,255,0.12)",
-            actionBackground: "rgba(255,255,255,0.06)",
+            actionBorder: "var(--border-color)",
+            actionBackground: "var(--bg-subtle)",
             actionColor: "var(--text-secondary)",
           };
 
@@ -75,19 +75,19 @@ function QuickReferenceButton({ tone = "stone", children, onClick }) {
   const toneStyles =
     tone === "sky"
       ? {
-          borderColor: "rgba(56,189,248,0.35)",
-          background: "rgba(56,189,248,0.10)",
-          color: "#bae6fd",
+          borderColor: "var(--tone-info-border)",
+          background: "var(--tone-info-bg)",
+          color: "var(--tone-info-text)",
         }
       : tone === "amber"
         ? {
-            borderColor: "rgba(251,191,36,0.30)",
-            background: "rgba(251,191,36,0.10)",
-            color: "#fde68a",
+            borderColor: "var(--tone-warning-border)",
+            background: "var(--tone-warning-bg)",
+            color: "var(--tone-warning-text)",
           }
         : {
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             color: "var(--text-secondary)",
           };
 
@@ -108,7 +108,6 @@ function QuickReferenceButton({ tone = "stone", children, onClick }) {
 }
 
 export default function AtlasUtilityBar({
-  theme = { theme },
   activeBoard,
   selectedEntry,
   compareEntries,
@@ -132,7 +131,7 @@ export default function AtlasUtilityBar({
       className='sticky top-20 z-10 border p-4 backdrop-blur'
       style={{
         borderColor: "var(--border-color)",
-        background: "rgba(255,255,255,0.04)",
+        background: "var(--bg-subtle)",
       }}
     >
       <div className='flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between'>
@@ -141,9 +140,9 @@ export default function AtlasUtilityBar({
             <div
               className='border px-3 py-2'
               style={{
-                borderColor: "rgba(168,85,247,0.35)",
-                background: "rgba(168,85,247,0.10)",
-                color: "#d8b4fe",
+                borderColor: "var(--tone-violet-border)",
+                background: "var(--tone-violet-bg)",
+                color: "var(--tone-violet-text)",
               }}
             >
               <div className='flex flex-wrap items-center gap-2'>
@@ -156,8 +155,8 @@ export default function AtlasUtilityBar({
               <div
                 className='mt-2 border px-3 py-2 text-xs'
                 style={{
-                  borderColor: "rgba(255,255,255,0.12)",
-                  background: "rgba(255,255,255,0.04)",
+                  borderColor: "var(--border-color)",
+                  background: "var(--bg-muted)",
                   color: "var(--text-secondary)",
                 }}
               >

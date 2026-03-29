@@ -18,21 +18,21 @@ function MetricChip({ label, value, tone = "neutral" }) {
 
   if (tone === "danger") {
     style = {
-      borderColor: "rgba(248,113,113,0.35)",
-      background: "rgba(248,113,113,0.10)",
-      color: "#fecaca",
+      borderColor: "var(--tone-danger-border)",
+      background: "var(--tone-danger-bg)",
+      color: "var(--tone-danger-text)",
     };
   } else if (tone === "warning") {
     style = {
-      borderColor: "rgba(251,191,36,0.30)",
-      background: "rgba(251,191,36,0.10)",
-      color: "#fde68a",
+      borderColor: "var(--tone-warning-border)",
+      background: "var(--tone-warning-bg)",
+      color: "var(--tone-warning-text)",
     };
   } else if (tone === "good") {
     style = {
-      borderColor: "rgba(16,185,129,0.35)",
-      background: "rgba(16,185,129,0.10)",
-      color: "#a7f3d0",
+      borderColor: "var(--tone-success-border)",
+      background: "var(--tone-success-bg)",
+      color: "var(--tone-success-text)",
     };
   }
 
@@ -49,38 +49,38 @@ function MetricChip({ label, value, tone = "neutral" }) {
 function AnalysisCard({ title, description, tone = "neutral" }) {
   let style = {
     borderColor: "var(--border-color)",
-    background: "rgba(255,255,255,0.03)",
+    background: "var(--bg-muted)",
     titleColor: "var(--text-primary)",
     bodyColor: "var(--text-secondary)",
   };
 
   if (tone === "danger") {
     style = {
-      borderColor: "rgba(248,113,113,0.35)",
-      background: "rgba(248,113,113,0.08)",
-      titleColor: "#fee2e2",
-      bodyColor: "#fecaca",
+      borderColor: "var(--tone-danger-border)",
+      background: "var(--tone-danger-bg)",
+      titleColor: "var(--tone-danger-text)",
+      bodyColor: "var(--tone-danger-text)",
     };
   } else if (tone === "warning") {
     style = {
-      borderColor: "rgba(251,191,36,0.30)",
-      background: "rgba(251,191,36,0.08)",
-      titleColor: "#fef3c7",
-      bodyColor: "#fde68a",
+      borderColor: "var(--tone-warning-border)",
+      background: "var(--tone-warning-bg)",
+      titleColor: "var(--tone-warning-text)",
+      bodyColor: "var(--tone-warning-text)",
     };
   } else if (tone === "good") {
     style = {
-      borderColor: "rgba(16,185,129,0.35)",
-      background: "rgba(16,185,129,0.08)",
-      titleColor: "#d1fae5",
-      bodyColor: "#a7f3d0",
+      borderColor: "var(--tone-success-border)",
+      background: "var(--tone-success-bg)",
+      titleColor: "var(--tone-success-text)",
+      bodyColor: "var(--tone-success-text)",
     };
   } else if (tone === "info") {
     style = {
-      borderColor: "rgba(56,189,248,0.35)",
-      background: "rgba(56,189,248,0.08)",
-      titleColor: "#e0f2fe",
-      bodyColor: "#bae6fd",
+      borderColor: "var(--tone-info-border)",
+      background: "var(--tone-info-bg)",
+      titleColor: "var(--tone-info-text)",
+      bodyColor: "var(--tone-info-text)",
     };
   }
 
@@ -164,9 +164,9 @@ function SectionBlock({
           <div
             className='border p-4 text-sm'
             style={{
-              borderColor: "rgba(16,185,129,0.30)",
-              background: "rgba(16,185,129,0.08)",
-              color: "#a7f3d0",
+              borderColor: "var(--tone-success-border)",
+              background: "var(--tone-success-bg)",
+              color: "var(--tone-success-text)",
             }}
           >
             {emptyLabel}

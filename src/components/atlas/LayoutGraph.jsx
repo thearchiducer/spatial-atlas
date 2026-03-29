@@ -1,38 +1,61 @@
 function nodeTone(zone) {
   if (zone === "public") {
-    return "border-sky-300 bg-sky-50 text-sky-950";
+    return {
+      borderColor: "var(--zone-public-border)",
+      background: "var(--zone-public-bg)",
+      color: "var(--zone-public-text)",
+    };
   }
 
   if (zone === "transition") {
-    return "border-amber-300 bg-amber-50 text-amber-950";
+    return {
+      borderColor: "var(--zone-transition-border)",
+      background: "var(--zone-transition-bg)",
+      color: "var(--zone-transition-text)",
+    };
   }
 
   if (zone === "private") {
-    return "border-emerald-300 bg-emerald-50 text-emerald-950";
+    return {
+      borderColor: "var(--zone-private-border)",
+      background: "var(--zone-private-bg)",
+      color: "var(--zone-private-text)",
+    };
   }
 
   if (zone === "service") {
-    return "border-violet-300 bg-violet-50 text-violet-950";
+    return {
+      borderColor: "var(--zone-service-border)",
+      background: "var(--zone-service-bg)",
+      color: "var(--zone-service-text)",
+    };
   }
 
-  return "border-stone-300 bg-white text-stone-900";
+  return {
+    borderColor: "var(--border-color)",
+    background: "var(--bg-surface)",
+    color: "var(--text-primary)",
+  };
 }
 
 function edgeTone(type) {
   if (type === "hub") {
-    return "bg-violet-300";
+    return "var(--tone-violet-text)";
   }
 
   if (type === "secondary") {
-    return "bg-amber-300";
+    return "var(--tone-warning-text)";
   }
 
-  return "bg-stone-400";
+  return "var(--text-muted)";
 }
 
 function annotationLabel(children) {
   return (
-    <div className='text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-500'>
+    <div
+      className='text-[10px] font-semibold uppercase tracking-[0.16em]'
+      style={{ color: "var(--text-muted)" }}
+    >
       {children}
     </div>
   );
@@ -41,16 +64,47 @@ function annotationLabel(children) {
 function ZoneLegend() {
   return (
     <div className='flex flex-wrap gap-2'>
-      <span className='border border-sky-300 bg-sky-50 px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] text-sky-950'>
+      <span
+        className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
+        style={{
+          borderColor: "var(--zone-public-border)",
+          background: "var(--zone-public-bg)",
+          color: "var(--zone-public-text)",
+        }}
+      >
         Public
       </span>
-      <span className='border border-amber-300 bg-amber-50 px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] text-amber-950'>
+
+      <span
+        className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
+        style={{
+          borderColor: "var(--zone-transition-border)",
+          background: "var(--zone-transition-bg)",
+          color: "var(--zone-transition-text)",
+        }}
+      >
         Transition
       </span>
-      <span className='border border-emerald-300 bg-emerald-50 px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] text-emerald-950'>
+
+      <span
+        className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
+        style={{
+          borderColor: "var(--zone-private-border)",
+          background: "var(--zone-private-bg)",
+          color: "var(--zone-private-text)",
+        }}
+      >
         Private
       </span>
-      <span className='border border-violet-300 bg-violet-50 px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] text-violet-950'>
+
+      <span
+        className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
+        style={{
+          borderColor: "var(--zone-service-border)",
+          background: "var(--zone-service-bg)",
+          color: "var(--zone-service-text)",
+        }}
+      >
         Service
       </span>
     </div>
@@ -66,14 +120,29 @@ export default function LayoutGraph({ layout }) {
   const edges = Array.isArray(layout.edges) ? layout.edges : [];
 
   return (
-    <section className='border border-stone-300 bg-white p-5'>
-      <div className='flex flex-col gap-3 border-b border-stone-200 pb-4 md:flex-row md:items-start md:justify-between'>
+    <section
+      className='border p-5'
+      style={{
+        borderColor: "var(--border-color)",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div
+        className='flex flex-col gap-3 border-b pb-4 md:flex-row md:items-start md:justify-between'
+        style={{ borderColor: "var(--border-color)" }}
+      >
         <div>
           {annotationLabel("Diagram")}
-          <h3 className='mt-2 text-lg font-semibold tracking-tight text-stone-900'>
+          <h3
+            className='mt-2 text-lg font-semibold tracking-tight'
+            style={{ color: "var(--text-primary)" }}
+          >
             Spatial diagram
           </h3>
-          <p className='mt-2 text-sm leading-relaxed text-stone-600'>
+          <p
+            className='mt-2 text-sm leading-relaxed'
+            style={{ color: "var(--text-secondary)" }}
+          >
             Conceptual spatial organization derived from board semantics.
           </p>
         </div>
@@ -84,12 +153,17 @@ export default function LayoutGraph({ layout }) {
       <div className='mt-5 overflow-x-auto'>
         <div className='flex min-w-max items-center gap-3'>
           {nodes.map((node, index) => {
+            const tone = nodeTone(node.zone);
+
             return (
               <div key={node.id} className='flex items-center gap-3'>
                 <div
-                  className={
-                    "min-w-[132px] border px-3 py-3 " + nodeTone(node.zone)
-                  }
+                  className='min-w-[132px] border px-3 py-3'
+                  style={{
+                    borderColor: tone.borderColor,
+                    background: tone.background,
+                    color: tone.color,
+                  }}
                 >
                   <div className='text-[10px] font-semibold uppercase tracking-[0.12em] opacity-70'>
                     {node.zone}
@@ -104,12 +178,19 @@ export default function LayoutGraph({ layout }) {
 
                 {index < nodes.length - 1 ? (
                   <div className='flex items-center gap-2'>
-                    <div className='text-[11px] text-stone-500'>→</div>
                     <div
-                      className={
-                        "h-[2px] w-10 " +
-                        edgeTone(edges[index] ? edges[index].type : "primary")
-                      }
+                      className='text-[11px]'
+                      style={{ color: "var(--text-muted)" }}
+                    >
+                      →
+                    </div>
+                    <div
+                      className='h-[2px] w-10'
+                      style={{
+                        background: edgeTone(
+                          edges[index] ? edges[index].type : "primary",
+                        ),
+                      }}
                     />
                   </div>
                 ) : null}
@@ -120,11 +201,22 @@ export default function LayoutGraph({ layout }) {
       </div>
 
       {layout.pattern ? (
-        <div className='mt-5 border border-stone-200 bg-stone-50/60 p-4'>
+        <div
+          className='mt-5 border p-4'
+          style={{
+            borderColor: "var(--border-color)",
+            background: "var(--bg-muted)",
+          }}
+        >
           {annotationLabel("Pattern")}
-          <div className='mt-2 text-sm text-stone-700'>
-            <strong className='text-stone-900'>{layout.pattern.type}</strong> —{" "}
-            {layout.pattern.description}
+          <div
+            className='mt-2 text-sm'
+            style={{ color: "var(--text-secondary)" }}
+          >
+            <strong style={{ color: "var(--text-primary)" }}>
+              {layout.pattern.type}
+            </strong>{" "}
+            — {layout.pattern.description}
           </div>
         </div>
       ) : null}

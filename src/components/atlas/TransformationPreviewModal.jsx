@@ -10,19 +10,19 @@ function DeltaCard({ label, beforeValue, afterValue, invert = false }) {
     delta === 0
       ? {
           borderColor: "var(--border-color)",
-          background: "rgba(255,255,255,0.03)",
+          background: "var(--bg-muted)",
           color: "var(--text-primary)",
         }
       : isPositive
         ? {
-            borderColor: "rgba(16,185,129,0.35)",
-            background: "rgba(16,185,129,0.10)",
-            color: "#d1fae5",
+            borderColor: "var(--tone-success-border)",
+            background: "var(--tone-success-bg)",
+            color: "var(--tone-success-text)",
           }
         : {
-            borderColor: "rgba(251,191,36,0.30)",
-            background: "rgba(251,191,36,0.10)",
-            color: "#fef3c7",
+            borderColor: "var(--tone-warning-border)",
+            background: "var(--tone-warning-bg)",
+            color: "var(--tone-warning-text)",
           };
 
   return (
@@ -57,7 +57,7 @@ function IdentityShiftRow({ label, beforeValue, afterValue }) {
       className='flex flex-wrap items-center gap-2 border px-3 py-2'
       style={{
         borderColor: "var(--border-color)",
-        background: "rgba(255,255,255,0.03)",
+        background: "var(--bg-muted)",
       }}
     >
       <div
@@ -76,7 +76,7 @@ function IdentityShiftRow({ label, beforeValue, afterValue }) {
       <div
         className='text-sm font-medium'
         style={{
-          color: changed ? "#a7f3d0" : "var(--text-secondary)",
+          color: changed ? "var(--tone-success-text)" : "var(--text-secondary)",
         }}
       >
         {afterValue || "None"}
@@ -86,9 +86,9 @@ function IdentityShiftRow({ label, beforeValue, afterValue }) {
         <div
           className='border px-2 py-0.5 text-[10px] uppercase tracking-[0.12em]'
           style={{
-            borderColor: "rgba(16,185,129,0.35)",
-            background: "rgba(16,185,129,0.10)",
-            color: "#a7f3d0",
+            borderColor: "var(--tone-success-border)",
+            background: "var(--tone-success-bg)",
+            color: "var(--tone-success-text)",
           }}
         >
           Changed
@@ -102,19 +102,19 @@ function DiffListBlock({ title, items, emptyText, tone = "emerald" }) {
   const toneStyles =
     tone === "emerald"
       ? {
-          borderColor: "rgba(16,185,129,0.35)",
-          background: "rgba(16,185,129,0.08)",
-          textColor: "#d1fae5",
+          borderColor: "var(--tone-success-border)",
+          background: "var(--tone-success-bg)",
+          textColor: "var(--tone-success-text)",
         }
       : tone === "amber"
         ? {
-            borderColor: "rgba(251,191,36,0.30)",
-            background: "rgba(251,191,36,0.08)",
-            textColor: "#fef3c7",
+            borderColor: "var(--tone-warning-border)",
+            background: "var(--tone-warning-bg)",
+            textColor: "var(--tone-warning-text)",
           }
         : {
             borderColor: "var(--border-color)",
-            background: "rgba(255,255,255,0.03)",
+            background: "var(--bg-muted)",
             textColor: "var(--text-primary)",
           };
 
@@ -157,31 +157,31 @@ function MetricCard({ label, value, tone = "stone" }) {
   const toneStyles =
     tone === "emerald"
       ? {
-          borderColor: "rgba(16,185,129,0.35)",
-          background: "rgba(16,185,129,0.10)",
-          color: "#d1fae5",
+          borderColor: "var(--tone-success-border)",
+          background: "var(--tone-success-bg)",
+          color: "var(--tone-success-text)",
         }
       : tone === "amber"
         ? {
-            borderColor: "rgba(251,191,36,0.30)",
-            background: "rgba(251,191,36,0.10)",
-            color: "#fef3c7",
+            borderColor: "var(--tone-warning-border)",
+            background: "var(--tone-warning-bg)",
+            color: "var(--tone-warning-text)",
           }
         : tone === "sky"
           ? {
-              borderColor: "rgba(56,189,248,0.35)",
-              background: "rgba(56,189,248,0.10)",
-              color: "#e0f2fe",
+              borderColor: "var(--tone-info-border)",
+              background: "var(--tone-info-bg)",
+              color: "var(--tone-info-text)",
             }
           : tone === "violet"
             ? {
-                borderColor: "rgba(168,85,247,0.35)",
-                background: "rgba(168,85,247,0.10)",
-                color: "#f3e8ff",
+                borderColor: "var(--tone-violet-border)",
+                background: "var(--tone-violet-bg)",
+                color: "var(--tone-violet-text)",
               }
             : {
                 borderColor: "var(--border-color)",
-                background: "rgba(255,255,255,0.03)",
+                background: "var(--bg-muted)",
                 color: "var(--text-primary)",
               };
 
@@ -278,7 +278,7 @@ export default function TransformationPreviewModal({
                 className='space-y-4 border p-4'
                 style={{
                   borderColor: "var(--border-color)",
-                  background: "rgba(255,255,255,0.03)",
+                  background: "var(--bg-muted)",
                 }}
               >
                 <div>
@@ -333,6 +333,7 @@ export default function TransformationPreviewModal({
                 />
               </div>
             </section>
+
             <section className='space-y-3'>
               <div
                 className='text-[10px] font-semibold uppercase tracking-[0.12em]'
@@ -349,13 +350,13 @@ export default function TransformationPreviewModal({
                   style={
                     applyMode === "live"
                       ? {
-                          borderColor: "rgba(168,85,247,0.35)",
-                          background: "rgba(168,85,247,0.10)",
-                          color: "#d8b4fe",
+                          borderColor: "var(--tone-violet-border)",
+                          background: "var(--tone-violet-bg)",
+                          color: "var(--tone-violet-text)",
                         }
                       : {
                           borderColor: "var(--border-color)",
-                          background: "rgba(255,255,255,0.03)",
+                          background: "var(--bg-muted)",
                           color: "var(--text-secondary)",
                         }
                   }
@@ -370,13 +371,13 @@ export default function TransformationPreviewModal({
                   style={
                     applyMode === "copy"
                       ? {
-                          borderColor: "rgba(168,85,247,0.35)",
-                          background: "rgba(168,85,247,0.10)",
-                          color: "#d8b4fe",
+                          borderColor: "var(--tone-violet-border)",
+                          background: "var(--tone-violet-bg)",
+                          color: "var(--tone-violet-text)",
                         }
                       : {
                           borderColor: "var(--border-color)",
-                          background: "rgba(255,255,255,0.03)",
+                          background: "var(--bg-muted)",
                           color: "var(--text-secondary)",
                         }
                   }
@@ -404,7 +405,10 @@ export default function TransformationPreviewModal({
                   >
                     Suggested entries to add
                   </div>
-                  <div className='mt-1 text-sm text-stone-600'>
+                  <div
+                    className='mt-1 text-sm'
+                    style={{ color: "var(--text-secondary)" }}
+                  >
                     Select which entries should be applied to the weaker
                     direction.
                   </div>
@@ -418,7 +422,7 @@ export default function TransformationPreviewModal({
                       className='border px-3 py-1 text-[10px] uppercase tracking-[0.12em] transition'
                       style={{
                         borderColor: "var(--border-color)",
-                        background: "rgba(255,255,255,0.03)",
+                        background: "var(--bg-muted)",
                         color: "var(--text-secondary)",
                       }}
                     >
@@ -431,7 +435,7 @@ export default function TransformationPreviewModal({
                       className='border px-3 py-1 text-[10px] uppercase tracking-[0.12em] transition'
                       style={{
                         borderColor: "var(--border-color)",
-                        background: "rgba(255,255,255,0.03)",
+                        background: "var(--bg-muted)",
                         color: "var(--text-secondary)",
                       }}
                     >
@@ -453,12 +457,12 @@ export default function TransformationPreviewModal({
                         style={
                           isChecked
                             ? {
-                                borderColor: "rgba(16,185,129,0.35)",
-                                background: "rgba(16,185,129,0.10)",
+                                borderColor: "var(--tone-success-border)",
+                                background: "var(--tone-success-bg)",
                               }
                             : {
                                 borderColor: "var(--border-color)",
-                                background: "rgba(255,255,255,0.03)",
+                                background: "var(--bg-muted)",
                               }
                         }
                       >
@@ -491,13 +495,13 @@ export default function TransformationPreviewModal({
                           style={
                             isChecked
                               ? {
-                                  borderColor: "rgba(16,185,129,0.35)",
-                                  background: "rgba(16,185,129,0.10)",
-                                  color: "#a7f3d0",
+                                  borderColor: "var(--tone-success-border)",
+                                  background: "var(--tone-success-bg)",
+                                  color: "var(--tone-success-text)",
                                 }
                               : {
                                   borderColor: "var(--border-color)",
-                                  background: "rgba(255,255,255,0.03)",
+                                  background: "var(--bg-muted)",
                                   color: "var(--text-muted)",
                                 }
                           }
@@ -530,9 +534,9 @@ export default function TransformationPreviewModal({
                       key={item.id}
                       className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
                       style={{
-                        borderColor: "rgba(251,191,36,0.30)",
-                        background: "rgba(251,191,36,0.10)",
-                        color: "#fde68a",
+                        borderColor: "var(--tone-warning-border)",
+                        background: "var(--tone-warning-bg)",
+                        color: "var(--tone-warning-text)",
                       }}
                     >
                       {item.term}
@@ -708,7 +712,7 @@ export default function TransformationPreviewModal({
               className='border px-3 py-1.5 text-[10px] uppercase tracking-[0.12em] transition'
               style={{
                 borderColor: "var(--border-color)",
-                background: "rgba(255,255,255,0.03)",
+                background: "var(--bg-muted)",
                 color: "var(--text-secondary)",
               }}
             >
@@ -721,9 +725,9 @@ export default function TransformationPreviewModal({
               disabled={suggestedEntries.length > 0 && selectedCount === 0}
               className='border px-3 py-1.5 text-[10px] uppercase tracking-[0.12em] transition disabled:cursor-not-allowed disabled:opacity-40'
               style={{
-                borderColor: "rgba(16,185,129,0.35)",
-                background: "rgba(16,185,129,0.10)",
-                color: "#a7f3d0",
+                borderColor: "var(--tone-success-border)",
+                background: "var(--tone-success-bg)",
+                color: "var(--tone-success-text)",
               }}
             >
               {applyMode === "live"

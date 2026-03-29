@@ -20,32 +20,32 @@ export default function ComparePanel({
     <section
       className='border p-5'
       style={{
-        borderColor: "rgba(56,189,248,0.35)",
-        background: "rgba(56,189,248,0.08)",
+        borderColor: "var(--tone-info-border)",
+        background: "var(--tone-info-bg)",
       }}
     >
       <div
         className='flex flex-col gap-4 border-b pb-4 md:flex-row md:items-start md:justify-between'
-        style={{ borderColor: "rgba(56,189,248,0.25)" }}
+        style={{ borderColor: "var(--tone-info-border)" }}
       >
         <div>
           <div
             className='mb-2 text-[10px] font-semibold uppercase tracking-[0.16em]'
-            style={{ color: "#bae6fd" }}
+            style={{ color: "var(--tone-info-text)" }}
           >
             Compare mode · 1 of 2 selected
           </div>
 
           <h2
             className='text-lg font-semibold tracking-tight'
-            style={{ color: "#e0f2fe" }}
+            style={{ color: "var(--text-primary)" }}
           >
             Compare entries
           </h2>
 
           <p
             className='mt-2 text-sm leading-relaxed'
-            style={{ color: "#bae6fd" }}
+            style={{ color: "var(--tone-info-text)" }}
           >
             Add one more entry to open the full split-screen comparison sheet.
           </p>
@@ -56,9 +56,9 @@ export default function ComparePanel({
           onClick={onClearCompare}
           className='border px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition'
           style={{
-            borderColor: "rgba(56,189,248,0.35)",
-            background: "rgba(56,189,248,0.10)",
-            color: "#bae6fd",
+            borderColor: "var(--tone-info-border)",
+            background: "var(--tone-info-bg)",
+            color: "var(--tone-info-text)",
           }}
         >
           Clear compare
@@ -68,15 +68,15 @@ export default function ComparePanel({
       <div
         className='mt-4 border p-4'
         style={{
-          borderColor: "rgba(56,189,248,0.25)",
-          background: "rgba(255,255,255,0.03)",
+          borderColor: "var(--tone-info-border)",
+          background: "var(--bg-muted)",
         }}
       >
         <div className='flex items-start justify-between gap-3'>
           <div className='min-w-0 flex-1'>
             <div
               className='mb-2 text-[10px] font-semibold uppercase tracking-[0.16em]'
-              style={{ color: "#7dd3fc" }}
+              style={{ color: "var(--tone-info-text)" }}
             >
               Selected candidate
             </div>
@@ -88,7 +88,7 @@ export default function ComparePanel({
             >
               <div
                 className='truncate text-base font-semibold tracking-tight hover:underline'
-                style={{ color: "#e0f2fe" }}
+                style={{ color: "var(--text-primary)" }}
               >
                 {entry.term}
               </div>
@@ -96,7 +96,7 @@ export default function ComparePanel({
 
             <p
               className='mt-2 text-sm leading-relaxed'
-              style={{ color: "#bae6fd" }}
+              style={{ color: "var(--text-secondary)" }}
             >
               {entry.description}
             </p>
@@ -109,9 +109,9 @@ export default function ComparePanel({
             onClick={() => onRemoveCompareEntry(entry.id)}
             className='border px-3 py-1 text-[11px] uppercase tracking-[0.08em] transition'
             style={{
-              borderColor: "rgba(56,189,248,0.30)",
-              background: "rgba(56,189,248,0.10)",
-              color: "#bae6fd",
+              borderColor: "var(--tone-info-border)",
+              background: "var(--tone-info-bg)",
+              color: "var(--tone-info-text)",
             }}
           >
             Remove

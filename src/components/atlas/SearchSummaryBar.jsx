@@ -14,9 +14,9 @@ function ReasonChip({ children }) {
     <span
       className='border px-2.5 py-1 text-[11px] uppercase tracking-[0.08em]'
       style={{
-        borderColor: "rgba(56,189,248,0.35)",
-        background: "rgba(56,189,248,0.10)",
-        color: "#bae6fd",
+        borderColor: "var(--tone-info-border)",
+        background: "var(--tone-info-bg)",
+        color: "var(--tone-info-text)",
       }}
     >
       {children}
@@ -59,19 +59,26 @@ export default function SearchSummaryBar({
     <section
       className='border px-4 py-3'
       style={{
-        borderColor: "rgba(56,189,248,0.30)",
-        background: "rgba(56,189,248,0.08)",
+        borderColor: "var(--tone-info-border)",
+        background: "var(--tone-info-bg)",
       }}
     >
       <div className='flex flex-col gap-3 md:flex-row md:items-start md:justify-between'>
         <div>
           {annotationLabel("Search output")}
 
-          <div className='mt-1 text-sm' style={{ color: "#bae6fd" }}>
-            <strong style={{ color: "#e0f2fe" }}>{visibleCount}</strong> result
-            {visibleCount === 1 ? "" : "s"} for{" "}
-            <strong style={{ color: "#e0f2fe" }}>“{filters.query}”</strong>.
-            Sorted by <strong>relevance</strong>.
+          <div
+            className='mt-1 text-sm'
+            style={{ color: "var(--tone-info-text)" }}
+          >
+            <strong style={{ color: "var(--text-primary)" }}>
+              {visibleCount}
+            </strong>{" "}
+            result{visibleCount === 1 ? "" : "s"} for{" "}
+            <strong style={{ color: "var(--text-primary)" }}>
+              “{filters.query}”
+            </strong>
+            . Sorted by <strong>relevance</strong>.
           </div>
         </div>
 
@@ -79,7 +86,7 @@ export default function SearchSummaryBar({
           <div className='md:text-right'>
             <div
               className='text-[10px] font-semibold uppercase tracking-[0.16em]'
-              style={{ color: "#7dd3fc" }}
+              style={{ color: "var(--tone-info-text)" }}
             >
               Top match reasons
             </div>
